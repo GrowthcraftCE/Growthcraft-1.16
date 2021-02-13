@@ -1,0 +1,30 @@
+{
+  "parent": "growthcraft:root",
+  "display": {
+    "icon": {
+      "item": "growthcraft_apples:apple_seeds"
+    },
+    "title": {
+      "translate": "advancements.growthcraft_apples.has_apple_seeds.title"
+    },
+    "description": {
+      "translate": "advancements.growthcraft_apples.has_apple_seeds.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_apple": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "growthcraft_apples:apple_seeds"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "growthcraft_apples:block/apple_tree_sapling"
+  }
+}

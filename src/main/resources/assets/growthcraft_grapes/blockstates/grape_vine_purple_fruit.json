@@ -1,0 +1,16 @@
+{
+  "multipart": [
+    {
+      "when": { "age": "0|1" },
+      "apply": { "model": "growthcraft_grapes:block/grape_vine_fruit_stage0" }
+    },
+    {
+      "when": { "age":  "2" },
+      "apply": { "model":  "growthcraft_grapes:block/grape_vine_fruit_purple_stage2" }
+    },
+    {
+      "when": { "age": 3 },
+      "apply": { "model": "growthcraft_grapes:block/grape_vine_fruit_purple_stage3" }
+    }
+  ]
+}

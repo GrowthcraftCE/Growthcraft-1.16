@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y": { "model": "growthcraft_bamboo:block/bamboo_wood" },
+        "axis=z": { "model": "growthcraft_bamboo:block/bamboo_wood", "x": 90 },
+        "axis=x": { "model": "growthcraft_bamboo:block/bamboo_wood", "x": 90, "y": 90 }
+    }
+}

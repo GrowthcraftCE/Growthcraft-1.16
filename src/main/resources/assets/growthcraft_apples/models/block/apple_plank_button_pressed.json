@@ -1,0 +1,6 @@
+{
+    "parent": "block/button_pressed",
+    "textures": {
+        "texture": "growthcraft_apples:block/apple_plank"
+    }
+}
