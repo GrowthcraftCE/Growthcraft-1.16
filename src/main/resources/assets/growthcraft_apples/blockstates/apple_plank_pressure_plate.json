@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "powered=false": { "model": "growthcraft_apples:block/apple_plank_pressure_plate" },
+    "powered=true": { "model": "growthcraft_apples:block/apple_plank_pressure_plate_down" }
+  }
+}

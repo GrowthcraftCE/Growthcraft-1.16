@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "growthcraft_apples:block/apple_tree_fruit_stage0"
+    },
+    "age=1": {
+      "model": "growthcraft_apples:block/apple_tree_fruit_stage0"
+    },
+    "age=2": {
+      "model": "growthcraft_apples:block/apple_tree_fruit_stage0"
+    },
+    "age=3": {
+      "model": "growthcraft_apples:block/apple_tree_fruit_stage0"
+    },
+    "age=4": {
+      "model": "growthcraft_apples:block/apple_tree_fruit_stage4"
+    },
+    "age=5": {
+      "model": "growthcraft_apples:block/apple_tree_fruit_stage4"
+    },
+    "age=6": {
+      "model": "growthcraft_apples:block/apple_tree_fruit_stage4"
+    },
+    "age=7": {
+      "model": "growthcraft_apples:block/apple_tree_fruit_stage7"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/fence_inventory",
+  "textures": {
+    "texture": "growthcraft_apples:block/apple_plank"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "growthcraft_grapes:item/grape_seeds_purple"
+  }
+}

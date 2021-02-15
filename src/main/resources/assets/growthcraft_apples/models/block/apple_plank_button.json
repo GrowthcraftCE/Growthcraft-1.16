@@ -1,0 +1,7 @@
+
+{
+    "parent": "block/button",
+    "textures": {
+        "texture": "growthcraft_apples:block/apple_plank"
+    }
+}
