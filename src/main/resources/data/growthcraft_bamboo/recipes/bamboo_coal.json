@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "growthcraft_bamboo:bamboo_stick"
-  },
-  "result": "growthcraft_bamboo:bamboo_coal",
-  "experience": 0.15,
-  "cookingtime": 200
-}

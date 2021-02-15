@@ -1,8 +1,11 @@
 package growthcraft.lib.common.item;
 
-import growthcraft.core.Growthcraft;
+import growthcraft.core.shared.Reference;
 import net.minecraft.item.Item;
 
+/**
+ * GrowthcraftItem is used to for a simple item.
+ */
 public class GrowthcraftItem extends Item {
 
     public GrowthcraftItem() {
@@ -13,15 +16,9 @@ public class GrowthcraftItem extends Item {
         super(getInitProperties(maxStackSize));
     }
 
-    /**
-     * Setup properties that we want all Growthcraft Items to have, like the
-     * creative tab.
-     *
-     * @return
-     */
     private static Properties getInitProperties(int maxStackSize) {
         Properties properties = new Properties();
-        properties.group(Growthcraft.itemGroup);
+        properties.group(Reference.growthraftCreativeTab);
         properties.maxStackSize(maxStackSize);
         return properties;
     }

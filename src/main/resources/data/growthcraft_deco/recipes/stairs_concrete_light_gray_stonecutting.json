@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:light_gray_concrete"
-  },
-  "result": "growthcraft_deco:stairs_concrete_light_gray",
-  "count": 1
-}

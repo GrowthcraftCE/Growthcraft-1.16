@@ -1,6 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "cross": "growthcraft_bamboo:block/bamboo_tree_sapling"
-  }
-}

@@ -1,8 +1,0 @@
-{
-    "parent": "block/slab_top",
-    "textures": {
-        "bottom": "growthcraft_apples:block/apple_plank",
-        "top": "growthcraft_apples:block/apple_plank",
-        "side": "growthcraft_apples:block/apple_plank"
-    }
-}
