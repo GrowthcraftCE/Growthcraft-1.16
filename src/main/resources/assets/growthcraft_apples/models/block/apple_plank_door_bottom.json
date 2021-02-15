@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom",
+    "textures": {
+        "bottom": "growthcraft_apples:block/apple_plank_door_bottom",
+        "top": "growthcraft_apples:block/apple_plank_door_top"
+    }
+}

@@ -1,0 +1,32 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"fruit": "growthcraft_grapes:block/missing",
+		"particle": "growthcraft_grapes:block/missing"
+	},
+	"elements": [
+		{
+			"name": "fruit_cross_1",
+			"from": [5.8, 4, 6],
+			"to": [17, 16, 6],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [13.5, 12, 9.5], "rescale": true},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#fruit", "tintindex": 0},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#fruit", "tintindex": 0}
+			}
+		},
+		{
+			"name": "fruit_cross_2",
+			"from": [9, 4, -2.2],
+			"to": [9, 16, 9],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [13.5, 12, 4.5], "rescale": true},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#fruit", "tintindex": 0},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#fruit", "tintindex": 0}
+			}
+		}
+	]
+}

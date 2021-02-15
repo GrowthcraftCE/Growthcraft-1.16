@@ -1,0 +1,8 @@
+{
+  "parent": "block/outer_stairs",
+  "textures": {
+    "bottom": "growthcraft_bamboo:block/bamboo_plank",
+    "top": "growthcraft_bamboo:block/bamboo_plank",
+    "side": "growthcraft_bamboo:block/bamboo_plank"
+  }
+}

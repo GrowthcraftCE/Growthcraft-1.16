@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "growthcraft_bamboo:block/bamboo_plank_slab" },
+    "type=top": { "model": "growthcraft_bamboo:block/bamboo_plank_slab_top" },
+    "type=double": { "model": "growthcraft_bamboo:block/bamboo_plank" }
+  }
+}

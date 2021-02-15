@@ -1,0 +1,79 @@
+{
+  "textures": {
+    "0": "growthcraft:block/rope_linen_center",
+    "1": "growthcraft:block/rope_linen_horizontal",
+    "2": "growthcraft:block/rope_linen_vertical",
+    "particle": "growthcraft:block/rope_linen_center"
+  },
+  "elements": [
+    {
+      "name": "rope_lenin_side",
+      "from": [
+        7.5,
+        7.5,
+        0.0
+      ],
+      "to": [
+        8.5,
+        8.5,
+        7.5
+      ],
+      "faces": {
+        "north": {
+          "texture": "#0",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "east": {
+          "texture": "#1",
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            2.0
+          ]
+        },
+        "south": {
+          "texture": "#0",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            2.0
+          ]
+        },
+        "west": {
+          "texture": "#1",
+          "uv": [
+            0.0,
+            0.0,
+            16.0,
+            2.0
+          ]
+        },
+        "up": {
+          "texture": "#2",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            16.0
+          ]
+        },
+        "down": {
+          "texture": "#2",
+          "uv": [
+            0.0,
+            0.0,
+            2.0,
+            16.0
+          ]
+        }
+      }
+    }
+  ]
+}

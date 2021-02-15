@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "fishtrap",
+  "pattern": [
+    "ACA",
+    "CBC",
+    "ACA"
+  ],
+  "key": {
+    "A": {
+      "item": "growthcraft_apples:apple_plank"
+    },
+    "B": {
+      "item": "minecraft:lead"
+    },
+    "C": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "growthcraft_apples:fishtrap_apple",
+    "count": 1
+  }
+}

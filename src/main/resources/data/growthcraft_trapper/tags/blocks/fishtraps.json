@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "growthcraft_apples:fishtrap_apple",
+    "growthcraft_bamboo:fishtrap_bamboo",
+    "growthcraft_trapper:fishtrap_acacia",
+    "growthcraft_trapper:fishtrap_birch",
+    "growthcraft_trapper:fishtrap_dark_oak",
+    "growthcraft_trapper:fishtrap_jungle",
+    "growthcraft_trapper:fishtrap_oak",
+    "growthcraft_trapper:fishtrap_spruce"
+  ]
+}

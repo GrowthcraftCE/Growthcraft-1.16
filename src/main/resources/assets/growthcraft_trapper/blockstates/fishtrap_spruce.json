@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "growthcraft_trapper:block/fishtrap_spruce"
+    },
+    "facing=south": {
+      "model": "growthcraft_trapper:block/fishtrap_spruce",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "growthcraft_trapper:block/fishtrap_spruce",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "growthcraft_trapper:block/fishtrap_spruce",
+      "y": 90
+    },
+    "facing=up": {
+      "model": "growthcraft_trapper:block/fishtrap_spruce",
+      "x": -90
+    },
+    "facing=down": {
+      "model": "growthcraft_trapper:block/fishtrap_spruce",
+      "x": 90
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/leaves",
+  "textures": {
+    "all": "growthcraft_apples:block/apple_tree_leaves"
+  }
+}

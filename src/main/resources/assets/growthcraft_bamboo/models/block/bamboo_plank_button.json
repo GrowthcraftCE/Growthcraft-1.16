@@ -1,0 +1,6 @@
+{
+    "parent": "block/button",
+    "textures": {
+        "texture": "growthcraft_bamboo:block/bamboo_plank"
+    }
+}

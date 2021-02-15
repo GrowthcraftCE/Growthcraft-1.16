@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:brown_concrete"
+  },
+  "result": "growthcraft_deco:stairs_concrete_brown",
+  "count": 1
+}

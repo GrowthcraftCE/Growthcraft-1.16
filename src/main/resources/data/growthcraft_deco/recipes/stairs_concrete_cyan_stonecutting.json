@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:cyan_concrete"
+  },
+  "result": "growthcraft_deco:stairs_concrete_cyan",
+  "count": 1
+}
