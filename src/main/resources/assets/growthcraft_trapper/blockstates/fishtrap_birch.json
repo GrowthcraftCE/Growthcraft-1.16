@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "growthcraft_trapper:block/fishtrap_birch"
+    },
+    "facing=south": {
+      "model": "growthcraft_trapper:block/fishtrap_birch",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "growthcraft_trapper:block/fishtrap_birch",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "growthcraft_trapper:block/fishtrap_birch",
+      "y": 90
+    },
+    "facing=up": {
+      "model": "growthcraft_trapper:block/fishtrap_birch",
+      "x": -90
+    },
+    "facing=down": {
+      "model": "growthcraft_trapper:block/fishtrap_birch",
+      "x": 90
+    }
+  }
+}
