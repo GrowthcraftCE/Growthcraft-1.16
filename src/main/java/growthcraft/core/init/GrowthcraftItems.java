@@ -1,8 +1,7 @@
 package growthcraft.core.init;
 
-import growthcraft.core.common.item.ItemCrowbar;
+import growthcraft.core.common.item.CrowbarItem;
 import growthcraft.core.shared.Reference;
-import growthcraft.core.shared.UnlocalizedName;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -14,53 +13,53 @@ public class GrowthcraftItems {
 
     private GrowthcraftItems() { /* Disable Default Public Constructor */ }
 
-    public static final RegistryObject<ItemCrowbar> CROWBAR_BLACK = ITEMS.register(
-            UnlocalizedName.CROWBAR_BLACK, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_BLACK = ITEMS.register(
+            Reference.CROWBAR_BLACK, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_BLUE = ITEMS.register(
-            UnlocalizedName.CROWBAR_BLUE, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_BLUE = ITEMS.register(
+            Reference.CROWBAR_BLUE, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_BROWN = ITEMS.register(
-            UnlocalizedName.CROWBAR_BROWN, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_BROWN = ITEMS.register(
+            Reference.CROWBAR_BROWN, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_CYAN = ITEMS.register(
-            UnlocalizedName.CROWBAR_CYAN, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_CYAN = ITEMS.register(
+            Reference.CROWBAR_CYAN, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_GRAY = ITEMS.register(
-            UnlocalizedName.CROWBAR_GRAY, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_GRAY = ITEMS.register(
+            Reference.CROWBAR_GRAY, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_GREEN = ITEMS.register(
-            UnlocalizedName.CROWBAR_GREEN, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_GREEN = ITEMS.register(
+            Reference.CROWBAR_GREEN, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_LIGHT_BLUE = ITEMS.register(
-            UnlocalizedName.CROWBAR_LIGHT_BLUE, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_LIGHT_BLUE = ITEMS.register(
+            Reference.CROWBAR_LIGHT_BLUE, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_LIGHT_GRAY = ITEMS.register(
-            UnlocalizedName.CROWBAR_LIGHT_GRAY, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_LIGHT_GRAY = ITEMS.register(
+            Reference.CROWBAR_LIGHT_GRAY, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_LIME = ITEMS.register(
-            UnlocalizedName.CROWBAR_LIME, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_LIME = ITEMS.register(
+            Reference.CROWBAR_LIME, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_MAGENTA = ITEMS.register(
-            UnlocalizedName.CROWBAR_MAGENTA, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_MAGENTA = ITEMS.register(
+            Reference.CROWBAR_MAGENTA, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_ORANGE = ITEMS.register(
-            UnlocalizedName.CROWBAR_ORANGE, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_ORANGE = ITEMS.register(
+            Reference.CROWBAR_ORANGE, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_PINK = ITEMS.register(
-            UnlocalizedName.CROWBAR_PINK, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_PINK = ITEMS.register(
+            Reference.CROWBAR_PINK, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_PURPLE = ITEMS.register(
-            UnlocalizedName.CROWBAR_PURPLE, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_PURPLE = ITEMS.register(
+            Reference.CROWBAR_PURPLE, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_RED = ITEMS.register(
-            UnlocalizedName.CROWBAR_RED, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_RED = ITEMS.register(
+            Reference.CROWBAR_RED, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_WHITE = ITEMS.register(
-            UnlocalizedName.CROWBAR_WHITE, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_WHITE = ITEMS.register(
+            Reference.CROWBAR_WHITE, () -> new CrowbarItem()
     );
-    public static final RegistryObject<ItemCrowbar> CROWBAR_YELLOW = ITEMS.register(
-            UnlocalizedName.CROWBAR_YELLOW, () -> new ItemCrowbar()
+    public static final RegistryObject<CrowbarItem> CROWBAR_YELLOW = ITEMS.register(
+            Reference.CROWBAR_YELLOW, () -> new CrowbarItem()
     );
 
 }
