@@ -1,10 +1,12 @@
 package growthcraft.core;
 
+import growthcraft.core.init.GrowthcraftItems;
 import growthcraft.core.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
@@ -30,6 +32,10 @@ public class Growthcraft {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+
+        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        GrowthcraftItems.ITEMS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

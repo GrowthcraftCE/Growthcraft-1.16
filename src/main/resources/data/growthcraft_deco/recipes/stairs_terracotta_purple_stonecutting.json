@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "minecraft:purple_terracotta"
-  },
-  "result": "growthcraft_deco:stairs_terracotta_purple",
-  "count": 1
-}
