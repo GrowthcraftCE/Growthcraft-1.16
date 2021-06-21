@@ -1,7 +1,7 @@
 modLoader="javafml"
-loaderVersion="[35,)"
+loaderVersion="[36,)"
 license="GPL-3.0"
-issueTrackerURL="https://github.com/GrowthcraftCE/Growthcraft-1.15/issues"
+issueTrackerURL="https://github.com/GrowthcraftCE/Growthcraft-1.16/issues"
 
 [[mods]]
     modId="growthcraft"
@@ -13,19 +13,35 @@ issueTrackerURL="https://github.com/GrowthcraftCE/Growthcraft-1.15/issues"
     credits="Thanks to Gwafu for starting a great mod. And the Growthcraft CE Development for continuing the work."
     authors="Alatyami"
     description='''
-        Growtchraft is a realistic and immersive Forge mod that adds various new elements to the game of Minecraft.
+        Growthcraft is a realistic and immersive Forge mod that adds various new elements to the game of Minecraft.
         '''
 
     [[dependencies.growthcraft]]
         modId="forge"
         mandatory=true
-        versionRange="[35,)"
+        versionRange="[36,)"
         ordering="NONE"
         side="BOTH"
 
     [[dependencies.growthcraft]]
         modId="minecraft"
         mandatory=true
-        versionRange="[1.16.4,1.17)"
+        versionRange="[1.16.5,1.17)"
         ordering="NONE"
         side="BOTH"
+
+[[mods]]
+    modId="growthcraft_cellar"
+    version="6.0.0.0"
+    displayName="Growthcraft Cellar"
+    logoFile="growthcraft_cellar_logo.png"
+    description = '''
+        As a child mod to Growthcraft...
+        '''
+
+    [[dependencies.growthcraft_cellar]]
+        modId = "growthcraft"
+        mandatory = true
+        versionRange = "[6,)"
+        ordering = "AFTER"
+        side = "BOTH"
