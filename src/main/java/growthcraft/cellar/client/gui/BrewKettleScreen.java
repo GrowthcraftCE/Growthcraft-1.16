@@ -88,6 +88,19 @@ public class BrewKettleScreen extends ContainerScreen<BrewKettleContainer> {
                     guiInputTankX, guiInputTankY + (guiInputTankHeight - scaledFluidH), 16, scaledFluidH);
         }
 
+        // OutputFluidTank Render
+        int guiOutputTankX = guiLeft + 146;
+        int guiOutputTankY = guiTop + 17;
+        int guiOutputTankHeight = 52;
+
+        if (this.container.getOutputFluidTank().getFluidAmount() > 0) {
+            FluidStack fluidStack = this.container.getOutputFluidTank().getFluid();
+
+            int scaledFluidH = getScaledFluid(fluidStack.getAmount(), this.container.getInputFluidTank().getCapacity(), guiOutputTankHeight);
+            ClientUtils.drawRepeatedFluidSpriteGui(renderTypeBuffer, matrixStack, fluidStack,
+                    guiOutputTankX, guiOutputTankY + (guiOutputTankHeight - scaledFluidH), 16, scaledFluidH);
+        }
+
         renderTypeBuffer.finish();
     }
 

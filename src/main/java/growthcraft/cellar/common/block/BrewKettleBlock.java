@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.block;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.common.tileentity.BrewKettleTileEntity;
 import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
@@ -120,7 +119,6 @@ public class BrewKettleBlock extends Block {
             TileEntity tileEntity = worldIn.getTileEntity(pos);
             if (tileEntity instanceof BrewKettleTileEntity) {
                 NetworkHooks.openGui((ServerPlayerEntity) player, (BrewKettleTileEntity) tileEntity, pos);
-                GrowthcraftCellar.LOGGER.warn("Open GUI ...");
             }
         }
 
