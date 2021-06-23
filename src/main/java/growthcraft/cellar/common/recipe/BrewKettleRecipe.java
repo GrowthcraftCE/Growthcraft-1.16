@@ -9,6 +9,7 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 
 public class BrewKettleRecipe implements IRecipe<IInventory> {
 
@@ -71,7 +72,7 @@ public class BrewKettleRecipe implements IRecipe<IInventory> {
 
     @Override
     public ItemStack getRecipeOutput() {
-        return null;
+        return FluidUtil.getFilledBucket(outputFluidStack);
     }
 
     @Override
@@ -93,4 +94,5 @@ public class BrewKettleRecipe implements IRecipe<IInventory> {
     public String getGroup() {
         return "growthcraft";
     }
+
 }

@@ -89,7 +89,7 @@ public class BrewKettleScreen extends ContainerScreen<BrewKettleContainer> {
         }
 
         // OutputFluidTank Render
-        int guiOutputTankX = guiLeft + 146;
+        int guiOutputTankX = guiLeft + 114;
         int guiOutputTankY = guiTop + 17;
         int guiOutputTankHeight = 52;
 
@@ -139,6 +139,17 @@ public class BrewKettleScreen extends ContainerScreen<BrewKettleContainer> {
             this.renderTooltip(matrixStack, stringTextComponent, mouseX, mouseY);
         }
 
+        // on hover for input fluid tank
+        int guiOutputTankX = guiLeft + 114;
+        int guiOutputTankY = guiTop + 17;
+        int guiOutputTankHeight = 52;
+
+        if (mouseX > guiOutputTankX && mouseX < guiOutputTankX + 16 && mouseY > guiOutputTankY && mouseY < guiOutputTankY + guiOutputTankHeight) {
+            FluidStack fluidStack = this.container.getOutputFluidTank().getFluid();
+            String tooltip = String.format("%s %dmb", fluidStack.getDisplayName().getString(), fluidStack.getAmount());
+            StringTextComponent stringTextComponent = new StringTextComponent(tooltip);
+            this.renderTooltip(matrixStack, stringTextComponent, mouseX, mouseY);
+        }
         // text after super
         this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }

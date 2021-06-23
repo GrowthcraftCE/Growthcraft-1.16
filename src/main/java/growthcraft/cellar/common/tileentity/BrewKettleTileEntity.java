@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.tileentity;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.client.container.BrewKettleContainer;
 import growthcraft.cellar.common.block.BrewKettleBlock;
 import growthcraft.cellar.common.recipe.BrewKettleRecipe;
@@ -135,7 +134,6 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
                     if(currentSmeltTime > maxSmeltTime) {
                         // If the currentSmeltTime is greater than the max, then we need to
                         // move some items and fluids around.
-                        GrowthcraftCellar.LOGGER.error("Process recipe results.");
                         this.inputFluidTank.drain(recipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
                         this.inventory.getStackInSlot(0).shrink(recipe.getInputItem().getCount());
                         this.outputFluidTank.fill(recipe.getOutputFluidStack(), IFluidHandler.FluidAction.EXECUTE);
