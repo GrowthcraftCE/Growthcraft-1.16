@@ -10,7 +10,7 @@
     "count": 1
   },
   "output_fluid": {
-    "fluid":"minecraft:water",
+    "fluid": "growthcraft_cellar:wort_fluid",
     "amount": 250
   },
   "by_product": {

@@ -39,9 +39,25 @@ issueTrackerURL="https://github.com/GrowthcraftCE/Growthcraft-1.16/issues"
         As a child mod to Growthcraft...
         '''
 
-    [[dependencies.growthcraft_cellar]]
-        modId = "growthcraft"
-        mandatory = true
-        versionRange = "[6,)"
-        ordering = "AFTER"
-        side = "BOTH"
+[[dependencies.growthcraft_cellar]]
+modId = "growthcraft"
+mandatory = true
+versionRange = "[6,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[mods]]
+modId = "growthcraft_hops"
+version = "6.0.0.0"
+displayName = "Growthcraft Hops"
+logoFile = "growthcraft_hops_logo.png"
+description = '''
+        As a child mod to Growthcraft...
+        '''
+
+[[dependencies.growthcraft_hops]]
+modId = "growthcraft"
+mandatory = true
+versionRange = "[6,)"
+ordering = "AFTER"
+side = "BOTH"

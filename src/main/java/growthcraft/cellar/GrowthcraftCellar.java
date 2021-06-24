@@ -39,6 +39,7 @@ public class GrowthcraftCellar {
 
         // Add DeferredRegister<Item> to the mod event bus.
         GrowthcraftCellarItems.ITEMS.register(modEventBus);
+        GrowthcraftCellarFluids.FLUIDS.register(modEventBus);
         GrowthcraftCellarBlocks.BLOCKS.register(modEventBus);
         GrowthcraftCellarTileEntities.TILE_ENTITIES.register(modEventBus);
         GrowthcraftCellarContainers.CONTAINERS.register(modEventBus);
@@ -50,7 +51,7 @@ public class GrowthcraftCellar {
     @SubscribeEvent
     public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
         final IForgeRegistry<Item> itemRegistry = event.getRegistry();
-        final Item.Properties properties = new Item.Properties().group(growthcraft.core.shared.Reference.itemGroup);
+        final Item.Properties properties = new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab);
 
         GrowthcraftCellarBlocks.registerBlockItems(itemRegistry, properties);
     }

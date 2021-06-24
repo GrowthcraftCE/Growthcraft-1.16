@@ -1,7 +1,6 @@
 package growthcraft.core.shared;
 
 import growthcraft.core.init.GrowthcraftItems;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
@@ -10,14 +9,6 @@ public class Reference {
     public static final String MODID = "growthcraft";
     public static final String NAME = "Growthcraft";
     public static final String VERSION = "6.0.0.0";
-
-    public static final ItemGroup itemGroup = new ItemGroup(Reference.MODID) {
-        @Override
-        public ItemStack createIcon() {
-            // TODO: Set as cellar ferment barrel.
-            return new ItemStack(GrowthcraftItems.CROWBAR_GREEN.get());
-        }
-    };
 
     public static final String CROWBAR_BLACK = "crowbar_black";
     public static final String CROWBAR_BLUE = "crowbar_blue";
@@ -56,11 +47,11 @@ public class Reference {
     /**
      * ItemGroup used for all Growthcraft Modules.
      */
-    public static final ItemGroup growthraftCreativeTab = new ItemGroup(MODID) {
+    public static final ItemGroup growthcraftCreativeTab = new ItemGroup(Reference.MODID) {
         @Override
         public ItemStack createIcon() {
-            // TODO: Replace CreateiveTab icon with Bamboo Plank block.
-            return new ItemStack(Blocks.DIRT);
+            // TODO: Set as cellar ferment barrel.
+            return new ItemStack(GrowthcraftItems.CROWBAR_GREEN.get());
         }
     };
 

@@ -18,7 +18,7 @@ public class GrowthcraftItem extends Item {
 
     private static Properties getInitProperties(int maxStackSize) {
         Properties properties = new Properties();
-        properties.group(Reference.growthraftCreativeTab);
+        properties.group(Reference.growthcraftCreativeTab);
         properties.maxStackSize(maxStackSize);
         return properties;
     }

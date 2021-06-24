@@ -8,6 +8,7 @@ import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
+import growthcraft.lib.common.tank.NonInteractiveTank;
 import growthcraft.lib.util.BlockStateUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -67,7 +68,7 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
     private FluidTank inputFluidTank;
     private final LazyOptional<IFluidHandler> inputFluidHandler = LazyOptional.of(() -> inputFluidTank);
 
-    private FluidTank outputFluidTank;
+    private NonInteractiveTank outputFluidTank;
     private final LazyOptional<IFluidHandler> outputFluidHandler = LazyOptional.of(() -> outputFluidTank);
 
     public BrewKettleTileEntity(TileEntityType<?> tileEntityTypeIn) {
@@ -82,7 +83,8 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
 
     private void createFluidTanks() {
         this.inputFluidTank = new FluidTank(4000);
-        this.outputFluidTank = new FluidTank(4000);
+        this.outputFluidTank = new NonInteractiveTank(4000);
+
     }
 
     public FluidTank getFluidTank(int slot) {
@@ -136,7 +138,7 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
                         // move some items and fluids around.
                         this.inputFluidTank.drain(recipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
                         this.inventory.getStackInSlot(0).shrink(recipe.getInputItem().getCount());
-                        this.outputFluidTank.fill(recipe.getOutputFluidStack(), IFluidHandler.FluidAction.EXECUTE);
+                        this.outputFluidTank.forceFill(recipe.getOutputFluidStack(), IFluidHandler.FluidAction.EXECUTE);
                         if (new Random().nextInt(4) == 1) {
                             this.inventory.insertItem(1, recipe.getByProduct(), false);
                         }
@@ -277,8 +279,11 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && side == Direction.UP) {
             return inputFluidHandler.cast();
+        }
+        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+            return outputFluidHandler.cast();
         }
         return super.getCapability(cap, side);
     }
