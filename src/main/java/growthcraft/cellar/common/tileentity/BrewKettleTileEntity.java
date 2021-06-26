@@ -62,9 +62,8 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
     public final int maxSmeltTime = 600;
     private final BrewKettleItemHandler inventory;
     public int currentSmeltTime;
-    private ITextComponent customName;
     private BrewKettleRecipe currentRecipe;
-
+    private ITextComponent customName;
     private FluidTank inputFluidTank;
     private final LazyOptional<IFluidHandler> inputFluidHandler = LazyOptional.of(() -> inputFluidTank);
 
@@ -79,6 +78,22 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
 
     public BrewKettleTileEntity() {
         this(GrowthcraftCellarTileEntities.brew_kettle_tileentity.get());
+    }
+
+    public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> brewKettleRecipeType, World world) {
+        return world != null ?
+                world.getRecipeManager().getRecipes().stream()
+                        .filter(recipe -> recipe.getType().toString().equals(brewKettleRecipeType.toString())).collect(Collectors.toSet())
+                : Collections.emptySet();
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> brewKettleRecipeType) {
+        ClientWorld world = Minecraft.getInstance().world;
+        return world != null ?
+                world.getRecipeManager().getRecipes().stream()
+                        .filter(recipe -> recipe.getType().toString().equals(brewKettleRecipeType.toString())).collect(Collectors.toSet())
+                : Collections.emptySet();
     }
 
     private void createFluidTanks() {
@@ -112,7 +127,7 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
             if (isHeated()) {
                 this.world.setBlockState(this.getPos(), this.getBlockState().with(BrewKettleBlock.LIT, true));
                 // Check for valid slots before looking for recipe.
-                if(this.inventory.getStackInSlot(0).getItem() != Items.AIR && !inputFluidTank.isEmpty()) {
+                if (this.inventory.getStackInSlot(0).getItem() != Items.AIR && !inputFluidTank.isEmpty()) {
 
                     BrewKettleRecipe recipe = this.getRecipe(
                             this.inventory.getStackInSlot(0),
@@ -133,7 +148,7 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
                         dirty = true;
                     }
 
-                    if(currentSmeltTime > maxSmeltTime) {
+                    if (currentSmeltTime > maxSmeltTime) {
                         // If the currentSmeltTime is greater than the max, then we need to
                         // move some items and fluids around.
                         this.inputFluidTank.drain(recipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
@@ -254,22 +269,6 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
             if (brewKettleRecipe.matches(itemStack, fluidStack, requiresLid)) return brewKettleRecipe;
         }
         return null;
-    }
-
-    public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> brewKettleRecipeType, World world) {
-        return world != null ?
-                world.getRecipeManager().getRecipes().stream()
-                        .filter(recipe -> recipe.getType().toString().equals(brewKettleRecipeType.toString())).collect(Collectors.toSet())
-                : Collections.emptySet();
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> brewKettleRecipeType) {
-        ClientWorld world = Minecraft.getInstance().world;
-        return world != null ?
-                world.getRecipeManager().getRecipes().stream()
-                        .filter(recipe -> recipe.getType().toString().equals(brewKettleRecipeType.toString())).collect(Collectors.toSet())
-                : Collections.emptySet();
     }
 
     /* Inventory */

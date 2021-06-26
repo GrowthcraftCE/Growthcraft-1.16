@@ -5,6 +5,7 @@ import growthcraft.cellar.common.proxy.CommonProxy;
 import growthcraft.cellar.init.*;
 import growthcraft.cellar.init.client.GrowthcraftCellarBlockRenders;
 import growthcraft.cellar.init.client.GrowthcraftCellarScreenManager;
+import growthcraft.cellar.init.client.GrowthcraftCellarTileEntityRenders;
 import growthcraft.cellar.init.config.GrowthcraftCellerConfig;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.lib.proxy.IProxy;
@@ -62,6 +63,7 @@ public class GrowthcraftCellar {
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         GrowthcraftCellarBlockRenders.setRenderLayers();
+        GrowthcraftCellarTileEntityRenders.bindTileEntityRenderers();
         GrowthcraftCellarScreenManager.registerFactories();
     }
 
