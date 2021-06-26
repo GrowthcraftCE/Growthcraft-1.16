@@ -3,9 +3,9 @@ package growthcraft.cellar.init;
 import growthcraft.cellar.common.fluid.WortFluid;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
-import net.minecraft.block.Block;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.block.material.Material;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
@@ -35,17 +35,22 @@ public class GrowthcraftCellarFluids {
     public static final RegistryObject<FlowingFluidBlock> WORT_FLUID_BLOCK = GrowthcraftCellarBlocks.BLOCKS.register(
             UnlocalizedName.WORT,
             () -> new FlowingFluidBlock(
-                    WORT_FLUID, Block.Properties.create(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()
+                    WORT_FLUID, AbstractBlock.Properties.from(Blocks.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()
             )
     );
 
     public static final ForgeFlowingFluid.Properties WORT_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
             WORT_FLUID, WORT_FLUID_FLOWING,
             FluidAttributes.builder(WORT_FLUID_STILL_RESOURCE, WORT_FLUID_FLOWING_RESOURCE)
-                    .color(0xD0AF4E).density(0).temperature(0).luminosity(0).viscosity(0)
-                    .sound(SoundEvents.BLOCK_WATER_AMBIENT)
+                    .color(0xD0AF4E)
+                    .density(0)
+                    .temperature(0)
+                    .luminosity(0)
+                    .viscosity(0)
+                    .sound(SoundEvents.ITEM_BUCKET_FILL, SoundEvents.ITEM_BUCKET_EMPTY)
                     .overlay(WORT_FLUID_OVERLAY_RESOURCE))
-            .block(WORT_FLUID_BLOCK).bucket(GrowthcraftCellarItems.bucket_wort);
+            .block(WORT_FLUID_BLOCK)
+            .bucket(GrowthcraftCellarItems.bucket_wort);
 
     public static ResourceLocation getFluidResourceLocation(String unlocalizedName, String type) {
         return new ResourceLocation(Reference.MODID, String.format("block/fluid/%s_%s", unlocalizedName, type));

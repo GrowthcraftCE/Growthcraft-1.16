@@ -4,17 +4,18 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import growthcraft.cellar.common.tileentity.BrewKettleTileEntity;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.vector.Vector3i;
+import net.minecraft.util.math.vector.Matrix4f;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.awt.*;
 
 public class BrewKettleTileEntityRenderer extends TileEntityRenderer<BrewKettleTileEntity> {
 
@@ -34,68 +35,58 @@ public class BrewKettleTileEntityRenderer extends TileEntityRenderer<BrewKettleT
         FluidStack outputFluidStack = tileEntity.getFluidTank(1).getFluid();
 
         float baseOffset = 4 / 16F;
-        float maxFluidHeight = 20 / 16F;
+        float maxFluidHeight = 15 / 16F;
 
         float inputFluidHeight = baseOffset + (maxFluidHeight - baseOffset) * inputFluidStack.getAmount() / (float) tileEntity.getFluidTank(0).getCapacity();
+        float outputFluidHeight = baseOffset + (maxFluidHeight - baseOffset) * outputFluidStack.getAmount() / (float) tileEntity.getFluidTank(0).getCapacity();
 
-        for (int x = 0; x <= 1; x++) {
-            for (int z = 0; z <= 1; z++) {
-                renderFluid(inputFluidStack, inputFluidHeight, x, z, buffer, matrixStack, lightLevel);
-            }
-        }
+        renderFluid(inputFluidStack, inputFluidHeight, buffer, matrixStack, lightLevel, overlay);
+        renderFluid(outputFluidStack, outputFluidHeight, buffer, matrixStack, lightLevel, overlay);
 
     }
 
-    private void renderFluid(FluidStack fluidStack, float height, int x, int z, IRenderTypeBuffer buffer, MatrixStack matrixStack, int lightLevel) {
-        Fluid fluid = fluidStack.getFluid();
-        FluidAttributes fluidAttributes = fluid.getAttributes();
+    public void renderIcon(MatrixStack matrixStack, IVertexBuilder builder, TextureAtlasSprite sprite, Color color, float alpha, int overlay, int light) {
+        int red = color.getRed();
+        int green = color.getGreen();
+        int blue = color.getBlue();
 
-        TextureAtlasSprite fluidTexture = minecraft.getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE)
+        Matrix4f mat = matrixStack.getLast().getMatrix();
+
+        builder.pos(mat, 0, 16, 0).color(red, green, blue, (int) (alpha * 255F)).tex(sprite.getMinU(),
+                sprite.getMaxV()).overlay(overlay).lightmap(light).normal(0, 0, 1).endVertex();
+        builder.pos(mat, 16, 16, 0).color(red, green, blue, (int) (alpha * 255F)).tex(sprite.getMaxU(),
+                sprite.getMaxV()).overlay(overlay).lightmap(light).normal(0, 0, 1).endVertex();
+        builder.pos(mat, 16, 0, 0).color(red, green, blue, (int) (alpha * 255F)).tex(sprite.getMaxU(),
+                sprite.getMinV()).overlay(overlay).lightmap(light).normal(0, 0, 1).endVertex();
+        builder.pos(mat, 1, 0, 1).color(red, green, blue, (int) (alpha * 255F)).tex(sprite.getMinU(),
+                sprite.getMinV()).overlay(overlay).lightmap(light).normal(0, 0, 1).endVertex();
+
+    }
+
+    private void renderFluid(FluidStack fluidStack, float height, IRenderTypeBuffer buffer, MatrixStack matrixStack, int lightLevel, int overlay) {
+        matrixStack.push();
+        matrixStack.translate(0.5F, height, 0.5F);
+
+        float s = 15 / 256F;
+        float v = 1.55F / 8F;
+        float w = -v * 2.5F;
+
+        float alpha = 2F;
+
+        matrixStack.translate(w, 0.0F, w);
+        matrixStack.rotate(Vector3f.XP.rotationDegrees(90));
+        matrixStack.scale(s, s, s);
+
+        FluidAttributes fluidAttributes = fluidStack.getFluid().getAttributes();
+        Color color = new Color(fluidAttributes.getColor(fluidStack));
+
+        TextureAtlasSprite sprite = minecraft.getAtlasSpriteGetter(PlayerContainer.LOCATION_BLOCKS_TEXTURE)
                 .apply(fluidAttributes.getStillTexture(fluidStack));
 
-        int color = fluidAttributes.getColor(fluidStack);
+        IVertexBuilder builder = buffer.getBuffer(Atlases.getTranslucentCullBlockType());
 
-        IVertexBuilder vertexBuilder = buffer.getBuffer(RenderType.getTranslucentMovingBlock());
-
-        float u1 = fluidTexture.getInterpolatedU(x == 0 ? 2 : 0);
-        float v1 = fluidTexture.getInterpolatedV(z == 0 ? 2 : 0);
-        float u2 = fluidTexture.getInterpolatedU(x == 0 ? 16 : 14);
-        float v2 = fluidTexture.getInterpolatedV(x == 0 ? 16 : 14);
-
-        buildVertices(vertexBuilder, matrixStack, height, x, z, u1, v1, u2, v2, lightLevel, color);
-
-    }
-
-    private static void buildVertices(IVertexBuilder vertexBuilder, MatrixStack matrixStack, float height, int x, int z, float u1, float v1, float u2, float v2, int lightLevel, int color) {
-        float minX = x == 0 ? 2 / 16F : 1;
-        float minZ = z == 0 ? 2 / 16F : 1;
-        float maxX = x == 0 ? 1 : 2 - 2 / 16F;
-        float maxZ = z == 0 ? 1 : 2 - 2 / 16F;
-
-        matrixStack.push();
-
-        putVertex(vertexBuilder, matrixStack, minX, height, maxZ, color, u1, v2, lightLevel);
-        putVertex(vertexBuilder, matrixStack, maxX, height, maxZ, color, u2, v2, lightLevel);
-        putVertex(vertexBuilder, matrixStack, maxX, height, minZ, color, u2, v1, lightLevel);
-        putVertex(vertexBuilder, matrixStack, minX, height, minZ, color, u1, v1, lightLevel);
-
+        renderIcon(matrixStack, builder, sprite, color, alpha, overlay, lightLevel);
         matrixStack.pop();
     }
 
-    private static void putVertex(IVertexBuilder vertexBuilder, MatrixStack matrixStack, float x, float y, float z, int color, float u, float v, int lightLevel) {
-        Vector3i normal = Direction.UP.getDirectionVec();
-        MatrixStack.Entry peek = matrixStack.getLast();
-
-        int a = color >> 24 & 0xFF;
-        int r = color >> 16 & 0xFF;
-        int g = color >> 8 & 0xFF;
-        int b = color & 0xFF;
-
-        vertexBuilder.normal(peek.getNormal(), x, y, z)
-                .color(r, g, b, a)
-                .lightmap((int) u, (int) v)
-                .lightmap(lightLevel)
-                .normal(normal.getX(), normal.getY(), normal.getZ())
-                .endVertex();
-    }
 }

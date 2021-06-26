@@ -4,6 +4,7 @@ import growthcraft.cellar.common.tileentity.BrewKettleTileEntity;
 import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.init.config.GrowthcraftCellerConfig;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -46,7 +47,7 @@ public class BrewKettleBlock extends Block {
     }
 
     private static Properties getInitProperties() {
-        Properties properties = Block.Properties.from(Blocks.FURNACE);
+        Properties properties = AbstractBlock.Properties.from(Blocks.FURNACE);
         properties.hardnessAndResistance(1.5F);
         properties.notSolid();
         return properties;
