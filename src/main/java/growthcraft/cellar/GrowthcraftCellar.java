@@ -5,6 +5,7 @@ import growthcraft.cellar.common.proxy.CommonProxy;
 import growthcraft.cellar.init.*;
 import growthcraft.cellar.init.client.GrowthcraftCellarBlockRenders;
 import growthcraft.cellar.init.client.GrowthcraftCellarScreenManager;
+import growthcraft.cellar.init.client.GrowthcraftCellarTileEntityRenders;
 import growthcraft.cellar.init.config.GrowthcraftCellerConfig;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.lib.proxy.IProxy;
@@ -39,6 +40,7 @@ public class GrowthcraftCellar {
 
         // Add DeferredRegister<Item> to the mod event bus.
         GrowthcraftCellarItems.ITEMS.register(modEventBus);
+        GrowthcraftCellarFluids.FLUIDS.register(modEventBus);
         GrowthcraftCellarBlocks.BLOCKS.register(modEventBus);
         GrowthcraftCellarTileEntities.TILE_ENTITIES.register(modEventBus);
         GrowthcraftCellarContainers.CONTAINERS.register(modEventBus);
@@ -50,7 +52,7 @@ public class GrowthcraftCellar {
     @SubscribeEvent
     public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
         final IForgeRegistry<Item> itemRegistry = event.getRegistry();
-        final Item.Properties properties = new Item.Properties().group(growthcraft.core.shared.Reference.itemGroup);
+        final Item.Properties properties = new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab);
 
         GrowthcraftCellarBlocks.registerBlockItems(itemRegistry, properties);
     }
@@ -61,6 +63,7 @@ public class GrowthcraftCellar {
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         GrowthcraftCellarBlockRenders.setRenderLayers();
+        GrowthcraftCellarTileEntityRenders.bindTileEntityRenderers();
         GrowthcraftCellarScreenManager.registerFactories();
     }
 

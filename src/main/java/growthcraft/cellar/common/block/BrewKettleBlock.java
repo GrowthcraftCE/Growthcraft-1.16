@@ -1,10 +1,10 @@
 package growthcraft.cellar.common.block;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.common.tileentity.BrewKettleTileEntity;
 import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.init.config.GrowthcraftCellerConfig;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -40,14 +40,15 @@ public class BrewKettleBlock extends Block {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
+    public static final BooleanProperty HAS_LID = BooleanProperty.create("has_lid");
 
     public BrewKettleBlock() {
         super(getInitProperties());
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, false));
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, false).with(HAS_LID, false));
     }
 
     private static Properties getInitProperties() {
-        Properties properties = Block.Properties.from(Blocks.FURNACE);
+        Properties properties = AbstractBlock.Properties.from(Blocks.FURNACE);
         properties.hardnessAndResistance(1.5F);
         properties.notSolid();
         return properties;
@@ -67,7 +68,7 @@ public class BrewKettleBlock extends Block {
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
-        builder.add(FACING, LIT);
+        builder.add(FACING, LIT, HAS_LID);
     }
 
     @Override
@@ -111,6 +112,7 @@ public class BrewKettleBlock extends Block {
     @SuppressWarnings("deprecation")
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+
         if (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
                 || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
             return ActionResultType.SUCCESS;
@@ -120,7 +122,6 @@ public class BrewKettleBlock extends Block {
             TileEntity tileEntity = worldIn.getTileEntity(pos);
             if (tileEntity instanceof BrewKettleTileEntity) {
                 NetworkHooks.openGui((ServerPlayerEntity) player, (BrewKettleTileEntity) tileEntity, pos);
-                GrowthcraftCellar.LOGGER.warn("Open GUI ...");
             }
         }
 

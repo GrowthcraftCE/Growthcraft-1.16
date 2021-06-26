@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.recipe;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -10,6 +9,7 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 
 public class BrewKettleRecipe implements IRecipe<IInventory> {
 
@@ -27,26 +27,37 @@ public class BrewKettleRecipe implements IRecipe<IInventory> {
         this.outputFluidStack = outputFluidStack;
         this.byProduct = byProduct;
         this.requiresLid = requiresLid;
-
-        GrowthcraftCellar.LOGGER.warn("============================================================================");
-        GrowthcraftCellar.LOGGER.warn(this.toString());
-    }
-
-    @Override
-    public String toString() {
-        return "BrewKettleRecipe{" +
-                "recipeId=" + recipeId +
-                ", inputFluidStack=" + inputFluidStack +
-                ", inputItem=" + inputItem +
-                ", outputFluidStack=" + outputFluidStack +
-                ", byProduct=" + byProduct +
-                ", requiresLid=" + requiresLid +
-                '}';
     }
 
     @Override
     public boolean matches(IInventory inv, World worldIn) {
         return false;
+    }
+
+    public boolean matches(ItemStack itemStack, FluidStack fluidStack, boolean needsLid) {
+        return this.inputItem.getItem() == itemStack.getItem() && this.inputItem.getCount() <= itemStack.getCount()
+                && this.inputFluidStack.getFluid() == fluidStack.getFluid() && this.inputFluidStack.getAmount() <= fluidStack.getAmount()
+                && this.requiresLid == needsLid;
+    }
+
+    public FluidStack getInputFluidStack() {
+        return inputFluidStack;
+    }
+
+    public FluidStack getOutputFluidStack() {
+        return outputFluidStack;
+    }
+
+    public ItemStack getInputItem() {
+        return inputItem;
+    }
+
+    public ItemStack getByProduct() {
+        return byProduct;
+    }
+
+    public boolean getLidRequired() {
+        return requiresLid;
     }
 
     @Override
@@ -61,7 +72,7 @@ public class BrewKettleRecipe implements IRecipe<IInventory> {
 
     @Override
     public ItemStack getRecipeOutput() {
-        return null;
+        return FluidUtil.getFilledBucket(outputFluidStack);
     }
 
     @Override
@@ -78,4 +89,10 @@ public class BrewKettleRecipe implements IRecipe<IInventory> {
     public IRecipeType<?> getType() {
         return new BrewKettleRecipeType();
     }
+
+    @Override
+    public String getGroup() {
+        return "growthcraft";
+    }
+
 }
