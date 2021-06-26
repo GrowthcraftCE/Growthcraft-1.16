@@ -40,10 +40,11 @@ public class BrewKettleBlock extends Block {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
+    public static final BooleanProperty HAS_LID = BooleanProperty.create("has_lid");
 
     public BrewKettleBlock() {
         super(getInitProperties());
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, false));
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, false).with(HAS_LID, false));
     }
 
     private static Properties getInitProperties() {
@@ -67,7 +68,7 @@ public class BrewKettleBlock extends Block {
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
-        builder.add(FACING, LIT);
+        builder.add(FACING, LIT, HAS_LID);
     }
 
     @Override

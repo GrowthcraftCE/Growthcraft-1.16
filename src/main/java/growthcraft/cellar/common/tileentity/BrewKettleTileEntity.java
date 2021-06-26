@@ -122,12 +122,14 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
     public void tick() {
         boolean dirty = false;
 
+        this.world.setBlockState(this.getPos(), this.getBlockState().with(BrewKettleBlock.HAS_LID, hasLid()));
+
         if (world != null && !world.isRemote) {
             // Do a check for a heat source
             if (isHeated()) {
                 this.world.setBlockState(this.getPos(), this.getBlockState().with(BrewKettleBlock.LIT, true));
                 // Check for valid slots before looking for recipe.
-                if (this.inventory.getStackInSlot(0).getItem() != Items.AIR && !inputFluidTank.isEmpty()) {
+                if (this.inventory.getStackInSlot(0).getItem() != Items.AIR && !inputFluidTank.isEmpty() && outputFluidTank.getFluidAmount() < outputFluidTank.getCapacity()) {
 
                     BrewKettleRecipe recipe = this.getRecipe(
                             this.inventory.getStackInSlot(0),
@@ -164,6 +166,7 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
                     }
                 } else {
                     currentRecipe = null;
+                    currentSmeltTime = 0;
                 }
             } else {
                 this.world.setBlockState(this.getPos(), this.getBlockState().with(BrewKettleBlock.LIT, false));
@@ -182,6 +185,10 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
         return BlockTags.getCollection().get(
                 new ResourceLocation(growthcraft.core.shared.Reference.MODID,
                         growthcraft.core.shared.Reference.TAG_HEATSOURCES)).contains(blockMap.get("down"));
+    }
+
+    public boolean hasLid() {
+        return this.inventory.getStackInSlot(2).getItem() == brew_kettle_lid.get();
     }
 
     /* Custom Name Handling */
