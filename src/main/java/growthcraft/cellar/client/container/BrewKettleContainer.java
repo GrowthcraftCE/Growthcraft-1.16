@@ -173,4 +173,9 @@ public class BrewKettleContainer extends Container {
         return this.brewKettleTileEntity.getFluidTank(0);
     }
 
+    @OnlyIn(Dist.CLIENT)
+    public FluidTank getOutputFluidTank() {
+        return this.brewKettleTileEntity.getFluidTank(1);
+    }
+
 }

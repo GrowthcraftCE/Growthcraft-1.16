@@ -4,9 +4,9 @@ license="GPL-3.0"
 issueTrackerURL="https://github.com/GrowthcraftCE/Growthcraft-1.16/issues"
 
 [[mods]]
-    modId="growthcraft"
-    version="6.0.0.0"
-    displayName="Growthcraft"
+    modId = "growthcraft"
+version = "6.0.1.0"
+displayName = "Growthcraft"
     updateJSONURL="https://raw.githubusercontent.com/GrowthcraftCE/Growthcraft-Updates/master/growthcraft-versions.json"
     displayURL="https://github.com/GrowthcraftCE/Growthcraft-1.16/wiki"
     logoFile="growthcraft_core_logo.png"
@@ -31,17 +31,33 @@ issueTrackerURL="https://github.com/GrowthcraftCE/Growthcraft-1.16/issues"
         side="BOTH"
 
 [[mods]]
-    modId="growthcraft_cellar"
-    version="6.0.0.0"
-    displayName="Growthcraft Cellar"
+modId = "growthcraft_cellar"
+version = "6.0.1.0"
+displayName = "Growthcraft Cellar"
     logoFile="growthcraft_cellar_logo.png"
     description = '''
         As a child mod to Growthcraft...
         '''
 
-    [[dependencies.growthcraft_cellar]]
-        modId = "growthcraft"
-        mandatory = true
-        versionRange = "[6,)"
-        ordering = "AFTER"
-        side = "BOTH"
+[[dependencies.growthcraft_cellar]]
+modId = "growthcraft"
+mandatory = true
+versionRange = "[6,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[mods]]
+modId = "growthcraft_hops"
+version = "6.0.1.0"
+displayName = "Growthcraft Hops"
+logoFile = "growthcraft_hops_logo.png"
+description = '''
+        As a child mod to Growthcraft...
+        '''
+
+[[dependencies.growthcraft_hops]]
+modId = "growthcraft"
+mandatory = true
+versionRange = "[6,)"
+ordering = "AFTER"
+side = "BOTH"
