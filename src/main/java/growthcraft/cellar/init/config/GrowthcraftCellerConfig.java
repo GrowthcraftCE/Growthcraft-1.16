@@ -25,7 +25,7 @@ public class GrowthcraftCellerConfig {
 
     static {
         initBrewKettleConfig(SERVER_BUILDER);
-        initWorldGenConfig(SERVER_BUILDER);
+        //initWorldGenConfig(SERVER_BUILDER);
 
         SERVER = SERVER_BUILDER.build();
         CLIENT = CLIENT_BUILDER.build();
