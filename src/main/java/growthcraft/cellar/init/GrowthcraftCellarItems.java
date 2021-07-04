@@ -2,6 +2,7 @@ package growthcraft.cellar.init;
 
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
+import growthcraft.lib.common.item.GrowthcraftEnchantedItem;
 import growthcraft.lib.common.item.GrowthcraftItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
@@ -24,4 +25,36 @@ public class GrowthcraftCellarItems {
                     new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
             )
     );
+    public static final RegistryObject<GrowthcraftItem> yeast_bayanus = ITEMS.register(
+            UnlocalizedName.YEAST_BAYANUS,
+            GrowthcraftItem::new
+    );
+    public static final RegistryObject<GrowthcraftEnchantedItem> yeast_bayanus_ethereal = ITEMS.register(
+            UnlocalizedName.YEAST_BAYANUS_ETHEREAL,
+            GrowthcraftEnchantedItem::new
+    );
+    public static final RegistryObject<GrowthcraftItem> yeast_brewers = ITEMS.register(
+            UnlocalizedName.YEAST_BREWERS,
+            GrowthcraftItem::new
+    );
+    public static final RegistryObject<GrowthcraftEnchantedItem> yeast_brewers_ethereal = ITEMS.register(
+            UnlocalizedName.YEAST_BREWERS_ETHEREAL,
+            GrowthcraftEnchantedItem::new
+    );
+    public static final RegistryObject<GrowthcraftItem> yeast_ethereal = ITEMS.register(
+            UnlocalizedName.YEAST_ETHEREAL,
+            GrowthcraftItem::new
+    );
+    public static final RegistryObject<GrowthcraftItem> yeast_lager = ITEMS.register(
+            UnlocalizedName.YEAST_LAGER,
+            GrowthcraftItem::new
+    );
+    public static final RegistryObject<GrowthcraftEnchantedItem> yeast_lager_ethereal = ITEMS.register(
+            UnlocalizedName.YEAST_LAGER_ETHEREAL,
+            GrowthcraftEnchantedItem::new
+    );
+
+    private GrowthcraftCellarItems() {
+        /* Prevent generation of default public constructor */
+    }
 }

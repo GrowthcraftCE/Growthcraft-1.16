@@ -3,5 +3,12 @@
   "container.growthcraft_cellar.brew_kettle": "Brew Kettle",
   "fluid.growthcraft_cellar.wort_fluid": "Wort",
   "item.growthcraft_cellar.wort_fluid_bucket": "Wort Bucket",
-  "item.growthcraft_cellar.brew_kettle_lid": "Brew Kettle Lid"
+  "item.growthcraft_cellar.brew_kettle_lid": "Brew Kettle Lid",
+  "item.growthcraft_cellar.yeast_brewers": "Brewer's Yeast",
+  "item.growthcraft_cellar.yeast_bayanus": "Bayanus Yeast",
+  "item.growthcraft_cellar.yeast_lager": "Lager Yeast",
+  "item.growthcraft_cellar.yeast_ethereal": "Ethereal Yeast",
+  "item.growthcraft_cellar.yeast_brewers_ethereal": "Brewer's Yeast",
+  "item.growthcraft_cellar.yeast_bayanus_ethereal": "Bayanus Yeast",
+  "item.growthcraft_cellar.yeast_lager_ethereal": "Lager Yeast"
 }
