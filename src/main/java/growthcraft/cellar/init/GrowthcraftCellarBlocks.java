@@ -2,6 +2,7 @@ package growthcraft.cellar.init;
 
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.common.block.BrewKettleBlock;
+import growthcraft.cellar.common.block.CultureJarBlock;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import net.minecraft.block.Block;
@@ -21,6 +22,11 @@ public class GrowthcraftCellarBlocks {
     public static final RegistryObject<BrewKettleBlock> brew_kettle = BLOCKS.register(
             UnlocalizedName.BREW_KETTLE,
             BrewKettleBlock::new
+    );
+
+    public static final RegistryObject<CultureJarBlock> culture_jar = BLOCKS.register(
+            UnlocalizedName.CULTURE_JAR,
+            CultureJarBlock::new
     );
 
     private GrowthcraftCellarBlocks() { /* Prevent Default Public Constructor */ }

@@ -25,7 +25,7 @@ public class GrowthcraftCellerConfig {
 
     static {
         initBrewKettleConfig(SERVER_BUILDER);
-        initWorldGenConfig(SERVER_BUILDER);
+        //initWorldGenConfig(SERVER_BUILDER);
 
         SERVER = SERVER_BUILDER.build();
         CLIENT = CLIENT_BUILDER.build();
@@ -59,7 +59,7 @@ public class GrowthcraftCellerConfig {
      */
     public static void initWorldGenConfig(ForgeConfigSpec.Builder server) {
         server.push("general");
-        server.comment(String.format("General configuration for %s.", Reference.NAME)).define("general.version", Reference.VERSION);
+        server.comment(String.format("General configuration for %s %s.", Reference.NAME, Reference.VERSION));
         server.pop();
         /**
          * Placeholder for setting configuration values.
