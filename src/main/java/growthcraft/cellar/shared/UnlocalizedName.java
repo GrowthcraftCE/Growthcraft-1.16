@@ -16,6 +16,7 @@ public class UnlocalizedName {
     public static final String YEAST_ETHEREAL = "yeast_ethereal";
     public static final String YEAST_LAGER = "yeast_lager";
     public static final String YEAST_LAGER_ETHEREAL = "yeast_lager_ethereal";
+    public static final String LOOT_SERIALIZER_BLOCK = "global_block_loot_modifier";
 
     private UnlocalizedName() {
         /* Prevent generation of default public constructor */

@@ -42,6 +42,7 @@ public class GrowthcraftCellar {
         GrowthcraftCellarItems.ITEMS.register(modEventBus);
         GrowthcraftCellarFluids.FLUIDS.register(modEventBus);
         GrowthcraftCellarBlocks.BLOCKS.register(modEventBus);
+        GrowthcraftCellarLootModifiers.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
         GrowthcraftCellarTileEntities.TILE_ENTITIES.register(modEventBus);
         GrowthcraftCellarContainers.CONTAINERS.register(modEventBus);
         GrowthcraftCellarRecipes.RECIPE_SERIALIZERS.register(modEventBus);
