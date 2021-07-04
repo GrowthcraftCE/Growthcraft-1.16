@@ -59,7 +59,7 @@ public class GrowthcraftCellerConfig {
      */
     public static void initWorldGenConfig(ForgeConfigSpec.Builder server) {
         server.push("general");
-        server.comment(String.format("General configuration for %s.", Reference.NAME)).define("general.version", Reference.VERSION);
+        server.comment(String.format("General configuration for %s %s.", Reference.NAME, Reference.VERSION));
         server.pop();
         /**
          * Placeholder for setting configuration values.
