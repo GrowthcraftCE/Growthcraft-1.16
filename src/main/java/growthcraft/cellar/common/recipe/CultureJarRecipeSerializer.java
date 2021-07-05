@@ -19,12 +19,14 @@ public class CultureJarRecipeSerializer extends ForgeRegistryEntry<IRecipeSerial
     public CultureJarRecipe read(ResourceLocation recipeId, JsonObject json) {
         // Processing Time
         int processingTime = JSONUtils.getInt(json, "processing_time");
+        // Needs Heat Source?
+        boolean needsHeat = JSONUtils.getBoolean(json, "requires_heat_source");
 
         // Inputs
         FluidStack inputFluid = CraftingUtils.getFluidStack(JSONUtils.getJsonObject(json, "input_fluid"));
         ItemStack inputItem = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "input_item"), false);
 
-        return new CultureJarRecipe(recipeId, inputFluid, inputItem, processingTime);
+        return new CultureJarRecipe(recipeId, inputFluid, inputItem, processingTime, needsHeat);
     }
 
     @Nullable

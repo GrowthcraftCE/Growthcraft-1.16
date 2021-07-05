@@ -39,7 +39,7 @@ public class CultureJarContainer extends Container {
         // Input Slot
         this.addSlot(new SlotItemHandler(
                 cultureJarTileEntity.getInventory(),
-                index, 80, 35
+                index, 94, 35
         ));
         index++;
 
@@ -79,8 +79,8 @@ public class CultureJarContainer extends Container {
         }
 
         this.trackInt(currentProcessingTime = new FunctionalIntReferenceHolder(
-                this.cultureJarTileEntity::getCurrentProcessingTicks,
-                this.cultureJarTileEntity::setCurrentProcessingTicks
+                this.cultureJarTileEntity::getCurrentProcessingTime,
+                this.cultureJarTileEntity::setCurrentProcessingTime
         ));
     }
 

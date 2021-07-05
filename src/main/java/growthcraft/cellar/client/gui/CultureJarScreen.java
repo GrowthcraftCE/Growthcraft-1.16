@@ -68,24 +68,23 @@ public class CultureJarScreen extends ContainerScreen<CultureJarContainer> {
         blit(matrixStack, this.guiLeft, this.guiTop, baseX, baseY, this.xSize, this.ySize, maxX, maxY);
 
         // Progress Bar
-        int guiProgressX = this.guiLeft + 55;
-        int guiProgressY = this.guiTop + 35;
+        int guiProgressX = this.guiLeft + 82;
+        int guiProgressY = this.guiTop + 30;
 
-        this.blit(matrixStack, guiProgressX, guiProgressY, 176, 0, 197 - 176,
-                this.container.getProcessingTimeScaled(197 - 176));
+        this.blit(matrixStack, guiProgressX, guiProgressY, 176, 0, 9,
+                this.container.getProcessingTimeScaled(28));
 
         // Heat indicator
-        int guiHeatLevelX = this.guiLeft + 81;
+        int guiHeatLevelX = this.guiLeft + 96;
         int guiHeatLevelY = this.guiTop + 57;
 
         if (this.container.isHeated()) {
-            this.blit(matrixStack, guiHeatLevelX, guiHeatLevelY, 176, 16, 13, 13);
+            this.blit(matrixStack, guiHeatLevelX, guiHeatLevelY, 176, 28, 13, 13);
         }
 
         // Input fluid tank
-        // TODO[20]: Fix the culture jar's input fluid tank in the background image. It overlaps the text.
-        int guiInputFluidTankX = guiLeft + 36;
-        int guiInputFluidTankY = guiTop + 14;
+        int guiInputFluidTankX = guiLeft + 65;
+        int guiInputFluidTankY = guiTop + 18;
         int guiInputFluidTankHeight = 52;
 
         if (this.container.getTileEntityFluidTank(0).getFluidAmount() > 0) {
@@ -106,8 +105,6 @@ public class CultureJarScreen extends ContainerScreen<CultureJarContainer> {
     @ParametersAreNonnullByDefault
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
         super.drawGuiContainerForegroundLayer(matrixStack, mouseX, mouseY);
-        // Culture Jar Title
-        //this.font.drawString(matrixStack, this.title.getString(), 7.0F, 5.0F, 0x404040);
     }
 
     @Override
@@ -118,9 +115,9 @@ public class CultureJarScreen extends ContainerScreen<CultureJarContainer> {
         super.render(matrixStack, mouseX, mouseY, partialTicks);
 
         // on hover for input fluid tank
-        int guiInputTankX = guiLeft + 46;
+        int guiInputTankX = guiLeft + 64;
         int guiInputTankY = guiTop + 17;
-        int guiInputTankHeight = 52;
+        int guiInputTankHeight = 54;
 
         if (mouseX > guiInputTankX && mouseX < guiInputTankX + 16 && mouseY > guiInputTankY && mouseY < guiInputTankY + guiInputTankHeight) {
             FluidStack fluidStack = this.container.getTileEntityFluidTank(0).getFluid();

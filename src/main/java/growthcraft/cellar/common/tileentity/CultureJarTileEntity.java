@@ -1,6 +1,9 @@
 package growthcraft.cellar.common.tileentity;
 
 import growthcraft.cellar.client.container.CultureJarContainer;
+import growthcraft.cellar.common.block.CultureJarBlock;
+import growthcraft.cellar.common.recipe.CultureJarRecipe;
+import growthcraft.cellar.common.recipe.CultureJarRecipeType;
 import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.shared.Reference;
@@ -8,12 +11,17 @@ import growthcraft.cellar.shared.UnlocalizedName;
 import growthcraft.lib.util.BlockStateUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -26,22 +34,28 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CultureJarTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
     private final int maxProcessingTime = 250;
     private int currentProcessingTicks;
-    // TODO: Create CultureJazrRecipe serialization
     private ITextComponent customName;
 
     private final BrewKettleItemHandler inventory;
@@ -51,6 +65,8 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
             () -> inputFluidTank
     );
 
+    private CultureJarRecipe currentRecipe;
+
     public CultureJarTileEntity(TileEntityType<?> tileEntityType) {
         super(tileEntityType);
         this.inventory = new BrewKettleItemHandler(1);
@@ -59,6 +75,47 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
 
     public CultureJarTileEntity() {
         this(GrowthcraftCellarTileEntities.culture_jar_tileentity.get());
+    }
+
+    @Override
+    public void tick() {
+        boolean dirty = false;
+
+        if (world != null && !world.isRemote) {
+            if (this.inventory.getStackInSlot(0).getItem() != Items.AIR && !inputFluidTank.isEmpty()) {
+
+                CultureJarRecipe recipe = this.getRecipe(
+                        this.inventory.getStackInSlot(0),
+                        inputFluidTank.getFluid(),
+                        isHeated()
+                );
+
+                if (currentRecipe != null && currentRecipe == recipe) {
+                    this.currentProcessingTicks++;
+                    dirty = true;
+                } else if (currentRecipe == null && recipe != null) {
+                    currentProcessingTicks = 0;
+                    currentRecipe = recipe;
+                    dirty = true;
+                }
+
+                if (currentProcessingTicks > maxProcessingTime) {
+                    this.inputFluidTank.drain(recipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
+                    this.inventory.getStackInSlot(0).grow(recipe.getInputItem().getCount());
+
+                    currentRecipe = null;
+                    currentProcessingTicks = 0;
+                    dirty = true;
+                }
+            }
+
+        }
+
+        if (dirty) {
+            this.markDirty();
+            this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
+        }
+
     }
 
     // Custom Name Handling
@@ -76,7 +133,7 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
     }
 
     private ITextComponent getDefaultName() {
-        String translationKey = String.format("container.%s.%s", Reference.MODID, UnlocalizedName.BREW_KETTLE);
+        String translationKey = String.format("container.%s.%s", Reference.MODID, UnlocalizedName.CULTURE_JAR);
         return new TranslationTextComponent(translationKey);
     }
 
@@ -85,11 +142,6 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
     @Override
     public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity playerEntity) {
         return new CultureJarContainer(windowId, playerInventory, this);
-    }
-
-    @Override
-    public void tick() {
-        // TODO[20]: implement culture jar processing. Requires recipe serialization.
     }
 
     // NBT Data Handling
@@ -148,9 +200,14 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
     // Heat Sources
     public boolean isHeated() {
         Map<String, Block> blockMap = BlockStateUtils.getSurroundingBlocks(world, pos);
-        return BlockTags.getCollection().get(
+
+        boolean heated = BlockTags.getCollection().get(
                 new ResourceLocation(growthcraft.core.shared.Reference.MODID,
                         growthcraft.core.shared.Reference.TAG_HEATSOURCES)).contains(blockMap.get("down"));
+
+        this.world.setBlockState(this.getPos(), this.getBlockState().with(CultureJarBlock.LIT, heated));
+
+        return heated;
     }
 
     // Inventory
@@ -176,14 +233,38 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
     }
 
     // Recipe Handling
-    // TODO[20]: getRecipes
+    public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> cultureJarRecipeType, World world) {
+        return world != null ?
+                world.getRecipeManager().getRecipes().stream()
+                        .filter(recipe -> recipe.getType().toString().equals(cultureJarRecipeType.toString())).collect(Collectors.toSet())
+                : Collections.emptySet();
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> cultureJarRecipeType) {
+        ClientWorld world = Minecraft.getInstance().world;
+        return world != null ?
+                world.getRecipeManager().getRecipes().stream()
+                        .filter(recipe -> recipe.getType().toString().equals(cultureJarRecipeType.toString())).collect(Collectors.toSet())
+                : Collections.emptySet();
+    }
+
+    @Nullable
+    private CultureJarRecipe getRecipe(ItemStack itemStack, FluidStack fluidStack, boolean requiresHeatSource) {
+        Set<IRecipe<?>> recipes = findRecipesByType(new CultureJarRecipeType(), this.world);
+        for (IRecipe<?> recipe : recipes) {
+            CultureJarRecipe cultureJarRecipe = (CultureJarRecipe) recipe;
+            if (cultureJarRecipe.matches(itemStack, fluidStack, requiresHeatSource)) return cultureJarRecipe;
+        }
+        return null;
+    }
 
     // Getters and Setters
-    public int getCurrentProcessingTicks() {
+    public int getCurrentProcessingTime() {
         return currentProcessingTicks;
     }
 
-    public void setCurrentProcessingTicks(int ticks) {
+    public void setCurrentProcessingTime(int ticks) {
         this.currentProcessingTicks = ticks;
     }
 
