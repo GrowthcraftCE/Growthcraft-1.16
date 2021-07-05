@@ -83,6 +83,7 @@ public class CultureJarScreen extends ContainerScreen<CultureJarContainer> {
         }
 
         // Input fluid tank
+        // TODO[20]: Fix the culture jar's input fluid tank in the background image. It overlaps the text.
         int guiInputFluidTankX = guiLeft + 36;
         int guiInputFluidTankY = guiTop + 14;
         int guiInputFluidTankHeight = 52;
