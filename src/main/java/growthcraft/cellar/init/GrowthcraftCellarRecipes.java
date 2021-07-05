@@ -1,8 +1,6 @@
 package growthcraft.cellar.init;
 
-import growthcraft.cellar.common.recipe.BrewKettleRecipe;
-import growthcraft.cellar.common.recipe.BrewKettleRecipeSerializer;
-import growthcraft.cellar.common.recipe.BrewKettleRecipeType;
+import growthcraft.cellar.common.recipe.*;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -19,6 +17,14 @@ public class GrowthcraftCellarRecipes {
             UnlocalizedName.BREW_KETTLE_RECIPE,
             BrewKettleRecipeSerializer::new);
 
-    public static final IRecipeType<BrewKettleRecipe> BREW_KETTLE_RECIPE_TYPE = new BrewKettleRecipeType();
+    public static final RegistryObject<IRecipeSerializer<?>> CULTURE_JAR_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register(
+            UnlocalizedName.CULTURE_JAR_RECIPE,
+            CultureJarRecipeSerializer::new);
 
+    public static final IRecipeType<BrewKettleRecipe> BREW_KETTLE_RECIPE_TYPE = new BrewKettleRecipeType();
+    public static final IRecipeType<CultureJarRecipe> CULTURE_JAR_RECIPE_TYPE = new CultureJarRecipeType();
+
+    private GrowthcraftCellarRecipes() {
+        /* Prevent default public constructor */
+    }
 }

@@ -3,7 +3,7 @@ package growthcraft.cellar.common.block;
 import growthcraft.cellar.common.tileentity.BrewKettleTileEntity;
 import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
-import growthcraft.cellar.init.config.GrowthcraftCellerConfig;
+import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -102,8 +102,8 @@ public class BrewKettleBlock extends Block {
 
     @Override
     public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-        return state.get(LIT) && GrowthcraftCellerConfig.getBrewKettleLitLightLevel() >= 0
-                ? GrowthcraftCellerConfig.getBrewKettleLitLightLevel()
+        return state.get(LIT) && GrowthcraftCellarConfig.getBrewKettleLitLightLevel() >= 0
+                ? GrowthcraftCellarConfig.getBrewKettleLitLightLevel()
                 : super.getLightValue(state, world, pos);
     }
 

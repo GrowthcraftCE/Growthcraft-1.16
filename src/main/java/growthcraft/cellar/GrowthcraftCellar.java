@@ -6,7 +6,7 @@ import growthcraft.cellar.init.*;
 import growthcraft.cellar.init.client.GrowthcraftCellarBlockRenders;
 import growthcraft.cellar.init.client.GrowthcraftCellarScreenManager;
 import growthcraft.cellar.init.client.GrowthcraftCellarTileEntityRenders;
-import growthcraft.cellar.init.config.GrowthcraftCellerConfig;
+import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.lib.proxy.IProxy;
 import net.minecraft.item.Item;
@@ -34,7 +34,7 @@ public class GrowthcraftCellar {
     public GrowthcraftCellar() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-        GrowthcraftCellerConfig.loadConfig();
+        GrowthcraftCellarConfig.loadConfig();
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 

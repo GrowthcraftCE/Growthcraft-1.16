@@ -1,8 +1,5 @@
 {
   "variants": {
-    "normal": {
-      "model": "growthcraft_cellar:block/culture_jar"
-    },
     "facing=north,lit=false": {
       "model": "growthcraft_cellar:block/culture_jar"
     },
