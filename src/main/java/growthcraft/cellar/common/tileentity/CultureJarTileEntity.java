@@ -1,5 +1,6 @@
 package growthcraft.cellar.common.tileentity;
 
+import growthcraft.cellar.client.container.CultureJarContainer;
 import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.shared.Reference;
@@ -38,7 +39,7 @@ import java.util.Map;
 
 public class CultureJarTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
-    private final int maxProcessingTicks = 250;
+    private final int maxProcessingTime = 250;
     private int currentProcessingTicks;
     // TODO: Create CultureJazrRecipe serialization
     private ITextComponent customName;
@@ -83,8 +84,7 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
     @Nullable
     @Override
     public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-        // TODO: return Container
-        return null;
+        return new CultureJarContainer(windowId, playerInventory, this);
     }
 
     @Override
@@ -168,7 +168,7 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
 
     // Fluid Tanks
     private void createFluidTanks() {
-        this.inputFluidTank = new FluidTank(4000);
+        this.inputFluidTank = new FluidTank(1000);
     }
 
     public FluidTank getInputFluidTank(int slot) {
@@ -185,5 +185,9 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
 
     public void setCurrentProcessingTicks(int ticks) {
         this.currentProcessingTicks = ticks;
+    }
+
+    public int getMaxProcessingTime() {
+        return this.maxProcessingTime;
     }
 }

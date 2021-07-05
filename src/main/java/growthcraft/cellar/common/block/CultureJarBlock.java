@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
@@ -28,6 +29,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
@@ -79,7 +81,12 @@ public class CultureJarBlock extends Block {
             return ActionResultType.SUCCESS;
         }
 
-        // TODO[20]: Add Culture Jar GUI interaction
+        if (!worldIn.isRemote) {
+            TileEntity tileEntity = worldIn.getTileEntity(pos);
+            if (tileEntity instanceof CultureJarTileEntity) {
+                NetworkHooks.openGui((ServerPlayerEntity) player, (CultureJarTileEntity) tileEntity, pos);
+            }
+        }
 
         return ActionResultType.SUCCESS;
     }

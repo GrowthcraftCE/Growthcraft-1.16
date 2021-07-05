@@ -139,7 +139,7 @@ public class BrewKettleScreen extends ContainerScreen<BrewKettleContainer> {
             this.renderTooltip(matrixStack, stringTextComponent, mouseX, mouseY);
         }
 
-        // on hover for input fluid tank
+        // on hover for output fluid tank
         int guiOutputTankX = guiLeft + 114;
         int guiOutputTankY = guiTop + 17;
         int guiOutputTankHeight = 52;
