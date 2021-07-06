@@ -1,6 +1,6 @@
 package growthcraft.cellar.client.container;
 
-import growthcraft.cellar.common.tileentity.BrewKettleTileEntity;
+import growthcraft.cellar.common.tileentity.CultureJarTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarContainers;
 import growthcraft.lib.util.FunctionalIntReferenceHolder;
@@ -20,48 +20,30 @@ import net.minecraftforge.items.SlotItemHandler;
 import javax.annotation.Nonnull;
 import java.util.Objects;
 
-public class BrewKettleContainer extends Container {
+public class CultureJarContainer extends Container {
 
-    private final BrewKettleTileEntity brewKettleTileEntity;
-    public FunctionalIntReferenceHolder currentSmeltTime;
-    private final IWorldPosCallable canInteractWithCallable;
+    private final CultureJarTileEntity cultureJarTileEntity;
+    private final IWorldPosCallable worldPosCallable;
 
-    // Server Side Constructor
-    public BrewKettleContainer(final int windowID, final PlayerInventory playerInventory, final BrewKettleTileEntity tileEntity) {
-        super(GrowthcraftCellarContainers.brew_kettle_container.get(), windowID);
+    private final FunctionalIntReferenceHolder currentProcessingTime;
 
-        this.brewKettleTileEntity = tileEntity;
-        this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
+    public CultureJarContainer(final int windowID, final PlayerInventory playerInventory, final CultureJarTileEntity tileEntity) {
+        super(GrowthcraftCellarContainers.culture_jar_container.get(), windowID);
+
+        this.cultureJarTileEntity = tileEntity;
+        this.worldPosCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
 
         int index = 0;
-        int slotWidth = 18;
+        int itemSlotWidth = 18;
 
-        /* Input Slot */
+        // Input Slot
         this.addSlot(new SlotItemHandler(
-                brewKettleTileEntity.getInventory(),
-                index, 80, 35)
-        );
+                cultureJarTileEntity.getInventory(),
+                index, 94, 35
+        ));
         index++;
 
         SlotItemHandler fluidInputSlot;
-
-        /* Output Slot */
-        this.addSlot(new SlotItemHandler(
-                brewKettleTileEntity.getInventory(),
-                index,
-                141, 17)
-        );
-        index++;
-
-        SlotItemHandler fluidOutputSlot;
-
-        /* Lid Slot */
-        this.addSlot(new SlotItemHandler(
-                brewKettleTileEntity.getInventory(),
-                index,
-                19, 17)
-        );
-        index++;
 
         /* Hotbar Inventory Slots */
         int hotbarBaseY = 142;
@@ -71,7 +53,7 @@ public class BrewKettleContainer extends Container {
             Slot slot = new Slot(
                     playerInventory,
                     column,
-                    hotbarBaseX + (column * slotWidth),
+                    hotbarBaseX + (column * itemSlotWidth),
                     hotbarBaseY);
 
             this.addSlot(slot);
@@ -89,39 +71,38 @@ public class BrewKettleContainer extends Container {
                 Slot slot = new Slot(
                         playerInventory,
                         slotIndex,
-                        playerInvBaseX + (column * slotWidth),
-                        playerInvBaseY + (row * slotWidth));
+                        playerInvBaseX + (column * itemSlotWidth),
+                        playerInvBaseY + (row * itemSlotWidth));
 
                 this.addSlot(slot);
             }
         }
 
-        this.trackInt(currentSmeltTime = new FunctionalIntReferenceHolder(
-                this.brewKettleTileEntity::getCurrentSmeltTime, this.brewKettleTileEntity::setCurrentSmeltTime
+        this.trackInt(currentProcessingTime = new FunctionalIntReferenceHolder(
+                this.cultureJarTileEntity::getCurrentProcessingTime,
+                this.cultureJarTileEntity::setCurrentProcessingTime
         ));
     }
 
-    // Client Side Constructor
-    public BrewKettleContainer(final int windowID, final PlayerInventory playerInventory, final PacketBuffer data) {
-        this(windowID, playerInventory, getTileEntity(playerInventory, data));
+    public CultureJarContainer(final int windowID, final PlayerInventory playerInventory, final PacketBuffer packetBuffer) {
+        this(windowID, playerInventory, getTileEntity(playerInventory, packetBuffer));
     }
 
-    private static BrewKettleTileEntity getTileEntity(PlayerInventory playerInventory, PacketBuffer data) {
+    private static CultureJarTileEntity getTileEntity(PlayerInventory playerInventory, PacketBuffer packetBuffer) {
         Objects.requireNonNull(playerInventory, "Player inventory cannot be null!");
-        Objects.requireNonNull(data, "Packet buffer cannot be null!");
+        Objects.requireNonNull(packetBuffer, "Packet buffer cannot be null!");
 
-        final TileEntity tileEntity = playerInventory.player.world.getTileEntity(data.readBlockPos());
-
-        if (tileEntity instanceof BrewKettleTileEntity) {
-            return (BrewKettleTileEntity) tileEntity;
+        final TileEntity tileEntity = playerInventory.player.world.getTileEntity(packetBuffer.readBlockPos());
+        if (tileEntity instanceof CultureJarTileEntity) {
+            return (CultureJarTileEntity) tileEntity;
         }
 
-        throw new IllegalStateException("TileEntity is not correct " + tileEntity);
+        throw new IllegalStateException("CultureJarContainer found invalid TileEntity: " + tileEntity);
     }
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(canInteractWithCallable, playerIn, GrowthcraftCellarBlocks.brew_kettle.get());
+        return isWithinUsableDistance(worldPosCallable, playerIn, GrowthcraftCellarBlocks.culture_jar.get());
     }
 
     @Nonnull
@@ -155,25 +136,20 @@ public class BrewKettleContainer extends Container {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public int getSmeltProgressionScaled(int size) {
-        return this.currentSmeltTime.get() != 0 && this.brewKettleTileEntity.maxSmeltTime != 0
-                ? this.currentSmeltTime.get() * size / this.brewKettleTileEntity.maxSmeltTime
+    public int getProcessingTimeScaled(int size) {
+        return this.currentProcessingTime.get() != 0 && this.cultureJarTileEntity.getMaxProcessingTime() != 0
+                ? this.currentProcessingTime.get() * size / this.cultureJarTileEntity.getMaxProcessingTime()
                 : 0;
     }
 
     @OnlyIn(Dist.CLIENT)
-    public boolean isBurning() {
-        return this.brewKettleTileEntity.isHeated();
+    public boolean isHeated() {
+        return this.cultureJarTileEntity.isHeated();
     }
 
     @OnlyIn(Dist.CLIENT)
-    public FluidTank getInputFluidTank() {
-        return this.brewKettleTileEntity.getFluidTank(0);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public FluidTank getOutputFluidTank() {
-        return this.brewKettleTileEntity.getFluidTank(1);
+    public FluidTank getTileEntityFluidTank(int slot) {
+        return this.cultureJarTileEntity.getInputFluidTank(0);
     }
 
 }

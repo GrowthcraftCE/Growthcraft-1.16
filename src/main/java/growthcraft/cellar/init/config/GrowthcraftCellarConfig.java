@@ -8,7 +8,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.File;
 
-public class GrowthcraftCellerConfig {
+public class GrowthcraftCellarConfig {
 
     public static final String SERVER_CONFIG = String.format("growthcraft-%s-server.toml", Reference.MODID_SHORT);
     public static final String CLIENT_CONFIG = String.format("growthcraft-%s-client.toml", Reference.MODID_SHORT);
@@ -22,6 +22,7 @@ public class GrowthcraftCellerConfig {
     private static final String CATEGORY_BREW_KETTLE = "brew_kettle";
 
     private static ForgeConfigSpec.IntValue brew_kettle_lit_light_level;
+    private static ForgeConfigSpec.IntValue default_brewing_ticks;
 
     static {
         initBrewKettleConfig(SERVER_BUILDER);
@@ -31,7 +32,7 @@ public class GrowthcraftCellerConfig {
         CLIENT = CLIENT_BUILDER.build();
     }
 
-    private GrowthcraftCellerConfig() { /* Disable default public constructor */ }
+    private GrowthcraftCellarConfig() { /* Disable default public constructor */ }
 
     public static void loadConfig() {
         loadConfig(SERVER, FMLPaths.CONFIGDIR.get().resolve(SERVER_CONFIG).toString());
@@ -50,6 +51,9 @@ public class GrowthcraftCellerConfig {
         brew_kettle_lit_light_level = server
                 .comment("Set the light level for the brew kettle when it is lit. Setting to 0 uses neighbor light level.")
                 .defineInRange("brewKettle.LitLightLevel", 15, 0, 15);
+        default_brewing_ticks = server
+                .comment("Set the Brew Kettle processing time in ticks.")
+                .defineInRange("brewKettle.DefaultProcessingTime", 600, 20, 24000);
     }
 
     /**
@@ -74,5 +78,9 @@ public class GrowthcraftCellerConfig {
 
     public static int getBrewKettleLitLightLevel() {
         return brew_kettle_lit_light_level.get();
+    }
+
+    public static int getDefaultProcessingTime() {
+        return default_brewing_ticks.get();
     }
 }
