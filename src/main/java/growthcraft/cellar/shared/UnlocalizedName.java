@@ -7,6 +7,7 @@ public class UnlocalizedName {
     public static final String CULTURE_JAR = "culture_jar";
     public static final String CULTURE_JAR_RECIPE = "culture_jar_recipe";
     public static final String BREW_KETTLE_RECIPE = "brew_kettle_recipe";
+    public static final String FERMENT_BARREL_OAK = "barrel_ferment_oak";
     public static final String WORT = "wort";
     public static final String WORT_BUCKET = "wort_fluid_bucket";
     public static final String WORT_FLUID = "wort_fluid";
