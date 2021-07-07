@@ -131,6 +131,4 @@ public class CultureJarBlock extends Block {
         return VOXEL_SHAPE;
     }
 
-    // TODO[20]: Add TileEntity
-
 }
