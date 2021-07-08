@@ -1,7 +1,7 @@
-package growthcraft.cellar.lib.block;
+package growthcraft.cellar.common.block;
 
+import growthcraft.cellar.common.tileentity.FermentBarrelTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
-import growthcraft.cellar.lib.tileentity.FermentBarrelTileEntity;
 import growthcraft.lib.util.BlockStateUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -2,7 +2,7 @@ package growthcraft.cellar.init;
 
 import growthcraft.cellar.common.tileentity.BrewKettleTileEntity;
 import growthcraft.cellar.common.tileentity.CultureJarTileEntity;
-import growthcraft.cellar.common.tileentity.OakFermentBarrelTileEntity;
+import growthcraft.cellar.common.tileentity.FermentBarrelTileEntity;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import net.minecraft.tileentity.TileEntityType;
@@ -26,10 +26,11 @@ public class GrowthcraftCellarTileEntities {
                     CultureJarTileEntity::new, GrowthcraftCellarBlocks.culture_jar.get()
             ).build(null)
     );
-    public static final RegistryObject<TileEntityType<OakFermentBarrelTileEntity>> barrel_ferment_oak_tileentity = TILE_ENTITIES.register(
+
+    public static final RegistryObject<TileEntityType<FermentBarrelTileEntity>> barrel_ferment_oak_tileentity = TILE_ENTITIES.register(
             UnlocalizedName.FERMENT_BARREL_OAK,
             () -> TileEntityType.Builder.create(
-                    OakFermentBarrelTileEntity::new, GrowthcraftCellarBlocks.barrel_ferment_oak.get()
+                    FermentBarrelTileEntity::new, GrowthcraftCellarBlocks.barrel_ferment_oak.get()
             ).build(null)
     );
 

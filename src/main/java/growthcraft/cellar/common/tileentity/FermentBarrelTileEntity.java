@@ -1,7 +1,8 @@
-package growthcraft.cellar.lib.tileentity;
+package growthcraft.cellar.common.tileentity;
 
 import growthcraft.cellar.client.container.FermentBarrelContainer;
 import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
+import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.lib.common.tank.handler.FluidTankHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
@@ -43,6 +44,10 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
         super(tileEntityTypeIn);
         this.inventory = new BrewKettleItemHandler(1);
         fluidTankHandler = new FluidTankHandler(1, 4000);
+    }
+
+    public FermentBarrelTileEntity() {
+        this(GrowthcraftCellarTileEntities.barrel_ferment_oak_tileentity.get());
     }
 
     @Override

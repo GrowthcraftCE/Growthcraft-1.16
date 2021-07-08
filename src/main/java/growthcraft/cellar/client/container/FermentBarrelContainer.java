@@ -1,7 +1,7 @@
 package growthcraft.cellar.client.container;
 
+import growthcraft.cellar.common.tileentity.FermentBarrelTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarContainers;
-import growthcraft.cellar.lib.tileentity.FermentBarrelTileEntity;
 import growthcraft.lib.util.FunctionalIntReferenceHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -38,7 +38,7 @@ public class FermentBarrelContainer extends Container {
         // Input Slot
         this.addSlot(new SlotItemHandler(
                 fermentBarrelTileEntity.getInventory(),
-                index, 94, 35
+                index, 52, 53
         ));
         index++;
 
