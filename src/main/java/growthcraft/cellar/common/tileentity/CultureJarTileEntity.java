@@ -55,7 +55,7 @@ import java.util.stream.Collectors;
 
 public class CultureJarTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
-    private final int maxProcessingTime = 250;
+    private int maxProcessingTime = 250;
     private int currentProcessingTicks;
     private ITextComponent customName;
 
@@ -92,6 +92,7 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
                 );
 
                 if (currentRecipe != null && currentRecipe == recipe) {
+                    this.maxProcessingTime = recipe.getProcessingTime();
                     this.currentProcessingTicks++;
                     dirty = true;
                 } else if (currentRecipe == null && recipe != null) {

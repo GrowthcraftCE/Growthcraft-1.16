@@ -2,6 +2,7 @@ package growthcraft.cellar.init;
 
 import growthcraft.cellar.client.container.BrewKettleContainer;
 import growthcraft.cellar.client.container.CultureJarContainer;
+import growthcraft.cellar.client.container.FermentBarrelContainer;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import net.minecraft.inventory.container.ContainerType;
@@ -21,6 +22,11 @@ public class GrowthcraftCellarContainers {
     public static final RegistryObject<ContainerType<CultureJarContainer>> culture_jar_container = CONTAINERS.register(
             UnlocalizedName.CULTURE_JAR,
             () -> IForgeContainerType.create(CultureJarContainer::new)
+    );
+
+    public static final RegistryObject<ContainerType<FermentBarrelContainer>> ferment_barrel_container = CONTAINERS.register(
+            UnlocalizedName.FERMENT_BARREL,
+            () -> IForgeContainerType.create(FermentBarrelContainer::new)
     );
 
     private GrowthcraftCellarContainers() { /* Disable default public constructor */ }

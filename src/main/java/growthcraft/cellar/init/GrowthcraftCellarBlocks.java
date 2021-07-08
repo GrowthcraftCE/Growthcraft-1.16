@@ -3,7 +3,8 @@ package growthcraft.cellar.init;
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.common.block.BrewKettleBlock;
 import growthcraft.cellar.common.block.CultureJarBlock;
-import growthcraft.cellar.common.block.FermentationBarrelBlock;
+import growthcraft.cellar.common.block.OakFermentBarrelBlock;
+import growthcraft.cellar.lib.block.FermentationBarrelBlock;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import net.minecraft.block.Block;
@@ -32,7 +33,7 @@ public class GrowthcraftCellarBlocks {
 
     public static final RegistryObject<FermentationBarrelBlock> barrel_ferment_oak = BLOCKS.register(
             UnlocalizedName.FERMENT_BARREL_OAK,
-            FermentationBarrelBlock::new
+            OakFermentBarrelBlock::new
     );
 
     private GrowthcraftCellarBlocks() { /* Prevent Default Public Constructor */ }

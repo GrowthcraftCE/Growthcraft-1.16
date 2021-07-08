@@ -1,5 +1,6 @@
-package growthcraft.cellar.common.block;
+package growthcraft.cellar.lib.block;
 
+import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.lib.util.BlockStateUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -11,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Rotation;
@@ -22,6 +24,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 import javax.annotation.Nullable;
 
@@ -56,12 +60,36 @@ public class FermentationBarrelBlock extends Block {
     }
 
     // TODO[19]: TileEntity
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return GrowthcraftCellarTileEntities.barrel_ferment_oak_tileentity.get().create();
+    }
 
     // TODO[19]: Block Interactions
     @Override
     @SuppressWarnings("deprecation")
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        if (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
+                || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
+            return ActionResultType.SUCCESS;
+        }
+
+        /*
+        if (!worldIn.isRemote) {
+            TileEntity tileEntity = worldIn.getTileEntity(pos);
+            if (tileEntity instanceof CultureJarTileEntity) {
+                NetworkHooks.openGui((ServerPlayerEntity) player, (CultureJarTileEntity) tileEntity, pos);
+            }
+        }
+        */
+
+        return ActionResultType.SUCCESS;
     }
 
     // TODO[19]: Block Replacement

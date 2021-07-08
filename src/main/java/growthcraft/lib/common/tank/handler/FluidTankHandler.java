@@ -4,6 +4,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class FluidTankHandler {
@@ -11,6 +12,7 @@ public class FluidTankHandler {
     private Map<Integer, FluidTank> fluidTanks;
 
     public FluidTankHandler(int tanks, int capacity) {
+        fluidTanks = new HashMap<>();
         createFluidTanks(tanks, capacity);
     }
 
@@ -26,5 +28,13 @@ public class FluidTankHandler {
 
     public LazyOptional<IFluidHandler> getFluidTankHandler(int tank) {
         return LazyOptional.of(() -> getTank(tank));
+    }
+
+    public int getNumberTanks() {
+        return fluidTanks.size();
+    }
+
+    public void updateFluidTank(int tank, FluidTank fluidTank) {
+        fluidTanks.put(tank, fluidTank);
     }
 }
