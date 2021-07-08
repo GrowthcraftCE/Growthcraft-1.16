@@ -9,6 +9,11 @@ public class UnlocalizedName {
     public static final String BREW_KETTLE_RECIPE = "brew_kettle_recipe";
     public static final String FERMENT_BARREL = "barrel_ferment";
     public static final String FERMENT_BARREL_OAK = "barrel_ferment_oak";
+    public static final String FERMENT_BARREL_RECIPE = "ferment_barrel_recipe";
+    public static final String PALE_ALE = "pale_ale";
+    public static final String PALE_ALE_BUCKET = "pale_ale_bucket";
+    public static final String PALE_ALE_FLUID = "pale_ale_fluid";
+    public static final String PALE_ALE_FLUID_FLOWING = "pale_ale_fluid_flowing";
     public static final String WORT = "wort";
     public static final String WORT_BUCKET = "wort_fluid_bucket";
     public static final String WORT_FLUID = "wort_fluid";

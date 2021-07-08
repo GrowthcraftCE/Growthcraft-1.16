@@ -1,0 +1,16 @@
+{
+  "type": "growthcraft_cellar:ferment_barrel_recipe",
+  "processing_time": 8000,
+  "input_fluid": {
+    "fluid": "growthcraft_cellar:wort_pale_golden",
+    "amount": 4000
+  },
+  "input_item": {
+    "item": "growthcraft_cellar:yeast_brewers",
+    "count": 4
+  },
+  "output_fluid": {
+    "fluid": "growthcraft_cellar:fluid_pale_ale",
+    "amount": 4000
+  }
+}

@@ -25,6 +25,14 @@ public class GrowthcraftCellarItems {
                     new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
             )
     );
+    public static final RegistryObject<BucketItem> bucket_pale_ale = ITEMS.register(
+            UnlocalizedName.PALE_ALE_BUCKET,
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.PALE_ALE_FLUID,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+
     public static final RegistryObject<GrowthcraftItem> yeast_bayanus = ITEMS.register(
             UnlocalizedName.YEAST_BAYANUS,
             GrowthcraftItem::new

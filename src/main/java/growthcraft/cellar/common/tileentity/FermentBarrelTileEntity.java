@@ -166,6 +166,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     }
 
     // Recipes Handling
+    // TODO[19]: Add recipe handling to FermentBarrel - Note can only ferment whole buckets as one bucket takes 1 yeast
 
     // Getters and Setters
     public int getCurrentProcessingTime() {
