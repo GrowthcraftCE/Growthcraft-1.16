@@ -25,7 +25,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 public class FermentBarrelScreen extends ContainerScreen<FermentBarrelContainer> {
 
-    private static final ResourceLocation TEXTURE = TextureHelper.getTextureGui(Reference.MODID, UnlocalizedName.CULTURE_JAR);
+    private static final ResourceLocation TEXTURE = TextureHelper.getTextureGui(Reference.MODID, UnlocalizedName.FERMENT_BARREL);
 
     public FermentBarrelScreen(FermentBarrelContainer container, PlayerInventory playerInventory, ITextComponent title) {
         super(container, playerInventory, title);
@@ -73,14 +73,6 @@ public class FermentBarrelScreen extends ContainerScreen<FermentBarrelContainer>
 
         this.blit(matrixStack, guiProgressX, guiProgressY, 176, 0, 9,
                 this.container.getProcessingTimeScaled(28));
-
-        // Heat indicator
-        int guiHeatLevelX = this.guiLeft + 96;
-        int guiHeatLevelY = this.guiTop + 57;
-
-        if (this.container.isHeated()) {
-            this.blit(matrixStack, guiHeatLevelX, guiHeatLevelY, 176, 28, 13, 13);
-        }
 
         // Input fluid tank
         int guiInputFluidTankX = guiLeft + 65;

@@ -1,8 +1,7 @@
 package growthcraft.cellar.client.container;
 
-import growthcraft.cellar.common.tileentity.CultureJarTileEntity;
-import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarContainers;
+import growthcraft.cellar.lib.tileentity.FermentBarrelTileEntity;
 import growthcraft.lib.util.FunctionalIntReferenceHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -22,15 +21,15 @@ import java.util.Objects;
 
 public class FermentBarrelContainer extends Container {
 
-    private final CultureJarTileEntity cultureJarTileEntity;
+    private final FermentBarrelTileEntity fermentBarrelTileEntity;
     private final IWorldPosCallable worldPosCallable;
 
     private final FunctionalIntReferenceHolder currentProcessingTime;
 
-    public FermentBarrelContainer(final int windowID, final PlayerInventory playerInventory, final CultureJarTileEntity tileEntity) {
-        super(GrowthcraftCellarContainers.culture_jar_container.get(), windowID);
+    public FermentBarrelContainer(final int windowID, final PlayerInventory playerInventory, final FermentBarrelTileEntity tileEntity) {
+        super(GrowthcraftCellarContainers.ferment_barrel_container.get(), windowID);
 
-        this.cultureJarTileEntity = tileEntity;
+        this.fermentBarrelTileEntity = tileEntity;
         this.worldPosCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
 
         int index = 0;
@@ -38,7 +37,7 @@ public class FermentBarrelContainer extends Container {
 
         // Input Slot
         this.addSlot(new SlotItemHandler(
-                cultureJarTileEntity.getInventory(),
+                fermentBarrelTileEntity.getInventory(),
                 index, 94, 35
         ));
         index++;
@@ -79,8 +78,8 @@ public class FermentBarrelContainer extends Container {
         }
 
         this.trackInt(currentProcessingTime = new FunctionalIntReferenceHolder(
-                this.cultureJarTileEntity::getCurrentProcessingTime,
-                this.cultureJarTileEntity::setCurrentProcessingTime
+                this.fermentBarrelTileEntity::getCurrentProcessingTime,
+                this.fermentBarrelTileEntity::setCurrentProcessingTime
         ));
     }
 
@@ -88,21 +87,21 @@ public class FermentBarrelContainer extends Container {
         this(windowID, playerInventory, getTileEntity(playerInventory, packetBuffer));
     }
 
-    private static CultureJarTileEntity getTileEntity(PlayerInventory playerInventory, PacketBuffer packetBuffer) {
+    private static FermentBarrelTileEntity getTileEntity(PlayerInventory playerInventory, PacketBuffer packetBuffer) {
         Objects.requireNonNull(playerInventory, "Player inventory cannot be null!");
         Objects.requireNonNull(packetBuffer, "Packet buffer cannot be null!");
 
         final TileEntity tileEntity = playerInventory.player.world.getTileEntity(packetBuffer.readBlockPos());
-        if (tileEntity instanceof CultureJarTileEntity) {
-            return (CultureJarTileEntity) tileEntity;
+        if (tileEntity instanceof FermentBarrelTileEntity) {
+            return (FermentBarrelTileEntity) tileEntity;
         }
 
-        throw new IllegalStateException("CultureJarContainer found invalid TileEntity: " + tileEntity);
+        throw new IllegalStateException("FermentBarrelTileEntity found invalid TileEntity: " + tileEntity);
     }
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(worldPosCallable, playerIn, GrowthcraftCellarBlocks.culture_jar.get());
+        return this.fermentBarrelTileEntity.canOpen(playerIn);
     }
 
     @Nonnull
@@ -137,19 +136,13 @@ public class FermentBarrelContainer extends Container {
 
     @OnlyIn(Dist.CLIENT)
     public int getProcessingTimeScaled(int size) {
-        return this.currentProcessingTime.get() != 0 && this.cultureJarTileEntity.getMaxProcessingTime() != 0
-                ? this.currentProcessingTime.get() * size / this.cultureJarTileEntity.getMaxProcessingTime()
+        return this.currentProcessingTime.get() != 0 && this.fermentBarrelTileEntity.getMaxProcessingTime() != 0
+                ? this.currentProcessingTime.get() * size / this.fermentBarrelTileEntity.getMaxProcessingTime()
                 : 0;
     }
-
-    @OnlyIn(Dist.CLIENT)
-    public boolean isHeated() {
-        return this.cultureJarTileEntity.isHeated();
-    }
-
     @OnlyIn(Dist.CLIENT)
     public FluidTank getTileEntityFluidTank(int slot) {
-        return this.cultureJarTileEntity.getInputFluidTank(0);
+        return this.fermentBarrelTileEntity.getFluidTank(0);
     }
 
 }

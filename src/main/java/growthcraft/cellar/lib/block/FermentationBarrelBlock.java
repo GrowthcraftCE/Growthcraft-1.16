@@ -1,6 +1,7 @@
 package growthcraft.cellar.lib.block;
 
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
+import growthcraft.cellar.lib.tileentity.FermentBarrelTileEntity;
 import growthcraft.lib.util.BlockStateUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -8,6 +9,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
@@ -26,6 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
@@ -80,14 +83,12 @@ public class FermentationBarrelBlock extends Block {
             return ActionResultType.SUCCESS;
         }
 
-        /*
         if (!worldIn.isRemote) {
             TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (tileEntity instanceof CultureJarTileEntity) {
-                NetworkHooks.openGui((ServerPlayerEntity) player, (CultureJarTileEntity) tileEntity, pos);
+            if (tileEntity instanceof FermentBarrelTileEntity) {
+                NetworkHooks.openGui((ServerPlayerEntity) player, (FermentBarrelTileEntity) tileEntity, pos);
             }
         }
-        */
 
         return ActionResultType.SUCCESS;
     }

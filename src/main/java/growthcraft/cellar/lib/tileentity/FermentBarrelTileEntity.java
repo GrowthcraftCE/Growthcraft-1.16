@@ -1,9 +1,9 @@
 package growthcraft.cellar.lib.tileentity;
 
+import growthcraft.cellar.client.container.FermentBarrelContainer;
 import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
 import growthcraft.lib.common.tank.handler.FluidTankHandler;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
@@ -13,7 +13,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
@@ -27,7 +27,7 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nullable;
 
-public class FermentBarrelTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+public class FermentBarrelTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
     private final int maxProcessingTime = 0;
     private int currentProcessingTime = 0;
@@ -46,6 +46,16 @@ public class FermentBarrelTileEntity extends TileEntity implements ITickableTile
     }
 
     @Override
+    protected NonNullList<ItemStack> getItems() {
+        return this.inventory.toNonNullList();
+    }
+
+    @Override
+    protected void setItems(NonNullList<ItemStack> itemsIn) {
+        this.inventory.setNonNullList(itemsIn);
+    }
+
+    @Override
     public void tick() {
 
     }
@@ -55,14 +65,23 @@ public class FermentBarrelTileEntity extends TileEntity implements ITickableTile
     // Custom Name Handling
     @Override
     public ITextComponent getDisplayName() {
-        return null;
+        return this.getName();
+    }
+
+    @Override
+    protected ITextComponent getDefaultName() {
+        return this.getBlockState().getBlock().getTranslatedName();
+    }
+
+    @Override
+    public ITextComponent getName() {
+        return this.customName != null ? this.customName : this.getDefaultName();
     }
 
     // Interactive GUI
-    @Nullable
     @Override
-    public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
-        return null;
+    protected Container createMenu(int id, PlayerInventory player) {
+        return new FermentBarrelContainer(id, player, this);
     }
 
     // NBT Data Handling
@@ -136,6 +155,11 @@ public class FermentBarrelTileEntity extends TileEntity implements ITickableTile
         return this.inventory;
     }
 
+    @Override
+    public int getSizeInventory() {
+        return this.inventory.getSlots();
+    }
+
     // Recipes Handling
 
     // Getters and Setters
@@ -158,4 +182,5 @@ public class FermentBarrelTileEntity extends TileEntity implements ITickableTile
     public FluidTank getFluidTank(int tank) {
         return fluidTankHandler.getTank(tank);
     }
+
 }
