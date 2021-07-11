@@ -4,6 +4,7 @@ import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.common.block.BrewKettleBlock;
 import growthcraft.cellar.common.block.CultureJarBlock;
 import growthcraft.cellar.common.block.FermentationBarrelBlock;
+import growthcraft.cellar.common.block.RoasterBlock;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import net.minecraft.block.Block;
@@ -35,6 +36,11 @@ public class GrowthcraftCellarBlocks {
             FermentationBarrelBlock::new
     );
 
+    public static final RegistryObject<RoasterBlock> roaster = BLOCKS.register(
+            UnlocalizedName.ROASTER,
+            RoasterBlock::new
+    );
+
     private GrowthcraftCellarBlocks() { /* Prevent Default Public Constructor */ }
 
     public static void registerBlockItems(IForgeRegistry<Item> itemRegistry, Item.Properties properties) {
@@ -53,9 +59,8 @@ public class GrowthcraftCellarBlocks {
 
     private static boolean excludeBlockItemRegistry(ResourceLocation registryName) {
         ArrayList<String> excludeBlocks = new ArrayList<>();
-        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.WORT);
-        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.WORT_FLUID);
-        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.WORT_FLUID_FLOWING);
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.WORT).get("fluid"));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.WORT).get("flowing"));
         return excludeBlocks.contains(registryName.toString());
     }
 

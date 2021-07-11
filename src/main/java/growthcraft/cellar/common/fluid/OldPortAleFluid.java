@@ -15,16 +15,16 @@ import net.minecraftforge.fml.RegistryObject;
 
 import java.awt.*;
 
-import static growthcraft.cellar.shared.Reference.FluidColor.WORT_FLUID_COLOR;
+import static growthcraft.cellar.shared.Reference.FluidColor.OLD_PORT_ALE_FLUID_COLOR;
 import static growthcraft.cellar.shared.Reference.FluidResource.*;
 
-public abstract class WortFluid extends ForgeFlowingFluid {
+public abstract class OldPortAleFluid extends ForgeFlowingFluid {
 
-    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.WORT_FLUID_BLOCK;
-    private static final Color color = WORT_FLUID_COLOR;
-    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_ipa_ale;
-    private static final RegistryObject<WortFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.WORT_FLUID_FLOWING;
-    private static final RegistryObject<WortFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.WORT_FLUID_STILL;
+    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.OLD_PORT_ALE_FLUID_BLOCK;
+    private static final Color color = OLD_PORT_ALE_FLUID_COLOR;
+    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_old_port_ale;
+    private static final RegistryObject<OldPortAleFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.OLD_PORT_ALE_FLUID_FLOWING;
+    private static final RegistryObject<OldPortAleFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.OLD_PORT_ALE_FLUID_STILL;
 
     public static final Properties FLUID_PROPERTIES = new Properties(
             registry_fluid_still,
@@ -37,7 +37,7 @@ public abstract class WortFluid extends ForgeFlowingFluid {
             .block(block)
             .bucket(registry_bucket);
 
-    protected WortFluid(Properties properties) {
+    protected OldPortAleFluid(Properties properties) {
         super(properties);
     }
 
@@ -56,7 +56,7 @@ public abstract class WortFluid extends ForgeFlowingFluid {
         return registry_bucket.get();
     }
 
-    public static class Flowing extends WortFluid {
+    public static class Flowing extends OldPortAleFluid {
 
         public Flowing() {
             super(FLUID_PROPERTIES);
@@ -77,7 +77,7 @@ public abstract class WortFluid extends ForgeFlowingFluid {
         }
     }
 
-    public static class Source extends WortFluid {
+    public static class Source extends OldPortAleFluid {
 
         public Source() {
             super(FLUID_PROPERTIES);

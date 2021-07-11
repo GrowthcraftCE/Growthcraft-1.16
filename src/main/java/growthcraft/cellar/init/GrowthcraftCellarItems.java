@@ -2,6 +2,7 @@ package growthcraft.cellar.init;
 
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
+import growthcraft.lib.common.item.GrowthcraftBucketItem;
 import growthcraft.lib.common.item.GrowthcraftEnchantedItem;
 import growthcraft.lib.common.item.GrowthcraftItem;
 import net.minecraft.item.BucketItem;
@@ -10,8 +11,12 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import static growthcraft.cellar.shared.Reference.FluidName.*;
+
 public class GrowthcraftCellarItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MODID);
+
+    private static final String BUCKET = "bucket";
 
     public static final RegistryObject<GrowthcraftItem> brew_kettle_lid = ITEMS.register(
             UnlocalizedName.BREW_KETTLE_LID,
@@ -19,18 +24,78 @@ public class GrowthcraftCellarItems {
     );
 
     public static final RegistryObject<BucketItem> bucket_wort = ITEMS.register(
-            UnlocalizedName.WORT_BUCKET,
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.WORT_FLUID,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
+            UnlocalizedName.getFluidNames(WORT).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.WORT_FLUID_STILL)
     );
+
     public static final RegistryObject<BucketItem> bucket_pale_ale = ITEMS.register(
-            UnlocalizedName.PALE_ALE_BUCKET,
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.PALE_ALE_FLUID,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
+            UnlocalizedName.getFluidNames(PALE_ALE).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PALE_ALE_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_ipa_ale = ITEMS.register(
+            UnlocalizedName.getFluidNames(IPA_ALE).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.IPA_ALE_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_amber_ale = ITEMS.register(
+            UnlocalizedName.getFluidNames(AMBER_ALE).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.AMBER_ALE_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_copper_ale = ITEMS.register(
+            UnlocalizedName.getFluidNames(COPPER_ALE).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.COPPER_ALE_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_old_port_ale = ITEMS.register(
+            UnlocalizedName.getFluidNames(OLD_PORT_ALE).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.OLD_PORT_ALE_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_brown_ale = ITEMS.register(
+            UnlocalizedName.getFluidNames(BROWN_ALE).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.BROWN_ALE_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_stout_ale = ITEMS.register(
+            UnlocalizedName.getFluidNames(STOUT_ALE).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.STOUT_ALE_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_pale_lager = ITEMS.register(
+            UnlocalizedName.getFluidNames(PALE_LAGER).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PALE_LAGER_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_pilsner_lager = ITEMS.register(
+            UnlocalizedName.getFluidNames(PILSNER_LAGER).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PILSNER_LAGER_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_amber_lager = ITEMS.register(
+            UnlocalizedName.getFluidNames(AMBER_LAGER).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.AMBER_LAGER_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_vienna_lager = ITEMS.register(
+            UnlocalizedName.getFluidNames(VIENNA_LAGER).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.VIENNA_LAGER_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_copper_lager = ITEMS.register(
+            UnlocalizedName.getFluidNames(COPPER_LAGER).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.COPPER_LAGER_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_brown_lager = ITEMS.register(
+            UnlocalizedName.getFluidNames(BROWN_LAGER).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.BROWN_LAGER_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_dark_lager = ITEMS.register(
+            UnlocalizedName.getFluidNames(DARK_LAGER).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.DARK_LAGER_FLUID_STILL)
     );
 
     public static final RegistryObject<GrowthcraftItem> yeast_bayanus = ITEMS.register(
