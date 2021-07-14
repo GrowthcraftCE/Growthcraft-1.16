@@ -154,7 +154,6 @@ public class RoasterTileEntity extends TileEntity implements ITickableTileEntity
     }
 
     // Recipe Handling
-    // TODO: Added recipe handling
 
     // Getters and Setters
     public int getCurrentProcessingTime() {

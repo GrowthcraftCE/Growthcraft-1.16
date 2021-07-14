@@ -1,0 +1,12 @@
+{
+  "type": "growthcraft_cellar:roaster_recipe",
+  "processing_time": 40,
+  "input": {
+    "item": "growthcraft_cellar:grain",
+    "count": 1
+  },
+  "result": {
+    "item": "growthcraft_cellar:grain_roasted_pale_golden",
+    "count": 1
+  }
+}
