@@ -1,5 +1,6 @@
 package growthcraft.cellar.common.tileentity;
 
+import growthcraft.cellar.client.container.RoasterContainer;
 import growthcraft.cellar.common.block.RoasterBlock;
 import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
@@ -77,8 +78,8 @@ public class RoasterTileEntity extends TileEntity implements ITickableTileEntity
     // Interactive GUI
     @Nullable
     @Override
-    public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
-        return null;
+    public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+        return new RoasterContainer(windowId, playerInventory, this);
     }
 
     // NBT Data Handling

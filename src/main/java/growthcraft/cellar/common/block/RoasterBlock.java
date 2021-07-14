@@ -11,6 +11,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
@@ -24,6 +25,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
@@ -74,12 +76,11 @@ public class RoasterBlock extends Block {
 
         if (stack.hasDisplayName()) {
             TileEntity tile = worldIn.getTileEntity(pos);
-            // TODO: TileEntity Stuff
-            /*
-            if (tile instanceof BrewKettleTileEntity) {
-                ((BrewKettleTileEntity) tile).setCustomName(stack.getDisplayName());
+
+            if (tile instanceof RoasterTileEntity) {
+                ((RoasterTileEntity) tile).setCustomName(stack.getDisplayName());
             }
-            */
+
         }
 
     }
@@ -94,7 +95,7 @@ public class RoasterBlock extends Block {
     // TileEntity
     @Override
     public boolean hasTileEntity(BlockState state) {
-        return false;
+        return true;
     }
 
     @Nullable
@@ -109,7 +110,7 @@ public class RoasterBlock extends Block {
         if (!worldIn.isRemote) {
             TileEntity tileEntity = worldIn.getTileEntity(pos);
             if (tileEntity instanceof RoasterTileEntity) {
-                // TODO: NetworkHooks.openGui((ServerPlayerEntity) player, (CultureJarTileEntity) tileEntity, pos);
+                NetworkHooks.openGui((ServerPlayerEntity) player, (RoasterTileEntity) tileEntity, pos);
             }
         }
 
