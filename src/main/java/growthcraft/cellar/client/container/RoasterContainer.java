@@ -26,6 +26,7 @@ public class RoasterContainer extends Container {
     private final IWorldPosCallable worldPosCallable;
 
     private final FunctionalIntReferenceHolder currentProcessingTime;
+    private final FunctionalIntReferenceHolder maxProcessingTime;
 
     public RoasterContainer(final int windowID, final PlayerInventory playerInventory, final RoasterTileEntity tileEntity) {
         super(GrowthcraftCellarContainers.roaster_container.get(), windowID);
@@ -38,14 +39,14 @@ public class RoasterContainer extends Container {
 
         // Input Slot
         this.addSlot(new SlotItemHandler(
-                roasterTileEntity.getInventory(),
+                this.roasterTileEntity.getInventory(),
                 index, 54, 42
         ));
         index++;
 
         // Redstone Input Slot
         this.addSlot(new SlotItemHandler(
-                roasterTileEntity.getInventory(),
+                this.roasterTileEntity.getInventory(),
                 index, 80, 25
         ));
         index++;
@@ -53,7 +54,7 @@ public class RoasterContainer extends Container {
         // Output Slot
         this.addSlot(
                 new OutputSlotItemHandler(
-                        roasterTileEntity.getInventory(),
+                        this.roasterTileEntity.getInventory(),
                         index, 106, 42
                 ));
         index++;
@@ -94,6 +95,11 @@ public class RoasterContainer extends Container {
         this.trackInt(currentProcessingTime = new FunctionalIntReferenceHolder(
                 this.roasterTileEntity::getCurrentProcessingTime,
                 this.roasterTileEntity::setCurrentProcessingTime
+        ));
+
+        this.trackInt(maxProcessingTime = new FunctionalIntReferenceHolder(
+                this.roasterTileEntity::getMaxProcessingTime,
+                this.roasterTileEntity::setMaxProcessingTime
         ));
 
     }
@@ -152,9 +158,16 @@ public class RoasterContainer extends Container {
 
     @OnlyIn(Dist.CLIENT)
     public int getProcessingTimeScaled(int size) {
-        return this.currentProcessingTime.get() != 0 && this.roasterTileEntity.getMaxProcessingTime() != 0
-                ? this.currentProcessingTime.get() * size / this.roasterTileEntity.getMaxProcessingTime()
-                : 0;
+        float scaledSize = 0;
+
+        // This section was very problematic so we have debug breakpoints in case it breaks again.
+        if (this.currentProcessingTime.get() != 0 && this.maxProcessingTime.get() != 0) {
+            int a = this.currentProcessingTime.get();
+            int b = this.maxProcessingTime.get();
+            scaledSize = ((float) this.currentProcessingTime.get() / this.maxProcessingTime.get()) * size;
+        }
+
+        return (int) scaledSize;
     }
 
     @OnlyIn(Dist.CLIENT)

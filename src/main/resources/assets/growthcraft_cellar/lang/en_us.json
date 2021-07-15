@@ -29,6 +29,13 @@
   "item.growthcraft_cellar.copper_lager_bucket": "Copper Lager Bucket",
   "item.growthcraft_cellar.dark_lager_bucket": "Dark Lager Bucket",
   "item.growthcraft_cellar.grain": "Grain",
+  "item.growthcraft_cellar.grain_golden": "Golden Roasted Grain",
+  "item.growthcraft_cellar.grain_amber": "Amber Roasted Grain",
+  "item.growthcraft_cellar.grain_deep_amber": "Deep Amber Roasted Grain",
+  "item.growthcraft_cellar.grain_copper": "Copper Roasted Grain",
+  "item.growthcraft_cellar.grain_deep_copper": "Deep Copper Roasted Grain",
+  "item.growthcraft_cellar.grain_brown": "Brown Roasted Grain",
+  "item.growthcraft_cellar.grain_dark": "Dark Roasted Grain",
   "item.growthcraft_cellar.grain_pale_golden": "Pale Golden Roasted Grain",
   "item.growthcraft_cellar.ipa_ale_bucket": "IPA Ale Bucket",
   "item.growthcraft_cellar.old_port_ale_bucket": "Old Port Ale Bucket",
@@ -45,5 +52,13 @@
   "item.growthcraft_cellar.yeast_ethereal": "Ethereal Yeast",
   "item.growthcraft_cellar.yeast_brewers_ethereal": "Brewer's Yeast",
   "item.growthcraft_cellar.yeast_bayanus_ethereal": "Bayanus Yeast",
-  "item.growthcraft_cellar.yeast_lager_ethereal": "Lager Yeast"
+  "item.growthcraft_cellar.yeast_lager_ethereal": "Lager Yeast",
+  "item.growthcraft_cellar.pale_golden_wort_bucket": "Pale Golden Wort Bucket",
+  "item.growthcraft_cellar.golden_wort_bucket": "Golden Wort Bucket",
+  "item.growthcraft_cellar.amber_wort_bucket": "Amber Wort Bucket",
+  "item.growthcraft_cellar.deep_amber_wort_bucket": "Deep Amber Wort Bucket",
+  "item.growthcraft_cellar.copper_wort_bucket": "Copper Wort Bucket",
+  "item.growthcraft_cellar.deep_copper_wort_bucket": "Deep Copper Wort Bucket",
+  "item.growthcraft_cellar.brown_wort_bucket": "Brown Wort Bucket",
+  "item.growthcraft_cellar.wdark_wort_bucket": "Dark Wort Bucket"
 }

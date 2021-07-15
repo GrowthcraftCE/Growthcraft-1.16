@@ -41,11 +41,10 @@ public class RoasterScreen extends ContainerScreen<RoasterContainer> {
         blit(matrixStack, this.guiLeft, this.guiTop, baseX, baseY, this.xSize, this.ySize, maxX, maxY);
 
         // Progress Bar
-        int guiProgressX = this.guiLeft + 82;
-        int guiProgressY = this.guiTop + 30;
+        int guiProgressX = this.guiLeft + 74;
+        int guiProgressY = this.guiTop + 45;
 
-        this.blit(matrixStack, guiProgressX, guiProgressY, 176, 0, 9,
-                this.container.getProcessingTimeScaled(28));
+        this.blit(matrixStack, guiProgressX, guiProgressY, 176, 0, this.container.getProcessingTimeScaled(28), 9);
 
         // Heat indicator
         int guiHeatLevelX = this.guiLeft + 81;

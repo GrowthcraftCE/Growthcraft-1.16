@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.tileentity;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.client.container.RoasterContainer;
 import growthcraft.cellar.common.block.RoasterBlock;
 import growthcraft.cellar.common.recipe.RoasterRecipe;
@@ -50,8 +49,8 @@ import java.util.stream.Collectors;
 
 public class RoasterTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
-    private int maxProcessingTime = 250;
-    private int currentProcessingTicks;
+    private int maxProcessingTime;
+    private int currentProcessingTicks = 0;
     private ITextComponent customName;
 
     private final BrewKettleItemHandler inventory;
@@ -79,28 +78,34 @@ public class RoasterTileEntity extends TileEntity implements ITickableTileEntity
                         this.inventory.getStackInSlot(1)
                 );
 
-                if (currentRecipe != null && currentRecipe == recipe) {
+                if (currentRecipe != null && currentRecipe == recipe && this.inventory.getStackInSlot(2).getCount() < 64) {
+                    // Continue to process the current recipe.
                     this.maxProcessingTime = recipe.getProcessingTime();
                     this.currentProcessingTicks++;
                     dirty = true;
                 } else if (currentRecipe == null && recipe != null) {
-                    currentProcessingTicks = 0;
-                    currentRecipe = recipe;
+                    // Set the current recipe and start processing next tick.
+                    this.maxProcessingTime = recipe.getProcessingTime();
+                    this.currentProcessingTicks = 0;
+                    this.currentRecipe = recipe;
                     dirty = true;
                 }
 
-                if (currentProcessingTicks > maxProcessingTime) {
-                    this.inventory.getStackInSlot(0).shrink(recipe.getInputItemStack().getCount());
-                    this.inventory.insertItem(2, recipe.getRecipeOutput(), false);
+                if (currentRecipe != null && currentProcessingTicks > maxProcessingTime) {
+                    // Current recipe is still valid and it is time to produce the result.
+                    this.inventory.getStackInSlot(0).shrink(currentRecipe.getInputItemStack().getCount());
+                    this.inventory.insertItem(2, currentRecipe.getRecipeOutput(), false);
 
-                    currentRecipe = null;
-                    currentProcessingTicks = 0;
+                    this.currentRecipe = null;
+                    this.currentProcessingTicks = 0;
+                    this.maxProcessingTime = 0;
                     dirty = true;
                 }
 
             } else {
-                currentRecipe = null;
-                currentProcessingTicks = 0;
+                this.currentRecipe = null;
+                this.currentProcessingTicks = 0;
+                this.maxProcessingTime = 0;
             }
 
         }
@@ -229,7 +234,6 @@ public class RoasterTileEntity extends TileEntity implements ITickableTileEntity
     private RoasterRecipe getRecipe(ItemStack inputItemStack, ItemStack redstoneTimerItemStack) {
         Set<IRecipe<?>> recipes = findRecipesByType(new RoasterRecipeType(), this.world);
         for (IRecipe<?> recipe : recipes) {
-            GrowthcraftCellar.LOGGER.warn(recipe.toString());
             RoasterRecipe roasterRecipe = (RoasterRecipe) recipe;
             if (roasterRecipe.matches(inputItemStack, redstoneTimerItemStack)) return roasterRecipe;
         }
@@ -238,7 +242,7 @@ public class RoasterTileEntity extends TileEntity implements ITickableTileEntity
 
     // Getters and Setters
     public int getCurrentProcessingTime() {
-        return currentProcessingTicks;
+        return this.currentProcessingTicks;
     }
 
     public void setCurrentProcessingTime(int ticks) {
@@ -249,4 +253,7 @@ public class RoasterTileEntity extends TileEntity implements ITickableTileEntity
         return this.maxProcessingTime;
     }
 
+    public void setMaxProcessingTime(int i) {
+        this.maxProcessingTime = i;
+    }
 }

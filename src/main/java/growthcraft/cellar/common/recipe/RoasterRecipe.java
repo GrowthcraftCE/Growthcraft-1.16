@@ -25,7 +25,7 @@ public class RoasterRecipe implements IRecipe<IInventory> {
         this.inputItemStack = inputItemStack;
         this.outputItemStack = outputItemStack;
         this.redstoneTimerItemStack = redstoneTimerItemStack;
-        this.processingTime = redstoneTimerItemStack.getCount() * 40;
+        this.processingTime = (redstoneTimerItemStack.getCount() * 200) + 200;
     }
 
     @Override
@@ -39,14 +39,14 @@ public class RoasterRecipe implements IRecipe<IInventory> {
     }
 
     public ItemStack getInputItemStack() {
-        Objects.requireNonNull(inputItemStack,
+        Objects.requireNonNull(this.inputItemStack,
                 String.format("Recipe input cannot be null! Check recipe (%s) json file.", recipeId));
         return inputItemStack;
     }
 
     @Override
     public ItemStack getCraftingResult(IInventory inv) {
-        Objects.requireNonNull(outputItemStack,
+        Objects.requireNonNull(this.outputItemStack,
                 String.format("Recipe output cannot be null. Check recipe (%s) json file.", recipeId));
         return outputItemStack;
     }
@@ -58,7 +58,7 @@ public class RoasterRecipe implements IRecipe<IInventory> {
 
     @Override
     public ItemStack getRecipeOutput() {
-        return outputItemStack;
+        return this.outputItemStack;
     }
 
     @Override

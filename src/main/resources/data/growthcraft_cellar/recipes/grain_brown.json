@@ -1,0 +1,15 @@
+{
+  "type": "growthcraft_cellar:roaster_recipe",
+  "redstone_timer": {
+    "item": "minecraft:redstone",
+    "count": 7
+  },
+  "input": {
+    "item": "growthcraft_cellar:grain",
+    "count": 1
+  },
+  "result": {
+    "item": "growthcraft_cellar:grain_brown",
+    "count": 1
+  }
+}
