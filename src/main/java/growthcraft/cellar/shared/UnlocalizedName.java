@@ -17,7 +17,7 @@ public class UnlocalizedName {
     public static final String GRAIN_PALE_GOLDEN = "grain_pale_golden";
     public static final String GRAIN_GOLDEN = "grain_golden";
     public static final String GRAIN_AMBER = "grain_amber";
-    public static final String GRAIN_DARK_AMBER = "grain_dark_amber";
+    public static final String GRAIN_DEEP_AMBER = "grain_deep_amber";
     public static final String GRAIN_COPPER = "grain_copper";
     public static final String GRAIN_DEEP_COPPER = "grain_deep_copper";
     public static final String GRAIN_BROWN = "grain_brown";

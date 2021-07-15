@@ -1,5 +1,6 @@
 package growthcraft.cellar.init;
 
+import growthcraft.cellar.common.item.GrainItem;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import growthcraft.lib.common.item.GrowthcraftBucketItem;
@@ -10,6 +11,8 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.awt.*;
 
 import static growthcraft.cellar.shared.Reference.FluidName.*;
 
@@ -26,6 +29,46 @@ public class GrowthcraftCellarItems {
     public static final RegistryObject<BucketItem> bucket_wort = ITEMS.register(
             UnlocalizedName.getFluidNames(WORT).get(BUCKET),
             () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.WORT_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_pale_golden_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(PALE_GOLDEN_WORT).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PALE_GOLDEN_WORT_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_golden_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(GOLDEN_WORT).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.GOLDEN_WORT_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_amber_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(AMBER_WORT).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.AMBER_WORT_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_deep_amber_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(DEEP_AMBER_WORT).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.DEEP_AMBER_WORT_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_copper_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(COPPER_WORT).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.COPPER_WORT_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_deep_copper_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(DEEP_COPPER_WORT).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.DEEP_COPPER_WORT_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_brown_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(BROWN_WORT).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.BROWN_WORT_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_dark_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(DARK_WORT).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.DARK_WORT_FLUID_STILL)
     );
 
     public static final RegistryObject<BucketItem> bucket_pale_ale = ITEMS.register(
@@ -125,6 +168,51 @@ public class GrowthcraftCellarItems {
     public static final RegistryObject<GrowthcraftEnchantedItem> yeast_lager_ethereal = ITEMS.register(
             UnlocalizedName.YEAST_LAGER_ETHEREAL,
             GrowthcraftEnchantedItem::new
+    );
+
+    public static final RegistryObject<GrowthcraftItem> grain = ITEMS.register(
+            UnlocalizedName.GRAIN,
+            () -> new GrainItem(new Color(0xA4DBE8).getRGB())
+    );
+
+    public static final RegistryObject<GrainItem> grain_pale_golden = ITEMS.register(
+            UnlocalizedName.GRAIN_PALE_GOLDEN,
+            () -> new GrainItem(Reference.FluidColor.PALE_GOLDEN_WORT_FLUID_COLOR.getRGB())
+    );
+
+    public static final RegistryObject<GrainItem> grain_golden = ITEMS.register(
+            UnlocalizedName.GRAIN_GOLDEN,
+            () -> new GrainItem(Reference.FluidColor.GOLDEN_WORT_FLUID_COLOR.getRGB())
+    );
+
+    public static final RegistryObject<GrainItem> grain_amber = ITEMS.register(
+            UnlocalizedName.GRAIN_AMBER,
+            () -> new GrainItem(Reference.FluidColor.AMBER_WORT_FLUID_COLOR.getRGB())
+    );
+
+    public static final RegistryObject<GrainItem> grain_deep_amber = ITEMS.register(
+            UnlocalizedName.GRAIN_DEEP_AMBER,
+            () -> new GrainItem(Reference.FluidColor.DEEP_AMBER_WORT_FLUID_COLOR.getRGB())
+    );
+
+    public static final RegistryObject<GrainItem> grain_copper = ITEMS.register(
+            UnlocalizedName.GRAIN_COPPER,
+            () -> new GrainItem(Reference.FluidColor.COPPER_WORT_FLUID_COLOR.getRGB())
+    );
+
+    public static final RegistryObject<GrainItem> grain_deep_copper = ITEMS.register(
+            UnlocalizedName.GRAIN_DEEP_COPPER,
+            () -> new GrainItem(Reference.FluidColor.DEEP_COPPER_WORT_FLUID_COLOR.getRGB())
+    );
+
+    public static final RegistryObject<GrainItem> grain_brown = ITEMS.register(
+            UnlocalizedName.GRAIN_BROWN,
+            () -> new GrainItem(Reference.FluidColor.BROWN_WORT_FLUID_COLOR.getRGB())
+    );
+
+    public static final RegistryObject<GrainItem> grain_dark = ITEMS.register(
+            UnlocalizedName.GRAIN_DARK,
+            () -> new GrainItem(Reference.FluidColor.DARK_WORT_FLUID_COLOR.getRGB())
     );
 
     private GrowthcraftCellarItems() {

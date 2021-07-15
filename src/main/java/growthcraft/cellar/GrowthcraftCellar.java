@@ -1,6 +1,7 @@
 package growthcraft.cellar;
 
 import growthcraft.cellar.client.proxy.ClientProxy;
+import growthcraft.cellar.common.item.GrainItem;
 import growthcraft.cellar.common.proxy.CommonProxy;
 import growthcraft.cellar.init.*;
 import growthcraft.cellar.init.client.GrowthcraftCellarBlockRenders;
@@ -10,6 +11,7 @@ import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.lib.proxy.IProxy;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -24,6 +26,9 @@ import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Mod(Reference.MODID)
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class GrowthcraftCellar {
@@ -34,6 +39,8 @@ public class GrowthcraftCellar {
     public GrowthcraftCellar() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerItemColors);
+
         GrowthcraftCellarConfig.loadConfig();
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -72,5 +79,25 @@ public class GrowthcraftCellar {
     public void onServerStarting(FMLServerStartingEvent event) {
         // do something when the server starts
         LOGGER.info("HELLO from server starting");
+    }
+
+    @SubscribeEvent
+    public void registerItemColors(ColorHandlerEvent.Item event) {
+        List<GrainItem> coloredItems = new ArrayList<>();
+        coloredItems.add(GrowthcraftCellarItems.grain_amber.get());
+        coloredItems.add(GrowthcraftCellarItems.grain_brown.get());
+        coloredItems.add(GrowthcraftCellarItems.grain_copper.get());
+        coloredItems.add(GrowthcraftCellarItems.grain_dark.get());
+        coloredItems.add(GrowthcraftCellarItems.grain_golden.get());
+        coloredItems.add(GrowthcraftCellarItems.grain_deep_amber.get());
+        coloredItems.add(GrowthcraftCellarItems.grain_deep_copper.get());
+        coloredItems.add(GrowthcraftCellarItems.grain_pale_golden.get());
+
+        for (GrainItem item : coloredItems) {
+            event.getItemColors().register(
+                    (itemStack, i) -> item.getColor(),
+                    item
+            );
+        }
     }
 }

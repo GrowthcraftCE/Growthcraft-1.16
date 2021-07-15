@@ -16,9 +16,9 @@ import static growthcraft.cellar.shared.Reference.FluidName;
 public class GrowthcraftCellarFluids {
 	public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, Reference.MODID);
 
-	private static final String STILL = "fluid";
-	private static final String FLOWING = "flowing";
-	private static final String BLOCK = "block";
+	public static final String STILL = "fluid";
+	public static final String FLOWING = "flowing";
+	public static final String BLOCK = "block";
 
 	private GrowthcraftCellarFluids() { /* Prevent Public Constructor */ }
 
@@ -156,5 +156,77 @@ public class GrowthcraftCellarFluids {
 	public static final RegistryObject<FlowingFluidBlock> WORT_FLUID_BLOCK =
 			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.WORT).get(BLOCK),
 					() -> new FlowingFluidBlock(WORT_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	// Fluid: Pale Golden Wort
+	public static final RegistryObject<PaleGoldenWortFluid.Source> PALE_GOLDEN_WORT_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.PALE_GOLDEN_WORT).get(STILL), PaleGoldenWortFluid.Source::new);
+	public static final RegistryObject<PaleGoldenWortFluid.Flowing> PALE_GOLDEN_WORT_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.PALE_GOLDEN_WORT).get(FLOWING), PaleGoldenWortFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> PALE_GOLDEN_WORT_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.PALE_GOLDEN_WORT).get(BLOCK),
+					() -> new FlowingFluidBlock(PALE_GOLDEN_WORT_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	// Fluid: Golden Wort
+	public static final RegistryObject<GoldenWortFluid.Source> GOLDEN_WORT_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.GOLDEN_WORT).get(STILL), GoldenWortFluid.Source::new);
+	public static final RegistryObject<GoldenWortFluid.Flowing> GOLDEN_WORT_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.GOLDEN_WORT).get(FLOWING), GoldenWortFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> GOLDEN_WORT_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.GOLDEN_WORT).get(BLOCK),
+					() -> new FlowingFluidBlock(GOLDEN_WORT_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	// Fluid: Amber Wort
+	public static final RegistryObject<AmberWortFluid.Source> AMBER_WORT_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.AMBER_WORT).get(STILL), AmberWortFluid.Source::new);
+	public static final RegistryObject<AmberWortFluid.Flowing> AMBER_WORT_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.AMBER_WORT).get(FLOWING), AmberWortFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> AMBER_WORT_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.AMBER_WORT).get(BLOCK),
+					() -> new FlowingFluidBlock(AMBER_WORT_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	// Fluid: Deep Amber Wort
+	public static final RegistryObject<DeepAmberWortFluid.Source> DEEP_AMBER_WORT_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.DEEP_AMBER_WORT).get(STILL), DeepAmberWortFluid.Source::new);
+	public static final RegistryObject<DeepAmberWortFluid.Flowing> DEEP_AMBER_WORT_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.DEEP_AMBER_WORT).get(FLOWING), DeepAmberWortFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> DEEP_AMBER_WORT_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.DEEP_AMBER_WORT).get(BLOCK),
+					() -> new FlowingFluidBlock(DEEP_AMBER_WORT_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	// Fluid: Copper Wort
+	public static final RegistryObject<CopperWortFluid.Source> COPPER_WORT_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.COPPER_WORT).get(STILL), CopperWortFluid.Source::new);
+	public static final RegistryObject<CopperWortFluid.Flowing> COPPER_WORT_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.COPPER_WORT).get(FLOWING), CopperWortFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> COPPER_WORT_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.COPPER_WORT).get(BLOCK),
+					() -> new FlowingFluidBlock(COPPER_WORT_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	// Fluid: Deep Copper Wort
+	public static final RegistryObject<DeepCopperWortFluid.Source> DEEP_COPPER_WORT_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.DEEP_COPPER_WORT).get(STILL), DeepCopperWortFluid.Source::new);
+	public static final RegistryObject<DeepCopperWortFluid.Flowing> DEEP_COPPER_WORT_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.DEEP_COPPER_WORT).get(FLOWING), DeepCopperWortFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> DEEP_COPPER_WORT_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.DEEP_COPPER_WORT).get(BLOCK),
+					() -> new FlowingFluidBlock(DEEP_COPPER_WORT_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	// Fluid: Brown Wort
+	public static final RegistryObject<BrownWortFluid.Source> BROWN_WORT_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.BROWN_WORT).get(STILL), BrownWortFluid.Source::new);
+	public static final RegistryObject<BrownWortFluid.Flowing> BROWN_WORT_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.BROWN_WORT).get(FLOWING), BrownWortFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> BROWN_WORT_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.BROWN_WORT).get(BLOCK),
+					() -> new FlowingFluidBlock(BROWN_WORT_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	// Fluid: Dark Wort
+	public static final RegistryObject<DarkWortFluid.Source> DARK_WORT_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.DARK_WORT).get(STILL), DarkWortFluid.Source::new);
+	public static final RegistryObject<DarkWortFluid.Flowing> DARK_WORT_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.DARK_WORT).get(FLOWING), DarkWortFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> DARK_WORT_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.DARK_WORT).get(BLOCK),
+					() -> new FlowingFluidBlock(DARK_WORT_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
 
 }

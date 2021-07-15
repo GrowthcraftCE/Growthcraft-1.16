@@ -15,16 +15,16 @@ public class RoasterRecipeSerializer extends ForgeRegistryEntry<IRecipeSerialize
 
     @Override
     public RoasterRecipe read(ResourceLocation recipeId, JsonObject json) {
-        // Processing Time
-        int processingTime = JSONUtils.getInt(json, "processint_time");
-
         // Input ItemStack
-        ItemStack inputItemStack = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "input_item"), false);
+        ItemStack inputItemStack = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "input"), false);
 
         // Resulting ItemStack
         ItemStack outputItemStack = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "result"), false);
 
-        return new RoasterRecipe(recipeId, inputItemStack, outputItemStack, processingTime);
+        // Redstone Timer ItemStack
+        ItemStack redstoneTimerItemStack = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "redstone_timer"), false);
+
+        return new RoasterRecipe(recipeId, inputItemStack, outputItemStack, redstoneTimerItemStack);
     }
 
     @Nullable

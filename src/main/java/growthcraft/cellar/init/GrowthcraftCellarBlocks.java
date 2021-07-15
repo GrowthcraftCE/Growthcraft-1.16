@@ -59,8 +59,30 @@ public class GrowthcraftCellarBlocks {
 
     private static boolean excludeBlockItemRegistry(ResourceLocation registryName) {
         ArrayList<String> excludeBlocks = new ArrayList<>();
-        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.WORT).get("fluid"));
-        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.WORT).get("flowing"));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.WORT).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.AMBER_ALE).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.AMBER_LAGER).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.BROWN_ALE).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.COPPER_ALE).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.PALE_ALE).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.OLD_PORT_ALE).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.STOUT_ALE).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.PILSNER_LAGER).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.DARK_LAGER).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.IPA_ALE).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.VIENNA_LAGER).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.PALE_LAGER).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.BROWN_LAGER).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.COPPER_LAGER).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.PALE_GOLDEN_WORT).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.GOLDEN_WORT).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.AMBER_WORT).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.DEEP_AMBER_WORT).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.COPPER_WORT).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.DEEP_COPPER_WORT).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.BROWN_WORT).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.DARK_WORT).get(GrowthcraftCellarFluids.BLOCK));
+
         return excludeBlocks.contains(registryName.toString());
     }
 
