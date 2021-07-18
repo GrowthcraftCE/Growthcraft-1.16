@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/GrowthcraftCE/Growthcraft-1.16/issues"
 
 [[mods]]
     modId = "growthcraft"
-version = "6.0.1.0"
+version = "6.0.3"
 displayName = "Growthcraft"
     updateJSONURL="https://raw.githubusercontent.com/GrowthcraftCE/Growthcraft-Updates/master/growthcraft-versions.json"
     displayURL="https://github.com/GrowthcraftCE/Growthcraft-1.16/wiki"
@@ -32,7 +32,7 @@ displayName = "Growthcraft"
 
 [[mods]]
 modId = "growthcraft_cellar"
-version = "6.0.1.0"
+version = "6.0.3"
 displayName = "Growthcraft Cellar"
     logoFile="growthcraft_cellar_logo.png"
     description = '''
@@ -48,7 +48,7 @@ side = "BOTH"
 
 [[mods]]
 modId = "growthcraft_hops"
-version = "6.0.1.0"
+version = "6.0.3"
 displayName = "Growthcraft Hops"
 logoFile = "growthcraft_hops_logo.png"
 description = '''

@@ -22,13 +22,17 @@ public class RoasterScreen extends ContainerScreen<RoasterContainer> {
     public RoasterScreen(RoasterContainer container, PlayerInventory playerInventory, ITextComponent title) {
         super(container, playerInventory, title);
 
+        this.guiLeft = 0;
+        this.guiTop = 0;
+        this.xSize = 176;
+        this.ySize = 166;
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
         matrixStack.push();
-
         IRenderTypeBuffer.Impl renderTypeBuffer = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
+
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.minecraft.getTextureManager().bindTexture(TEXTURE);
 
