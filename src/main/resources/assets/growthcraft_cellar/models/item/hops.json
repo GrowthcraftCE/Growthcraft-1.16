@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "growthcraft_hops:item/hops"
+    "layer0": "growthcraft_cellar:item/hops"
   }
 }

@@ -215,6 +215,11 @@ public class GrowthcraftCellarItems {
             () -> new GrainItem(Reference.FluidColor.DARK_WORT_FLUID_COLOR.getRGB())
     );
 
+    public static final RegistryObject<GrowthcraftItem> hops = ITEMS.register(
+            UnlocalizedName.HOPS,
+            GrowthcraftItem::new
+    );
+
     private GrowthcraftCellarItems() {
         /* Prevent generation of default public constructor */
     }

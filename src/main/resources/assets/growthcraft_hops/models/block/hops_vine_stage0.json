@@ -1,6 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-    "cross": "growthcraft_hops:block/hops_vine_stage0"
-  }
-}
