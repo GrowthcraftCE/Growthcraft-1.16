@@ -112,9 +112,15 @@ public class FermentBarrelScreen extends ContainerScreen<FermentBarrelContainer>
         int guiInputTankHeight = 54;
 
         if (mouseX > guiInputTankX && mouseX < guiInputTankX + (121 - 64) && mouseY > guiInputTankY && mouseY < guiInputTankY + guiInputTankHeight) {
+            String fluidTankTooltip = "Empty";
+
             FluidStack fluidStack = this.container.getTileEntityFluidTank(0).getFluid();
-            String tooltip = String.format("%s %dmb", fluidStack.getDisplayName().getString(), fluidStack.getAmount());
-            StringTextComponent stringTextComponent = new StringTextComponent(tooltip);
+
+            if (!this.container.getTileEntityFluidTank(0).isEmpty()) {
+                fluidTankTooltip = String.format("%s %dmb", fluidStack.getDisplayName().getString(), fluidStack.getAmount());
+            }
+
+            StringTextComponent stringTextComponent = new StringTextComponent(fluidTankTooltip);
             this.renderTooltip(matrixStack, stringTextComponent, mouseX, mouseY);
         }
 

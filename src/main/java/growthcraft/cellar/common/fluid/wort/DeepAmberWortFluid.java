@@ -1,4 +1,4 @@
-package growthcraft.cellar.common.fluid;
+package growthcraft.cellar.common.fluid.wort;
 
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
@@ -15,16 +15,16 @@ import net.minecraftforge.fml.RegistryObject;
 
 import java.awt.*;
 
-import static growthcraft.cellar.shared.Reference.FluidColor.COPPER_LAGER_FLUID_COLOR;
+import static growthcraft.cellar.shared.Reference.FluidColor.DEEP_AMBER_WORT_FLUID_COLOR;
 import static growthcraft.cellar.shared.Reference.FluidResource.*;
 
-public abstract class CopperLagerFluid extends ForgeFlowingFluid {
+public abstract class DeepAmberWortFluid extends ForgeFlowingFluid {
 
-    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.COPPER_LAGER_FLUID_BLOCK;
-    private static final Color color = COPPER_LAGER_FLUID_COLOR;
-    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_copper_lager;
-    private static final RegistryObject<CopperLagerFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.COPPER_LAGER_FLUID_FLOWING;
-    private static final RegistryObject<CopperLagerFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.COPPER_LAGER_FLUID_STILL;
+    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.DEEP_AMBER_WORT_FLUID_BLOCK;
+    private static final Color color = DEEP_AMBER_WORT_FLUID_COLOR;
+    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_deep_amber_wort;
+    private static final RegistryObject<DeepAmberWortFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.DEEP_AMBER_WORT_FLUID_FLOWING;
+    private static final RegistryObject<DeepAmberWortFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.DEEP_AMBER_WORT_FLUID_STILL;
 
     public static final Properties FLUID_PROPERTIES = new Properties(
             registry_fluid_still,
@@ -37,7 +37,7 @@ public abstract class CopperLagerFluid extends ForgeFlowingFluid {
             .block(block)
             .bucket(registry_bucket);
 
-    protected CopperLagerFluid(Properties properties) {
+    protected DeepAmberWortFluid(Properties properties) {
         super(properties);
     }
 
@@ -56,7 +56,7 @@ public abstract class CopperLagerFluid extends ForgeFlowingFluid {
         return registry_bucket.get();
     }
 
-    public static class Flowing extends CopperLagerFluid {
+    public static class Flowing extends DeepAmberWortFluid {
 
         public Flowing() {
             super(FLUID_PROPERTIES);
@@ -77,7 +77,7 @@ public abstract class CopperLagerFluid extends ForgeFlowingFluid {
         }
     }
 
-    public static class Source extends CopperLagerFluid {
+    public static class Source extends DeepAmberWortFluid {
 
         public Source() {
             super(FLUID_PROPERTIES);

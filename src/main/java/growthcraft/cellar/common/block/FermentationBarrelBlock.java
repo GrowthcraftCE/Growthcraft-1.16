@@ -78,6 +78,8 @@ public class FermentationBarrelBlock extends Block {
     @Override
     @SuppressWarnings("deprecation")
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        // TODO: Handle bottle filling to result in a potion of Ale
+
         if (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
                 || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
             return ActionResultType.SUCCESS;

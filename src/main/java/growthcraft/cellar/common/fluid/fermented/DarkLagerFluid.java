@@ -1,4 +1,4 @@
-package growthcraft.cellar.common.fluid;
+package growthcraft.cellar.common.fluid.fermented;
 
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
@@ -15,16 +15,16 @@ import net.minecraftforge.fml.RegistryObject;
 
 import java.awt.*;
 
-import static growthcraft.cellar.shared.Reference.FluidColor.BROWN_LAGER_FLUID_COLOR;
+import static growthcraft.cellar.shared.Reference.FluidColor.DARK_LAGER_FLUID_COLOR;
 import static growthcraft.cellar.shared.Reference.FluidResource.*;
 
-public abstract class BrownLagerFluid extends ForgeFlowingFluid {
+public abstract class DarkLagerFluid extends ForgeFlowingFluid {
 
-    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.BROWN_LAGER_FLUID_BLOCK;
-    private static final Color color = BROWN_LAGER_FLUID_COLOR;
-    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_brown_lager;
-    private static final RegistryObject<BrownLagerFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.BROWN_LAGER_FLUID_FLOWING;
-    private static final RegistryObject<BrownLagerFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.BROWN_LAGER_FLUID_STILL;
+    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.DARK_LAGER_FLUID_BLOCK;
+    private static final Color color = DARK_LAGER_FLUID_COLOR;
+    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_dark_lager;
+    private static final RegistryObject<DarkLagerFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.DARK_LAGER_FLUID_FLOWING;
+    private static final RegistryObject<DarkLagerFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.DARK_LAGER_FLUID_STILL;
 
     public static final Properties FLUID_PROPERTIES = new Properties(
             registry_fluid_still,
@@ -37,7 +37,7 @@ public abstract class BrownLagerFluid extends ForgeFlowingFluid {
             .block(block)
             .bucket(registry_bucket);
 
-    protected BrownLagerFluid(Properties properties) {
+    protected DarkLagerFluid(Properties properties) {
         super(properties);
     }
 
@@ -56,7 +56,7 @@ public abstract class BrownLagerFluid extends ForgeFlowingFluid {
         return registry_bucket.get();
     }
 
-    public static class Flowing extends BrownLagerFluid {
+    public static class Flowing extends DarkLagerFluid {
 
         public Flowing() {
             super(FLUID_PROPERTIES);
@@ -77,7 +77,7 @@ public abstract class BrownLagerFluid extends ForgeFlowingFluid {
         }
     }
 
-    public static class Source extends BrownLagerFluid {
+    public static class Source extends DarkLagerFluid {
 
         public Source() {
             super(FLUID_PROPERTIES);

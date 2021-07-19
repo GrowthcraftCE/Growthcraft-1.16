@@ -1,6 +1,8 @@
 package growthcraft.cellar.init;
 
-import growthcraft.cellar.common.fluid.*;
+import growthcraft.cellar.common.fluid.WortFluid;
+import growthcraft.cellar.common.fluid.fermented.*;
+import growthcraft.cellar.common.fluid.wort.*;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import net.minecraft.block.AbstractBlock;

@@ -1,4 +1,4 @@
-package growthcraft.cellar.common.fluid;
+package growthcraft.cellar.common.fluid.fermented;
 
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
@@ -15,16 +15,16 @@ import net.minecraftforge.fml.RegistryObject;
 
 import java.awt.*;
 
-import static growthcraft.cellar.shared.Reference.FluidColor.DEEP_COPPER_WORT_FLUID_COLOR;
+import static growthcraft.cellar.shared.Reference.FluidColor.PALE_ALE_FLUID_COLOR;
 import static growthcraft.cellar.shared.Reference.FluidResource.*;
 
-public abstract class DeepCopperWortFluid extends ForgeFlowingFluid {
+public abstract class PaleAleFluid extends ForgeFlowingFluid {
 
-    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.DEEP_COPPER_WORT_FLUID_BLOCK;
-    private static final Color color = DEEP_COPPER_WORT_FLUID_COLOR;
-    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_deep_copper_wort;
-    private static final RegistryObject<DeepCopperWortFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.DEEP_COPPER_WORT_FLUID_FLOWING;
-    private static final RegistryObject<DeepCopperWortFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.DEEP_COPPER_WORT_FLUID_STILL;
+    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.PALE_ALE_FLUID_BLOCK;
+    private static final Color color = PALE_ALE_FLUID_COLOR;
+    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_pale_ale;
+    private static final RegistryObject<PaleAleFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.PALE_ALE_FLUID_FLOWING;
+    private static final RegistryObject<PaleAleFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.PALE_ALE_FLUID_STILL;
 
     public static final Properties FLUID_PROPERTIES = new Properties(
             registry_fluid_still,
@@ -37,7 +37,7 @@ public abstract class DeepCopperWortFluid extends ForgeFlowingFluid {
             .block(block)
             .bucket(registry_bucket);
 
-    protected DeepCopperWortFluid(Properties properties) {
+    protected PaleAleFluid(Properties properties) {
         super(properties);
     }
 
@@ -56,7 +56,7 @@ public abstract class DeepCopperWortFluid extends ForgeFlowingFluid {
         return registry_bucket.get();
     }
 
-    public static class Flowing extends DeepCopperWortFluid {
+    public static class Flowing extends PaleAleFluid {
 
         public Flowing() {
             super(FLUID_PROPERTIES);
@@ -77,7 +77,7 @@ public abstract class DeepCopperWortFluid extends ForgeFlowingFluid {
         }
     }
 
-    public static class Source extends DeepCopperWortFluid {
+    public static class Source extends PaleAleFluid {
 
         public Source() {
             super(FLUID_PROPERTIES);
@@ -91,5 +91,4 @@ public abstract class DeepCopperWortFluid extends ForgeFlowingFluid {
             return true;
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package growthcraft.cellar.common.fluid;
+package growthcraft.cellar.common.fluid.wort;
 
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
@@ -15,16 +15,16 @@ import net.minecraftforge.fml.RegistryObject;
 
 import java.awt.*;
 
-import static growthcraft.cellar.shared.Reference.FluidColor.COPPER_ALE_FLUID_COLOR;
+import static growthcraft.cellar.shared.Reference.FluidColor.GOLDEN_WORT_FLUID_COLOR;
 import static growthcraft.cellar.shared.Reference.FluidResource.*;
 
-public abstract class CopperAleFluid extends ForgeFlowingFluid {
+public abstract class GoldenWortFluid extends ForgeFlowingFluid {
 
-    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.COPPER_ALE_FLUID_BLOCK;
-    private static final Color color = COPPER_ALE_FLUID_COLOR;
-    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_copper_ale;
-    private static final RegistryObject<CopperAleFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.COPPER_ALE_FLUID_FLOWING;
-    private static final RegistryObject<CopperAleFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.COPPER_ALE_FLUID_STILL;
+    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.GOLDEN_WORT_FLUID_BLOCK;
+    private static final Color color = GOLDEN_WORT_FLUID_COLOR;
+    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_golden_wort;
+    private static final RegistryObject<GoldenWortFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.GOLDEN_WORT_FLUID_FLOWING;
+    private static final RegistryObject<GoldenWortFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.GOLDEN_WORT_FLUID_STILL;
 
     public static final Properties FLUID_PROPERTIES = new Properties(
             registry_fluid_still,
@@ -37,7 +37,7 @@ public abstract class CopperAleFluid extends ForgeFlowingFluid {
             .block(block)
             .bucket(registry_bucket);
 
-    protected CopperAleFluid(Properties properties) {
+    protected GoldenWortFluid(Properties properties) {
         super(properties);
     }
 
@@ -56,7 +56,7 @@ public abstract class CopperAleFluid extends ForgeFlowingFluid {
         return registry_bucket.get();
     }
 
-    public static class Flowing extends CopperAleFluid {
+    public static class Flowing extends GoldenWortFluid {
 
         public Flowing() {
             super(FLUID_PROPERTIES);
@@ -77,7 +77,7 @@ public abstract class CopperAleFluid extends ForgeFlowingFluid {
         }
     }
 
-    public static class Source extends CopperAleFluid {
+    public static class Source extends GoldenWortFluid {
 
         public Source() {
             super(FLUID_PROPERTIES);

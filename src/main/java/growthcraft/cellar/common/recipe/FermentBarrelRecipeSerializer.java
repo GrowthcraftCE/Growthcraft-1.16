@@ -21,10 +21,13 @@ public class FermentBarrelRecipeSerializer extends ForgeRegistryEntry<IRecipeSer
         int processingTime = JSONUtils.getInt(json, "processing_time");
 
         // Inputs
-        FluidStack inputFluid = CraftingUtils.getFluidStack(JSONUtils.getJsonObject(json, "input_fluid"));
-        ItemStack inputItem = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "input_item"), false);
+        FluidStack inputFluid = CraftingUtils.getFluidStack(JSONUtils.getJsonObject(json, "ingredient_fluid"));
+        ItemStack inputItem = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "ingredient_item"), false);
 
-        return new FermentBarrelRecipe(recipeId, inputFluid, inputItem, processingTime);
+        // Outputs
+        FluidStack outputFluid = CraftingUtils.getFluidStack(JSONUtils.getJsonObject(json, "result"));
+
+        return new FermentBarrelRecipe(recipeId, inputFluid, inputItem, outputFluid, processingTime);
     }
 
     @Nullable

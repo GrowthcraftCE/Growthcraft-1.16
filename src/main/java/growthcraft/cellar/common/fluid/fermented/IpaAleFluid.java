@@ -1,4 +1,4 @@
-package growthcraft.cellar.common.fluid;
+package growthcraft.cellar.common.fluid.fermented;
 
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
@@ -15,16 +15,16 @@ import net.minecraftforge.fml.RegistryObject;
 
 import java.awt.*;
 
-import static growthcraft.cellar.shared.Reference.FluidColor.BROWN_WORT_FLUID_COLOR;
+import static growthcraft.cellar.shared.Reference.FluidColor.IPA_ALE_FLUID_COLOR;
 import static growthcraft.cellar.shared.Reference.FluidResource.*;
 
-public abstract class BrownWortFluid extends ForgeFlowingFluid {
+public abstract class IpaAleFluid extends ForgeFlowingFluid {
 
-    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.BROWN_WORT_FLUID_BLOCK;
-    private static final Color color = BROWN_WORT_FLUID_COLOR;
-    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_brown_wort;
-    private static final RegistryObject<BrownWortFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.BROWN_WORT_FLUID_FLOWING;
-    private static final RegistryObject<BrownWortFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.BROWN_WORT_FLUID_STILL;
+    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.IPA_ALE_FLUID_BLOCK;
+    private static final Color color = IPA_ALE_FLUID_COLOR;
+    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_ipa_ale;
+    private static final RegistryObject<IpaAleFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.IPA_ALE_FLUID_FLOWING;
+    private static final RegistryObject<IpaAleFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.IPA_ALE_FLUID_STILL;
 
     public static final Properties FLUID_PROPERTIES = new Properties(
             registry_fluid_still,
@@ -37,7 +37,7 @@ public abstract class BrownWortFluid extends ForgeFlowingFluid {
             .block(block)
             .bucket(registry_bucket);
 
-    protected BrownWortFluid(Properties properties) {
+    protected IpaAleFluid(Properties properties) {
         super(properties);
     }
 
@@ -56,7 +56,7 @@ public abstract class BrownWortFluid extends ForgeFlowingFluid {
         return registry_bucket.get();
     }
 
-    public static class Flowing extends BrownWortFluid {
+    public static class Flowing extends IpaAleFluid {
 
         public Flowing() {
             super(FLUID_PROPERTIES);
@@ -77,7 +77,7 @@ public abstract class BrownWortFluid extends ForgeFlowingFluid {
         }
     }
 
-    public static class Source extends BrownWortFluid {
+    public static class Source extends IpaAleFluid {
 
         public Source() {
             super(FLUID_PROPERTIES);

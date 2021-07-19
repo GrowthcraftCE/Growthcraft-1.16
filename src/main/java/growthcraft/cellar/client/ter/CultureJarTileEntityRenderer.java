@@ -70,7 +70,7 @@ public class CultureJarTileEntityRenderer extends TileEntityRenderer<CultureJarT
 
     private void drawCubeQuads(MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, float inputFluidHeight, TextureAtlasSprite textureAtlasSprite, Color color, int lightLevel) {
         IVertexBuilder vertexBuilderBlockQuads = renderTypeBuffer.getBuffer(RenderType.getEntityTranslucent(
-                new ResourceLocation("growthcraft_cellar:textures/block/fluid/wort_fluid_still.png")
+                new ResourceLocation("growthcraft_cellar:textures/block/fluid/fluid_still.png")
         ));
 
         Matrix4f matrixPos = matrixStack.getLast().getMatrix();

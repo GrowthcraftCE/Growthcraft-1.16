@@ -1,4 +1,4 @@
-package growthcraft.cellar.common.fluid;
+package growthcraft.cellar.common.fluid.fermented;
 
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
@@ -15,16 +15,16 @@ import net.minecraftforge.fml.RegistryObject;
 
 import java.awt.*;
 
-import static growthcraft.cellar.shared.Reference.FluidColor.PILSNER_LAGER_FLUID_COLOR;
+import static growthcraft.cellar.shared.Reference.FluidColor.AMBER_ALE_FLUID_COLOR;
 import static growthcraft.cellar.shared.Reference.FluidResource.*;
 
-public abstract class PilsnerLagerFluid extends ForgeFlowingFluid {
+public abstract class AmberAleFluid extends ForgeFlowingFluid {
 
-    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.PILSNER_LAGER_FLUID_BLOCK;
-    private static final Color color = PILSNER_LAGER_FLUID_COLOR;
-    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_pilsner_lager;
-    private static final RegistryObject<PilsnerLagerFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.PILSNER_LAGER_FLUID_FLOWING;
-    private static final RegistryObject<PilsnerLagerFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.PILSNER_LAGER_FLUID_STILL;
+    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.AMBER_ALE_FLUID_BLOCK;
+    private static final Color color = AMBER_ALE_FLUID_COLOR;
+    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_amber_ale;
+    private static final RegistryObject<AmberAleFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.AMBER_ALE_FLUID_FLOWING;
+    private static final RegistryObject<AmberAleFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.AMBER_ALE_FLUID_STILL;
 
     public static final Properties FLUID_PROPERTIES = new Properties(
             registry_fluid_still,
@@ -37,7 +37,7 @@ public abstract class PilsnerLagerFluid extends ForgeFlowingFluid {
             .block(block)
             .bucket(registry_bucket);
 
-    protected PilsnerLagerFluid(Properties properties) {
+    protected AmberAleFluid(Properties properties) {
         super(properties);
     }
 
@@ -56,7 +56,7 @@ public abstract class PilsnerLagerFluid extends ForgeFlowingFluid {
         return registry_bucket.get();
     }
 
-    public static class Flowing extends PilsnerLagerFluid {
+    public static class Flowing extends AmberAleFluid {
 
         public Flowing() {
             super(FLUID_PROPERTIES);
@@ -77,7 +77,7 @@ public abstract class PilsnerLagerFluid extends ForgeFlowingFluid {
         }
     }
 
-    public static class Source extends PilsnerLagerFluid {
+    public static class Source extends AmberAleFluid {
 
         public Source() {
             super(FLUID_PROPERTIES);

@@ -1,4 +1,4 @@
-package growthcraft.cellar.common.fluid;
+package growthcraft.cellar.common.fluid.fermented;
 
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
@@ -15,16 +15,16 @@ import net.minecraftforge.fml.RegistryObject;
 
 import java.awt.*;
 
-import static growthcraft.cellar.shared.Reference.FluidColor.OLD_PORT_ALE_FLUID_COLOR;
+import static growthcraft.cellar.shared.Reference.FluidColor.COPPER_LAGER_FLUID_COLOR;
 import static growthcraft.cellar.shared.Reference.FluidResource.*;
 
-public abstract class OldPortAleFluid extends ForgeFlowingFluid {
+public abstract class CopperLagerFluid extends ForgeFlowingFluid {
 
-    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.OLD_PORT_ALE_FLUID_BLOCK;
-    private static final Color color = OLD_PORT_ALE_FLUID_COLOR;
-    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_old_port_ale;
-    private static final RegistryObject<OldPortAleFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.OLD_PORT_ALE_FLUID_FLOWING;
-    private static final RegistryObject<OldPortAleFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.OLD_PORT_ALE_FLUID_STILL;
+    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.COPPER_LAGER_FLUID_BLOCK;
+    private static final Color color = COPPER_LAGER_FLUID_COLOR;
+    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_copper_lager;
+    private static final RegistryObject<CopperLagerFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.COPPER_LAGER_FLUID_FLOWING;
+    private static final RegistryObject<CopperLagerFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.COPPER_LAGER_FLUID_STILL;
 
     public static final Properties FLUID_PROPERTIES = new Properties(
             registry_fluid_still,
@@ -37,7 +37,7 @@ public abstract class OldPortAleFluid extends ForgeFlowingFluid {
             .block(block)
             .bucket(registry_bucket);
 
-    protected OldPortAleFluid(Properties properties) {
+    protected CopperLagerFluid(Properties properties) {
         super(properties);
     }
 
@@ -56,7 +56,7 @@ public abstract class OldPortAleFluid extends ForgeFlowingFluid {
         return registry_bucket.get();
     }
 
-    public static class Flowing extends OldPortAleFluid {
+    public static class Flowing extends CopperLagerFluid {
 
         public Flowing() {
             super(FLUID_PROPERTIES);
@@ -77,7 +77,7 @@ public abstract class OldPortAleFluid extends ForgeFlowingFluid {
         }
     }
 
-    public static class Source extends OldPortAleFluid {
+    public static class Source extends CopperLagerFluid {
 
         public Source() {
             super(FLUID_PROPERTIES);
