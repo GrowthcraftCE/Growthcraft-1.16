@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BAB",
+    "B B",
+    "BBB"
+  ],
+  "key": {
+    "A": {
+      "tag": "minecraft:planks"
+    },
+    "B": {
+      "tag": "forge:glass_panes"
+    }
+  },
+  "result": {
+    "item": "growthcraft_cellar:culture_jar"
+  }
+}

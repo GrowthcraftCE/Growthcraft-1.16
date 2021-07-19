@@ -1,6 +1,0 @@
-{
-  "parent": "growthcraft_hops:block/hops_vine_stage4",
-  "textures": {
-    "0": "growthcraft_hops:block/leaves_fruit"
-  }
-}
