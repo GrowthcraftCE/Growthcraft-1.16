@@ -1,6 +1,7 @@
 package growthcraft.cellar.common.recipe;
 
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
+import growthcraft.cellar.lib.effect.CellarPotionEffect;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -10,21 +11,24 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.List;
+
 public class FermentBarrelRecipe implements IRecipe<IInventory> {
 
     private final ResourceLocation recipeId;
     private final FluidStack inputFluidStack;
     private final FluidStack outputFluidStack;
     private final ItemStack inputItem;
+    private final List<CellarPotionEffect> potionEffects;
     private final int processingTime;
 
-    public FermentBarrelRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItem, FluidStack outputFluidStack, int processingTime) {
+    public FermentBarrelRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItem, FluidStack outputFluidStack, int processingTime, List<CellarPotionEffect> potionEffects) {
         this.recipeId = recipeId;
         this.inputFluidStack = inputFluidStack;
         this.outputFluidStack = outputFluidStack;
         this.inputItem = inputItem;
         this.processingTime = processingTime;
-        // TODO[19]: Get potion effect from recipe
+        this.potionEffects = potionEffects;
     }
 
     @Override
@@ -40,6 +44,10 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
                 && this.inputFluidStack.getAmount() <= inputFluidStack.getAmount();
 
         return inputItemMatches && inputFluidMatches;
+    }
+
+    public boolean matches(FluidStack fluidStack) {
+        return this.outputFluidStack.getFluid() == fluidStack.getFluid();
     }
 
     /**
@@ -105,5 +113,13 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
 
     public int getProcessingTime() {
         return processingTime;
+    }
+
+    public boolean hasEffects() {
+        return potionEffects != null;
+    }
+
+    public List<CellarPotionEffect> getEffects() {
+        return this.potionEffects;
     }
 }

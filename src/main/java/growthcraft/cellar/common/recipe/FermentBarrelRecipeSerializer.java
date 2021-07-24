@@ -1,17 +1,23 @@
 package growthcraft.cellar.common.recipe;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import growthcraft.cellar.lib.effect.CellarPotionEffect;
 import growthcraft.lib.util.CraftingUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.potion.Effect;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FermentBarrelRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<FermentBarrelRecipe> {
 
@@ -27,7 +33,22 @@ public class FermentBarrelRecipeSerializer extends ForgeRegistryEntry<IRecipeSer
         // Outputs
         FluidStack outputFluid = CraftingUtils.getFluidStack(JSONUtils.getJsonObject(json, "result"));
 
-        return new FermentBarrelRecipe(recipeId, inputFluid, inputItem, outputFluid, processingTime);
+        List<CellarPotionEffect> effects = new ArrayList<>();
+
+        //Effects
+        JsonArray recipeEffects = JSONUtils.getJsonArray(json, "effects");
+        for (int i = 0; i < recipeEffects.size(); i++) {
+            String effectRegistryName = JSONUtils.getString(recipeEffects.get(i).getAsJsonObject(), "effect");
+            int effectDuration = JSONUtils.getInt(recipeEffects.get(i).getAsJsonObject(), "duration", 200);
+            int effectAmplifier = JSONUtils.getInt(recipeEffects.get(i).getAsJsonObject(), "amplifier", 0);
+
+            Effect effect = ForgeRegistries.POTIONS.getValue(new ResourceLocation(effectRegistryName));
+
+            effects.add(new CellarPotionEffect(effect, effectDuration, effectAmplifier));
+
+        }
+
+        return new FermentBarrelRecipe(recipeId, inputFluid, inputItem, outputFluid, processingTime, effects);
     }
 
     @Nullable

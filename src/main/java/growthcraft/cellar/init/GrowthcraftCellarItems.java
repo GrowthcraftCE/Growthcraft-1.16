@@ -1,6 +1,7 @@
 package growthcraft.cellar.init;
 
 import growthcraft.cellar.common.item.GrainItem;
+import growthcraft.cellar.lib.item.CellarPotionItem;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import growthcraft.lib.common.item.GrowthcraftBucketItem;
@@ -8,6 +9,7 @@ import growthcraft.lib.common.item.GrowthcraftEnchantedItem;
 import growthcraft.lib.common.item.GrowthcraftItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
+import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -18,6 +20,10 @@ import static growthcraft.cellar.shared.Reference.FluidName.*;
 
 public class GrowthcraftCellarItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MODID);
+
+    public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(
+            ForgeRegistries.POTION_TYPES, growthcraft.core.shared.Reference.MODID
+    );
 
     private static final String BUCKET = "bucket";
 
@@ -251,6 +257,16 @@ public class GrowthcraftCellarItems {
     public static final RegistryObject<GrowthcraftItem> hops = ITEMS.register(
             UnlocalizedName.HOPS, GrowthcraftItem::new
     );
+
+    // TODO: Ale Potions
+    public static final RegistryObject<CellarPotionItem> ALE_POTION = ITEMS.register(
+            UnlocalizedName.ALE_POTION,
+            CellarPotionItem::new
+    );
+
+    // TODO: Lager Potions
+
+    // TODO: Wine Potions
 
     private GrowthcraftCellarItems() {
         /* Prevent generation of default public constructor */

@@ -9,7 +9,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class GrowthcraftItems {
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
+            ForgeRegistries.ITEMS, Reference.MODID
+    );
 
     private GrowthcraftItems() { /* Disable Default Public Constructor */ }
 
