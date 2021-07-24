@@ -28,13 +28,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
@@ -99,9 +100,17 @@ public class FermentationBarrelBlock extends Block {
                 if (effects != null && !effects.isEmpty()) cellarPotionItem.setEffects(effects);
 
                 player.getHeldItem(handIn).shrink(1);
+                tileEntity.getFluidTank(0).drain(250, IFluidHandler.FluidAction.EXECUTE);
 
-                ItemStack potionStack = new ItemStack(cellarPotionItem).setDisplayName(ITextComponent.getTextComponentOrEmpty(tileEntity.getFluidTank(0).getFluid().getTranslationKey()));
+                // TODO: Fix display name of CellarPotionItem
+                ItemStack potionStack = new ItemStack(cellarPotionItem).setDisplayName(
+                        new TranslationTextComponent("item.growthcraft_cellar.pint_glass_of")
+                                .appendString(" ")
+                                .appendSibling(new TranslationTextComponent(tileEntity.getFluidTank(0).getFluid().getTranslationKey()))
+                );
+
                 player.inventory.addItemStackToInventory(potionStack);
+
             } catch (NullPointerException npe) {
                 // Do nothing as it isn't a fermentable fluid and a bucket should be used.
             }
