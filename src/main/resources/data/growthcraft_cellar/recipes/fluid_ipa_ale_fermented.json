@@ -1,0 +1,24 @@
+{
+  "type": "growthcraft_cellar:ferment_barrel_recipe",
+  "processing_time": 260,
+  "ingredient_item": {
+    "item": "growthcraft_cellar:yeast_brewers",
+    "count": 1
+  },
+  "ingredient_fluid": {
+    "fluid": "growthcraft_cellar:golden_wort_fluid",
+    "amount": 1000
+  },
+  "result": {
+    "fluid": "growthcraft_cellar:ipa_ale_fluid",
+    "amount": 1000
+  },
+  "effects": [
+    {
+      "effect": "minecraft:haste",
+      "duration": 400,
+      "amplifier": 1
+    }
+  ],
+  "color": "0xF6D02E"
+}

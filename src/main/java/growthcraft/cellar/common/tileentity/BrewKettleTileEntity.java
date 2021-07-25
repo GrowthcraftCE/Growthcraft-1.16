@@ -6,6 +6,7 @@ import growthcraft.cellar.common.recipe.BrewKettleRecipe;
 import growthcraft.cellar.common.recipe.BrewKettleRecipeType;
 import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
+import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import growthcraft.lib.common.tank.NonInteractiveTank;
@@ -59,9 +60,9 @@ import static growthcraft.cellar.init.GrowthcraftCellarItems.brew_kettle_lid;
 public class BrewKettleTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
     // TODO: Get smelt time from recipe
-    public final int maxSmeltTime = 600;
+    public final int maxSmeltTime = GrowthcraftCellarConfig.getDefaultProcessingTime();
     private final BrewKettleItemHandler inventory;
-    public int currentSmeltTime;
+    private int currentSmeltTime;
     private BrewKettleRecipe currentRecipe;
     private ITextComponent customName;
     private FluidTank inputFluidTank;
@@ -135,7 +136,6 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
                             this.inventory.getStackInSlot(0),
                             inputFluidTank.getFluid(),
                             this.inventory.getStackInSlot(2).getItem() == brew_kettle_lid.get());
-
                     if (currentRecipe != null && currentRecipe == recipe) {
                         // If the current recipe is not null and it equals the new recipe,
                         // then increment the smelting counter.
@@ -292,5 +292,13 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
             return outputFluidHandler.cast();
         }
         return super.getCapability(cap, side);
+    }
+
+    public int getCurrentSmeltTime() {
+        return currentSmeltTime;
+    }
+
+    public void setCurrentSmeltTime(int smeltTime) {
+        this.currentSmeltTime = smeltTime;
     }
 }

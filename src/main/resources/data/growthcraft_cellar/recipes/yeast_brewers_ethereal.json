@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "growthcraft_cellar:yeast_brewers"
+    },
+    {
+      "item": "growthcraft_cellar:yeast_ethereal"
+    }
+  ],
+  "result": {
+    "item": "growthcraft_cellar:yeast_brewers_ethereal"
+  }
+}

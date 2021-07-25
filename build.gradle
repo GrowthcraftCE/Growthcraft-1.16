@@ -37,6 +37,13 @@ repositories {
     // Patchouli
     maven { url = 'https://maven.blamejared.com' }
     maven { url = 'https://oss.sonatype.org/content/groups/public/' }
+    // Curse Forge
+    maven {
+        url = "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 version = project.growthcraft_version as String
@@ -110,7 +117,6 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
     runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${minecraft_version_short}:${minecraft_version_short}-${theoneprobe_version}")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
-
 }
 
 task sourcesJar(type: Jar) {

@@ -1,0 +1,24 @@
+{
+  "type": "growthcraft_cellar:ferment_barrel_recipe",
+  "processing_time": 260,
+  "ingredient_item": {
+    "item": "growthcraft_cellar:yeast_lager",
+    "count": 1
+  },
+  "ingredient_fluid": {
+    "fluid": "growthcraft_cellar:deep_amber_wort_fluid",
+    "amount": 1000
+  },
+  "result": {
+    "fluid": "growthcraft_cellar:vienna_lager_fluid",
+    "amount": 1000
+  },
+  "effects": [
+    {
+      "effect": "minecraft:haste",
+      "duration": 400,
+      "amplifier": 1
+    }
+  ],
+  "color": "0xCFA26F"
+}

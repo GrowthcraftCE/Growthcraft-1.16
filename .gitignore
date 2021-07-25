@@ -55,3 +55,5 @@ log
 # macOS
 .DS_Store
 .ds_store
+
+.local

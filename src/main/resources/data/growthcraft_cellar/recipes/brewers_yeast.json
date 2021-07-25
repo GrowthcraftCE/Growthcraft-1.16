@@ -1,0 +1,13 @@
+{
+  "type": "growthcraft_cellar:culture_jar_recipe",
+  "processing_time": 600,
+  "requires_heat_source": false,
+  "input_fluid": {
+    "fluid": "growthcraft_cellar:wort_fluid",
+    "amount": 250
+  },
+  "input_item": {
+    "item": "growthcraft_cellar:yeast_brewers",
+    "count": 1
+  }
+}

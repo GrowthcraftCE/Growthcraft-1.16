@@ -2,6 +2,8 @@ package growthcraft.lib.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -78,6 +80,14 @@ public class BlockStateUtils {
         blockMap.put("up", world.getBlockState(pos.up()));
         blockMap.put("down", world.getBlockState(pos.down()));
         return blockMap;
+    }
+
+    public static Direction getFacingFromEntity(BlockPos clickedBlock, LivingEntity placer) {
+        return Direction.getFacingFromVector(
+                (float) (placer.getPosX() - clickedBlock.getX()),
+                (float) (placer.getPosY() - clickedBlock.getY()),
+                (float) (placer.getPosZ() - clickedBlock.getZ())
+        );
     }
 
 }
