@@ -83,11 +83,9 @@ public class FermentationBarrelBlock extends Block {
         return GrowthcraftCellarTileEntities.barrel_ferment_oak_tileentity.get().create();
     }
 
-    // TODO[19]: Block Interactions
     @Override
     @SuppressWarnings("deprecation")
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        // TODO: Handle bottle filling to result in a potion of Ale
 
         if (player.getHeldItem(handIn).getItem() instanceof GlassBottleItem) {
             FermentBarrelTileEntity tileEntity = (FermentBarrelTileEntity) worldIn.getTileEntity(pos);
@@ -98,11 +96,11 @@ public class FermentationBarrelBlock extends Block {
                 CellarPotionItem cellarPotionItem = GrowthcraftCellarItems.ALE_POTION.get();
 
                 if (effects != null && !effects.isEmpty()) cellarPotionItem.setEffects(effects);
+                cellarPotionItem.setColor(recipe.getColor());
 
                 player.getHeldItem(handIn).shrink(1);
                 tileEntity.getFluidTank(0).drain(250, IFluidHandler.FluidAction.EXECUTE);
 
-                // TODO: Fix display name of CellarPotionItem
                 ItemStack potionStack = new ItemStack(cellarPotionItem).setDisplayName(
                         new TranslationTextComponent("item.growthcraft_cellar.pint_glass_of")
                                 .appendString(" ")

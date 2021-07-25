@@ -3,63 +3,86 @@ package growthcraft.cellar.common.tileentity;
 import growthcraft.cellar.client.container.RoasterContainer;
 import growthcraft.cellar.common.block.RoasterBlock;
 import growthcraft.cellar.common.recipe.RoasterRecipe;
-import growthcraft.cellar.common.recipe.RoasterRecipeType;
-import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
+import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
-import growthcraft.cellar.shared.Reference;
-import growthcraft.cellar.shared.UnlocalizedName;
 import growthcraft.lib.util.BlockStateUtils;
+import growthcraft.lib.util.RecipeUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-public class RoasterTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+public class RoasterTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
     private int maxProcessingTime;
     private int currentProcessingTicks = 0;
     private ITextComponent customName;
+    private ItemStack currentRecipeOutput;
 
-    private final BrewKettleItemHandler inventory;
+    //private final BrewKettleItemHandler inventory;
+
+    private final IItemHandlerModifiable items = createHandler();
+    private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
+    private NonNullList<ItemStack> inventoryItemStacks = NonNullList.withSize(3, ItemStack.EMPTY);
 
     private RoasterRecipe currentRecipe;
 
     public RoasterTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
-        this.inventory = new BrewKettleItemHandler(3);
+        //this.inventory = new BrewKettleItemHandler(3);
+    }
+
+    private IItemHandlerModifiable createHandler() {
+        return new InvWrapper(this);
+    }
+
+    @Override
+    public void updateContainingBlockInfo() {
+        super.updateContainingBlockInfo();
+        if (this.itemHandler != null) {
+            this.itemHandler.invalidate();
+            this.itemHandler = null;
+        }
+    }
+
+    //public IItemHandler getInventory() {
+    //     return this.items;
+    //}
+
+    @Override
+    public NonNullList<ItemStack> getItems() {
+        return this.inventoryItemStacks;
+    }
+
+    @Override
+    protected void setItems(NonNullList<ItemStack> itemsIn) {
+        this.inventoryItemStacks = itemsIn;
     }
 
     public RoasterTileEntity() {
@@ -71,19 +94,24 @@ public class RoasterTileEntity extends TileEntity implements ITickableTileEntity
         boolean dirty = false;
 
         if (world != null && !world.isRemote) {
-            if (!this.inventory.getStackInSlot(0).isEmpty() && this.isHeated()) {
+            if (!this.items.getStackInSlot(0).isEmpty() && this.isHeated()) {
 
                 RoasterRecipe recipe = this.getRecipe(
-                        this.inventory.getStackInSlot(0),
-                        this.inventory.getStackInSlot(1)
+                        this.items.getStackInSlot(0),
+                        this.items.getStackInSlot(1)
                 );
 
-                if (currentRecipe != null && currentRecipe == recipe && this.inventory.getStackInSlot(2).getCount() < 64) {
+                if (recipe != null && !recipe.equals(this.currentRecipe)) {
+                    this.currentRecipe = recipe;
+                    this.currentRecipeOutput = recipe.getOutputItem();
+                }
+
+                if (recipe != null && recipe.equals(this.currentRecipe) && this.items.getStackInSlot(2).getCount() < 64 && this.items.isItemValid(2, recipe.getOutputItem())) {
                     // Continue to process the current recipe.
                     this.maxProcessingTime = recipe.getProcessingTime();
                     this.currentProcessingTicks++;
                     dirty = true;
-                } else if (currentRecipe == null && recipe != null) {
+                } else if (this.currentRecipe == null && recipe != null) {
                     // Set the current recipe and start processing next tick.
                     this.maxProcessingTime = recipe.getProcessingTime();
                     this.currentProcessingTicks = 0;
@@ -91,19 +119,21 @@ public class RoasterTileEntity extends TileEntity implements ITickableTileEntity
                     dirty = true;
                 }
 
-                if (currentRecipe != null && currentProcessingTicks > maxProcessingTime) {
+                if (this.currentRecipe != null && this.currentProcessingTicks > this.maxProcessingTime) {
                     // Current recipe is still valid and it is time to produce the result.
-                    this.inventory.getStackInSlot(0).shrink(currentRecipe.getInputItemStack().getCount());
-                    this.inventory.insertItem(2, currentRecipe.getRecipeOutput(), false);
+                    if (this.items.getStackInSlot(2).getItem().equals(recipe.getOutputItem().getItem())
+                            || this.items.getStackInSlot(2).getItem().equals(Items.AIR)) {
 
-                    this.currentRecipe = null;
-                    this.currentProcessingTicks = 0;
-                    this.maxProcessingTime = 0;
-                    dirty = true;
+                        this.items.getStackInSlot(0).shrink(recipe.getInputItemStack().getCount());
+                        this.items.insertItem(2, recipe.getOutputItem(), false);
+
+                        this.currentProcessingTicks = 0;
+                        this.maxProcessingTime = 0;
+                        dirty = true;
+                    }
                 }
 
             } else {
-                this.currentRecipe = null;
                 this.currentProcessingTicks = 0;
                 this.maxProcessingTime = 0;
             }
@@ -119,26 +149,26 @@ public class RoasterTileEntity extends TileEntity implements ITickableTileEntity
     // Custom Name Handling
     @Override
     public ITextComponent getDisplayName() {
-        return this.getName();
-    }
-
-    public void setCustomName(ITextComponent name) {
-        this.customName = name;
+        return this.getName() != null ? this.getName() : this.getDefaultName();
     }
 
     public ITextComponent getName() {
         return this.customName != null ? this.customName : this.getDefaultName();
     }
 
-    private ITextComponent getDefaultName() {
-        String translationKey = String.format("container.%s.%s", Reference.MODID, UnlocalizedName.ROASTER);
-        return new TranslationTextComponent(translationKey);
+    protected ITextComponent getDefaultName() {
+        return this.getBlockState().getBlock().getTranslatedName();
     }
 
     // Interactive GUI
     @Nullable
     @Override
     public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+        return new RoasterContainer(windowId, playerInventory, this);
+    }
+
+    @Override
+    protected Container createMenu(int windowId, PlayerInventory playerInventory) {
         return new RoasterContainer(windowId, playerInventory, this);
     }
 
@@ -150,9 +180,10 @@ public class RoasterTileEntity extends TileEntity implements ITickableTileEntity
             this.customName = ITextComponent.Serializer.getComponentFromJson(compound.getString("CustomName"));
         }
 
-        NonNullList<ItemStack> inv = NonNullList.withSize(this.inventory.getSlots(), ItemStack.EMPTY);
-        ItemStackHelper.loadAllItems(compound, inv);
-        this.inventory.setNonNullList(inv);
+        this.inventoryItemStacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
+        if (!this.checkLootAndRead(compound)) {
+            ItemStackHelper.loadAllItems(compound, this.inventoryItemStacks);
+        }
 
         this.currentProcessingTicks = compound.getInt("CurrentProcessingTicks");
     }
@@ -164,11 +195,13 @@ public class RoasterTileEntity extends TileEntity implements ITickableTileEntity
             compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
         }
 
-        ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());
+        ItemStackHelper.saveAllItems(compound, this.inventoryItemStacks);
+
         compound.putInt("CurrentProcessingTicks", this.currentProcessingTicks);
 
         return super.write(compound);
     }
+
 
     @Nullable
     @Override
@@ -190,6 +223,7 @@ public class RoasterTileEntity extends TileEntity implements ITickableTileEntity
         return nbt;
     }
 
+
     // Heat Sources
     public boolean isHeated() {
         Map<String, Block> blockMap = BlockStateUtils.getSurroundingBlocks(world, pos);
@@ -209,33 +243,21 @@ public class RoasterTileEntity extends TileEntity implements ITickableTileEntity
         return super.getCapability(cap, side);
     }
 
-    public final IItemHandlerModifiable getInventory() {
-        return this.inventory;
+    @Override
+    public int getSizeInventory() {
+        return this.inventoryItemStacks.size();
     }
 
     // Recipe Handling
-    public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> recipeType, World world) {
-        return world != null ?
-                world.getRecipeManager().getRecipes().stream()
-                        .filter(recipe -> recipe.getType().toString().equals(recipeType.toString())).collect(Collectors.toSet())
-                : Collections.emptySet();
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> recipeType) {
-        ClientWorld world = Minecraft.getInstance().world;
-        return world != null ?
-                world.getRecipeManager().getRecipes().stream()
-                        .filter(recipe -> recipe.getType().toString().equals(recipeType.toString())).collect(Collectors.toSet())
-                : Collections.emptySet();
-    }
-
     @Nullable
     private RoasterRecipe getRecipe(ItemStack inputItemStack, ItemStack redstoneTimerItemStack) {
-        Set<IRecipe<?>> recipes = findRecipesByType(new RoasterRecipeType(), this.world);
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(this.world, GrowthcraftCellarRecipes.ROASTER_RECIPE_TYPE);
+
         for (IRecipe<?> recipe : recipes) {
             RoasterRecipe roasterRecipe = (RoasterRecipe) recipe;
-            if (roasterRecipe.matches(inputItemStack, redstoneTimerItemStack)) return roasterRecipe;
+            if (roasterRecipe.matches(inputItemStack, redstoneTimerItemStack)) {
+                return roasterRecipe;
+            }
         }
         return null;
     }
@@ -256,4 +278,5 @@ public class RoasterTileEntity extends TileEntity implements ITickableTileEntity
     public void setMaxProcessingTime(int i) {
         this.maxProcessingTime = i;
     }
+
 }

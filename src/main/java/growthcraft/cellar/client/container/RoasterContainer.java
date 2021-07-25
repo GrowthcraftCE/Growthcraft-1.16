@@ -1,9 +1,7 @@
 package growthcraft.cellar.client.container;
 
 import growthcraft.cellar.common.tileentity.RoasterTileEntity;
-import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarContainers;
-import growthcraft.lib.common.handler.OutputSlotItemHandler;
 import growthcraft.lib.util.FunctionalIntReferenceHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,7 +13,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -38,25 +35,26 @@ public class RoasterContainer extends Container {
         int itemSlotWidth = 18;
 
         // Input Slot
-        this.addSlot(new SlotItemHandler(
-                this.roasterTileEntity.getInventory(),
+        this.addSlot(new Slot(
+                this.roasterTileEntity,
                 index, 54, 42
         ));
         index++;
 
         // Redstone Input Slot
-        this.addSlot(new SlotItemHandler(
-                this.roasterTileEntity.getInventory(),
+        this.addSlot(new Slot(
+                this.roasterTileEntity,
                 index, 80, 25
         ));
         index++;
 
         // Output Slot
         this.addSlot(
-                new OutputSlotItemHandler(
-                        this.roasterTileEntity.getInventory(),
+                new Slot(
+                        this.roasterTileEntity,
                         index, 106, 42
-                ));
+                )
+        );
         index++;
 
         /* Hotbar Inventory Slots */
@@ -123,7 +121,7 @@ public class RoasterContainer extends Container {
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(worldPosCallable, playerIn, GrowthcraftCellarBlocks.roaster.get());
+        return this.roasterTileEntity.canOpen(playerIn);
     }
 
     @Nonnull

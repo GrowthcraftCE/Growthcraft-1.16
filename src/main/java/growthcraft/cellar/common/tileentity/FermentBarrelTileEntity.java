@@ -94,11 +94,6 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
                         currentProcessingTime = 0;
                     } else {
                         this.currentProcessingTime++;
-
-                        if (currentProcessingTime % 20 == 0)
-                            GrowthcraftCellar.LOGGER.warn(
-                                    String.format("Fermenting .... %d :: %d", this.currentProcessingTime, this.maxProcessingTime)
-                            );
                     }
                     dirty = true;
                 } else {

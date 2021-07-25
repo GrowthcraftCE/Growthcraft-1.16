@@ -3,6 +3,7 @@ package growthcraft.cellar.common.tileentity.handler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class BrewKettleItemHandler extends ItemStackHandler {
@@ -12,6 +13,10 @@ public class BrewKettleItemHandler extends ItemStackHandler {
         for (int index = 0; index < stacks.length; index++) {
             this.stacks.set(index, ItemStack.EMPTY);
         }
+    }
+
+    public LazyOptional<ItemStackHandler> getOptionalHandler() {
+        return LazyOptional.of(() -> this);
     }
 
     public void clear() {

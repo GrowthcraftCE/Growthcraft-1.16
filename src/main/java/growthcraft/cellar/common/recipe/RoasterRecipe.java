@@ -1,5 +1,6 @@
 package growthcraft.cellar.common.recipe;
 
+import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -34,21 +35,32 @@ public class RoasterRecipe implements IRecipe<IInventory> {
     }
 
     public boolean matches(ItemStack itemStack, ItemStack redstoneTimerItemStack) {
-        return this.inputItemStack.getItem() == itemStack.getItem() && this.inputItemStack.getCount() <= itemStack.getCount()
-                && this.redstoneTimerItemStack.getItem() == redstoneTimerItemStack.getItem() && this.redstoneTimerItemStack.getCount() == redstoneTimerItemStack.getCount();
+        boolean inputValid = this.inputItemStack.getItem() == itemStack.getItem() && this.inputItemStack.getCount() <= itemStack.getCount();
+        boolean redstoneValid = this.redstoneTimerItemStack.getItem() == redstoneTimerItemStack.getItem() && this.redstoneTimerItemStack.getCount() == redstoneTimerItemStack.getCount();
+
+        if (inputValid && redstoneValid) {
+            if (this.outputItemStack.getCount() > 1) {
+                this.outputItemStack.setCount(1);
+
+                GrowthcraftCellar.LOGGER.info(
+                        String.format("Recipe matches(%s): %s (%d)", this.recipeId.toString(), this.outputItemStack.getItem().getRegistryName(), this.outputItemStack.getCount())
+                );
+            }
+        }
+        return inputValid && redstoneValid;
     }
 
     public ItemStack getInputItemStack() {
         Objects.requireNonNull(this.inputItemStack,
                 String.format("Recipe input cannot be null! Check recipe (%s) json file.", recipeId));
-        return inputItemStack;
+        return this.inputItemStack;
     }
 
     @Override
     public ItemStack getCraftingResult(IInventory inv) {
         Objects.requireNonNull(this.outputItemStack,
                 String.format("Recipe output cannot be null. Check recipe (%s) json file.", recipeId));
-        return outputItemStack;
+        return this.outputItemStack;
     }
 
     @Override
@@ -83,5 +95,13 @@ public class RoasterRecipe implements IRecipe<IInventory> {
 
     public int getProcessingTime() {
         return this.processingTime;
+    }
+
+    public ItemStack getOutputItem() {
+        return this.outputItemStack;
+    }
+
+    public ResourceLocation getRecipeID() {
+        return this.recipeId;
     }
 }

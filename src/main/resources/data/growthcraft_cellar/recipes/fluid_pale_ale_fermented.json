@@ -16,8 +16,9 @@
   "effects": [
     {
       "effect": "minecraft:haste",
-      "duration": 60,
+      "duration": 400,
       "amplifier": 0
     }
-  ]
+  ],
+  "color": "0xFBF855"
 }

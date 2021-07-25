@@ -11,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.awt.*;
 import java.util.List;
 
 public class FermentBarrelRecipe implements IRecipe<IInventory> {
@@ -21,14 +22,16 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
     private final ItemStack inputItem;
     private final List<CellarPotionEffect> potionEffects;
     private final int processingTime;
+    private final Color color;
 
-    public FermentBarrelRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItem, FluidStack outputFluidStack, int processingTime, List<CellarPotionEffect> potionEffects) {
+    public FermentBarrelRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItem, FluidStack outputFluidStack, int processingTime, List<CellarPotionEffect> potionEffects, Color color) {
         this.recipeId = recipeId;
         this.inputFluidStack = inputFluidStack;
         this.outputFluidStack = outputFluidStack;
         this.inputItem = inputItem;
         this.processingTime = processingTime;
         this.potionEffects = potionEffects;
+        this.color = color;
     }
 
     @Override
@@ -121,5 +124,9 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
 
     public List<CellarPotionEffect> getEffects() {
         return this.potionEffects;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }

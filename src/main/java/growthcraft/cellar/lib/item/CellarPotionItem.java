@@ -15,15 +15,21 @@ import net.minecraft.util.DrinkHelper;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CellarPotionItem extends GrowthcraftItem {
 
     private List<CellarPotionEffect> potionEffects = new ArrayList<>();
+    private Color color = new Color(0xCFA26F);
 
     public CellarPotionItem() {
         super();
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public void setEffects(List<CellarPotionEffect> effects) {
@@ -90,4 +96,7 @@ public class CellarPotionItem extends GrowthcraftItem {
         return stack;
     }
 
+    public int getColor() {
+        return this.color.getRGB();
+    }
 }

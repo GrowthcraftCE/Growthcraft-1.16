@@ -1,7 +1,6 @@
 package growthcraft.cellar.common.block;
 
 import growthcraft.cellar.common.tileentity.RoasterTileEntity;
-import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import net.minecraft.block.AbstractBlock;
@@ -9,9 +8,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
@@ -125,13 +124,8 @@ public class RoasterBlock extends Block {
 
         TileEntity tileEntity = worldIn.getTileEntity(pos);
         if (tileEntity instanceof RoasterTileEntity && state.getBlock() != newState.getBlock()) {
-            RoasterTileEntity cultureJarTileEntity = (RoasterTileEntity) tileEntity;
-            ((BrewKettleItemHandler) cultureJarTileEntity.getInventory()).toNonNullList().forEach(
-                    itemStack -> {
-                        ItemEntity itemEntity = new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), itemStack);
-                        worldIn.addEntity(itemEntity);
-                    }
-            );
+            RoasterTileEntity roasterTileEntity = (RoasterTileEntity) tileEntity;
+            InventoryHelper.dropItems(worldIn, pos, roasterTileEntity.getItems());
         }
         // Cleanup the TileEntity Object
         if (state.hasTileEntity() && state.getBlock() != newState.getBlock()) {

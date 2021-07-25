@@ -8,7 +8,7 @@ public class Reference {
 
     public static final String MODID = "growthcraft";
     public static final String NAME = "Growthcraft";
-    public static final String VERSION = "6.0.3";
+    public static final String VERSION = "6.0.4";
 
     public static final String CROWBAR_BLACK = "crowbar_black";
     public static final String CROWBAR_BLUE = "crowbar_blue";

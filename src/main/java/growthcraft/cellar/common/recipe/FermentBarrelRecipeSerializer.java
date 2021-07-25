@@ -16,6 +16,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,9 @@ public class FermentBarrelRecipeSerializer extends ForgeRegistryEntry<IRecipeSer
     public FermentBarrelRecipe read(ResourceLocation recipeId, JsonObject json) {
         // Processing Time
         int processingTime = JSONUtils.getInt(json, "processing_time");
+
+        // Color
+        Color color = new Color(Integer.decode(JSONUtils.getString(json, "color")));
 
         // Inputs
         FluidStack inputFluid = CraftingUtils.getFluidStack(JSONUtils.getJsonObject(json, "ingredient_fluid"));
@@ -48,7 +52,7 @@ public class FermentBarrelRecipeSerializer extends ForgeRegistryEntry<IRecipeSer
 
         }
 
-        return new FermentBarrelRecipe(recipeId, inputFluid, inputItem, outputFluid, processingTime, effects);
+        return new FermentBarrelRecipe(recipeId, inputFluid, inputItem, outputFluid, processingTime, effects, color);
     }
 
     @Nullable

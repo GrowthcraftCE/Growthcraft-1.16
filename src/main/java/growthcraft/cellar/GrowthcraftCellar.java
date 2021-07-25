@@ -99,5 +99,10 @@ public class GrowthcraftCellar {
                     item
             );
         }
+
+        event.getItemColors().register(
+                (itemStack, i) -> GrowthcraftCellarItems.ALE_POTION.get().getColor(),
+                GrowthcraftCellarItems.ALE_POTION.get()
+        );
     }
 }
