@@ -27,16 +27,25 @@ jobs:
         path: ~/.sonar/cache
         key: ${{ runner.os }}-sonar
         restore-keys: ${{ runner.os }}-sonar
-        
+
     - name: Cache Gradle packages
       uses: actions/cache@v1
       with:
         path: ~/.gradle/caches
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: ${{ runner.os }}-gradle
-        
-    - name: Build and analyze
+
+    - name: Build with Gradle
+      run: ./gradlew build
+             - name: Setup sonarqube
+             uses: warchant/setup-sonar-scanner@v3
+
+    - name: Run sonarqube
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: ./gradlew build sonarqube --debug
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: sonar-scanner
+        -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        -Dsonar.organization=growthcraftce
+        -Dsonar.host.url=https://sonarcloud.io/
+        -Dsonar.projectKey=growthcraft:Growthcraft-1.15
+        -Dsonar.java.binaries=./build/classes
