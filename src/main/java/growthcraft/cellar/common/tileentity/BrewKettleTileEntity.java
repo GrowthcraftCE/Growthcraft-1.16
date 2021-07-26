@@ -59,7 +59,6 @@ import static growthcraft.cellar.init.GrowthcraftCellarItems.brew_kettle_lid;
 
 public class BrewKettleTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
-    // TODO: Get smelt time from recipe
     public final int maxSmeltTime = GrowthcraftCellarConfig.getDefaultProcessingTime();
     private final BrewKettleItemHandler inventory;
     private int currentSmeltTime;

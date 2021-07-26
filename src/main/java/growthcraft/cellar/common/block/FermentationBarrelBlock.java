@@ -71,7 +71,6 @@ public class FermentationBarrelBlock extends Block {
         builder.add(FACING);
     }
 
-    // TODO[19]: TileEntity
     @Override
     public boolean hasTileEntity(BlockState state) {
         return true;
@@ -130,7 +129,6 @@ public class FermentationBarrelBlock extends Block {
         return ActionResultType.SUCCESS;
     }
 
-    // TODO[19]: Block Replacement
     @Override
     @SuppressWarnings("deprecation")
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
