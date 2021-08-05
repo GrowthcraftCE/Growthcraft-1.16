@@ -22,6 +22,9 @@ public class UnlocalizedName {
     public static final String GRAIN_DEEP_COPPER = "grain_deep_copper";
     public static final String GRAIN_BROWN = "grain_brown";
     public static final String GRAIN_DARK = "grain_dark";
+    public static final String GRAPE_RED = "grape_red";
+    public static final String GRAPE_PURPLE = "grape_purple";
+    public static final String GRAPE_WHITE = "grape_white";
     public static final String HOPS = "hops";
     public static final String ALE_POTION = "ale_potion";
     public static final String YEAST_BAYANUS = "yeast_bayanus";

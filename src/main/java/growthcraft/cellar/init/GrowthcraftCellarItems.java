@@ -6,6 +6,7 @@ import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import growthcraft.lib.common.item.GrowthcraftBucketItem;
 import growthcraft.lib.common.item.GrowthcraftEnchantedItem;
+import growthcraft.lib.common.item.GrowthcraftFoodItem;
 import growthcraft.lib.common.item.GrowthcraftItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
@@ -268,7 +269,19 @@ public class GrowthcraftCellarItems {
 
     // TODO: Wine Potions
 
+    // Foods
+    public static final RegistryObject<GrowthcraftFoodItem> GRAPE_PURPLE = ITEMS.register(
+            UnlocalizedName.GRAPE_PURPLE, GrowthcraftFoodItem::new
+    );
+    public static final RegistryObject<GrowthcraftFoodItem> GRAPE_RED = ITEMS.register(
+            UnlocalizedName.GRAPE_RED, GrowthcraftFoodItem::new
+    );
+    public static final RegistryObject<GrowthcraftFoodItem> GRAPE_WHITE = ITEMS.register(
+            UnlocalizedName.GRAPE_WHITE, GrowthcraftFoodItem::new
+    );
+
     private GrowthcraftCellarItems() {
         /* Prevent generation of default public constructor */
     }
+
 }

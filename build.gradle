@@ -108,6 +108,7 @@ dependencies {
      * Include mods that we have a direct dependency with.
      */
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}:api")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
 
     /** Runtime Dependencies
      *  Include mods the we need while testing during runtime. When adding mods

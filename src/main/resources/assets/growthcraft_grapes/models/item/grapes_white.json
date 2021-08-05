@@ -1,6 +1,0 @@
-{
-  "parent": "item/handheld",
-  "textures": {
-    "layer0": "growthcraft_grapes:item/grapes_white"
-  }
-}
