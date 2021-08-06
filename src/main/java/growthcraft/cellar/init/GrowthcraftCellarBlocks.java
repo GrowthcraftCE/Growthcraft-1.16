@@ -1,10 +1,7 @@
 package growthcraft.cellar.init;
 
 import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.common.block.BrewKettleBlock;
-import growthcraft.cellar.common.block.CultureJarBlock;
-import growthcraft.cellar.common.block.FermentationBarrelBlock;
-import growthcraft.cellar.common.block.RoasterBlock;
+import growthcraft.cellar.common.block.*;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import net.minecraft.block.Block;
@@ -41,6 +38,16 @@ public class GrowthcraftCellarBlocks {
             RoasterBlock::new
     );
 
+    public static final RegistryObject<FruitPressBlock> FRUIT_PRESS = BLOCKS.register(
+            UnlocalizedName.FRUIT_PRESS,
+            FruitPressBlock::new
+    );
+
+    public static final RegistryObject<FruitPressPistonBlock> FRUIT_PRESS_PISTON = BLOCKS.register(
+            UnlocalizedName.FRUIT_PRESS_PISTON,
+            FruitPressPistonBlock::new
+    );
+
     private GrowthcraftCellarBlocks() { /* Prevent Default Public Constructor */ }
 
     public static void registerBlockItems(IForgeRegistry<Item> itemRegistry, Item.Properties properties) {
@@ -59,6 +66,7 @@ public class GrowthcraftCellarBlocks {
 
     private static boolean excludeBlockItemRegistry(ResourceLocation registryName) {
         ArrayList<String> excludeBlocks = new ArrayList<>();
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.FRUIT_PRESS_PISTON);
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.WORT).get(GrowthcraftCellarFluids.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.AMBER_ALE).get(GrowthcraftCellarFluids.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.AMBER_LAGER).get(GrowthcraftCellarFluids.BLOCK));

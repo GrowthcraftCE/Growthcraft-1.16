@@ -1,0 +1,32 @@
+{
+  "variants": {
+    "facing=north,pressed=false": {
+      "model": "growthcraft_cellar:block/fruit_press_piston_up",
+      "y": 270
+    },
+    "facing=north,pressed=true": {
+      "model": "growthcraft_cellar:block/fruit_press_piston_down",
+      "y": 270
+    },
+    "facing=south,pressed=false": {
+      "model": "growthcraft_cellar:block/fruit_press_piston_up",
+      "y": 270
+    },
+    "facing=south,pressed=true": {
+      "model": "growthcraft_cellar:block/fruit_press_piston_down",
+      "y": 270
+    },
+    "facing=east,pressed=false": {
+      "model": "growthcraft_cellar:block/fruit_press_piston_up"
+    },
+    "facing=east,pressed=true": {
+      "model": "growthcraft_cellar:block/fruit_press_piston_down"
+    },
+    "facing=west,pressed=false": {
+      "model": "growthcraft_cellar:block/fruit_press_piston_up"
+    },
+    "facing=west,pressed=true": {
+      "model": "growthcraft_cellar:block/fruit_press_piston_down"
+    }
+  }
+}
