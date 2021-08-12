@@ -1,5 +1,6 @@
 package growthcraft.cellar.common.block;
 
+import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -10,11 +11,13 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
@@ -46,6 +49,19 @@ public class FruitPressPistonBlock extends Block {
     }
 
     @Override
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        worldIn.setBlockState(pos, state.with(PRESSED, isPowered(worldIn, pos)));
+        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+    }
+
+    @Override
+    public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
+        super.onNeighborChange(state, world, pos, neighbor);
+        World worldIn = (World) world;
+        worldIn.setBlockState(pos, state.with(PRESSED, isPowered(worldIn, pos)));
+    }
+
+    @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(FACING)));
     }
@@ -58,7 +74,7 @@ public class FruitPressPistonBlock extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(PRESSED, this.isPowered(context.getWorld(), context.getPos()));
     }
 
     @Override
@@ -67,6 +83,27 @@ public class FruitPressPistonBlock extends Block {
         worldIn.removeBlock(pos.down(), false);
     }
 
-    /* TileEntity */
+    /* Redstone Power */
 
+    @Override
+    public boolean canConnectRedstone(BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side) {
+        // Do not extend the redstone signal
+        return false;
+    }
+
+    public boolean isPowered(World world, BlockPos pos) {
+        return world.getRedstonePowerFromNeighbors(pos) == 15;
+    }
+
+    /* TileEntity */
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return GrowthcraftCellarTileEntities.fruit_press_piston_tileentity.get().create();
+    }
 }

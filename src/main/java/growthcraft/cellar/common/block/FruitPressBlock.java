@@ -25,7 +25,6 @@ import javax.annotation.Nullable;
 public class FruitPressBlock extends Block {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    //public static final BooleanProperty PRESSED = BooleanProperty.create("pressed");
 
     public FruitPressBlock() {
         super(getInitProperties());
