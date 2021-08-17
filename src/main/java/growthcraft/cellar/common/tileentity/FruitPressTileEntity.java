@@ -1,10 +1,13 @@
 package growthcraft.cellar.common.tileentity;
 
+import growthcraft.cellar.client.container.FruitPressContainer;
+import growthcraft.cellar.client.container.RoasterContainer;
 import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
@@ -53,6 +56,18 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
         this(GrowthcraftCellarTileEntities.fruit_press_tileentity.get());
     }
 
+    // Interactive GUI
+    @Nullable
+    @Override
+    public Container createMenu(int windowId, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+        return new FruitPressContainer(windowId, playerInventory, this);
+    }
+
+    @Override
+    protected Container createMenu(int windowId, PlayerInventory playerInventory) {
+        return new FruitPressContainer(windowId, playerInventory, this);
+    }
+
     @Override
     public void tick() {
         // TODO: Check if the FruitPressPiston is powered.
@@ -65,21 +80,20 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
         //world.setBlockState(this.pos, state.with(FruitPressPistonBlock.PRESSED, powerLevel == 15));
     }
 
-    /**
-     * Based on the recipe and the current item inventory, determine how long it
-     * will take to press the entire ItemStack.
-     *
-     * @return
-     */
-    private void setCurrentProcessingTime(int time) {
+
+    public int getCurrentProcessingTime() {
+        return this.currentProcessingTime;
+    }
+
+    public void setCurrentProcessingTime(int time) {
         this.currentProcessingTime = time;
     }
 
-    private int getMaxProcessingTime() {
+    public int getMaxProcessingTime() {
         return this.maxProcessingTime;
     }
 
-    private void setMaxProcessingTime(int maxTime) {
+    public void setMaxProcessingTime(int maxTime) {
         this.maxProcessingTime = maxTime;
     }
 
@@ -100,11 +114,6 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
     @Override
     protected void setItems(NonNullList<ItemStack> itemsIn) {
         this.inventory.setNonNullList(itemsIn);
-    }
-
-    @Override
-    protected Container createMenu(int id, PlayerInventory player) {
-        return null;
     }
 
     @Override
@@ -130,7 +139,7 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
         this.outputFluidTank = new FluidTank(4000);
     }
 
-    public FluidTank getInputFluidTank(int slot) {
+    public FluidTank getFluidTank(int slot) {
         return outputFluidTank;
     }
 

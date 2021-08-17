@@ -1,9 +1,6 @@
 package growthcraft.cellar.init.client;
 
-import growthcraft.cellar.client.gui.BrewKettleScreen;
-import growthcraft.cellar.client.gui.CultureJarScreen;
-import growthcraft.cellar.client.gui.FermentBarrelScreen;
-import growthcraft.cellar.client.gui.RoasterScreen;
+import growthcraft.cellar.client.gui.*;
 import growthcraft.cellar.init.GrowthcraftCellarContainers;
 import net.minecraft.client.gui.ScreenManager;
 
@@ -22,5 +19,7 @@ public class GrowthcraftCellarScreenManager {
                 GrowthcraftCellarContainers.ferment_barrel_container.get(), FermentBarrelScreen::new);
         ScreenManager.registerFactory(
                 GrowthcraftCellarContainers.roaster_container.get(), RoasterScreen::new);
+        ScreenManager.registerFactory(
+                GrowthcraftCellarContainers.fruit_press_container.get(), FruitPressScreen::new);
     }
 }
