@@ -84,10 +84,8 @@ public class FruitPressPistonBlock extends Block {
     }
 
     /* Redstone Power */
-
     @Override
     public boolean canConnectRedstone(BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side) {
-        // Do not extend the redstone signal
         return false;
     }
 

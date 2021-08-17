@@ -39,6 +39,13 @@ public class GrowthcraftCellarTileEntities {
             ).build(null)
     );
 
+    public static final RegistryObject<TileEntityType<FruitPressTileEntity>> fruit_press_tileentity = TILE_ENTITIES.register(
+            UnlocalizedName.FRUIT_PRESS,
+            () -> TileEntityType.Builder.create(
+                    FruitPressTileEntity::new, GrowthcraftCellarBlocks.FRUIT_PRESS.get()
+            ).build(null)
+    );
+
     public static final RegistryObject<TileEntityType<FruitPressPistonTileEntity>> fruit_press_piston_tileentity = TILE_ENTITIES.register(
             UnlocalizedName.FRUIT_PRESS_PISTON,
             () -> TileEntityType.Builder.create(
