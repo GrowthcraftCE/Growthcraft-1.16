@@ -1,6 +1,5 @@
 package growthcraft.cellar.client.container;
 
-import growthcraft.cellar.common.tileentity.CultureJarTileEntity;
 import growthcraft.cellar.common.tileentity.FruitPressTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarContainers;
@@ -8,7 +7,6 @@ import growthcraft.lib.util.FunctionalIntReferenceHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -20,7 +18,6 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Objects;
 
 public class FruitPressContainer extends Container {
@@ -28,7 +25,7 @@ public class FruitPressContainer extends Container {
     private final FruitPressTileEntity fruitPressTileEntity;
     private final IWorldPosCallable worldPosCallable;
 
-    private FunctionalIntReferenceHolder currentProcessingTime;
+    private final FunctionalIntReferenceHolder currentProcessingTime;
 
     public FruitPressContainer(final int windowID, final PlayerInventory playerInventory, final FruitPressTileEntity tileEntity) {
         super(GrowthcraftCellarContainers.fruit_press_container.get(), windowID);
@@ -81,12 +78,12 @@ public class FruitPressContainer extends Container {
             }
         }
 
-        FunctionalIntReferenceHolder currentProcessingTimeReference = new FunctionalIntReferenceHolder(
+        currentProcessingTime = new FunctionalIntReferenceHolder(
                 this.fruitPressTileEntity::getCurrentProcessingTime,
                 this.fruitPressTileEntity::setCurrentProcessingTime
         );
 
-        this.trackInt(currentProcessingTimeReference);
+        this.trackInt(currentProcessingTime);
 
     }
 
@@ -110,7 +107,6 @@ public class FruitPressContainer extends Container {
     public boolean canInteractWith(PlayerEntity playerIn) {
         return isWithinUsableDistance(worldPosCallable, playerIn, GrowthcraftCellarBlocks.FRUIT_PRESS.get());
     }
-
 
     @Nonnull
     @Override
@@ -148,7 +144,6 @@ public class FruitPressContainer extends Container {
                 ? this.currentProcessingTime.get() * size / this.fruitPressTileEntity.getMaxProcessingTime()
                 : 0;
     }
-
 
     @OnlyIn(Dist.CLIENT)
     public FluidTank getTileEntityFluidTank(int slot) {

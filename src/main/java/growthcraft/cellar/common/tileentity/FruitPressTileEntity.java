@@ -1,7 +1,6 @@
 package growthcraft.cellar.common.tileentity;
 
 import growthcraft.cellar.client.container.FruitPressContainer;
-import growthcraft.cellar.client.container.RoasterContainer;
 import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.shared.Reference;
@@ -35,8 +34,8 @@ import javax.annotation.Nullable;
 
 public class FruitPressTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
-    private int maxProcessingTime = 0;
-    private int currentProcessingTime = 0;
+    private int maxProcessingTime;
+    private int currentProcessingTime;
     private ITextComponent customName;
 
     private final BrewKettleItemHandler inventory;
@@ -50,6 +49,8 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
         super(typeIn);
         this.inventory = new BrewKettleItemHandler(1);
         this.createFluidTanks();
+        this.maxProcessingTime = 0;
+        this.currentProcessingTime = 0;
     }
 
     public FruitPressTileEntity() {
