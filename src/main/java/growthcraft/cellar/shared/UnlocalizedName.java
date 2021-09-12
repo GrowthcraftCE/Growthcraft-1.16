@@ -15,6 +15,7 @@ public class UnlocalizedName {
     public static final String FERMENT_BARREL_RECIPE = "ferment_barrel_recipe";
     public static final String FRUIT_PRESS = "fruit_press";
     public static final String FRUIT_PRESS_PISTON = "fruit_press_piston";
+    public static final String FRUIT_PRESS_RECIPE = "fruit_press_recipe";
     public static final String GRAIN = "grain";
     public static final String GRAIN_PALE_GOLDEN = "grain_pale_golden";
     public static final String GRAIN_GOLDEN = "grain_golden";

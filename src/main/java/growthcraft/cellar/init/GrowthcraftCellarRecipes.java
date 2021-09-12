@@ -31,6 +31,11 @@ public class GrowthcraftCellarRecipes {
             UnlocalizedName.ROASTER_RECIPE,
             RoasterRecipeSerializer::new
     );
+
+    public static final RegistryObject<IRecipeSerializer<?>> FRUIT_PRESS_SERIALIZER = RECIPE_SERIALIZERS.register(
+            UnlocalizedName.FRUIT_PRESS_RECIPE,
+            FruitPressRecipeSerializer::new
+    );
     //endregion
 
     //region Recipe Types
@@ -38,6 +43,7 @@ public class GrowthcraftCellarRecipes {
     public static final IRecipeType<CultureJarRecipe> CULTURE_JAR_RECIPE_TYPE = new CultureJarRecipeType();
     public static final IRecipeType<FermentBarrelRecipe> FERMENT_BARREL_RECIPE_TYPE = new FermentBarrelRecipeType();
     public static final IRecipeType<RoasterRecipe> ROASTER_RECIPE_TYPE = new RoasterRecipeType();
+    public static final IRecipeType<FruitPressRecipe> FRUIT_PRESS_RECIPE_TYPE = new FruitPressRecipeType();
     //endregion
 
     private GrowthcraftCellarRecipes() {

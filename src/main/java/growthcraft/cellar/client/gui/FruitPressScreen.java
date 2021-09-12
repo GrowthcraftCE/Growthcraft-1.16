@@ -75,8 +75,8 @@ public class FruitPressScreen extends ContainerScreen<FruitPressContainer> {
                 this.container.getProcessingTimeScaled(28));
 
         // Output fluid tank
-        int guiInputFluidTankX = guiLeft + 65;
-        int guiInputFluidTankY = guiTop + 18;
+        int guiInputFluidTankX = guiLeft + 72;
+        int guiInputFluidTankY = guiTop + 17;
         int guiInputFluidTankHeight = 52;
 
         if (this.container.getTileEntityFluidTank(0).getFluidAmount() > 0) {
@@ -86,7 +86,7 @@ public class FruitPressScreen extends ContainerScreen<FruitPressContainer> {
                     this.container.getTileEntityFluidTank(0).getCapacity(), guiInputFluidTankHeight);
 
             ClientUtils.drawRepeatedFluidSpriteGui(renderTypeBuffer, matrixStack, fluidStack, guiInputFluidTankX,
-                    guiInputFluidTankY + (guiInputFluidTankHeight - scaledFluidHeight), 16, scaledFluidHeight);
+                    guiInputFluidTankY + (guiInputFluidTankHeight - scaledFluidHeight), 50, scaledFluidHeight);
 
         }
 
@@ -112,10 +112,16 @@ public class FruitPressScreen extends ContainerScreen<FruitPressContainer> {
         int guiInputTankY = guiTop + 17;
         int guiInputTankHeight = 54;
 
-        if (mouseX > guiInputTankX && mouseX < guiInputTankX + 16 && mouseY > guiInputTankY && mouseY < guiInputTankY + guiInputTankHeight) {
+        if (mouseX > guiInputTankX && mouseX < guiInputTankX + (121 - 64) && mouseY > guiInputTankY && mouseY < guiInputTankY + guiInputTankHeight) {
+            String fluidTankTooltip = "Empty";
+
             FluidStack fluidStack = this.container.getTileEntityFluidTank(0).getFluid();
-            String tooltip = String.format("%s %dmb", fluidStack.getDisplayName().getString(), fluidStack.getAmount());
-            StringTextComponent stringTextComponent = new StringTextComponent(tooltip);
+
+            if (!this.container.getTileEntityFluidTank(0).isEmpty()) {
+                fluidTankTooltip = String.format("%s %dmb", fluidStack.getDisplayName().getString(), fluidStack.getAmount());
+            }
+
+            StringTextComponent stringTextComponent = new StringTextComponent(fluidTankTooltip);
             this.renderTooltip(matrixStack, stringTextComponent, mouseX, mouseY);
         }
 

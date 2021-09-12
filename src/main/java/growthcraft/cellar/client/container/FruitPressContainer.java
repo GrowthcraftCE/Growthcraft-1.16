@@ -39,7 +39,7 @@ public class FruitPressContainer extends Container {
         // Input Slot
         this.addSlot(new SlotItemHandler(
                 fruitPressTileEntity.getInventory(),
-                index, 94, 35
+                index, 52, 53
         ));
         index++;
 
