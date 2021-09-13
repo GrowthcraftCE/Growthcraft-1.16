@@ -206,9 +206,19 @@ public class GrowthcraftCellarItems {
     );
     //endregion
 
-    public static RegistryObject<BucketItem> bucket_red_grape_juice = ITEMS.register(
+    public static final RegistryObject<BucketItem> bucket_red_grape_juice = ITEMS.register(
             UnlocalizedName.getFluidNames(RED_GRAPE_JUICE).get(BUCKET),
             () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.RED_GRAPE_JUICE_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_white_grape_juice = ITEMS.register(
+            UnlocalizedName.getFluidNames(WHITE_GRAPE_JUICE).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.WHITE_GRAPE_JUICE_FLUID_STILL)
+    );
+
+    public static final RegistryObject<BucketItem> bucket_purple_grape_juice = ITEMS.register(
+            UnlocalizedName.getFluidNames(PURPLE_GRAPE_JUICE).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PURPLE_GRAPE_JUICE_FLUID_STILL)
     );
 
     public static final RegistryObject<GrowthcraftItem> yeast_bayanus = ITEMS.register(
