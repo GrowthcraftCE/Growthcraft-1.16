@@ -1,10 +1,13 @@
 package growthcraft.cellar.common.tileentity;
 
 import growthcraft.cellar.client.container.FruitPressContainer;
+import growthcraft.cellar.common.recipe.FruitPressRecipe;
 import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
+import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
+import growthcraft.lib.util.RecipeUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -12,6 +15,7 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -25,12 +29,14 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nullable;
+import java.util.Set;
 
 public class FruitPressTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
@@ -44,6 +50,8 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
     private final LazyOptional<IFluidHandler> outputFluidHandler = LazyOptional.of(
             () -> outputFluidTank
     );
+
+    private FruitPressRecipe currentRecipe;
 
     protected FruitPressTileEntity(TileEntityType<?> typeIn) {
         super(typeIn);
@@ -71,16 +79,69 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
 
     @Override
     public void tick() {
-        // TODO: Check if the FruitPressPiston is powered.
+        boolean dirty = false;
 
-        // TODO: Lock the inventory if FruitPressPistion is powered.
+        // Check if the FruitPressPiston is powered and the input slot is not empty
+        if (this.world.isBlockPowered(this.getPos().up()) && !this.inventory.getStackInSlot(0).isEmpty()) {
 
-        //World world = this.world;
-        //BlockState state = world.getBlockState(this.getPos());
-        //int powerLevel = world.getRedstonePowerFromNeighbors(this.getPos());
-        //world.setBlockState(this.pos, state.with(FruitPressPistonBlock.PRESSED, powerLevel == 15));
+            FruitPressRecipe fruitPressRecipe = this.getRecipe(
+                    this.inventory.getStackInSlot(0)
+            );
+
+            if (fruitPressRecipe != null) {
+                this.setMaxProcessingTime(fruitPressRecipe.getProcessingTime());
+
+                if (currentRecipe != null && this.isTankFull(0)) {
+                    // Do nothing as we cannot process the output.
+                } else if (fruitPressRecipe != currentRecipe) {
+                    currentRecipe = fruitPressRecipe;
+                } else if (currentProcessingTime >= maxProcessingTime) {
+                    this.processRecipeResult();
+                    currentProcessingTime = 0;
+                } else {
+                    this.currentProcessingTime++;
+                }
+
+                dirty = true;
+
+            } else {
+                // No matching recipe found.
+            }
+        } else {
+            // FruitPressPiston isn't power and/or the input inventory is empty.
+        }
+
+        if (dirty) {
+            this.markDirty();
+            this.world.notifyBlockUpdate(
+                    this.getPos(), this.getBlockState(), this.getBlockState(),
+                    Constants.BlockFlags.BLOCK_UPDATE);
+        }
     }
 
+    public boolean isTankFull(int index) {
+        try {
+            int tankAmount = this.getFluidTank(index).getFluidAmount();
+            int outputAmount = this.currentRecipe.getOutputFluidStack().getAmount();
+            int tankCapacity = this.getFluidTank(index).getCapacity();
+
+            return this.getFluidTank(index).getFluidAmount() + currentRecipe.getOutputFluidStack().getAmount() >= this.getFluidTank(0).getCapacity();
+        } catch (Exception ex) {
+            // Then there isn't a current recipe, and we need to return true to prevent processing.
+            return true;
+        }
+    }
+
+    private void processRecipeResult() {
+        if (!this.isTankFull(0)) {
+            // Process the inputs.
+            this.inventory.getStackInSlot(0).shrink(currentRecipe.getInputItemStack().getCount());
+            // Process the outputs
+            FluidStack resultFluidStack = currentRecipe.getOutputFluidStack();
+            resultFluidStack.setAmount(currentRecipe.getOutputFluidStack().getAmount());
+            this.getFluidTank(0).fill(resultFluidStack, IFluidHandler.FluidAction.EXECUTE);
+        }
+    }
 
     public int getCurrentProcessingTime() {
         return this.currentProcessingTime;
@@ -120,6 +181,21 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
     @Override
     public int getSizeInventory() {
         return this.inventory.getSlots();
+    }
+
+    @Nullable
+    public FruitPressRecipe getRecipe(ItemStack inputStack) {
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(
+                this.world, GrowthcraftCellarRecipes.FRUIT_PRESS_RECIPE_TYPE);
+
+        for (IRecipe<?> recipe : recipes) {
+            FruitPressRecipe fruitPressRecipe = (FruitPressRecipe) recipe;
+            if (fruitPressRecipe.matches(inputStack)) {
+                return fruitPressRecipe;
+            }
+        }
+
+        return null;
     }
 
     // Inventory

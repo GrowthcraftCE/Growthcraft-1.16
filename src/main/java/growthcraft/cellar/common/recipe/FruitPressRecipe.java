@@ -36,7 +36,7 @@ public class FruitPressRecipe implements IRecipe<IInventory> {
     }
 
     public boolean matches(ItemStack inputItemStack) {
-        return this.inputItemStack == inputItemStack;
+        return this.inputItemStack.getItem() == inputItemStack.getItem();
     }
 
     public boolean matches(ItemStack inputItemStack, FluidStack outputFluidStack) {
@@ -71,7 +71,7 @@ public class FruitPressRecipe implements IRecipe<IInventory> {
 
     @Override
     public IRecipeType<?> getType() {
-        return GrowthcraftCellarRecipes.FRUIT_PRESS_RECIPE_TYPE;
+        return new FruitPressRecipeType();
     }
 
     @Override
@@ -95,4 +95,7 @@ public class FruitPressRecipe implements IRecipe<IInventory> {
         return itemByProduct;
     }
 
+    public FluidStack getResultingFluid() {
+        return this.outputFluidStack;
+    }
 }

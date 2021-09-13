@@ -21,6 +21,10 @@ public class FruitPressRecipeSerializer extends ForgeRegistryEntry<IRecipeSerial
         int processingTime = JSONUtils.getInt(json, "processing_time");
 
         // Input
+        ItemStack inputItemStack = CraftingHelper.getItemStack(
+                JSONUtils.getJsonObject(json, "input_item"),
+                false
+        );
 
         // Output
         FluidStack outputFluid = CraftingUtils.getFluidStack(
@@ -29,11 +33,11 @@ public class FruitPressRecipeSerializer extends ForgeRegistryEntry<IRecipeSerial
 
         // By Product
         ItemStack itemByProduct = CraftingHelper.getItemStack(
-                JSONUtils.getJsonObject(json, "input_item"),
+                JSONUtils.getJsonObject(json, "by_product"),
                 false
         );
 
-        return null;
+        return new FruitPressRecipe(recipeId, inputItemStack, outputFluid, itemByProduct, processingTime);
     }
 
     @Nullable

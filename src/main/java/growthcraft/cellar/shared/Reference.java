@@ -45,6 +45,9 @@ public class Reference {
         public static final Color STOUT_ALE_FLUID_COLOR = new Color(0x0E0A07);
         public static final Color VIENNA_LAGER_FLUID_COLOR = new Color(0x904730);
         public static final Color WORT_FLUID_COLOR = new Color(0xD0AF4E);
+        public static final Color RED_GRAPE_JUICE_COLOR = new Color(0xA63F4A);
+        public static final Color WHITE_GRAPE_JUICE_COLOR = new Color(0xB4C91C);
+        public static final Color PURPLE_GRAPE_JUICE_COLOR = new Color(0x682961);
 
         private FluidColor() { /* Prevent Public Constructor */ }
     }
@@ -70,6 +73,9 @@ public class Reference {
         public static final String PALE_ALE = "pale_ale";
         public static final String PALE_LAGER = "pale_lager";
         public static final String PILSNER_LAGER = "pilsner_lager";
+        public static final String RED_GRAPE_JUICE = "red_grape_juice";
+        public static final String WHITE_GRAPE_JUICE = "white_grape_juice";
+        public static final String PURPLE_GRAPE_JUICE = "purple_grape_juice";
         public static final String STOUT_ALE = "stout_ale";
         public static final String VIENNA_LAGER = "vienna_lager";
         public static final String WORT = "wort";

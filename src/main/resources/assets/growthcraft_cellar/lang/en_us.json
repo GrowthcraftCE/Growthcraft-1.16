@@ -32,6 +32,9 @@
   "fluid.growthcraft_cellar.deep_copper_wort_fluid": "Deep Copper Wort",
   "fluid.growthcraft_cellar.brown_wort_fluid": "Brown Wort",
   "fluid.growthcraft_cellar.dark_wort_fluid": "Dark Wort",
+  "fluid.growthcraft_cellar.red_grape_juice_fluid": "Red Grape Juice",
+  "fluid.growthcraft_cellar.white_grape_juice_fluid": "White Grape Juice",
+  "fluid.growthcraft_cellar.purple_grape_juice_fluid": "Purple Grape Juice",
   "item.growthcraft_cellar.grape_red": "Red Grapes",
   "item.growthcraft_cellar.grape_purple": "Purple Grapes",
   "item.growthcraft_cellar.grape_white": "White Grapes",
@@ -79,5 +82,9 @@
   "item.growthcraft_cellar.copper_wort_bucket": "Copper Wort Bucket",
   "item.growthcraft_cellar.deep_copper_wort_bucket": "Deep Copper Wort Bucket",
   "item.growthcraft_cellar.brown_wort_bucket": "Brown Wort Bucket",
-  "item.growthcraft_cellar.wdark_wort_bucket": "Dark Wort Bucket"
+  "item.growthcraft_cellar.dark_wort_bucket": "Dark Wort Bucket",
+  "item.growthcraft_cellar.red_grape_juice_bucket": "Red Grape Juice Bucket",
+  "item.growthcraft_cellar.white_grape_juice_bucket": "White Grape Juice Bucket",
+  "item.growthcraft_cellar.purple_grape_juice_bucket": "Purple Grape Juice Bucket",
+  "item.growthcraft_cellar.hops": "Hops"
 }

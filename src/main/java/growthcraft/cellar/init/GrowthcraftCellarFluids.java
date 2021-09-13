@@ -2,6 +2,7 @@ package growthcraft.cellar.init;
 
 import growthcraft.cellar.common.fluid.WortFluid;
 import growthcraft.cellar.common.fluid.fermented.*;
+import growthcraft.cellar.common.fluid.juice.RedGrapeJuiceFluid;
 import growthcraft.cellar.common.fluid.wort.*;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
@@ -230,5 +231,14 @@ public class GrowthcraftCellarFluids {
 	public static final RegistryObject<FlowingFluidBlock> DARK_WORT_FLUID_BLOCK =
 			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.DARK_WORT).get(BLOCK),
 					() -> new FlowingFluidBlock(DARK_WORT_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	// Fluid: Red Grape Juice
+	public static final RegistryObject<RedGrapeJuiceFluid.Source> RED_GRAPE_JUICE_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.RED_GRAPE_JUICE).get(STILL), RedGrapeJuiceFluid.Source::new);
+	public static final RegistryObject<RedGrapeJuiceFluid.Flowing> RED_GRAPE_JUICE_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.RED_GRAPE_JUICE).get(FLOWING), RedGrapeJuiceFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> RED_GRAPE_JUICE_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.RED_GRAPE_JUICE).get(BLOCK),
+					() -> new FlowingFluidBlock(RED_GRAPE_JUICE_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
 
 }
