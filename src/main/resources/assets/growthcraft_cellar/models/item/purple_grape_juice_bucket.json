@@ -1,7 +1,7 @@
 {
-  "parent": "forge:item/default",
+  "parent": "item/generated",
   "textures": {
-    "base": "item/bucket",
-    "fluid": "forge:item/mask/bucket_fluid"
+    "layer0": "growthcraft_cellar:item/bucket_overlay",
+    "layer1": "growthcraft_cellar:item/bucket_base"
   }
 }

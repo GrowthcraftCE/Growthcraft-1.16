@@ -108,6 +108,8 @@ public class GrowthcraftCellar {
 
         List<GrowthcraftBucketItem> bucketItems = new ArrayList<>();
         bucketItems.add(GrowthcraftCellarItems.bucket_purple_grape_juice.get());
+        bucketItems.add(GrowthcraftCellarItems.bucket_red_grape_juice.get());
+        bucketItems.add(GrowthcraftCellarItems.bucket_white_grape_juice.get());
 
         for (GrowthcraftBucketItem item : bucketItems) {
             event.getItemColors().register(
