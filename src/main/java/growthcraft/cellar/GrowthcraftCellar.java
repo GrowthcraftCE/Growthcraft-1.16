@@ -9,6 +9,7 @@ import growthcraft.cellar.init.client.GrowthcraftCellarScreenManager;
 import growthcraft.cellar.init.client.GrowthcraftCellarTileEntityRenders;
 import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.Reference;
+import growthcraft.lib.common.item.GrowthcraftBucketItem;
 import growthcraft.lib.proxy.IProxy;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -83,17 +84,17 @@ public class GrowthcraftCellar {
 
     @SubscribeEvent
     public void registerItemColors(ColorHandlerEvent.Item event) {
-        List<GrainItem> coloredItems = new ArrayList<>();
-        coloredItems.add(GrowthcraftCellarItems.grain_amber.get());
-        coloredItems.add(GrowthcraftCellarItems.grain_brown.get());
-        coloredItems.add(GrowthcraftCellarItems.grain_copper.get());
-        coloredItems.add(GrowthcraftCellarItems.grain_dark.get());
-        coloredItems.add(GrowthcraftCellarItems.grain_golden.get());
-        coloredItems.add(GrowthcraftCellarItems.grain_deep_amber.get());
-        coloredItems.add(GrowthcraftCellarItems.grain_deep_copper.get());
-        coloredItems.add(GrowthcraftCellarItems.grain_pale_golden.get());
+        List<GrainItem> grainItems = new ArrayList<>();
+        grainItems.add(GrowthcraftCellarItems.grain_amber.get());
+        grainItems.add(GrowthcraftCellarItems.grain_brown.get());
+        grainItems.add(GrowthcraftCellarItems.grain_copper.get());
+        grainItems.add(GrowthcraftCellarItems.grain_dark.get());
+        grainItems.add(GrowthcraftCellarItems.grain_golden.get());
+        grainItems.add(GrowthcraftCellarItems.grain_deep_amber.get());
+        grainItems.add(GrowthcraftCellarItems.grain_deep_copper.get());
+        grainItems.add(GrowthcraftCellarItems.grain_pale_golden.get());
 
-        for (GrainItem item : coloredItems) {
+        for (GrainItem item : grainItems) {
             event.getItemColors().register(
                     (itemStack, i) -> item.getColor(),
                     item
@@ -104,5 +105,16 @@ public class GrowthcraftCellar {
                 (itemStack, i) -> GrowthcraftCellarItems.ALE_POTION.get().getColor(),
                 GrowthcraftCellarItems.ALE_POTION.get()
         );
+
+        List<GrowthcraftBucketItem> bucketItems = new ArrayList<>();
+        bucketItems.add(GrowthcraftCellarItems.bucket_purple_grape_juice.get());
+
+        for (GrowthcraftBucketItem item : bucketItems) {
+            event.getItemColors().register(
+                    (itemStack, i) -> item.getColor(),
+                    item
+            );
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 {
-  "parent": "item/generated",
+  "parent": "builtin/generated",
   "textures": {
-    "layer0": "growthcraft_cellar:item/red_grape_juice_bucket"
+    "layer0": "growthcraft_cellar:item/bucket_overlay",
+    "layer1": "growthcraft_cellar:item/bucket_base"
   }
 }

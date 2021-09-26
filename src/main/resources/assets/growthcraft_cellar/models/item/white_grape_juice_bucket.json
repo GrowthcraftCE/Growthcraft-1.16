@@ -1,6 +1,7 @@
 {
-  "parent": "item/generated",
+  "parent": "forge:item/default",
   "textures": {
-    "layer0": "growthcraft_cellar:item/white_grape_juice_bucket"
+    "base": "item/bucket",
+    "fluid": "forge:item/mask/bucket_fluid"
   }
 }

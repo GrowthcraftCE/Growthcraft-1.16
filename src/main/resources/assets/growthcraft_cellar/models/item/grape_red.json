@@ -1,6 +1,7 @@
 {
-  "parent": "item/handheld",
+  "parent": "forge:item/default",
   "textures": {
-    "layer0": "growthcraft_cellar:item/grape_red"
+    "base": "item/bucket",
+    "fluid": "forge:item/mask/bucket_fluid"
   }
 }

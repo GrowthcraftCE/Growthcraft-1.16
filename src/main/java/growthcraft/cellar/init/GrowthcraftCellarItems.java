@@ -172,53 +172,53 @@ public class GrowthcraftCellarItems {
     //region Fermented Lager Buckets
     public static final RegistryObject<BucketItem> bucket_pale_lager = ITEMS.register(
             UnlocalizedName.getFluidNames(PALE_LAGER).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PALE_LAGER_FLUID_STILL)
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PALE_LAGER_FLUID_STILL, Reference.FluidColor.PALE_LAGER_FLUID_COLOR)
     );
 
     public static final RegistryObject<BucketItem> bucket_pilsner_lager = ITEMS.register(
             UnlocalizedName.getFluidNames(PILSNER_LAGER).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PILSNER_LAGER_FLUID_STILL)
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PILSNER_LAGER_FLUID_STILL, Reference.FluidColor.PILSNER_LAGER_FLUID_COLOR)
     );
 
     public static final RegistryObject<BucketItem> bucket_amber_lager = ITEMS.register(
             UnlocalizedName.getFluidNames(AMBER_LAGER).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.AMBER_LAGER_FLUID_STILL)
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.AMBER_LAGER_FLUID_STILL, Reference.FluidColor.AMBER_LAGER_FLUID_COLOR)
     );
 
     public static final RegistryObject<BucketItem> bucket_vienna_lager = ITEMS.register(
             UnlocalizedName.getFluidNames(VIENNA_LAGER).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.VIENNA_LAGER_FLUID_STILL)
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.VIENNA_LAGER_FLUID_STILL, Reference.FluidColor.VIENNA_LAGER_FLUID_COLOR)
     );
 
     public static final RegistryObject<BucketItem> bucket_copper_lager = ITEMS.register(
             UnlocalizedName.getFluidNames(COPPER_LAGER).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.COPPER_LAGER_FLUID_STILL)
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.COPPER_LAGER_FLUID_STILL, Reference.FluidColor.COPPER_LAGER_FLUID_COLOR)
     );
 
     public static final RegistryObject<BucketItem> bucket_brown_lager = ITEMS.register(
             UnlocalizedName.getFluidNames(BROWN_LAGER).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.BROWN_LAGER_FLUID_STILL)
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.BROWN_LAGER_FLUID_STILL, Reference.FluidColor.BROWN_LAGER_FLUID_COLOR)
     );
 
     public static final RegistryObject<BucketItem> bucket_dark_lager = ITEMS.register(
             UnlocalizedName.getFluidNames(DARK_LAGER).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.DARK_LAGER_FLUID_STILL)
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.DARK_LAGER_FLUID_STILL, Reference.FluidColor.DARK_LAGER_FLUID_COLOR)
     );
     //endregion
 
     public static final RegistryObject<BucketItem> bucket_red_grape_juice = ITEMS.register(
             UnlocalizedName.getFluidNames(RED_GRAPE_JUICE).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.RED_GRAPE_JUICE_FLUID_STILL)
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.RED_GRAPE_JUICE_FLUID_STILL, Reference.FluidColor.RED_GRAPE_JUICE_COLOR)
     );
 
     public static final RegistryObject<BucketItem> bucket_white_grape_juice = ITEMS.register(
             UnlocalizedName.getFluidNames(WHITE_GRAPE_JUICE).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.WHITE_GRAPE_JUICE_FLUID_STILL)
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.WHITE_GRAPE_JUICE_FLUID_STILL, Reference.FluidColor.WHITE_GRAPE_JUICE_COLOR)
     );
 
-    public static final RegistryObject<BucketItem> bucket_purple_grape_juice = ITEMS.register(
+    public static final RegistryObject<GrowthcraftBucketItem> bucket_purple_grape_juice = ITEMS.register(
             UnlocalizedName.getFluidNames(PURPLE_GRAPE_JUICE).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PURPLE_GRAPE_JUICE_FLUID_STILL)
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PURPLE_GRAPE_JUICE_FLUID_STILL, Reference.FluidColor.PURPLE_GRAPE_JUICE_COLOR)
     );
 
     public static final RegistryObject<GrowthcraftItem> yeast_bayanus = ITEMS.register(
