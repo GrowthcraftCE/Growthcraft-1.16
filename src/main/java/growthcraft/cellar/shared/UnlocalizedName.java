@@ -29,7 +29,9 @@ public class UnlocalizedName {
     public static final String GRAPE_PURPLE = "grape_purple";
     public static final String GRAPE_WHITE = "grape_white";
     public static final String HOPS = "hops";
-    public static final String ALE_POTION = "ale_potion";
+    public static final String ALE_POTION = "potion_ale";
+    public static final String WINE_POTION = "potion_wine";
+    public static final String LAGER_POTION = "potion_lager";
     public static final String YEAST_BAYANUS = "yeast_bayanus";
     public static final String YEAST_BAYANUS_ETHEREAL = "yeast_bayanus_ethereal";
     public static final String YEAST_BREWERS = "yeast_brewers";
@@ -38,6 +40,7 @@ public class UnlocalizedName {
     public static final String YEAST_LAGER = "yeast_lager";
     public static final String YEAST_LAGER_ETHEREAL = "yeast_lager_ethereal";
     public static final String LOOT_SERIALIZER_BLOCK = "global_block_loot_modifier";
+    public static final String POTION_PALE_ALE = "potion_pale_ale";
 
     public static final String ROASTER = "roaster";
     public static final String ROASTER_RECIPE = "roaster_recipe";

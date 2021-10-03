@@ -3,18 +3,28 @@ package growthcraft.cellar.lib.item;
 import growthcraft.cellar.lib.effect.CellarPotionEffect;
 import growthcraft.lib.common.item.GrowthcraftItem;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.UseAction;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
+import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DrinkHelper;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +104,46 @@ public class CellarPotionItem extends GrowthcraftItem {
         }
 
         return stack;
+    }
+
+    public static ListNBT getEnchantments(ItemStack stack) {
+        CompoundNBT compoundnbt = stack.getTag();
+        return compoundnbt != null ? compoundnbt.getList("StoredEffects", 10) : new ListNBT();
+    }
+
+    public static void addEnchantment(ItemStack stack, Effect effect) {
+        ListNBT listnbt = getEnchantments(stack);
+        boolean flag = true;
+        ResourceLocation resourcelocation = Registry.ENCHANTMENT.getKey(stackIn.enchantment);
+
+        for (int i = 0; i < listnbt.size(); ++i) {
+            CompoundNBT compoundnbt = listnbt.getCompound(i);
+            ResourceLocation resourcelocation1 = ResourceLocation.tryCreate(compoundnbt.getString("id"));
+            if (resourcelocation1 != null && resourcelocation1.equals(resourcelocation)) {
+                if (compoundnbt.getInt("lvl") < stackIn.enchantmentLevel) {
+                    compoundnbt.putShort("lvl", (short) stackIn.enchantmentLevel);
+                }
+
+                flag = false;
+                break;
+            }
+        }
+
+        if (flag) {
+            CompoundNBT compoundnbt1 = new CompoundNBT();
+            compoundnbt1.putString("id", String.valueOf(resourcelocation));
+            compoundnbt1.putShort("lvl", (short) stackIn.enchantmentLevel);
+            listnbt.add(compoundnbt1);
+        }
+
+        stack.getOrCreateTag().put("StoredEffects", listnbt);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+        ItemStack.addEnchantmentTooltips(tooltip, this.potionEffects);
     }
 
     public int getColor() {

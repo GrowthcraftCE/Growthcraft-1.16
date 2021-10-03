@@ -20,5 +20,8 @@
       "amplifier": 0
     }
   ],
+  "bottle": {
+    "item": "growthcraft_cellar:potion_pale_ale"
+  },
   "color": "0xFBF855"
 }

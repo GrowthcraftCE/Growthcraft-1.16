@@ -279,6 +279,18 @@ public class GrowthcraftCellarItems {
             UnlocalizedName.ALE_POTION,
             CellarPotionItem::new
     );
+    public static final RegistryObject<CellarPotionItem> LAGER_POTION = ITEMS.register(
+            UnlocalizedName.LAGER_POTION,
+            CellarPotionItem::new
+    );
+    public static final RegistryObject<CellarPotionItem> WINE_POTION = ITEMS.register(
+            UnlocalizedName.WINE_POTION,
+            CellarPotionItem::new
+    );
+    public static final RegistryObject<CellarPotionItem> POTION_PALE_ALE = ITEMS.register(
+            UnlocalizedName.POTION_PALE_ALE,
+            CellarPotionItem::new
+    );
 
     // TODO: Lager Potions
 

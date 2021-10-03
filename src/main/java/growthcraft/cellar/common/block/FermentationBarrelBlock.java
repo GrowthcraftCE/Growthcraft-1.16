@@ -1,11 +1,13 @@
 package growthcraft.cellar.common.block;
 
+import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.common.recipe.FermentBarrelRecipe;
 import growthcraft.cellar.common.tileentity.FermentBarrelTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.lib.effect.CellarPotionEffect;
 import growthcraft.cellar.lib.item.CellarPotionItem;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.lib.util.BlockStateUtils;
 import growthcraft.lib.util.RecipeUtils;
 import net.minecraft.block.Block;
@@ -20,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -91,23 +94,73 @@ public class FermentationBarrelBlock extends Block {
             try {
                 FermentBarrelRecipe recipe = RecipeUtils.findFermentRecipesByResult(worldIn, tileEntity.getFluidTank(0).getFluid());
                 List<CellarPotionEffect> effects = recipe.getEffects();
+                CellarPotionItem bottleItem = recipe.getBottle();
 
-                CellarPotionItem cellarPotionItem = GrowthcraftCellarItems.ALE_POTION.get();
+                if (effects != null && !effects.isEmpty()) {
+                    bottleItem.setEffects(effects);
+                    GrowthcraftCellar.LOGGER.warn("has effect " + effects);
+                }
 
-                if (effects != null && !effects.isEmpty()) cellarPotionItem.setEffects(effects);
-                cellarPotionItem.setColor(recipe.getColor());
+                // If the fluid is a Ale
+                if (FluidTags.getCollection().get(Reference.TagResource.TAG_ALES)
+                        .contains(tileEntity.getFluidTank(0).getFluid().getFluid())
+                ) {
+                    CellarPotionItem cellarPotionItem = GrowthcraftCellarItems.ALE_POTION.get();
 
-                player.getHeldItem(handIn).shrink(1);
-                tileEntity.getFluidTank(0).drain(250, IFluidHandler.FluidAction.EXECUTE);
+                    if (effects != null && !effects.isEmpty()) {
+                        cellarPotionItem.setEffects(effects);
+                        GrowthcraftCellar.LOGGER.warn("has effect " + effects);
+                    }
 
-                ItemStack potionStack = new ItemStack(cellarPotionItem).setDisplayName(
-                        new TranslationTextComponent("item.growthcraft_cellar.pint_glass_of")
-                                .appendString(" ")
-                                .appendSibling(new TranslationTextComponent(tileEntity.getFluidTank(0).getFluid().getTranslationKey()))
-                );
+                    cellarPotionItem.setColor(recipe.getColor());
 
-                player.inventory.addItemStackToInventory(potionStack);
+                    player.getHeldItem(handIn).shrink(1);
+                    tileEntity.getFluidTank(0).drain(250, IFluidHandler.FluidAction.EXECUTE);
 
+                    ItemStack potionStack = new ItemStack(cellarPotionItem).setDisplayName(
+                            new TranslationTextComponent("item.growthcraft_cellar.potion_pint_of")
+                                    .appendString(" ")
+                                    .appendSibling(new TranslationTextComponent(tileEntity.getFluidTank(0).getFluid().getTranslationKey()))
+                    );
+
+                    player.inventory.addItemStackToInventory(potionStack);
+                } else if (FluidTags.getCollection().get(Reference.TagResource.TAG_LAGERS)
+                        .contains(tileEntity.getFluidTank(0).getFluid().getFluid())
+                ) {
+                    CellarPotionItem cellarPotionItem = GrowthcraftCellarItems.LAGER_POTION.get();
+
+                    if (effects != null && !effects.isEmpty()) cellarPotionItem.setEffects(effects);
+                    cellarPotionItem.setColor(recipe.getColor());
+
+                    player.getHeldItem(handIn).shrink(1);
+                    tileEntity.getFluidTank(0).drain(250, IFluidHandler.FluidAction.EXECUTE);
+
+                    ItemStack potionStack = new ItemStack(cellarPotionItem).setDisplayName(
+                            new TranslationTextComponent("item.growthcraft_cellar.potion_pint_of")
+                                    .appendString(" ")
+                                    .appendSibling(new TranslationTextComponent(tileEntity.getFluidTank(0).getFluid().getTranslationKey()))
+                    );
+
+                    player.inventory.addItemStackToInventory(potionStack);
+                } else if (FluidTags.getCollection().get(Reference.TagResource.TAG_WINES)
+                        .contains(tileEntity.getFluidTank(0).getFluid().getFluid())
+                ) {
+                    CellarPotionItem cellarPotionItem = GrowthcraftCellarItems.WINE_POTION.get();
+
+                    if (effects != null && !effects.isEmpty()) cellarPotionItem.setEffects(effects);
+                    cellarPotionItem.setColor(recipe.getColor());
+
+                    player.getHeldItem(handIn).shrink(1);
+                    tileEntity.getFluidTank(0).drain(250, IFluidHandler.FluidAction.EXECUTE);
+
+                    ItemStack potionStack = new ItemStack(cellarPotionItem).setDisplayName(
+                            new TranslationTextComponent("item.growthcraft_cellar.potion_bottle_of")
+                                    .appendString(" ")
+                                    .appendSibling(new TranslationTextComponent(tileEntity.getFluidTank(0).getFluid().getTranslationKey()))
+                    );
+
+                    player.inventory.addItemStackToInventory(potionStack);
+                }
             } catch (NullPointerException npe) {
                 // Do nothing as it isn't a fermentable fluid and a bucket should be used.
             }

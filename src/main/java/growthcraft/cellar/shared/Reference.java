@@ -21,6 +21,12 @@ public class Reference {
         private FluidResource() { /* Prevent Public Constructor */ }
     }
 
+    public static class TagResource {
+        public static final ResourceLocation TAG_ALES = new ResourceLocation(Reference.MODID, "ale");
+        public static final ResourceLocation TAG_LAGERS = new ResourceLocation(Reference.MODID, "lager");
+        public static final ResourceLocation TAG_WINES = new ResourceLocation(Reference.MODID, "wine");
+    }
+
     public static class FluidColor {
         public static final Color PALE_GOLDEN_WORT_FLUID_COLOR = new Color(0xFBF855);
         public static final Color GOLDEN_WORT_FLUID_COLOR = new Color(0xF6D02E);

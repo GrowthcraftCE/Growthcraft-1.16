@@ -2,6 +2,7 @@ package growthcraft.cellar.common.recipe;
 
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.lib.effect.CellarPotionEffect;
+import growthcraft.cellar.lib.item.CellarPotionItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -23,14 +24,16 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
     private final List<CellarPotionEffect> potionEffects;
     private final int processingTime;
     private final Color color;
+    private final CellarPotionItem bottleItem;
 
-    public FermentBarrelRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItem, FluidStack outputFluidStack, int processingTime, List<CellarPotionEffect> potionEffects, Color color) {
+    public FermentBarrelRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItem, FluidStack outputFluidStack, int processingTime, List<CellarPotionEffect> potionEffects, CellarPotionItem bottleItem, Color color) {
         this.recipeId = recipeId;
         this.inputFluidStack = inputFluidStack;
         this.outputFluidStack = outputFluidStack;
         this.inputItem = inputItem;
         this.processingTime = processingTime;
         this.potionEffects = potionEffects;
+        this.bottleItem = bottleItem;
         this.color = color;
     }
 
@@ -124,6 +127,10 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
 
     public List<CellarPotionEffect> getEffects() {
         return this.potionEffects;
+    }
+
+    public CellarPotionItem getBottle() {
+        return this.bottleItem;
     }
 
     public Color getColor() {

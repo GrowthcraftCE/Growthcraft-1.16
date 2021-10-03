@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "growthcraft_cellar:amber_lager_fluid",
+    "growthcraft_cellar:brown_lager_fluid",
+    "growthcraft_cellar:copper_lager_fluid",
+    "growthcraft_cellar:dark_lager_fluid",
+    "growthcraft_cellar:pale_lager_fluid",
+    "growthcraft_cellar:pilsner_lager_fluid",
+    "growthcraft_cellar:vienna_lager_fluid"
+  ]
+}

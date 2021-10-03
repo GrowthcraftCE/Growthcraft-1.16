@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "growthcraft_cellar:amber_ale_fluid",
+    "growthcraft_cellar:brown_ale_fluid",
+    "growthcraft_cellar:copper_ale_fluid",
+    "growthcraft_cellar:pale_ale_fluid",
+    "growthcraft_cellar:ipa_ale_fluid",
+    "growthcraft_cellar:old_port_ale_fluid",
+    "growthcraft_cellar:stout_ale_fluid"
+  ]
+}
