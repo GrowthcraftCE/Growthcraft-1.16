@@ -63,6 +63,14 @@ public class GrowthcraftCellarItems {
             )
     );
 
+    public static final RegistryObject<BucketItem> bucket_hopped_golden_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(HOPPED_GOLDEN_WORT).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.HOPPED_GOLDEN_WORT_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+
     public static final RegistryObject<BucketItem> bucket_amber_wort = ITEMS.register(
             UnlocalizedName.getFluidNames(AMBER_WORT).get(BUCKET),
             () -> new BucketItem(

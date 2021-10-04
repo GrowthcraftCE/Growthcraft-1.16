@@ -17,35 +17,29 @@ import java.util.ArrayList;
 
 public class GrowthcraftCellarBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Reference.MODID);
-
-    public static final RegistryObject<BrewKettleBlock> brew_kettle = BLOCKS.register(
-            UnlocalizedName.BREW_KETTLE,
-            BrewKettleBlock::new
-    );
-
-    public static final RegistryObject<CultureJarBlock> culture_jar = BLOCKS.register(
-            UnlocalizedName.CULTURE_JAR,
-            CultureJarBlock::new
-    );
-
-    public static final RegistryObject<FermentationBarrelBlock> barrel_ferment_oak = BLOCKS.register(
-            UnlocalizedName.FERMENT_BARREL_OAK,
-            FermentationBarrelBlock::new
-    );
-
-    public static final RegistryObject<RoasterBlock> roaster = BLOCKS.register(
-            UnlocalizedName.ROASTER,
-            RoasterBlock::new
-    );
-
     public static final RegistryObject<FruitPressBlock> FRUIT_PRESS = BLOCKS.register(
             UnlocalizedName.FRUIT_PRESS,
             FruitPressBlock::new
     );
-
     public static final RegistryObject<FruitPressPistonBlock> FRUIT_PRESS_PISTON = BLOCKS.register(
             UnlocalizedName.FRUIT_PRESS_PISTON,
             FruitPressPistonBlock::new
+    );
+    public static final RegistryObject<FermentationBarrelBlock> barrel_ferment_oak = BLOCKS.register(
+            UnlocalizedName.FERMENT_BARREL_OAK,
+            FermentationBarrelBlock::new
+    );
+    public static final RegistryObject<BrewKettleBlock> brew_kettle = BLOCKS.register(
+            UnlocalizedName.BREW_KETTLE,
+            BrewKettleBlock::new
+    );
+    public static final RegistryObject<CultureJarBlock> culture_jar = BLOCKS.register(
+            UnlocalizedName.CULTURE_JAR,
+            CultureJarBlock::new
+    );
+    public static final RegistryObject<RoasterBlock> roaster = BLOCKS.register(
+            UnlocalizedName.ROASTER,
+            RoasterBlock::new
     );
 
     private GrowthcraftCellarBlocks() { /* Prevent Default Public Constructor */ }
@@ -93,6 +87,7 @@ public class GrowthcraftCellarBlocks {
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.RED_GRAPE_JUICE).get(GrowthcraftCellarFluids.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.WHITE_GRAPE_JUICE).get(GrowthcraftCellarFluids.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.PURPLE_GRAPE_JUICE).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.HOPPED_GOLDEN_WORT).get(GrowthcraftCellarFluids.BLOCK));
 
         return excludeBlocks.contains(registryName.toString());
     }

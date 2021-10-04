@@ -260,4 +260,13 @@ public class GrowthcraftCellarFluids {
 	public static final RegistryObject<FlowingFluidBlock> PURPLE_GRAPE_JUICE_FLUID_BLOCK =
 			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.PURPLE_GRAPE_JUICE).get(BLOCK),
 					() -> new FlowingFluidBlock(PURPLE_GRAPE_JUICE_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	// Fluid: Hopped Golden Wort
+	public static final RegistryObject<HoppedGoldenWortFluid.Source> HOPPED_GOLDEN_WORT_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.HOPPED_GOLDEN_WORT).get(STILL), HoppedGoldenWortFluid.Source::new);
+	public static final RegistryObject<HoppedGoldenWortFluid.Flowing> HOPPED_GOLDEN_WORT_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.HOPPED_GOLDEN_WORT).get(FLOWING), HoppedGoldenWortFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> HOPPED_GOLDEN_WORT_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.HOPPED_GOLDEN_WORT).get(BLOCK),
+					() -> new FlowingFluidBlock(HOPPED_GOLDEN_WORT_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
 }
