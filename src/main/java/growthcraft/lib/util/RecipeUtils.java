@@ -36,11 +36,11 @@ public class RecipeUtils {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> brewKettleRecipeType) {
+    public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> recipeType) {
         ClientWorld world = Minecraft.getInstance().world;
         return world != null ?
                 world.getRecipeManager().getRecipes().stream()
-                        .filter(recipe -> recipe.getType().toString().equals(brewKettleRecipeType.toString())).collect(Collectors.toSet())
+                        .filter(recipe -> recipe.getType().toString().equals(recipeType.toString())).collect(Collectors.toSet())
                 : Collections.emptySet();
     }
 

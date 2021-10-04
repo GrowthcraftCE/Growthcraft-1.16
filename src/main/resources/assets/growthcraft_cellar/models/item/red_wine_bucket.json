@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "growthcraft_cellar:item/bucket/wine/bucket_overlay_red_wine",
+    "layer1": "growthcraft_cellar:item/bucket/bucket_base"
+  }
+}

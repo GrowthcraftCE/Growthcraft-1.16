@@ -117,7 +117,8 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
         Float multiplier = (float) this.inventory.getStackInSlot(0).getCount() / currentRecipe.getIngredientItemStack().getCount();
 
         if (multiplier % 1 == 0) {
-            if (currentRecipe.getResultingFluid().getAmount() * multiplier.intValue() == this.getFluidTank(0).getFluidAmount()) {
+            if (currentRecipe.getResultingFluid().getAmount() * multiplier.intValue()
+                    == this.getFluidTank(0).getFluidAmount()) {
                 // Process recipe inputs
                 this.getFluidTank(0).drain(currentRecipe.getIngredientFluidStack().getAmount() * multiplier.intValue(),
                         IFluidHandler.FluidAction.EXECUTE);

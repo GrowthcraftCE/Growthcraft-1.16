@@ -83,17 +83,17 @@ public class GrowthcraftCellar {
 
     @SubscribeEvent
     public void registerItemColors(ColorHandlerEvent.Item event) {
-        List<GrainItem> coloredItems = new ArrayList<>();
-        coloredItems.add(GrowthcraftCellarItems.grain_amber.get());
-        coloredItems.add(GrowthcraftCellarItems.grain_brown.get());
-        coloredItems.add(GrowthcraftCellarItems.grain_copper.get());
-        coloredItems.add(GrowthcraftCellarItems.grain_dark.get());
-        coloredItems.add(GrowthcraftCellarItems.grain_golden.get());
-        coloredItems.add(GrowthcraftCellarItems.grain_deep_amber.get());
-        coloredItems.add(GrowthcraftCellarItems.grain_deep_copper.get());
-        coloredItems.add(GrowthcraftCellarItems.grain_pale_golden.get());
+        List<GrainItem> grainItems = new ArrayList<>();
+        grainItems.add(GrowthcraftCellarItems.grain_amber.get());
+        grainItems.add(GrowthcraftCellarItems.grain_brown.get());
+        grainItems.add(GrowthcraftCellarItems.grain_copper.get());
+        grainItems.add(GrowthcraftCellarItems.grain_dark.get());
+        grainItems.add(GrowthcraftCellarItems.grain_golden.get());
+        grainItems.add(GrowthcraftCellarItems.grain_deep_amber.get());
+        grainItems.add(GrowthcraftCellarItems.grain_deep_copper.get());
+        grainItems.add(GrowthcraftCellarItems.grain_pale_golden.get());
 
-        for (GrainItem item : coloredItems) {
+        for (GrainItem item : grainItems) {
             event.getItemColors().register(
                     (itemStack, i) -> item.getColor(),
                     item
@@ -104,5 +104,6 @@ public class GrowthcraftCellar {
                 (itemStack, i) -> GrowthcraftCellarItems.ALE_POTION.get().getColor(),
                 GrowthcraftCellarItems.ALE_POTION.get()
         );
+
     }
 }

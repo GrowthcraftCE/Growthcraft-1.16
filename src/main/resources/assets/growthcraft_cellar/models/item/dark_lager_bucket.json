@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "growthcraft_cellar:item/dark_lager_bucket"
+    "layer0": "growthcraft_cellar:item/bucket/lager/dark_lager_bucket"
   }
 }

@@ -1,9 +1,6 @@
 package growthcraft.cellar.init;
 
-import growthcraft.cellar.common.tileentity.BrewKettleTileEntity;
-import growthcraft.cellar.common.tileentity.CultureJarTileEntity;
-import growthcraft.cellar.common.tileentity.FermentBarrelTileEntity;
-import growthcraft.cellar.common.tileentity.RoasterTileEntity;
+import growthcraft.cellar.common.tileentity.*;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import net.minecraft.tileentity.TileEntityType;
@@ -39,6 +36,20 @@ public class GrowthcraftCellarTileEntities {
             UnlocalizedName.ROASTER,
             () -> TileEntityType.Builder.create(
                     RoasterTileEntity::new, GrowthcraftCellarBlocks.roaster.get()
+            ).build(null)
+    );
+
+    public static final RegistryObject<TileEntityType<FruitPressTileEntity>> fruit_press_tileentity = TILE_ENTITIES.register(
+            UnlocalizedName.FRUIT_PRESS,
+            () -> TileEntityType.Builder.create(
+                    FruitPressTileEntity::new, GrowthcraftCellarBlocks.FRUIT_PRESS.get()
+            ).build(null)
+    );
+
+    public static final RegistryObject<TileEntityType<FruitPressPistonTileEntity>> fruit_press_piston_tileentity = TILE_ENTITIES.register(
+            UnlocalizedName.FRUIT_PRESS_PISTON,
+            () -> TileEntityType.Builder.create(
+                    FruitPressPistonTileEntity::new, GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get()
             ).build(null)
     );
 

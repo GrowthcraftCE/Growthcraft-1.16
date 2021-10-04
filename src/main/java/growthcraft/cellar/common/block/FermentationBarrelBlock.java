@@ -2,7 +2,6 @@ package growthcraft.cellar.common.block;
 
 import growthcraft.cellar.common.recipe.FermentBarrelRecipe;
 import growthcraft.cellar.common.tileentity.FermentBarrelTileEntity;
-import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.lib.effect.CellarPotionEffect;
 import growthcraft.cellar.lib.item.CellarPotionItem;
@@ -92,21 +91,24 @@ public class FermentationBarrelBlock extends Block {
                 FermentBarrelRecipe recipe = RecipeUtils.findFermentRecipesByResult(worldIn, tileEntity.getFluidTank(0).getFluid());
                 List<CellarPotionEffect> effects = recipe.getEffects();
 
-                CellarPotionItem cellarPotionItem = GrowthcraftCellarItems.ALE_POTION.get();
+                CellarPotionItem bottleItem = recipe.getBottle();
+                ItemStack bottleItemStack = new ItemStack(bottleItem);
 
-                if (effects != null && !effects.isEmpty()) cellarPotionItem.setEffects(effects);
-                cellarPotionItem.setColor(recipe.getColor());
+                if (effects != null && !effects.isEmpty()) {
+                    effects.forEach(effect ->
+                            CellarPotionItem.addEffect(bottleItemStack, effect.getEffect(), effect.getDuration(), effect.getAmplifier()));
+                }
 
                 player.getHeldItem(handIn).shrink(1);
                 tileEntity.getFluidTank(0).drain(250, IFluidHandler.FluidAction.EXECUTE);
 
-                ItemStack potionStack = new ItemStack(cellarPotionItem).setDisplayName(
-                        new TranslationTextComponent("item.growthcraft_cellar.pint_glass_of")
+                bottleItemStack.setDisplayName(
+                        bottleItemStack.getDisplayName().copyRaw()
                                 .appendString(" ")
                                 .appendSibling(new TranslationTextComponent(tileEntity.getFluidTank(0).getFluid().getTranslationKey()))
                 );
 
-                player.inventory.addItemStackToInventory(potionStack);
+                player.inventory.addItemStackToInventory(bottleItemStack);
 
             } catch (NullPointerException npe) {
                 // Do nothing as it isn't a fermentable fluid and a bucket should be used.

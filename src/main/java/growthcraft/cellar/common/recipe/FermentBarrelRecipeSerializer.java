@@ -37,6 +37,8 @@ public class FermentBarrelRecipeSerializer extends ForgeRegistryEntry<IRecipeSer
         // Outputs
         FluidStack outputFluid = CraftingUtils.getFluidStack(JSONUtils.getJsonObject(json, "result"));
 
+        ItemStack bottle = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "bottle"), false);
+
         List<CellarPotionEffect> effects = new ArrayList<>();
 
         //Effects
@@ -52,7 +54,7 @@ public class FermentBarrelRecipeSerializer extends ForgeRegistryEntry<IRecipeSer
 
         }
 
-        return new FermentBarrelRecipe(recipeId, inputFluid, inputItem, outputFluid, processingTime, effects, color);
+        return new FermentBarrelRecipe(recipeId, inputFluid, inputItem, outputFluid, processingTime, effects, bottle, color);
     }
 
     @Nullable

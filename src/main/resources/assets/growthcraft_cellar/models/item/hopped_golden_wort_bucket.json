@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "growthcraft_cellar:item/bucket/wort/bucket_overlay_hopped_golden_wort",
+    "layer1": "growthcraft_cellar:item/bucket/bucket_base"
+  }
+}

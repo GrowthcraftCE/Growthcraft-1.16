@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "growthcraft_cellar:item/amber_ale_bucket"
+    "layer0": "growthcraft_cellar:item/bucket/ale/amber_ale_bucket"
   }
 }
