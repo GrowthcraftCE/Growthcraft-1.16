@@ -278,4 +278,12 @@ public class GrowthcraftCellarFluids {
 	public static final RegistryObject<FlowingFluidBlock> RED_WINE_FLUID_BLOCK =
 			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.RED_WINE).get(BLOCK),
 					() -> new FlowingFluidBlock(RED_WINE_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	public static final RegistryObject<PurpleWineFluid.Source> PURPLE_WINE_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.PURPLE_WINE).get(STILL), PurpleWineFluid.Source::new);
+	public static final RegistryObject<PurpleWineFluid.Flowing> PURPLE_WINE_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.PURPLE_WINE).get(FLOWING), PurpleWineFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> PURPLE_WINE_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.PURPLE_WINE).get(BLOCK),
+					() -> new FlowingFluidBlock(PURPLE_WINE_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
 }
