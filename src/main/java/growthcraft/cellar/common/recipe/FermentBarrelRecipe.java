@@ -26,14 +26,14 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
     private final Color color;
     private final CellarPotionItem bottleItem;
 
-    public FermentBarrelRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItem, FluidStack outputFluidStack, int processingTime, List<CellarPotionEffect> potionEffects, CellarPotionItem bottleItem, Color color) {
+    public FermentBarrelRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItem, FluidStack outputFluidStack, int processingTime, List<CellarPotionEffect> potionEffects, ItemStack bottle, Color color) {
         this.recipeId = recipeId;
         this.inputFluidStack = inputFluidStack;
         this.outputFluidStack = outputFluidStack;
         this.inputItem = inputItem;
         this.processingTime = processingTime;
         this.potionEffects = potionEffects;
-        this.bottleItem = bottleItem;
+        this.bottleItem = (CellarPotionItem) bottle.getItem();
         this.color = color;
     }
 

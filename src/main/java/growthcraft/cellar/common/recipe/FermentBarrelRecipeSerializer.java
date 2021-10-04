@@ -4,7 +4,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import growthcraft.cellar.lib.effect.CellarPotionEffect;
 import growthcraft.lib.util.CraftingUtils;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.network.PacketBuffer;
@@ -38,7 +37,7 @@ public class FermentBarrelRecipeSerializer extends ForgeRegistryEntry<IRecipeSer
         // Outputs
         FluidStack outputFluid = CraftingUtils.getFluidStack(JSONUtils.getJsonObject(json, "result"));
 
-        Item bottleItem = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "bottle"), false).getItem();
+        ItemStack bottle = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "bottle"), false);
 
         List<CellarPotionEffect> effects = new ArrayList<>();
 
@@ -55,7 +54,7 @@ public class FermentBarrelRecipeSerializer extends ForgeRegistryEntry<IRecipeSer
 
         }
 
-        return new FermentBarrelRecipe(recipeId, inputFluid, inputItem, outputFluid, processingTime, effects, bottleItem, color);
+        return new FermentBarrelRecipe(recipeId, inputFluid, inputItem, outputFluid, processingTime, effects, bottle, color);
     }
 
     @Nullable

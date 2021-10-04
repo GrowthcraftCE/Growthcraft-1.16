@@ -15,10 +15,13 @@
   },
   "effects": [
     {
-      "effect": "minecraft:haste",
-      "duration": 400,
+      "effect": "minecraft:regeneration",
+      "duration": 120,
       "amplifier": 1
     }
   ],
+  "bottle": {
+    "item": "growthcraft_cellar:potion_ale"
+  },
   "color": "0xF6D02E"
 }
