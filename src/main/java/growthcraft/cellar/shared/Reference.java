@@ -56,6 +56,7 @@ public class Reference {
         public static final Color STOUT_ALE_FLUID_COLOR = new Color(0x0E0A07);
         public static final Color VIENNA_LAGER_FLUID_COLOR = new Color(0x904730);
         public static final Color WHITE_GRAPE_JUICE_COLOR = new Color(0xB4C91C);
+        public static final Color WHITE_WINE_FLUID_COLOR = new Color(0x96A817);
         public static final Color WORT_FLUID_COLOR = new Color(0xD0AF4E);
 
         private FluidColor() { /* Prevent Public Constructor */ }
@@ -91,6 +92,7 @@ public class Reference {
         public static final String WORT = "wort";
         public static final String RED_WINE = "red_wine";
         public static final String PURPLE_WINE = "purple_wine";
+        public static final String WHITE_WINE = "white_wine";
 
         private FluidName() { /* Prevent Public Constructor */ }
     }

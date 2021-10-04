@@ -298,6 +298,14 @@ public class GrowthcraftCellarItems {
             )
     );
 
+    public static final RegistryObject<BucketItem> bucket_white_wine = ITEMS.register(
+            UnlocalizedName.getFluidNames(WHITE_WINE).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.WHITE_WINE_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+
     private GrowthcraftCellarItems() {
         /* Prevent generation of default public constructor */
     }
