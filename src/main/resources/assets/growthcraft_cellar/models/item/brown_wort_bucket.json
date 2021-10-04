@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "growthcraft_cellar:item/brown_wort_bucket"
+    "layer0": "growthcraft_cellar:item/bucket/wort/brown_wort_bucket"
   }
 }

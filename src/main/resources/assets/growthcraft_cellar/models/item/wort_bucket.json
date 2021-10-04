@@ -1,6 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "growthcraft_cellar:item/wort_bucket"
+    "layer0": "growthcraft_cellar:item/bucket/wort/bucket_overlay_wort",
+    "layer1": "growthcraft_cellar:item/bucket/bucket_base"
   }
 }

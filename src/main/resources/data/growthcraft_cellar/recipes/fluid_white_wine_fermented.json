@@ -1,0 +1,27 @@
+{
+  "type": "growthcraft_cellar:ferment_barrel_recipe",
+  "processing_time": 260,
+  "ingredient_item": {
+    "item": "growthcraft_cellar:yeast_bayanus",
+    "count": 1
+  },
+  "ingredient_fluid": {
+    "fluid": "growthcraft_cellar:white_grape_juice_fluid",
+    "amount": 1000
+  },
+  "result": {
+    "fluid": "growthcraft_cellar:white_wine_fluid",
+    "amount": 1000
+  },
+  "effects": [
+    {
+      "effect": "minecraft:saturation",
+      "duration": 1200,
+      "amplifier": 1
+    }
+  ],
+  "bottle": {
+    "item": "growthcraft_cellar:potion_wine"
+  },
+  "color": "0x805C2F"
+}

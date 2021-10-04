@@ -16,9 +16,12 @@
   "effects": [
     {
       "effect": "minecraft:haste",
-      "duration": 400,
-      "amplifier": 0
+      "duration": 600,
+      "amplifier": 1
     }
   ],
+  "bottle": {
+    "item": "growthcraft_cellar:potion_ale"
+  },
   "color": "0xFBF855"
 }

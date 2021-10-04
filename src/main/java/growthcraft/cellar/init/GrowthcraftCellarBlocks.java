@@ -1,10 +1,7 @@
 package growthcraft.cellar.init;
 
 import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.common.block.BrewKettleBlock;
-import growthcraft.cellar.common.block.CultureJarBlock;
-import growthcraft.cellar.common.block.FermentationBarrelBlock;
-import growthcraft.cellar.common.block.RoasterBlock;
+import growthcraft.cellar.common.block.*;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import net.minecraft.block.Block;
@@ -20,22 +17,26 @@ import java.util.ArrayList;
 
 public class GrowthcraftCellarBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Reference.MODID);
-
-    public static final RegistryObject<BrewKettleBlock> brew_kettle = BLOCKS.register(
-            UnlocalizedName.BREW_KETTLE,
-            BrewKettleBlock::new
+    public static final RegistryObject<FruitPressBlock> FRUIT_PRESS = BLOCKS.register(
+            UnlocalizedName.FRUIT_PRESS,
+            FruitPressBlock::new
     );
-
-    public static final RegistryObject<CultureJarBlock> culture_jar = BLOCKS.register(
-            UnlocalizedName.CULTURE_JAR,
-            CultureJarBlock::new
+    public static final RegistryObject<FruitPressPistonBlock> FRUIT_PRESS_PISTON = BLOCKS.register(
+            UnlocalizedName.FRUIT_PRESS_PISTON,
+            FruitPressPistonBlock::new
     );
-
     public static final RegistryObject<FermentationBarrelBlock> barrel_ferment_oak = BLOCKS.register(
             UnlocalizedName.FERMENT_BARREL_OAK,
             FermentationBarrelBlock::new
     );
-
+    public static final RegistryObject<BrewKettleBlock> brew_kettle = BLOCKS.register(
+            UnlocalizedName.BREW_KETTLE,
+            BrewKettleBlock::new
+    );
+    public static final RegistryObject<CultureJarBlock> culture_jar = BLOCKS.register(
+            UnlocalizedName.CULTURE_JAR,
+            CultureJarBlock::new
+    );
     public static final RegistryObject<RoasterBlock> roaster = BLOCKS.register(
             UnlocalizedName.ROASTER,
             RoasterBlock::new
@@ -59,6 +60,7 @@ public class GrowthcraftCellarBlocks {
 
     private static boolean excludeBlockItemRegistry(ResourceLocation registryName) {
         ArrayList<String> excludeBlocks = new ArrayList<>();
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.FRUIT_PRESS_PISTON);
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.WORT).get(GrowthcraftCellarFluids.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.AMBER_ALE).get(GrowthcraftCellarFluids.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.AMBER_LAGER).get(GrowthcraftCellarFluids.BLOCK));
@@ -82,6 +84,13 @@ public class GrowthcraftCellarBlocks {
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.DEEP_COPPER_WORT).get(GrowthcraftCellarFluids.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.BROWN_WORT).get(GrowthcraftCellarFluids.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.DARK_WORT).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.RED_GRAPE_JUICE).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.WHITE_GRAPE_JUICE).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.PURPLE_GRAPE_JUICE).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.HOPPED_GOLDEN_WORT).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.RED_WINE).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.PURPLE_WINE).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.WHITE_WINE).get(GrowthcraftCellarFluids.BLOCK));
 
         return excludeBlocks.contains(registryName.toString());
     }

@@ -6,7 +6,7 @@
     "count": 1
   },
   "ingredient_fluid": {
-    "fluid": "growthcraft_cellar:stout_wort_fluid",
+    "fluid": "growthcraft_cellar:dark_wort_fluid",
     "amount": 1000
   },
   "result": {
@@ -15,10 +15,13 @@
   },
   "effects": [
     {
-      "effect": "minecraft:haste",
-      "duration": 400,
-      "amplifier": 1
+      "effect": "minecraft:regeneration",
+      "duration": 6000,
+      "amplifier": 3
     }
   ],
+  "bottle": {
+    "item": "growthcraft_cellar:potion_ale"
+  },
   "color": "0x0E0A07"
 }

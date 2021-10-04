@@ -1,0 +1,16 @@
+{
+  "type": "growthcraft_cellar:fruit_press_recipe",
+  "processing_time": 260,
+  "input_item": {
+    "item": "growthcraft_cellar:grape_purple",
+    "count": 1
+  },
+  "output_fluid": {
+    "fluid": "growthcraft_cellar:purple_grape_juice_fluid",
+    "amount": 250
+  },
+  "by_product": {
+    "item": "minecraft:bone_meal",
+    "count": 1
+  }
+}

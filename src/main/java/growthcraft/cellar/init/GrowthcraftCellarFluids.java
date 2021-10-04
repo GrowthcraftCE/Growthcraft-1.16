@@ -2,6 +2,9 @@ package growthcraft.cellar.init;
 
 import growthcraft.cellar.common.fluid.WortFluid;
 import growthcraft.cellar.common.fluid.fermented.*;
+import growthcraft.cellar.common.fluid.juice.PurpleGrapeJuiceFluid;
+import growthcraft.cellar.common.fluid.juice.RedGrapeJuiceFluid;
+import growthcraft.cellar.common.fluid.juice.WhiteGrapeJuiceFluid;
 import growthcraft.cellar.common.fluid.wort.*;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
@@ -231,4 +234,64 @@ public class GrowthcraftCellarFluids {
 			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.DARK_WORT).get(BLOCK),
 					() -> new FlowingFluidBlock(DARK_WORT_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
 
+	// Fluid: Red Grape Juice
+	public static final RegistryObject<RedGrapeJuiceFluid.Source> RED_GRAPE_JUICE_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.RED_GRAPE_JUICE).get(STILL), RedGrapeJuiceFluid.Source::new);
+	public static final RegistryObject<RedGrapeJuiceFluid.Flowing> RED_GRAPE_JUICE_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.RED_GRAPE_JUICE).get(FLOWING), RedGrapeJuiceFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> RED_GRAPE_JUICE_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.RED_GRAPE_JUICE).get(BLOCK),
+					() -> new FlowingFluidBlock(RED_GRAPE_JUICE_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	// Fluid: White Grape Juice
+	public static final RegistryObject<WhiteGrapeJuiceFluid.Source> WHITE_GRAPE_JUICE_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.WHITE_GRAPE_JUICE).get(STILL), WhiteGrapeJuiceFluid.Source::new);
+	public static final RegistryObject<WhiteGrapeJuiceFluid.Flowing> WHITE_GRAPE_JUICE_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.WHITE_GRAPE_JUICE).get(FLOWING), WhiteGrapeJuiceFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> WHITE_GRAPE_JUICE_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.WHITE_GRAPE_JUICE).get(BLOCK),
+					() -> new FlowingFluidBlock(WHITE_GRAPE_JUICE_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	// Fluid: Purple Grape Juice
+	public static final RegistryObject<PurpleGrapeJuiceFluid.Source> PURPLE_GRAPE_JUICE_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.PURPLE_GRAPE_JUICE).get(STILL), PurpleGrapeJuiceFluid.Source::new);
+	public static final RegistryObject<PurpleGrapeJuiceFluid.Flowing> PURPLE_GRAPE_JUICE_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.PURPLE_GRAPE_JUICE).get(FLOWING), PurpleGrapeJuiceFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> PURPLE_GRAPE_JUICE_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.PURPLE_GRAPE_JUICE).get(BLOCK),
+					() -> new FlowingFluidBlock(PURPLE_GRAPE_JUICE_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	// Fluid: Hopped Golden Wort
+	public static final RegistryObject<HoppedGoldenWortFluid.Source> HOPPED_GOLDEN_WORT_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.HOPPED_GOLDEN_WORT).get(STILL), HoppedGoldenWortFluid.Source::new);
+	public static final RegistryObject<HoppedGoldenWortFluid.Flowing> HOPPED_GOLDEN_WORT_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.HOPPED_GOLDEN_WORT).get(FLOWING), HoppedGoldenWortFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> HOPPED_GOLDEN_WORT_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.HOPPED_GOLDEN_WORT).get(BLOCK),
+					() -> new FlowingFluidBlock(HOPPED_GOLDEN_WORT_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	// Fluid: Red Wine
+	public static final RegistryObject<RedWineFluid.Source> RED_WINE_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.RED_WINE).get(STILL), RedWineFluid.Source::new);
+	public static final RegistryObject<RedWineFluid.Flowing> RED_WINE_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.RED_WINE).get(FLOWING), RedWineFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> RED_WINE_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.RED_WINE).get(BLOCK),
+					() -> new FlowingFluidBlock(RED_WINE_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	public static final RegistryObject<PurpleWineFluid.Source> PURPLE_WINE_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.PURPLE_WINE).get(STILL), PurpleWineFluid.Source::new);
+	public static final RegistryObject<PurpleWineFluid.Flowing> PURPLE_WINE_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.PURPLE_WINE).get(FLOWING), PurpleWineFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> PURPLE_WINE_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.PURPLE_WINE).get(BLOCK),
+					() -> new FlowingFluidBlock(PURPLE_WINE_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+	public static final RegistryObject<WhiteWineFluid.Source> WHITE_WINE_FLUID_STILL = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.WHITE_WINE).get(STILL), WhiteWineFluid.Source::new);
+	public static final RegistryObject<WhiteWineFluid.Flowing> WHITE_WINE_FLUID_FLOWING = FLUIDS.register(
+			UnlocalizedName.getFluidNames(FluidName.WHITE_WINE).get(FLOWING), WhiteWineFluid.Flowing::new);
+	public static final RegistryObject<FlowingFluidBlock> WHITE_WINE_FLUID_BLOCK =
+			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.WHITE_WINE).get(BLOCK),
+					() -> new FlowingFluidBlock(WHITE_WINE_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
 }

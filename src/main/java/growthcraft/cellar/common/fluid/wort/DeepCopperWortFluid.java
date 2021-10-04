@@ -41,6 +41,10 @@ public abstract class DeepCopperWortFluid extends ForgeFlowingFluid {
         super(properties);
     }
 
+    public static Color getColor() {
+        return color;
+    }
+
     @Override
     public Fluid getFlowingFluid() {
         return registry_fluid_flowing.get();

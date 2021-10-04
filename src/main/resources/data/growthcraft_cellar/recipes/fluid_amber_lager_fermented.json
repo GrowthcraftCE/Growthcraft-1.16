@@ -15,10 +15,13 @@
   },
   "effects": [
     {
-      "effect": "minecraft:haste",
-      "duration": 400,
-      "amplifier": 1
+      "effect": "minecraft:speed",
+      "duration": 3600,
+      "amplifier": 2
     }
   ],
+  "bottle": {
+    "item": "growthcraft_cellar:potion_lager"
+  },
   "color": "0xE5C7A2"
 }
