@@ -1,4 +1,4 @@
-package growthcraft.cellar.common.fluid.juice;
+package growthcraft.cellar.common.fluid.fermented;
 
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
@@ -15,16 +15,16 @@ import net.minecraftforge.fml.RegistryObject;
 
 import java.awt.*;
 
-import static growthcraft.cellar.shared.Reference.FluidColor.RED_GRAPE_JUICE_COLOR;
+import static growthcraft.cellar.shared.Reference.FluidColor.RED_WINE_FLUID_COLOR;
 import static growthcraft.cellar.shared.Reference.FluidResource.*;
 
-public abstract class RedGrapeJuiceFluid extends ForgeFlowingFluid {
+public abstract class RedWineFluid extends ForgeFlowingFluid {
 
-    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.RED_GRAPE_JUICE_FLUID_BLOCK;
-    private static final Color color = RED_GRAPE_JUICE_COLOR;
-    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_red_grape_juice;
-    private static final RegistryObject<RedGrapeJuiceFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.RED_GRAPE_JUICE_FLUID_FLOWING;
-    private static final RegistryObject<RedGrapeJuiceFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.RED_GRAPE_JUICE_FLUID_STILL;
+    private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.RED_WINE_FLUID_BLOCK;
+    private static final Color color = RED_WINE_FLUID_COLOR;
+    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_red_wine;
+    private static final RegistryObject<RedWineFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.RED_WINE_FLUID_FLOWING;
+    private static final RegistryObject<RedWineFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.RED_WINE_FLUID_STILL;
 
     public static final Properties FLUID_PROPERTIES = new Properties(
             registry_fluid_still,
@@ -37,7 +37,7 @@ public abstract class RedGrapeJuiceFluid extends ForgeFlowingFluid {
             .block(block)
             .bucket(registry_bucket);
 
-    protected RedGrapeJuiceFluid(Properties properties) {
+    protected RedWineFluid(Properties properties) {
         super(properties);
     }
 
@@ -60,7 +60,7 @@ public abstract class RedGrapeJuiceFluid extends ForgeFlowingFluid {
         return registry_bucket.get();
     }
 
-    public static class Flowing extends RedGrapeJuiceFluid {
+    public static class Flowing extends RedWineFluid {
 
         public Flowing() {
             super(FLUID_PROPERTIES);
@@ -81,7 +81,7 @@ public abstract class RedGrapeJuiceFluid extends ForgeFlowingFluid {
         }
     }
 
-    public static class Source extends RedGrapeJuiceFluid {
+    public static class Source extends RedWineFluid {
 
         public Source() {
             super(FLUID_PROPERTIES);
@@ -95,4 +95,5 @@ public abstract class RedGrapeJuiceFluid extends ForgeFlowingFluid {
             return true;
         }
     }
+
 }

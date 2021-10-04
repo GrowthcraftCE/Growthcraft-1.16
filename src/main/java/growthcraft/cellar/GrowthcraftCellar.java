@@ -9,7 +9,6 @@ import growthcraft.cellar.init.client.GrowthcraftCellarScreenManager;
 import growthcraft.cellar.init.client.GrowthcraftCellarTileEntityRenders;
 import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.Reference;
-import growthcraft.lib.common.item.GrowthcraftBucketItem;
 import growthcraft.lib.proxy.IProxy;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -105,18 +104,6 @@ public class GrowthcraftCellar {
                 (itemStack, i) -> GrowthcraftCellarItems.ALE_POTION.get().getColor(),
                 GrowthcraftCellarItems.ALE_POTION.get()
         );
-
-        List<GrowthcraftBucketItem> bucketItems = new ArrayList<>();
-        bucketItems.add(GrowthcraftCellarItems.bucket_purple_grape_juice.get());
-        bucketItems.add(GrowthcraftCellarItems.bucket_red_grape_juice.get());
-        bucketItems.add(GrowthcraftCellarItems.bucket_white_grape_juice.get());
-
-        for (GrowthcraftBucketItem item : bucketItems) {
-            event.getItemColors().register(
-                    (itemStack, i) -> item.getColor(),
-                    item
-            );
-        }
 
     }
 }

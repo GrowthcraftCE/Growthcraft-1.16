@@ -88,6 +88,7 @@ public class GrowthcraftCellarBlocks {
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.WHITE_GRAPE_JUICE).get(GrowthcraftCellarFluids.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.PURPLE_GRAPE_JUICE).get(GrowthcraftCellarFluids.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.HOPPED_GOLDEN_WORT).get(GrowthcraftCellarFluids.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.getFluidNames(Reference.FluidName.RED_WINE).get(GrowthcraftCellarFluids.BLOCK));
 
         return excludeBlocks.contains(registryName.toString());
     }

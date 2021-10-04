@@ -2,10 +2,10 @@ package growthcraft.cellar.common.fluid.juice;
 
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
-import growthcraft.lib.common.item.GrowthcraftBucketItem;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.SoundEvents;
@@ -22,7 +22,7 @@ public abstract class PurpleGrapeJuiceFluid extends ForgeFlowingFluid {
 
     private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.PURPLE_GRAPE_JUICE_FLUID_BLOCK;
     private static final Color color = PURPLE_GRAPE_JUICE_COLOR;
-    private static final RegistryObject<GrowthcraftBucketItem> registry_bucket = GrowthcraftCellarItems.bucket_purple_grape_juice;
+    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_purple_grape_juice;
     private static final RegistryObject<PurpleGrapeJuiceFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.PURPLE_GRAPE_JUICE_FLUID_FLOWING;
     private static final RegistryObject<PurpleGrapeJuiceFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.PURPLE_GRAPE_JUICE_FLUID_STILL;
 

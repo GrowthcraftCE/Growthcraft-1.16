@@ -40,7 +40,6 @@ public class UnlocalizedName {
     public static final String YEAST_LAGER = "yeast_lager";
     public static final String YEAST_LAGER_ETHEREAL = "yeast_lager_ethereal";
     public static final String LOOT_SERIALIZER_BLOCK = "global_block_loot_modifier";
-    public static final String POTION_PALE_ALE = "potion_pale_ale";
 
     public static final String ROASTER = "roaster";
     public static final String ROASTER_RECIPE = "roaster_recipe";

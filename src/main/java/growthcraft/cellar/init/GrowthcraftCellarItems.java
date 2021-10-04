@@ -21,220 +21,73 @@ import static growthcraft.cellar.shared.Reference.FluidName.*;
 
 public class GrowthcraftCellarItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MODID);
-
+    // TODO: Ale Potions
+    public static final RegistryObject<CellarPotionItem> ALE_POTION = ITEMS.register(
+            UnlocalizedName.ALE_POTION,
+            CellarPotionItem::new
+    );
+    // Foods
+    public static final RegistryObject<GrowthcraftFoodItem> GRAPE_PURPLE = ITEMS.register(
+            UnlocalizedName.GRAPE_PURPLE, GrowthcraftFoodItem::new
+    );
+    public static final RegistryObject<GrowthcraftFoodItem> GRAPE_RED = ITEMS.register(
+            UnlocalizedName.GRAPE_RED, GrowthcraftFoodItem::new
+    );
+    public static final RegistryObject<GrowthcraftFoodItem> GRAPE_WHITE = ITEMS.register(
+            UnlocalizedName.GRAPE_WHITE, GrowthcraftFoodItem::new
+    );
+    public static final RegistryObject<CellarPotionItem> LAGER_POTION = ITEMS.register(
+            UnlocalizedName.LAGER_POTION,
+            CellarPotionItem::new
+    );
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(
             ForgeRegistries.POTION_TYPES, growthcraft.core.shared.Reference.MODID
     );
-
-    private static final String BUCKET = "bucket";
-
+    public static final RegistryObject<CellarPotionItem> WINE_POTION = ITEMS.register(
+            UnlocalizedName.WINE_POTION,
+            CellarPotionItem::new
+    );
     public static final RegistryObject<GrowthcraftItem> brew_kettle_lid = ITEMS.register(
             UnlocalizedName.BREW_KETTLE_LID,
             () -> new GrowthcraftItem(1)
     );
-
-    /**
-     * Generic wort fluid for testing.
-     */
-    public static final RegistryObject<BucketItem> bucket_wort = ITEMS.register(
-            UnlocalizedName.getFluidNames(WORT).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.WORT_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
+    public static final RegistryObject<GrowthcraftItem> grain = ITEMS.register(
+            UnlocalizedName.GRAIN, () -> new GrainItem(new Color(0xA4DBE8).getRGB())
     );
-
-    /**
-     * Ale Fluids
-     */
-    public static final RegistryObject<BucketItem> bucket_pale_golden_wort = ITEMS.register(
-            UnlocalizedName.getFluidNames(PALE_GOLDEN_WORT).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.PALE_GOLDEN_WORT_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
+    public static final RegistryObject<GrainItem> grain_amber = ITEMS.register(
+            UnlocalizedName.GRAIN_AMBER, () -> new GrainItem(Reference.FluidColor.AMBER_WORT_FLUID_COLOR.getRGB())
     );
-
-    public static final RegistryObject<BucketItem> bucket_golden_wort = ITEMS.register(
-            UnlocalizedName.getFluidNames(GOLDEN_WORT).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.GOLDEN_WORT_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
+    public static final RegistryObject<GrainItem> grain_brown = ITEMS.register(
+            UnlocalizedName.GRAIN_BROWN, () -> new GrainItem(Reference.FluidColor.BROWN_WORT_FLUID_COLOR.getRGB())
     );
-
-    public static final RegistryObject<BucketItem> bucket_hopped_golden_wort = ITEMS.register(
-            UnlocalizedName.getFluidNames(HOPPED_GOLDEN_WORT).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.HOPPED_GOLDEN_WORT_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
+    public static final RegistryObject<GrainItem> grain_copper = ITEMS.register(
+            UnlocalizedName.GRAIN_COPPER, () -> new GrainItem(Reference.FluidColor.COPPER_WORT_FLUID_COLOR.getRGB())
     );
-
-    public static final RegistryObject<BucketItem> bucket_amber_wort = ITEMS.register(
-            UnlocalizedName.getFluidNames(AMBER_WORT).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.AMBER_WORT_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
+    public static final RegistryObject<GrainItem> grain_dark = ITEMS.register(
+            UnlocalizedName.GRAIN_DARK, () -> new GrainItem(Reference.FluidColor.DARK_WORT_FLUID_COLOR.getRGB())
     );
-
-    public static final RegistryObject<BucketItem> bucket_deep_amber_wort = ITEMS.register(
-            UnlocalizedName.getFluidNames(DEEP_AMBER_WORT).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.DEEP_AMBER_WORT_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
+    public static final RegistryObject<GrainItem> grain_deep_amber = ITEMS.register(
+            UnlocalizedName.GRAIN_DEEP_AMBER, () -> new GrainItem(Reference.FluidColor.DEEP_AMBER_WORT_FLUID_COLOR.getRGB())
     );
-
-    public static final RegistryObject<BucketItem> bucket_copper_wort = ITEMS.register(
-            UnlocalizedName.getFluidNames(COPPER_WORT).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.COPPER_WORT_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
+    public static final RegistryObject<GrainItem> grain_deep_copper = ITEMS.register(
+            UnlocalizedName.GRAIN_DEEP_COPPER, () -> new GrainItem(Reference.FluidColor.DEEP_COPPER_WORT_FLUID_COLOR.getRGB())
     );
-
-    public static final RegistryObject<BucketItem> bucket_deep_copper_wort = ITEMS.register(
-            UnlocalizedName.getFluidNames(DEEP_COPPER_WORT).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.DEEP_COPPER_WORT_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
+    public static final RegistryObject<GrainItem> grain_golden = ITEMS.register(
+            UnlocalizedName.GRAIN_GOLDEN, () -> new GrainItem(Reference.FluidColor.GOLDEN_WORT_FLUID_COLOR.getRGB())
     );
-
-    public static final RegistryObject<BucketItem> bucket_brown_wort = ITEMS.register(
-            UnlocalizedName.getFluidNames(BROWN_WORT).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.BROWN_WORT_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
+    public static final RegistryObject<GrainItem> grain_pale_golden = ITEMS.register(
+            UnlocalizedName.GRAIN_PALE_GOLDEN, () -> new GrainItem(Reference.FluidColor.PALE_GOLDEN_WORT_FLUID_COLOR.getRGB())
     );
-
-    public static final RegistryObject<BucketItem> bucket_dark_wort = ITEMS.register(
-            UnlocalizedName.getFluidNames(DARK_WORT).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.DARK_WORT_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
+    public static final RegistryObject<GrowthcraftItem> hops = ITEMS.register(
+            UnlocalizedName.HOPS, GrowthcraftItem::new
     );
-
-    //region Fermented Ale Buckets
-    public static final RegistryObject<BucketItem> bucket_pale_ale = ITEMS.register(
-            UnlocalizedName.getFluidNames(PALE_ALE).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.PALE_ALE_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
-    );
-
-    public static final RegistryObject<BucketItem> bucket_ipa_ale = ITEMS.register(
-            UnlocalizedName.getFluidNames(IPA_ALE).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.IPA_ALE_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
-    );
-
-    public static final RegistryObject<BucketItem> bucket_amber_ale = ITEMS.register(
-            UnlocalizedName.getFluidNames(AMBER_ALE).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.AMBER_ALE_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
-    );
-
-    public static final RegistryObject<BucketItem> bucket_copper_ale = ITEMS.register(
-            UnlocalizedName.getFluidNames(COPPER_ALE).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.COPPER_ALE_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
-    );
-
-    public static final RegistryObject<BucketItem> bucket_old_port_ale = ITEMS.register(
-            UnlocalizedName.getFluidNames(OLD_PORT_ALE).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.OLD_PORT_ALE_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
-    );
-
-    public static final RegistryObject<BucketItem> bucket_brown_ale = ITEMS.register(
-            UnlocalizedName.getFluidNames(BROWN_ALE).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.BROWN_ALE_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
-    );
-
-    public static final RegistryObject<BucketItem> bucket_stout_ale = ITEMS.register(
-            UnlocalizedName.getFluidNames(STOUT_ALE).get(BUCKET),
-            () -> new BucketItem(
-                    GrowthcraftCellarFluids.STOUT_ALE_FLUID_STILL,
-                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
-            )
-    );
-    //endregion
-
-    //region Fermented Lager Buckets
-    public static final RegistryObject<BucketItem> bucket_pale_lager = ITEMS.register(
-            UnlocalizedName.getFluidNames(PALE_LAGER).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PALE_LAGER_FLUID_STILL, Reference.FluidColor.PALE_LAGER_FLUID_COLOR)
-    );
-
-    public static final RegistryObject<BucketItem> bucket_pilsner_lager = ITEMS.register(
-            UnlocalizedName.getFluidNames(PILSNER_LAGER).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PILSNER_LAGER_FLUID_STILL, Reference.FluidColor.PILSNER_LAGER_FLUID_COLOR)
-    );
-
-    public static final RegistryObject<BucketItem> bucket_amber_lager = ITEMS.register(
-            UnlocalizedName.getFluidNames(AMBER_LAGER).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.AMBER_LAGER_FLUID_STILL, Reference.FluidColor.AMBER_LAGER_FLUID_COLOR)
-    );
-
-    public static final RegistryObject<BucketItem> bucket_vienna_lager = ITEMS.register(
-            UnlocalizedName.getFluidNames(VIENNA_LAGER).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.VIENNA_LAGER_FLUID_STILL, Reference.FluidColor.VIENNA_LAGER_FLUID_COLOR)
-    );
-
-    public static final RegistryObject<BucketItem> bucket_copper_lager = ITEMS.register(
-            UnlocalizedName.getFluidNames(COPPER_LAGER).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.COPPER_LAGER_FLUID_STILL, Reference.FluidColor.COPPER_LAGER_FLUID_COLOR)
-    );
-
-    public static final RegistryObject<BucketItem> bucket_brown_lager = ITEMS.register(
-            UnlocalizedName.getFluidNames(BROWN_LAGER).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.BROWN_LAGER_FLUID_STILL, Reference.FluidColor.BROWN_LAGER_FLUID_COLOR)
-    );
-
-    public static final RegistryObject<BucketItem> bucket_dark_lager = ITEMS.register(
-            UnlocalizedName.getFluidNames(DARK_LAGER).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.DARK_LAGER_FLUID_STILL, Reference.FluidColor.DARK_LAGER_FLUID_COLOR)
-    );
-    //endregion
-
-    public static final RegistryObject<GrowthcraftBucketItem> bucket_red_grape_juice = ITEMS.register(
-            UnlocalizedName.getFluidNames(RED_GRAPE_JUICE).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.RED_GRAPE_JUICE_FLUID_STILL, Reference.FluidColor.RED_GRAPE_JUICE_COLOR)
-    );
-
-    public static final RegistryObject<GrowthcraftBucketItem> bucket_white_grape_juice = ITEMS.register(
-            UnlocalizedName.getFluidNames(WHITE_GRAPE_JUICE).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.WHITE_GRAPE_JUICE_FLUID_STILL, Reference.FluidColor.WHITE_GRAPE_JUICE_COLOR)
-    );
-
-    public static final RegistryObject<GrowthcraftBucketItem> bucket_purple_grape_juice = ITEMS.register(
-            UnlocalizedName.getFluidNames(PURPLE_GRAPE_JUICE).get(BUCKET),
-            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PURPLE_GRAPE_JUICE_FLUID_STILL, Reference.FluidColor.PURPLE_GRAPE_JUICE_COLOR)
-    );
-
     public static final RegistryObject<GrowthcraftItem> yeast_bayanus = ITEMS.register(
             UnlocalizedName.YEAST_BAYANUS, GrowthcraftItem::new
     );
     public static final RegistryObject<GrowthcraftEnchantedItem> yeast_bayanus_ethereal = ITEMS.register(
             UnlocalizedName.YEAST_BAYANUS_ETHEREAL, GrowthcraftEnchantedItem::new
     );
+    //endregion
     public static final RegistryObject<GrowthcraftItem> yeast_brewers = ITEMS.register(
             UnlocalizedName.YEAST_BREWERS, GrowthcraftItem::new
     );
@@ -250,65 +103,191 @@ public class GrowthcraftCellarItems {
     public static final RegistryObject<GrowthcraftEnchantedItem> yeast_lager_ethereal = ITEMS.register(
             UnlocalizedName.YEAST_LAGER_ETHEREAL, GrowthcraftEnchantedItem::new
     );
+    private static final String BUCKET = "bucket";
+    /**
+     * Generic wort fluid for testing.
+     */
+    public static final RegistryObject<BucketItem> bucket_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(WORT).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.WORT_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    //endregion
+    /**
+     * Ale Fluids
+     */
+    public static final RegistryObject<BucketItem> bucket_pale_golden_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(PALE_GOLDEN_WORT).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.PALE_GOLDEN_WORT_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_golden_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(GOLDEN_WORT).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.GOLDEN_WORT_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_hopped_golden_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(HOPPED_GOLDEN_WORT).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.HOPPED_GOLDEN_WORT_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_amber_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(AMBER_WORT).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.AMBER_WORT_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_deep_amber_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(DEEP_AMBER_WORT).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.DEEP_AMBER_WORT_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_copper_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(COPPER_WORT).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.COPPER_WORT_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_deep_copper_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(DEEP_COPPER_WORT).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.DEEP_COPPER_WORT_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_brown_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(BROWN_WORT).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.BROWN_WORT_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_dark_wort = ITEMS.register(
+            UnlocalizedName.getFluidNames(DARK_WORT).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.DARK_WORT_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    //region Fermented Ale Buckets
+    public static final RegistryObject<BucketItem> bucket_pale_ale = ITEMS.register(
+            UnlocalizedName.getFluidNames(PALE_ALE).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.PALE_ALE_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_ipa_ale = ITEMS.register(
+            UnlocalizedName.getFluidNames(IPA_ALE).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.IPA_ALE_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_amber_ale = ITEMS.register(
+            UnlocalizedName.getFluidNames(AMBER_ALE).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.AMBER_ALE_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_copper_ale = ITEMS.register(
+            UnlocalizedName.getFluidNames(COPPER_ALE).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.COPPER_ALE_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_old_port_ale = ITEMS.register(
+            UnlocalizedName.getFluidNames(OLD_PORT_ALE).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.OLD_PORT_ALE_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_brown_ale = ITEMS.register(
+            UnlocalizedName.getFluidNames(BROWN_ALE).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.BROWN_ALE_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_stout_ale = ITEMS.register(
+            UnlocalizedName.getFluidNames(STOUT_ALE).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.STOUT_ALE_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    //region Fermented Lager Buckets
+    public static final RegistryObject<BucketItem> bucket_pale_lager = ITEMS.register(
+            UnlocalizedName.getFluidNames(PALE_LAGER).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PALE_LAGER_FLUID_STILL, Reference.FluidColor.PALE_LAGER_FLUID_COLOR)
+    );
+    public static final RegistryObject<BucketItem> bucket_pilsner_lager = ITEMS.register(
+            UnlocalizedName.getFluidNames(PILSNER_LAGER).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PILSNER_LAGER_FLUID_STILL, Reference.FluidColor.PILSNER_LAGER_FLUID_COLOR)
+    );
+    public static final RegistryObject<BucketItem> bucket_amber_lager = ITEMS.register(
+            UnlocalizedName.getFluidNames(AMBER_LAGER).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.AMBER_LAGER_FLUID_STILL, Reference.FluidColor.AMBER_LAGER_FLUID_COLOR)
+    );
+    public static final RegistryObject<BucketItem> bucket_vienna_lager = ITEMS.register(
+            UnlocalizedName.getFluidNames(VIENNA_LAGER).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.VIENNA_LAGER_FLUID_STILL, Reference.FluidColor.VIENNA_LAGER_FLUID_COLOR)
+    );
+    public static final RegistryObject<BucketItem> bucket_copper_lager = ITEMS.register(
+            UnlocalizedName.getFluidNames(COPPER_LAGER).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.COPPER_LAGER_FLUID_STILL, Reference.FluidColor.COPPER_LAGER_FLUID_COLOR)
+    );
+    public static final RegistryObject<BucketItem> bucket_brown_lager = ITEMS.register(
+            UnlocalizedName.getFluidNames(BROWN_LAGER).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.BROWN_LAGER_FLUID_STILL, Reference.FluidColor.BROWN_LAGER_FLUID_COLOR)
+    );
+    public static final RegistryObject<BucketItem> bucket_dark_lager = ITEMS.register(
+            UnlocalizedName.getFluidNames(DARK_LAGER).get(BUCKET),
+            () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.DARK_LAGER_FLUID_STILL, Reference.FluidColor.DARK_LAGER_FLUID_COLOR)
+    );
+    public static final RegistryObject<BucketItem> bucket_red_grape_juice = ITEMS.register(
+            UnlocalizedName.getFluidNames(RED_GRAPE_JUICE).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.RED_GRAPE_JUICE_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_white_grape_juice = ITEMS.register(
+            UnlocalizedName.getFluidNames(WHITE_GRAPE_JUICE).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.WHITE_GRAPE_JUICE_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
+    public static final RegistryObject<BucketItem> bucket_purple_grape_juice = ITEMS.register(
+            UnlocalizedName.getFluidNames(PURPLE_GRAPE_JUICE).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.PURPLE_GRAPE_JUICE_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
+    );
 
-    public static final RegistryObject<GrowthcraftItem> grain = ITEMS.register(
-            UnlocalizedName.GRAIN, () -> new GrainItem(new Color(0xA4DBE8).getRGB())
-    );
-    public static final RegistryObject<GrainItem> grain_pale_golden = ITEMS.register(
-            UnlocalizedName.GRAIN_PALE_GOLDEN, () -> new GrainItem(Reference.FluidColor.PALE_GOLDEN_WORT_FLUID_COLOR.getRGB())
-    );
-    public static final RegistryObject<GrainItem> grain_golden = ITEMS.register(
-            UnlocalizedName.GRAIN_GOLDEN, () -> new GrainItem(Reference.FluidColor.GOLDEN_WORT_FLUID_COLOR.getRGB())
-    );
-    public static final RegistryObject<GrainItem> grain_amber = ITEMS.register(
-            UnlocalizedName.GRAIN_AMBER, () -> new GrainItem(Reference.FluidColor.AMBER_WORT_FLUID_COLOR.getRGB())
-    );
-    public static final RegistryObject<GrainItem> grain_deep_amber = ITEMS.register(
-            UnlocalizedName.GRAIN_DEEP_AMBER, () -> new GrainItem(Reference.FluidColor.DEEP_AMBER_WORT_FLUID_COLOR.getRGB())
-    );
-    public static final RegistryObject<GrainItem> grain_copper = ITEMS.register(
-            UnlocalizedName.GRAIN_COPPER, () -> new GrainItem(Reference.FluidColor.COPPER_WORT_FLUID_COLOR.getRGB())
-    );
-    public static final RegistryObject<GrainItem> grain_deep_copper = ITEMS.register(
-            UnlocalizedName.GRAIN_DEEP_COPPER, () -> new GrainItem(Reference.FluidColor.DEEP_COPPER_WORT_FLUID_COLOR.getRGB())
-    );
-    public static final RegistryObject<GrainItem> grain_brown = ITEMS.register(
-            UnlocalizedName.GRAIN_BROWN, () -> new GrainItem(Reference.FluidColor.BROWN_WORT_FLUID_COLOR.getRGB())
-    );
-    public static final RegistryObject<GrainItem> grain_dark = ITEMS.register(
-            UnlocalizedName.GRAIN_DARK, () -> new GrainItem(Reference.FluidColor.DARK_WORT_FLUID_COLOR.getRGB())
-    );
-    public static final RegistryObject<GrowthcraftItem> hops = ITEMS.register(
-            UnlocalizedName.HOPS, GrowthcraftItem::new
-    );
-
-    // TODO: Ale Potions
-    public static final RegistryObject<CellarPotionItem> ALE_POTION = ITEMS.register(
-            UnlocalizedName.ALE_POTION,
-            CellarPotionItem::new
-    );
-    public static final RegistryObject<CellarPotionItem> LAGER_POTION = ITEMS.register(
-            UnlocalizedName.LAGER_POTION,
-            CellarPotionItem::new
-    );
-    public static final RegistryObject<CellarPotionItem> WINE_POTION = ITEMS.register(
-            UnlocalizedName.WINE_POTION,
-            CellarPotionItem::new
-    );
-
-    // TODO: Lager Potions
-
-    // TODO: Wine Potions
-
-    // Foods
-    public static final RegistryObject<GrowthcraftFoodItem> GRAPE_PURPLE = ITEMS.register(
-            UnlocalizedName.GRAPE_PURPLE, GrowthcraftFoodItem::new
-    );
-    public static final RegistryObject<GrowthcraftFoodItem> GRAPE_RED = ITEMS.register(
-            UnlocalizedName.GRAPE_RED, GrowthcraftFoodItem::new
-    );
-    public static final RegistryObject<GrowthcraftFoodItem> GRAPE_WHITE = ITEMS.register(
-            UnlocalizedName.GRAPE_WHITE, GrowthcraftFoodItem::new
+    public static final RegistryObject<BucketItem> bucket_red_wine = ITEMS.register(
+            UnlocalizedName.getFluidNames(RED_WINE).get(BUCKET),
+            () -> new BucketItem(
+                    GrowthcraftCellarFluids.RED_WINE_FLUID_STILL,
+                    new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
+            )
     );
 
     private GrowthcraftCellarItems() {

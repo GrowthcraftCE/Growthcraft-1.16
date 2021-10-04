@@ -181,7 +181,7 @@ public class CellarPotionItem extends GrowthcraftItem {
                 IFormattableTextComponent textComponent = new TranslationTextComponent(effect.getName());
                 long minutes = TimeUnit.SECONDS.toMinutes(duration / 20L);
                 long seconds = (duration - (minutes * 1200)) / 20;
-                String attributes = String.format(" %s (%d:%2d)", TranslationUtils.intToRomanNumeral(lvl), minutes, seconds);
+                String attributes = String.format(" %s (%d:%02d)", TranslationUtils.intToRomanNumeral(lvl), minutes, seconds);
                 textComponent.appendString(attributes);
 
                 tooltip.add(textComponent);
