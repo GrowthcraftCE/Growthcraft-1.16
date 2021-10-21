@@ -1,8 +1,12 @@
 package growthcraft.lib.util;
 
+import growthcraft.core.shared.Reference;
+import growthcraft.lib.common.block.GrowthcraftRopeBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -88,6 +92,11 @@ public class BlockStateUtils {
                 (float) (placer.getPosY() - clickedBlock.getY()),
                 (float) (placer.getPosZ() - clickedBlock.getZ())
         );
+    }
+
+    public static boolean isRopeBlock(Block block) {
+        Tag<Block> tagRope = BlockTags.getCollection().getOrCreate(Reference.TAG_ROPE);
+        return tagRope.contains(block) || block instanceof GrowthcraftRopeBlock;
     }
 
 }
