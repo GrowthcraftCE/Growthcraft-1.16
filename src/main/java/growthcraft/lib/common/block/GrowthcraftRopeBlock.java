@@ -1,6 +1,5 @@
 package growthcraft.lib.common.block;
 
-import growthcraft.core.shared.Reference;
 import growthcraft.lib.util.BlockStateUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -12,8 +11,6 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -71,7 +68,8 @@ public class GrowthcraftRopeBlock extends Block implements IWaterLoggable {
     @Override
     public void onNeighborChange(BlockState state, IWorldReader worldReader, BlockPos pos, BlockPos neighbor) {
         if (!worldReader.isRemote()) {
-            World world = (World) worldReader;
+            World worldIn = (World) worldReader;
+            worldIn.setBlockState(pos, getActualBlockState(worldIn, pos), 3);
         }
     }
 
@@ -80,14 +78,12 @@ public class GrowthcraftRopeBlock extends Block implements IWaterLoggable {
         ArrayList<VoxelShape> voxelShapeArrayList = new ArrayList<VoxelShape>();
         Map<String, Block> blockMap = BlockStateUtils.getSurroundingBlocks(worldIn, pos);
 
-        Tag<Block> tagRope = BlockTags.getCollection().getOrCreate(Reference.TAG_ROPE);
-
-        if (tagRope.contains(blockMap.get("north"))) voxelShapeArrayList.add(NORTH_BOUNDING_BOX);
-        if (tagRope.contains(blockMap.get("east"))) voxelShapeArrayList.add(EAST_BOUNDING_BOX);
-        if (tagRope.contains(blockMap.get("south"))) voxelShapeArrayList.add(SOUTH_BOUNDING_BOX);
-        if (tagRope.contains(blockMap.get("west"))) voxelShapeArrayList.add(WEST_BOUNDING_BOX);
-        if (tagRope.contains(blockMap.get("up"))) voxelShapeArrayList.add(UP_BOUNDING_BOX);
-        if (tagRope.contains(blockMap.get("down"))) voxelShapeArrayList.add(DOWN_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("north"))) voxelShapeArrayList.add(NORTH_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("east"))) voxelShapeArrayList.add(EAST_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("south"))) voxelShapeArrayList.add(SOUTH_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("west"))) voxelShapeArrayList.add(WEST_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("up"))) voxelShapeArrayList.add(UP_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("down"))) voxelShapeArrayList.add(DOWN_BOUNDING_BOX);
 
         VoxelShape[] voxelShapes = new VoxelShape[voxelShapeArrayList.size()];
         voxelShapes = voxelShapeArrayList.toArray(voxelShapes);
@@ -107,12 +103,6 @@ public class GrowthcraftRopeBlock extends Block implements IWaterLoggable {
                 .with(UP, BlockStateUtils.isRopeBlock(blockMap.get("up")))
                 .with(DOWN, BlockStateUtils.isRopeBlock(blockMap.get("down")))
                 .with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
-    }
-
-    @Override
-    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-        worldIn.setBlockState(pos, getActualBlockState(worldIn, pos), 3);
-        super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
     }
 
     public boolean canBeConnectedTo(BlockState state, IBlockReader world, BlockPos pos, Direction facing) {

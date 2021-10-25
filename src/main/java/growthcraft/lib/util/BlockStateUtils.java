@@ -6,8 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -95,8 +95,9 @@ public class BlockStateUtils {
     }
 
     public static boolean isRopeBlock(Block block) {
-        Tag<Block> tagRope = BlockTags.getCollection().getOrCreate(Reference.TAG_ROPE);
-        return tagRope.contains(block) || block instanceof GrowthcraftRopeBlock;
+        return BlockTags.getCollection().get(
+                new ResourceLocation(growthcraft.core.shared.Reference.MODID,
+                        Reference.TAG_ROPE)).contains(block) || block instanceof GrowthcraftRopeBlock;
     }
 
 }
