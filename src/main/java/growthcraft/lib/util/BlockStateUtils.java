@@ -1,11 +1,11 @@
 package growthcraft.lib.util;
 
-import growthcraft.core.shared.Reference;
 import growthcraft.lib.common.block.GrowthcraftRopeBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ITag;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -95,9 +95,13 @@ public class BlockStateUtils {
     }
 
     public static boolean isRopeBlock(Block block) {
-        return BlockTags.getCollection().get(
-                new ResourceLocation(growthcraft.core.shared.Reference.MODID,
-                        Reference.TAG_ROPE)).contains(block) || block instanceof GrowthcraftRopeBlock;
+        try {
+            ITag<Block> tagRope = BlockTags.makeWrapperTag(new ResourceLocation(growthcraft.core.shared.Reference.MODID,
+                    growthcraft.core.shared.Reference.TAG_ROPE).toString());
+            return block.isIn(tagRope) || block instanceof GrowthcraftRopeBlock;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
 }

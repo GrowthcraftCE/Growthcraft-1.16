@@ -1,5 +1,6 @@
 package growthcraft.core;
 
+import growthcraft.core.init.GrowthcraftBlocks;
 import growthcraft.core.init.GrowthcraftItems;
 import growthcraft.core.shared.Reference;
 import net.minecraft.block.Block;
@@ -29,7 +30,10 @@ public class Growthcraft {
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        // ITEMS, FLUIDS, BLOCKS, LOOT_MODIFIER_SERIALIZERS
+        // TILE_ENTITIES, CONTAINERS, RECIPE_SERIALIZERS
         GrowthcraftItems.ITEMS.register(modEventBus);
+        GrowthcraftBlocks.BLOCKS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
