@@ -42,6 +42,8 @@ public class Growthcraft {
     public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
         final IForgeRegistry<Item> itemRegistry = event.getRegistry();
         final Item.Properties properties = new Item.Properties().group(Reference.growthcraftCreativeTab);
+
+        GrowthcraftBlocks.registerBlockItems(itemRegistry, properties);
     }
 
     @SubscribeEvent
