@@ -17,6 +17,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
@@ -88,6 +89,7 @@ public class GrowthcraftRopeBlock extends Block implements IWaterLoggable {
         VoxelShape[] voxelShapes = new VoxelShape[voxelShapeArrayList.size()];
         voxelShapes = voxelShapeArrayList.toArray(voxelShapes);
 
+
         return VoxelShapes.or(KNOT_BOUNDING_BOX, voxelShapes);
     }
 
@@ -103,6 +105,11 @@ public class GrowthcraftRopeBlock extends Block implements IWaterLoggable {
                 .with(UP, BlockStateUtils.isRopeBlock(blockMap.get("up")))
                 .with(DOWN, BlockStateUtils.isRopeBlock(blockMap.get("down")))
                 .with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
+    }
+
+    @Override
+    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+        return this.getActualBlockState((World) worldIn, currentPos);
     }
 
     public boolean canBeConnectedTo(BlockState state, IBlockReader world, BlockPos pos, Direction facing) {
