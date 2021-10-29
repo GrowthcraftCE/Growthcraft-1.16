@@ -45,7 +45,7 @@ public class RoasterTileEntity extends LockableLootTileEntity implements ITickab
     private ITextComponent customName;
     private ItemStack currentRecipeOutput;
 
-    //private final BrewKettleItemHandler inventory;
+    //private final GrowthcraftItemHandler inventory;
 
     private final IItemHandlerModifiable items = createHandler();
     private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
@@ -55,7 +55,7 @@ public class RoasterTileEntity extends LockableLootTileEntity implements ITickab
 
     public RoasterTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
-        //this.inventory = new BrewKettleItemHandler(3);
+        //this.inventory = new GrowthcraftItemHandler(3);
     }
 
     private IItemHandlerModifiable createHandler() {

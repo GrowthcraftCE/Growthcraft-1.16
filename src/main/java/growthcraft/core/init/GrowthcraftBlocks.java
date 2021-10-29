@@ -1,8 +1,8 @@
 package growthcraft.core.init;
 
 import growthcraft.core.Growthcraft;
+import growthcraft.core.common.block.RopeBlock;
 import growthcraft.core.shared.Reference;
-import growthcraft.lib.common.block.GrowthcraftRopeBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -22,9 +22,9 @@ public class GrowthcraftBlocks {
 
     private GrowthcraftBlocks() { /* Prevent default public constructor */ }
 
-    public static final RegistryObject<GrowthcraftRopeBlock> ROPE = BLOCKS.register(
+    public static final RegistryObject<RopeBlock> ROPE_LINEN = BLOCKS.register(
             Reference.ROPE_LINEN,
-            GrowthcraftRopeBlock::new
+            RopeBlock::new
     );
 
     public static void registerBlockItems(IForgeRegistry<Item> itemRegistry, Item.Properties properties) {
@@ -43,7 +43,7 @@ public class GrowthcraftBlocks {
 
     private static boolean excludeBlockItemRegistry(ResourceLocation registryName) {
         ArrayList<String> excludeBlocks = new ArrayList<>();
-        //excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.FRUIT_PRESS_PISTON);
+        excludeBlocks.add(Reference.MODID + ":" + Reference.ROPE_LINEN);
         return excludeBlocks.contains(registryName.toString());
     }
 

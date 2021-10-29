@@ -1,16 +1,21 @@
-package growthcraft.lib.common.block;
+package growthcraft.core.common.block;
 
+import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
+import growthcraft.core.common.tileentity.RopeTileEntity;
+import growthcraft.core.init.GrowthcraftTileEntities;
 import growthcraft.lib.util.BlockStateUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -21,10 +26,11 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class GrowthcraftRopeBlock extends Block implements IWaterLoggable {
+public class RopeBlock extends Block implements IWaterLoggable {
 
     public static final BooleanProperty NORTH = BooleanProperty.create("north");
     public static final BooleanProperty EAST = BooleanProperty.create("east");
@@ -32,8 +38,9 @@ public class GrowthcraftRopeBlock extends Block implements IWaterLoggable {
     public static final BooleanProperty WEST = BooleanProperty.create("west");
     public static final BooleanProperty UP = BooleanProperty.create("up");
     public static final BooleanProperty DOWN = BooleanProperty.create("down");
+    public static final BooleanProperty KNOT = BooleanProperty.create("knot");
 
-    public static final VoxelShape KNOT_BOUNDING_BOX = makeCuboidShape(7.0D, 7.0D, 7.0D, 9.0D, 9.0D, 9.0D);
+    public static final VoxelShape KNOT_BOUNDING_BOX = makeCuboidShape(5.0D, 6.0D, 5.0D, 11.0D, 14.0D, 11.0D);
     public static final VoxelShape NORTH_BOUNDING_BOX = makeCuboidShape(7.0D, 7.0D, 0.0D, 9.0D, 9.0D, 7.0D);
     public static final VoxelShape EAST_BOUNDING_BOX = makeCuboidShape(9.0D, 7.0D, 7.0D, 16.0D, 9.0D, 9.0D);
     public static final VoxelShape SOUTH_BOUNDING_BOX = makeCuboidShape(7.0D, 7.0D, 9.0D, 9.0D, 9.0D, 16.0D);
@@ -43,11 +50,11 @@ public class GrowthcraftRopeBlock extends Block implements IWaterLoggable {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    public GrowthcraftRopeBlock() {
+    public RopeBlock() {
         this(getInitProperties(Material.WOOL));
     }
 
-    public GrowthcraftRopeBlock(Properties properties) {
+    public RopeBlock(Properties properties) {
         super(properties);
         this.setDefaultState(this.stateContainer.getBaseState()
                 .with(NORTH, Boolean.valueOf(false))
@@ -56,6 +63,7 @@ public class GrowthcraftRopeBlock extends Block implements IWaterLoggable {
                 .with(WEST, Boolean.valueOf(false))
                 .with(UP, Boolean.valueOf(false))
                 .with(DOWN, Boolean.valueOf(false))
+                .with(KNOT, Boolean.valueOf(false))
                 .with(WATERLOGGED, Boolean.valueOf(false))
         );
     }
@@ -64,6 +72,36 @@ public class GrowthcraftRopeBlock extends Block implements IWaterLoggable {
         Properties properties = Properties.create(material);
         properties.sound(SoundType.CLOTH);
         return properties;
+    }
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return GrowthcraftTileEntities.rope_tileentity.get().create();
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        // Dump the inventory
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+        if (tileEntity instanceof RopeTileEntity && state.getBlock() != newState.getBlock()) {
+            RopeTileEntity ropeTileEntity = (RopeTileEntity) tileEntity;
+            ((GrowthcraftItemHandler) ropeTileEntity.getInventory()).toNonNullList().forEach(item -> {
+                ItemEntity itemEntity = new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), item);
+                worldIn.addEntity(itemEntity);
+            });
+        }
+
+        // Remove the tile entity
+        if (state.hasTileEntity() && state.getBlock() != newState.getBlock()) {
+            worldIn.removeTileEntity(pos);
+        }
     }
 
     @Override
@@ -85,6 +123,7 @@ public class GrowthcraftRopeBlock extends Block implements IWaterLoggable {
         if (BlockStateUtils.isRopeBlock(blockMap.get("west"))) voxelShapeArrayList.add(WEST_BOUNDING_BOX);
         if (BlockStateUtils.isRopeBlock(blockMap.get("up"))) voxelShapeArrayList.add(UP_BOUNDING_BOX);
         if (BlockStateUtils.isRopeBlock(blockMap.get("down"))) voxelShapeArrayList.add(DOWN_BOUNDING_BOX);
+        if (Boolean.TRUE.equals(state.get(KNOT))) voxelShapeArrayList.add(KNOT_BOUNDING_BOX);
 
         VoxelShape[] voxelShapes = new VoxelShape[voxelShapeArrayList.size()];
         voxelShapes = voxelShapeArrayList.toArray(voxelShapes);
@@ -97,6 +136,8 @@ public class GrowthcraftRopeBlock extends Block implements IWaterLoggable {
         Map<String, Block> blockMap = BlockStateUtils.getSurroundingBlocks(world, blockPos);
         FluidState ifluidstate = world.getFluidState(blockPos);
 
+        RopeTileEntity tile = (RopeTileEntity) world.getTileEntity(blockPos);
+
         return this.getDefaultState()
                 .with(NORTH, BlockStateUtils.isRopeBlock(blockMap.get("north")))
                 .with(EAST, BlockStateUtils.isRopeBlock(blockMap.get("east")))
@@ -104,6 +145,7 @@ public class GrowthcraftRopeBlock extends Block implements IWaterLoggable {
                 .with(WEST, BlockStateUtils.isRopeBlock(blockMap.get("west")))
                 .with(UP, BlockStateUtils.isRopeBlock(blockMap.get("up")))
                 .with(DOWN, BlockStateUtils.isRopeBlock(blockMap.get("down")))
+                .with(KNOT, tile != null && tile.hasFenceItemStack())
                 .with(WATERLOGGED, ifluidstate.getFluid() == Fluids.WATER);
     }
 
@@ -122,7 +164,7 @@ public class GrowthcraftRopeBlock extends Block implements IWaterLoggable {
     }
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(NORTH, EAST, SOUTH, WEST, UP, DOWN, WATERLOGGED);
+        builder.add(NORTH, EAST, SOUTH, WEST, UP, DOWN, KNOT, WATERLOGGED);
     }
 
 }

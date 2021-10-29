@@ -2,7 +2,7 @@ package growthcraft.cellar.common.tileentity;
 
 import growthcraft.cellar.client.container.FruitPressContainer;
 import growthcraft.cellar.common.recipe.FruitPressRecipe;
-import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
+import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.shared.Reference;
@@ -44,7 +44,7 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
     private int currentProcessingTime;
     private ITextComponent customName;
 
-    private final BrewKettleItemHandler inventory;
+    private final GrowthcraftItemHandler inventory;
 
     private FluidTank outputFluidTank;
     private final LazyOptional<IFluidHandler> outputFluidHandler = LazyOptional.of(
@@ -55,7 +55,7 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
 
     protected FruitPressTileEntity(TileEntityType<?> typeIn) {
         super(typeIn);
-        this.inventory = new BrewKettleItemHandler(1);
+        this.inventory = new GrowthcraftItemHandler(1);
         this.createFluidTanks();
         this.maxProcessingTime = 0;
         this.currentProcessingTime = 0;

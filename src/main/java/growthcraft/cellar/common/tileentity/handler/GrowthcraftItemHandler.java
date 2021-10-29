@@ -6,9 +6,9 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class BrewKettleItemHandler extends ItemStackHandler {
+public class GrowthcraftItemHandler extends ItemStackHandler {
 
-    public BrewKettleItemHandler(int size, ItemStack... stacks) {
+    public GrowthcraftItemHandler(int size, ItemStack... stacks) {
         super(size);
         for (int index = 0; index < stacks.length; index++) {
             this.stacks.set(index, ItemStack.EMPTY);

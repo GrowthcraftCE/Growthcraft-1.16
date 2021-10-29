@@ -2,6 +2,7 @@ package growthcraft.core;
 
 import growthcraft.core.init.GrowthcraftBlocks;
 import growthcraft.core.init.GrowthcraftItems;
+import growthcraft.core.init.GrowthcraftTileEntities;
 import growthcraft.core.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -32,8 +33,10 @@ public class Growthcraft {
 
         // ITEMS, FLUIDS, BLOCKS, LOOT_MODIFIER_SERIALIZERS
         // TILE_ENTITIES, CONTAINERS, RECIPE_SERIALIZERS
-        GrowthcraftItems.ITEMS.register(modEventBus);
+
         GrowthcraftBlocks.BLOCKS.register(modEventBus);
+        GrowthcraftItems.ITEMS.register(modEventBus);
+        GrowthcraftTileEntities.TILE_ENTITIES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
