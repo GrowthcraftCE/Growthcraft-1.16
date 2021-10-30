@@ -35,9 +35,8 @@ public class Reference {
     public static final String SALT_ITEM = "salt";
 
     // TODO[]:
+    public static final String ROPE = "rope";
     public static final String ROPE_LINEN = "rope_linen";
-    // TODO[]:
-    public static final String ROPE_FENCE_OAK_LINEN = "rope_fence_oak_linen";
 
     // TODO[*]: Move tags to lib
     public static final String TAG_ROPE = "rope";

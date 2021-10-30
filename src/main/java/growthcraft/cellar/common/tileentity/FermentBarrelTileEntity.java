@@ -3,7 +3,7 @@ package growthcraft.cellar.common.tileentity;
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.client.container.FermentBarrelContainer;
 import growthcraft.cellar.common.recipe.FermentBarrelRecipe;
-import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
+import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.lib.common.tank.handler.FluidTankHandler;
@@ -42,7 +42,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     private int currentProcessingTime;
     private ITextComponent customName;
 
-    private final BrewKettleItemHandler inventory;
+    private final GrowthcraftItemHandler inventory;
 
     private final FluidTankHandler fluidTankHandler;
 
@@ -50,7 +50,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
 
     public FermentBarrelTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
-        this.inventory = new BrewKettleItemHandler(1);
+        this.inventory = new GrowthcraftItemHandler(1);
         this.fluidTankHandler = new FluidTankHandler(1, 4000);
         this.maxProcessingTime = 1200;
         this.currentProcessingTime = 0;

@@ -1,6 +1,7 @@
 package growthcraft.core.init;
 
 import growthcraft.core.common.item.CrowbarItem;
+import growthcraft.core.common.item.RopeLinenItem;
 import growthcraft.core.shared.Reference;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
@@ -62,6 +63,10 @@ public class GrowthcraftItems {
     );
     public static final RegistryObject<CrowbarItem> CROWBAR_YELLOW = ITEMS.register(
             Reference.CROWBAR_YELLOW, () -> new CrowbarItem()
+    );
+
+    public static final RegistryObject<RopeLinenItem> ROPE_LINEN = ITEMS.register(
+            Reference.ROPE_LINEN, () -> new RopeLinenItem(GrowthcraftBlocks.ROPE_LINEN.get())
     );
 
 }

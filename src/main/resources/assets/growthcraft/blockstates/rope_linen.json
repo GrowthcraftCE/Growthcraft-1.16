@@ -7,6 +7,15 @@
     },
     {
       "when": {
+        "knot": true
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_knot",
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
         "north": "true"
       },
       "apply": {

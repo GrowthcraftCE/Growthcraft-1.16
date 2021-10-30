@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "growthcraft_cellar:ferment_barrel"
+          "name": "growthcraft_cellar:barrel_ferment_oak"
         }
       ],
       "conditions": [
