@@ -26,6 +26,7 @@ public class HopsCrop extends GrowthcraftCropsRopeBlock {
             Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D),
             Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D)};
 
+    // TODO[]: Set hops fruit min/max via Config
     private static int fruitMax = 3;
     private static int fruitMin = 1;
 
@@ -42,7 +43,7 @@ public class HopsCrop extends GrowthcraftCropsRopeBlock {
             ItemStack itemStack = new ItemStack(GrowthcraftCellarItems.hops.get(), count);
             InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), itemStack);
 
-            // Decrease age to 3
+            // Decrease age to 4
             worldIn.setBlockState(pos, this.getActualBlockStateWithAge(worldIn, pos, 4), 2);
         }
         return ActionResultType.PASS;

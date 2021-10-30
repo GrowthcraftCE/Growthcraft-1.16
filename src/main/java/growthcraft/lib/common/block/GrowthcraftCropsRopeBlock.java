@@ -20,6 +20,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ToolType;
 
 import java.util.Map;
 import java.util.Random;
@@ -66,6 +67,7 @@ public class GrowthcraftCropsRopeBlock extends BushBlock implements IGrowable {
         Properties properties = Properties.create(Material.PLANTS);
         properties.tickRandomly();
         properties.hardnessAndResistance(0.2F, 0.2F);
+        properties.harvestTool(ToolType.HOE);
         properties.sound(SoundType.PLANT);
         properties.notSolid();
         return properties;
@@ -168,7 +170,7 @@ public class GrowthcraftCropsRopeBlock extends BushBlock implements IGrowable {
 
     @Override
     public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-        return true;
+        return worldIn.getBlockState(pos.down()).getBlock() == Blocks.FARMLAND || state.getBlock() instanceof GrowthcraftCropsRopeBlock;
     }
 
     @Override
