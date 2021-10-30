@@ -12,7 +12,7 @@ public class GrowthcraftCellarBlockRenders {
     public static void setRenderLayers() {
         RenderTypeLookup.setRenderLayer(GrowthcraftCellarBlocks.brew_kettle.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftCellarBlocks.culture_jar.get(), RenderType.getTranslucent());
-
+        RenderTypeLookup.setRenderLayer(GrowthcraftCellarBlocks.hops_vine.get(), RenderType.getCutout());
     }
 
 }

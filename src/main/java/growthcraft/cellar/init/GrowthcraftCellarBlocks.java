@@ -2,6 +2,7 @@ package growthcraft.cellar.init;
 
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.common.block.*;
+import growthcraft.cellar.common.block.crop.HopsCrop;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import net.minecraft.block.Block;
@@ -40,6 +41,11 @@ public class GrowthcraftCellarBlocks {
     public static final RegistryObject<RoasterBlock> roaster = BLOCKS.register(
             UnlocalizedName.ROASTER,
             RoasterBlock::new
+    );
+
+    public static final RegistryObject<HopsCrop> hops_vine = BLOCKS.register(
+            UnlocalizedName.HOPS_VINE,
+            HopsCrop::new
     );
 
     private GrowthcraftCellarBlocks() { /* Prevent Default Public Constructor */ }

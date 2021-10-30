@@ -81,6 +81,9 @@ public class GrowthcraftCellarItems {
     public static final RegistryObject<GrowthcraftItem> hops = ITEMS.register(
             UnlocalizedName.HOPS, GrowthcraftItem::new
     );
+    public static final RegistryObject<GrowthcraftItem> hops_seeds = ITEMS.register(
+            UnlocalizedName.HOPS_SEEDS, GrowthcraftItem::new
+    );
     public static final RegistryObject<GrowthcraftItem> yeast_bayanus = ITEMS.register(
             UnlocalizedName.YEAST_BAYANUS, GrowthcraftItem::new
     );
