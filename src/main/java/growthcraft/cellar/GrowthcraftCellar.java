@@ -74,8 +74,7 @@ public class GrowthcraftCellar {
 
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
-        // do something when the server starts
-        LOGGER.info("HELLO from server starting");
+        // Do nothing at this time.
     }
 
 

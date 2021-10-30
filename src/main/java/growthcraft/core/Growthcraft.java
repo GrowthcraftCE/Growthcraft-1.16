@@ -1,15 +1,20 @@
 package growthcraft.core;
 
+import growthcraft.core.client.proxy.ClientProxy;
+import growthcraft.core.common.proxy.CommonProxy;
 import growthcraft.core.init.GrowthcraftBlocks;
 import growthcraft.core.init.GrowthcraftItems;
 import growthcraft.core.init.GrowthcraftTileEntities;
+import growthcraft.core.init.client.GrowthcraftTileEntityRenders;
 import growthcraft.core.shared.Reference;
+import growthcraft.lib.proxy.IProxy;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -24,6 +29,7 @@ import org.apache.logging.log4j.Logger;
 public class Growthcraft {
 
     public static final Logger LOGGER = LogManager.getLogger(Reference.MODID);
+    public static final IProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
     public Growthcraft() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -55,16 +61,16 @@ public class Growthcraft {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        LOGGER.info("Growthcraft Core setting up ... ");
+        proxy.init();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+        GrowthcraftTileEntityRenders.bindTileEntityRenderers();
     }
 
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
-        LOGGER.info("Server start-up ...");
+        // Do nothing at this time.
     }
 
 }
