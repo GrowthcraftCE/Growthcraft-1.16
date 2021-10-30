@@ -5,6 +5,7 @@
   "block.growthcraft_cellar.fruit_press": "Fruit Press",
   "block.growthcraft_cellar.fruit_press_piston": "Fruit Press",
   "block.growthcraft_cellar.roaster": "Roaster",
+  "block.growthcraft_cellar.hops_vine": "Hops Vine",
   "container.growthcraft_cellar.brew_kettle": "Brew Kettle",
   "container.growthcraft_cellar.culture_jar": "Culture Jar",
   "container.growthcraft_cellar.roaster": "Roaster",
@@ -94,5 +95,6 @@
   "item.growthcraft_cellar.red_wine_bucket": "Red Wine Bucket",
   "item.growthcraft_cellar.purple_wine_bucket": "Purple Wine Bucket",
   "item.growthcraft_cellar.white_wine_bucket": "White Wine Bucket",
-  "item.growthcraft_cellar.hops": "Hops"
+  "item.growthcraft_cellar.hops": "Hops",
+  "item.growthcraft_cellar.hops_seeds": "Hops Seeds"
 }

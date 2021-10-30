@@ -1,7 +1,7 @@
 package growthcraft.cellar.common.block;
 
 import growthcraft.cellar.common.tileentity.CultureJarTileEntity;
-import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
+import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -99,7 +99,7 @@ public class CultureJarBlock extends Block {
         TileEntity tileEntity = worldIn.getTileEntity(pos);
         if (tileEntity instanceof CultureJarTileEntity && state.getBlock() != newState.getBlock()) {
             CultureJarTileEntity cultureJarTileEntity = (CultureJarTileEntity) tileEntity;
-            ((BrewKettleItemHandler) cultureJarTileEntity.getInventory()).toNonNullList().forEach(
+            ((GrowthcraftItemHandler) cultureJarTileEntity.getInventory()).toNonNullList().forEach(
                     itemStack -> {
                         ItemEntity itemEntity = new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), itemStack);
                         worldIn.addEntity(itemEntity);

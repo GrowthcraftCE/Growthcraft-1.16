@@ -4,7 +4,7 @@ import growthcraft.cellar.client.container.BrewKettleContainer;
 import growthcraft.cellar.common.block.BrewKettleBlock;
 import growthcraft.cellar.common.recipe.BrewKettleRecipe;
 import growthcraft.cellar.common.recipe.BrewKettleRecipeType;
-import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
+import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.Reference;
@@ -60,7 +60,7 @@ import static growthcraft.cellar.init.GrowthcraftCellarItems.brew_kettle_lid;
 public class BrewKettleTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
     public final int maxSmeltTime = GrowthcraftCellarConfig.getDefaultProcessingTime();
-    private final BrewKettleItemHandler inventory;
+    private final GrowthcraftItemHandler inventory;
     private int currentSmeltTime;
     private BrewKettleRecipe currentRecipe;
     private ITextComponent customName;
@@ -72,7 +72,7 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
 
     public BrewKettleTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
-        this.inventory = new BrewKettleItemHandler(3);
+        this.inventory = new GrowthcraftItemHandler(3);
         this.createFluidTanks();
     }
 

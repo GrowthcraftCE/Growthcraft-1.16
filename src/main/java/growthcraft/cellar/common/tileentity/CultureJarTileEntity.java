@@ -4,7 +4,7 @@ import growthcraft.cellar.client.container.CultureJarContainer;
 import growthcraft.cellar.common.block.CultureJarBlock;
 import growthcraft.cellar.common.recipe.CultureJarRecipe;
 import growthcraft.cellar.common.recipe.CultureJarRecipeType;
-import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
+import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
@@ -59,7 +59,7 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
     private int currentProcessingTicks;
     private ITextComponent customName;
 
-    private final BrewKettleItemHandler inventory;
+    private final GrowthcraftItemHandler inventory;
 
     private FluidTank inputFluidTank;
     private final LazyOptional<IFluidHandler> inputFluidHandler = LazyOptional.of(
@@ -70,7 +70,7 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
 
     public CultureJarTileEntity(TileEntityType<?> tileEntityType) {
         super(tileEntityType);
-        this.inventory = new BrewKettleItemHandler(1);
+        this.inventory = new GrowthcraftItemHandler(1);
         this.createFluidTanks();
     }
 

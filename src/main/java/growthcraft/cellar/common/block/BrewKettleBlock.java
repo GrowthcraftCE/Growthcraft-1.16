@@ -1,7 +1,7 @@
 package growthcraft.cellar.common.block;
 
 import growthcraft.cellar.common.tileentity.BrewKettleTileEntity;
-import growthcraft.cellar.common.tileentity.handler.BrewKettleItemHandler;
+import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import net.minecraft.block.AbstractBlock;
@@ -136,7 +136,7 @@ public class BrewKettleBlock extends Block {
         TileEntity tileEntity = worldIn.getTileEntity(pos);
         if (tileEntity instanceof BrewKettleTileEntity && state.getBlock() != newState.getBlock()) {
             BrewKettleTileEntity brewKettleTileEntity = (BrewKettleTileEntity) tileEntity;
-            ((BrewKettleItemHandler) brewKettleTileEntity.getInventory()).toNonNullList().forEach(item -> {
+            ((GrowthcraftItemHandler) brewKettleTileEntity.getInventory()).toNonNullList().forEach(item -> {
                 ItemEntity itemEntity = new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), item);
                 worldIn.addEntity(itemEntity);
             });
