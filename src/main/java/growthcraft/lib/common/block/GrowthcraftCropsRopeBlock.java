@@ -213,11 +213,9 @@ public class GrowthcraftCropsRopeBlock extends BushBlock implements IGrowable {
 
         worldIn.setBlockState(pos, getActualBlockStateWithAge(worldIn, pos, i), 2);
 
-        if (i == this.getMaxAge()) {
-            if (BlockStateUtils.isRopeBlock(worldIn.getBlockState(pos.up()).getBlock())
-                    && !(worldIn.getBlockState(pos.up()).getBlock() instanceof GrowthcraftCropsRopeBlock)) {
-                worldIn.setBlockState(pos.up(), this.getActualBlockStateWithAge(worldIn, pos.up(), 0));
-            }
+        if (i == this.getMaxAge() && BlockStateUtils.isRopeBlock(worldIn.getBlockState(pos.up()).getBlock())
+                && !(worldIn.getBlockState(pos.up()).getBlock() instanceof GrowthcraftCropsRopeBlock)) {
+            worldIn.setBlockState(pos.up(), this.getActualBlockStateWithAge(worldIn, pos.up(), 0));
         }
     }
 

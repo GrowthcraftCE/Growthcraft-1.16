@@ -1,11 +1,6 @@
 {
   "multipart": [
     {
-      "apply": {
-        "model": "growthcraft:block/rope_linen"
-      }
-    },
-    {
       "when": {
         "age": 0
       },

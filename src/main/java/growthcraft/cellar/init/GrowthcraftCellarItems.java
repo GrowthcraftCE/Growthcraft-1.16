@@ -1,6 +1,7 @@
 package growthcraft.cellar.init;
 
 import growthcraft.cellar.common.item.GrainItem;
+import growthcraft.cellar.common.item.HopSeedsItem;
 import growthcraft.cellar.lib.item.CellarPotionItem;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
@@ -81,8 +82,8 @@ public class GrowthcraftCellarItems {
     public static final RegistryObject<GrowthcraftItem> hops = ITEMS.register(
             UnlocalizedName.HOPS, GrowthcraftItem::new
     );
-    public static final RegistryObject<GrowthcraftItem> hops_seeds = ITEMS.register(
-            UnlocalizedName.HOPS_SEEDS, GrowthcraftItem::new
+    public static final RegistryObject<HopSeedsItem> hops_seeds = ITEMS.register(
+            UnlocalizedName.HOPS_SEEDS, HopSeedsItem::new
     );
     public static final RegistryObject<GrowthcraftItem> yeast_bayanus = ITEMS.register(
             UnlocalizedName.YEAST_BAYANUS, GrowthcraftItem::new
