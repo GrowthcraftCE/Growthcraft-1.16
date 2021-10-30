@@ -3,11 +3,15 @@ package growthcraft.core.client.ter;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import growthcraft.core.common.tileentity.RopeTileEntity;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
@@ -16,6 +20,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.*;
 
 import java.awt.*;
+import java.util.Random;
 
 public class RopeTileEntityRenderer extends TileEntityRenderer<RopeTileEntity> {
 
@@ -34,28 +39,32 @@ public class RopeTileEntityRenderer extends TileEntityRenderer<RopeTileEntity> {
         ItemStack itemStack = tileEntity.getFenceItemStack();
         ResourceLocation resourceLocation = Blocks.OAK_FENCE.getRegistryName();
 
-        float inputFluidHeight = 1;
+        //Block block = Block.getBlockFromItem(itemStack.getItem());
+        Block block = Blocks.OAK_PLANKS;
+        BlockState state = block.getDefaultState();
 
-        renderCubeUsingQuads(tileEntity, partialTicks, matrixStack, buffer, lightLevel, overlay, resourceLocation);
+        BlockRendererDispatcher blockRendererDispatcher = minecraft.getBlockRendererDispatcher();
+        TextureAtlasSprite sprite = blockRendererDispatcher.getModelForState(state).getQuads(state, Direction.NORTH, new Random(0)).get(0).getSprite();
 
+        renderCubeUsingQuads(tileEntity, partialTicks, matrixStack, buffer, lightLevel, overlay, sprite);
     }
 
     public void renderCubeUsingQuads(RopeTileEntity ropeTileEntity, float partialTicks,
                                      MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer,
-                                     int lightLevel, int overlay, ResourceLocation resourceLocation) {
+                                     int lightLevel, int overlay, TextureAtlasSprite sprite) {
         final Vector3d TRANSLATION_OFFSET = new Vector3d(0, 0.01, 0);
 
         matrixStack.push();
         matrixStack.translate(TRANSLATION_OFFSET.x, TRANSLATION_OFFSET.y, TRANSLATION_OFFSET.z); // translate
-        Color color = Color.BLUE;
+        Color color = new Color(156, 107, 34);
 
-        drawCubeQuads(matrixStack, renderTypeBuffer, color, lightLevel, resourceLocation);
+        drawCubeQuads(matrixStack, renderTypeBuffer, color, lightLevel, sprite);
         matrixStack.pop();
     }
 
-    private void drawCubeQuads(MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, Color color, int lightLevel, ResourceLocation resourceLocation) {
+    private void drawCubeQuads(MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, Color color, int lightLevel, TextureAtlasSprite sprite) {
         IVertexBuilder vertexBuilderBlockQuads = renderTypeBuffer.getBuffer(RenderType.getEntitySolid(
-                resourceLocation
+                new ResourceLocation("growthcraft:textures/block/apple_plank.png")
         ));
 
         Matrix4f matrixPos = matrixStack.getLast().getMatrix();
@@ -78,23 +87,23 @@ public class RopeTileEntityRenderer extends TileEntityRenderer<RopeTileEntity> {
         final Vector3d DOWN_FACE_MIDPOINT = new Vector3d(0.5, 0.0, 0.5);
 
         addFace(Direction.EAST, matrixPos, matrixNormal, vertexBuilderBlockQuads,
-                color, EAST_FACE_MIDPOINT, WIDTH, 0.99F, bottomLeftUV, uVwidth, uVheight, lightLevel);
+                color, EAST_FACE_MIDPOINT, WIDTH, 0.99F, bottomLeftUV, uVwidth, uVheight, lightLevel, sprite);
         addFace(Direction.WEST, matrixPos, matrixNormal, vertexBuilderBlockQuads,
-                color, WEST_FACE_MIDPOINT, WIDTH, 0.99F, bottomLeftUV, uVwidth, uVheight, lightLevel);
+                color, WEST_FACE_MIDPOINT, WIDTH, 0.99F, bottomLeftUV, uVwidth, uVheight, lightLevel, sprite);
         addFace(Direction.NORTH, matrixPos, matrixNormal, vertexBuilderBlockQuads,
-                color, NORTH_FACE_MIDPOINT, WIDTH, 0.99F, bottomLeftUV, uVwidth, uVheight, lightLevel);
+                color, NORTH_FACE_MIDPOINT, WIDTH, 0.99F, bottomLeftUV, uVwidth, uVheight, lightLevel, sprite);
         addFace(Direction.SOUTH, matrixPos, matrixNormal, vertexBuilderBlockQuads,
-                color, SOUTH_FACE_MIDPOINT, WIDTH, 0.99F, bottomLeftUV, uVwidth, uVheight, lightLevel);
+                color, SOUTH_FACE_MIDPOINT, WIDTH, 0.99F, bottomLeftUV, uVwidth, uVheight, lightLevel, sprite);
         addFace(Direction.UP, matrixPos, matrixNormal, vertexBuilderBlockQuads,
-                color, UP_FACE_MIDPOINT, WIDTH, HEIGHT, bottomLeftUV, uVwidth, uVheight, lightLevel);
+                color, UP_FACE_MIDPOINT, WIDTH, HEIGHT, bottomLeftUV, uVwidth, uVheight, lightLevel, sprite);
         addFace(Direction.DOWN, matrixPos, matrixNormal, vertexBuilderBlockQuads,
-                color, DOWN_FACE_MIDPOINT, WIDTH, HEIGHT, bottomLeftUV, uVwidth, uVheight, lightLevel);
+                color, DOWN_FACE_MIDPOINT, WIDTH, HEIGHT, bottomLeftUV, uVwidth, uVheight, lightLevel, sprite);
     }
 
     private void addFace(Direction face, Matrix4f matrixPos, Matrix3f matrixNormal,
                          IVertexBuilder vertexBuilderBlockQuads, Color color, Vector3d centrePos,
                          float width, float height, Vector2f bottomLeftUV, float texUwidth, float texVheight,
-                         int lightLevel) {
+                         int lightLevel, TextureAtlasSprite sprite) {
 
         Vector3f leftToRightDirection;
         Vector3f bottomToTopDirection;
@@ -163,26 +172,27 @@ public class RopeTileEntityRenderer extends TileEntityRenderer<RopeTileEntity> {
         addQuad(matrixPos, matrixNormal, vertexBuilderBlockQuads,
                 bottomLeftPos, bottomRightPos, topRightPos, topLeftPos,
                 bottomLeftUVpos, bottomRightUVpos, topLeftUVpos, topRightUVpos,
-                normalVector, color, lightLevel);
+                normalVector, color, lightLevel, sprite);
     }
 
     private void addQuad(Matrix4f matrixPos, Matrix3f matrixNormal, IVertexBuilder renderBuffer,
                          Vector3f bottomLeftPos, Vector3f bottomRightPos, Vector3f topRightPos, Vector3f topLeftPos,
                          Vector2f bottomLeftUVpos, Vector2f bottomRightUVpos, Vector2f topLeftUVpos, Vector2f topRightUVpos,
-                         Vector3f normalVector, Color color, int lightLevel) {
+                         Vector3f normalVector, Color color, int lightLevel, TextureAtlasSprite sprite) {
 
-        addQuadVertex(matrixPos, matrixNormal, renderBuffer, bottomLeftPos, bottomLeftUVpos, normalVector, color, lightLevel);
-        addQuadVertex(matrixPos, matrixNormal, renderBuffer, bottomRightPos, bottomRightUVpos, normalVector, color, lightLevel);
-        addQuadVertex(matrixPos, matrixNormal, renderBuffer, topRightPos, topRightUVpos, normalVector, color, lightLevel);
-        addQuadVertex(matrixPos, matrixNormal, renderBuffer, topLeftPos, topLeftUVpos, normalVector, color, lightLevel);
+        addQuadVertex(matrixPos, matrixNormal, renderBuffer, bottomLeftPos, bottomLeftUVpos, normalVector, color, lightLevel, sprite);
+        addQuadVertex(matrixPos, matrixNormal, renderBuffer, bottomRightPos, bottomRightUVpos, normalVector, color, lightLevel, sprite);
+        addQuadVertex(matrixPos, matrixNormal, renderBuffer, topRightPos, topRightUVpos, normalVector, color, lightLevel, sprite);
+        addQuadVertex(matrixPos, matrixNormal, renderBuffer, topLeftPos, topLeftUVpos, normalVector, color, lightLevel, sprite);
     }
 
     private void addQuadVertex(Matrix4f matrixPos, Matrix3f matrixNormal, IVertexBuilder renderBuffer,
                                Vector3f pos, Vector2f texUV, Vector3f normalVector,
-                               Color color, int lightLevel) {
+                               Color color, int lightLevel, TextureAtlasSprite sprite) {
         renderBuffer.pos(matrixPos, pos.getX(), pos.getY(), pos.getZ()) // position coordinate
-                .color(color.getRed(), color.getGreen(), color.getBlue(), 25)
-                .tex(texUV.x, texUV.y)
+                .color(color.getRed(), color.getGreen(), color.getBlue(), 5)
+                //.tex(texUV.x, texUV.y)
+                .tex(sprite.getMaxU(), sprite.getMinV())
                 .overlay(OverlayTexture.NO_OVERLAY)
                 .lightmap(lightLevel)
                 .normal(normalVector.getX(), normalVector.getY(), normalVector.getZ())
