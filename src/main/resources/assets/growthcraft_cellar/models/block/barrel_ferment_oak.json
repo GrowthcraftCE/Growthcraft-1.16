@@ -5,6 +5,7 @@
     "1": "growthcraft_cellar:block/barrel_ferment/oak_side",
     "2": "growthcraft_cellar:block/barrel_ferment/oak_side_alt",
     "3": "growthcraft_cellar:block/barrel_ferment/oak_top",
+    "missing": "growthcraft:block/missing",
     "particle": "growthcraft_cellar:block/barrel_ferment/oak_bottom"
   },
   "elements": [
