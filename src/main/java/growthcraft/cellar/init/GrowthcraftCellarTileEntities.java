@@ -53,5 +53,15 @@ public class GrowthcraftCellarTileEntities {
             ).build(null)
     );
 
+    public static final RegistryObject<TileEntityType<GrapeVineTileEntity>> grape_vine_tileentity = TILE_ENTITIES.register(
+            UnlocalizedName.GRAPE_VINE,
+            () -> TileEntityType.Builder.create(
+                    GrapeVineTileEntity::new,
+                    GrowthcraftCellarBlocks.GRAPE_VINE.get(),
+                    GrowthcraftCellarBlocks.GRAPE_VINE_CROP.get(),
+                    GrowthcraftCellarBlocks.GRAPE_VINE_LEAVES.get()
+            ).build(null)
+    );
+
     private GrowthcraftCellarTileEntities() { /* Prevent creation of public constructor */ }
 }

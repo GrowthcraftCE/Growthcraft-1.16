@@ -20,12 +20,18 @@ public class GrowthcraftCellarConfig {
     public static final ForgeConfigSpec CLIENT;
 
     private static final String CATEGORY_BREW_KETTLE = "brew_kettle";
+    private static final String CATEGORY_GRAPE_VINES = "grape_vines";
 
     private static ForgeConfigSpec.IntValue brew_kettle_lit_light_level;
     private static ForgeConfigSpec.IntValue default_brewing_ticks;
 
+    private static ForgeConfigSpec.DoubleValue grape_vine_fruit_scale;
+    private static ForgeConfigSpec.IntValue grape_vine_min_fruit;
+    private static ForgeConfigSpec.IntValue grape_vine_max_fruit;
+
     static {
         initBrewKettleConfig(SERVER_BUILDER);
+        initGrapeVineConfig(SERVER_BUILDER);
         //initWorldGenConfig(SERVER_BUILDER);
 
         SERVER = SERVER_BUILDER.build();
@@ -54,6 +60,18 @@ public class GrowthcraftCellarConfig {
         default_brewing_ticks = server
                 .comment("Set the Brew Kettle processing time in ticks.")
                 .defineInRange("brewKettle.DefaultProcessingTime", 600, 20, 24000);
+    }
+
+    public static void initGrapeVineConfig(ForgeConfigSpec.Builder server) {
+        grape_vine_fruit_scale = server
+                .comment("Determines the scale of the rendering of grape vine fruit.")
+                .defineInRange("grape_vine.render_fruit_scale", 2.0D, 0.1D, 3.0D);
+        grape_vine_min_fruit = server
+                .comment("Set to the minimum amount of fruit dropped by grape vines.")
+                .defineInRange("grape_vine.min_fruit_yield", 1, 1, 100);
+        grape_vine_max_fruit = server
+                .comment("Set to the maximum amount of fruit dropped by grape vines.")
+                .defineInRange("grape_vine.max_fruit_yield", 4, 1, 100);
     }
 
     /**

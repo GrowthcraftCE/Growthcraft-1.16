@@ -1,7 +1,6 @@
 package growthcraft.lib.util;
 
 import growthcraft.core.common.block.RopeBlock;
-import growthcraft.core.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -99,16 +98,6 @@ public class BlockStateUtils {
         try {
             ITag<Block> tagRope = BlockTags.makeWrapperTag(new ResourceLocation(growthcraft.core.shared.Reference.MODID,
                     growthcraft.core.shared.Reference.TAG_ROPE).toString());
-            return block.isIn(tagRope) || block instanceof RopeBlock;
-        } catch (Exception ex) {
-            return false;
-        }
-    }
-
-    public static boolean isRopeFenceBlock(Block block) {
-        try {
-            ITag<Block> tagRope = BlockTags.makeWrapperTag(new ResourceLocation(growthcraft.core.shared.Reference.MODID,
-                    Reference.TAG_ROPE_FENCE).toString());
             return block.isIn(tagRope) || block instanceof RopeBlock;
         } catch (Exception ex) {
             return false;

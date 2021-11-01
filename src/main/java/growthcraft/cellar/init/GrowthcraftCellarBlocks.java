@@ -2,6 +2,9 @@ package growthcraft.cellar.init;
 
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.common.block.*;
+import growthcraft.cellar.common.block.crop.GrapeCrop;
+import growthcraft.cellar.common.block.crop.GrapeVineCrop;
+import growthcraft.cellar.common.block.crop.GrapeVineLeavesCrop;
 import growthcraft.cellar.common.block.crop.HopsCrop;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
@@ -46,6 +49,15 @@ public class GrowthcraftCellarBlocks {
     public static final RegistryObject<HopsCrop> hops_vine = BLOCKS.register(
             UnlocalizedName.HOPS_VINE,
             HopsCrop::new
+    );
+    public static final RegistryObject<GrapeCrop> GRAPE_VINE_CROP = BLOCKS.register(
+            UnlocalizedName.GRAPE_VINE_CROP, GrapeCrop::new
+    );
+    public static final RegistryObject<GrapeVineCrop> GRAPE_VINE = BLOCKS.register(
+            UnlocalizedName.GRAPE_VINE, GrapeVineCrop::new
+    );
+    public static final RegistryObject<GrapeVineLeavesCrop> GRAPE_VINE_LEAVES = BLOCKS.register(
+            UnlocalizedName.GRAPE_VINE_LEAVES, GrapeVineLeavesCrop::new
     );
 
     private GrowthcraftCellarBlocks() { /* Prevent Default Public Constructor */ }

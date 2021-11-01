@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "growthcraft:rope_linen",
-    "growthcraft_cellar:hops_vine"
+    "growthcraft_cellar:hops_vine",
+    "growthcraft_cellar:grape_vine",
+    "growthcraft_cellar:grape_vine_leaves"
   ]
 }
