@@ -27,7 +27,7 @@ import java.util.Random;
 
 public class GrowthcraftCropsRopeBlock extends BushBlock implements IGrowable {
 
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_0_7;
+    public static IntegerProperty AGE = BlockStateProperties.AGE_0_7;
     public static final BooleanProperty DOWN = BooleanProperty.create("down");
     public static final BooleanProperty EAST = BooleanProperty.create("east");
     public static final BooleanProperty NORTH = BooleanProperty.create("north");
@@ -63,7 +63,7 @@ public class GrowthcraftCropsRopeBlock extends BushBlock implements IGrowable {
                 .with(DOWN, false));
     }
 
-    private static Properties getInitProperties() {
+    public static Properties getInitProperties() {
         Properties properties = Properties.create(Material.PLANTS);
         properties.tickRandomly();
         properties.hardnessAndResistance(0.2F, 0.2F);
@@ -215,7 +215,13 @@ public class GrowthcraftCropsRopeBlock extends BushBlock implements IGrowable {
 
         worldIn.setBlockState(pos, getActualBlockStateWithAge(worldIn, pos, i), 2);
 
-        if (i == this.getMaxAge() && BlockStateUtils.isRopeBlock(worldIn.getBlockState(pos.up()).getBlock())
+        if (i == this.getMaxAge()) {
+            this.doMaxAge(worldIn, pos, state);
+        }
+    }
+
+    public void doMaxAge(World worldIn, BlockPos pos, BlockState state) {
+        if (BlockStateUtils.isRopeBlock(worldIn.getBlockState(pos.up()).getBlock())
                 && !(worldIn.getBlockState(pos.up()).getBlock() instanceof GrowthcraftCropsRopeBlock)) {
             worldIn.setBlockState(pos.up(), this.getActualBlockStateWithAge(worldIn, pos.up(), 0));
         }

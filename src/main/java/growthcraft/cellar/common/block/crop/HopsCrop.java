@@ -40,7 +40,7 @@ public class HopsCrop extends GrowthcraftCropsRopeBlock {
         if (state.get(AGE) == 7) {
             int count = RANDOM.nextInt(fruitMax - fruitMin) + fruitMin;
             // Spawn the random drop count
-            ItemStack itemStack = new ItemStack(GrowthcraftCellarItems.hops.get(), count);
+            ItemStack itemStack = new ItemStack(GrowthcraftCellarItems.HOPS.get(), count);
             InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), itemStack);
 
             // Decrease age to 4

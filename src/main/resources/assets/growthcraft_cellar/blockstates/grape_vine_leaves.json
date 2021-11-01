@@ -1,0 +1,84 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "growthcraft:block/rope_linen"
+      }
+    },
+    {
+      "when": {
+        "trunk_connected": "true"
+      },
+      "apply": {
+        "model": "growthcraft_cellar:block/grape_vine/grape_vine_leaves_trunk"
+      }
+    },
+    {
+      "when": {
+        "age": "0|1|2|3|4|5|6|7"
+      },
+      "apply": {
+        "model": "growthcraft_cellar:block/grape_vine/grape_vine_leaves"
+      }
+    },
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_side",
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_side",
+        "y": 90,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_side",
+        "y": 180,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_side",
+        "y": 270,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_side",
+        "x": 270,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "down": "true"
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_side",
+        "x": 90,
+        "uvlock": false
+      }
+    }
+  ]
+}

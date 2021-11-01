@@ -28,6 +28,12 @@ public class UnlocalizedName {
     public static final String GRAIN_PALE_GOLDEN = "grain_pale_golden";
     public static final String GRAPE_PURPLE = "grape_purple";
     public static final String GRAPE_RED = "grape_red";
+    public static final String GRAPE_SEEDS_PURPLE = "grape_seeds_purple";
+    public static final String GRAPE_SEEDS_RED = "grape_seeds_red";
+    public static final String GRAPE_SEEDS_WHITE = "grape_seeds_white";
+    public static final String GRAPE_VINE = "grape_vine";
+    public static final String GRAPE_VINE_CROP = "grape_vine_crop";
+    public static final String GRAPE_VINE_LEAVES = "grape_vine_leaves";
     public static final String GRAPE_WHITE = "grape_white";
     public static final String HOPS = "hops";
     public static final String HOPS_SEEDS = "hops_seeds";

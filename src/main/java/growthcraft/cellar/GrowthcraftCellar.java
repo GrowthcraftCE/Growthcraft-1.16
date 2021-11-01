@@ -42,9 +42,9 @@ public class GrowthcraftCellar {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         // Add DeferredRegister<Item> to the mod event bus.
+        GrowthcraftCellarBlocks.BLOCKS.register(modEventBus);
         GrowthcraftCellarItems.ITEMS.register(modEventBus);
         GrowthcraftCellarFluids.FLUIDS.register(modEventBus);
-        GrowthcraftCellarBlocks.BLOCKS.register(modEventBus);
         GrowthcraftCellarLootModifiers.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
         GrowthcraftCellarTileEntities.TILE_ENTITIES.register(modEventBus);
         GrowthcraftCellarContainers.CONTAINERS.register(modEventBus);
