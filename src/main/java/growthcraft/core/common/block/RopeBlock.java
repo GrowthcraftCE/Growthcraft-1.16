@@ -48,6 +48,7 @@ public class RopeBlock extends Block implements IWaterLoggable {
     public static final VoxelShape UP_BOUNDING_BOX = makeCuboidShape(7.0D, 9.0D, 7.0D, 9.0D, 16.0D, 9.0D);
     public static final VoxelShape DOWN_BOUNDING_BOX = makeCuboidShape(7.0D, 0.0D, 7.0D, 9.0D, 7.0D, 9.0D);
     public static final VoxelShape KNOT_FENCE_BOUNDING_BOX = makeCuboidShape(5.0D, 6.0D, 5.0D, 11.0D, 14.0D, 11.0D);
+    public static final VoxelShape FENCE_POST_BOUNDING_BOX = makeCuboidShape(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -124,11 +125,13 @@ public class RopeBlock extends Block implements IWaterLoggable {
         if (BlockStateUtils.isRopeBlock(blockMap.get("west"))) voxelShapeArrayList.add(WEST_BOUNDING_BOX);
         if (BlockStateUtils.isRopeBlock(blockMap.get("up"))) voxelShapeArrayList.add(UP_BOUNDING_BOX);
         if (BlockStateUtils.isRopeBlock(blockMap.get("down"))) voxelShapeArrayList.add(DOWN_BOUNDING_BOX);
-        if (Boolean.TRUE.equals(state.get(KNOT))) voxelShapeArrayList.add(KNOT_FENCE_BOUNDING_BOX);
+        if (Boolean.TRUE.equals(state.get(KNOT))) {
+            voxelShapeArrayList.add(KNOT_FENCE_BOUNDING_BOX);
+            voxelShapeArrayList.add(FENCE_POST_BOUNDING_BOX);
+        }
 
         VoxelShape[] voxelShapes = new VoxelShape[voxelShapeArrayList.size()];
         voxelShapes = voxelShapeArrayList.toArray(voxelShapes);
-
 
         return VoxelShapes.or(KNOT_BOUNDING_BOX, voxelShapes);
     }

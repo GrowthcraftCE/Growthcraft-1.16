@@ -33,7 +33,7 @@ public class GrapeVineTileEntityRenderer extends TileEntityRenderer<GrapeVineTil
         int lightLevel = getLightLevel(grapeVineTileEntity.getWorld(), grapeVineTileEntity.getPos().up());
 
         double[] placement = new double[]{0.5D, 0.5D, 0.5D};
-        float itemScale = 1.75F;
+        float itemScale = 2.0F;
 
         renderItem(grapeVineTileEntity.getInventory().getStackInSlot(1), placement, Vector3f.YP.rotationDegrees(180F - player.rotationYaw), matrixStackIn, bufferIn, partialTicks, combinedOverlayIn, lightLevel, itemScale);
 

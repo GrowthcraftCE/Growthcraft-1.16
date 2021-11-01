@@ -4,6 +4,7 @@ import growthcraft.core.Growthcraft;
 import growthcraft.core.common.block.RopeBlock;
 import growthcraft.core.common.tileentity.RopeTileEntity;
 import growthcraft.lib.common.item.GrowthcraftItem;
+import growthcraft.lib.util.WorldUtils;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
@@ -11,7 +12,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.Constants;
 
 public class RopeLinenItem extends GrowthcraftItem {
 
@@ -39,7 +39,7 @@ public class RopeLinenItem extends GrowthcraftItem {
                 Growthcraft.LOGGER.error("BlockPos [" + blockpos.toString() + "] does not have a RopeTileEntity!");
             }
 
-            world.notifyBlockUpdate(blockpos, world.getBlockState(blockpos), world.getBlockState(blockpos), Constants.BlockFlags.BLOCK_UPDATE);
+            WorldUtils.notifyBlockUpdate(world, blockpos);
 
             context.getPlayer().getHeldItem(context.getHand()).shrink(1);
             return ActionResultType.SUCCESS;
