@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "growthcraft_cellar:block/grape_vine/grape_vine_stage0"
+  }
+}

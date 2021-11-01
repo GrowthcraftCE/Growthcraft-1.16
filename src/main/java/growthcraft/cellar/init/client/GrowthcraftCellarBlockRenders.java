@@ -13,6 +13,9 @@ public class GrowthcraftCellarBlockRenders {
         RenderTypeLookup.setRenderLayer(GrowthcraftCellarBlocks.brew_kettle.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftCellarBlocks.culture_jar.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(GrowthcraftCellarBlocks.hops_vine.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftCellarBlocks.GRAPE_VINE.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftCellarBlocks.GRAPE_VINE_CROP.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftCellarBlocks.GRAPE_VINE_LEAVES.get(), RenderType.getCutout());
     }
 
 }
