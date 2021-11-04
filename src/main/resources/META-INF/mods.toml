@@ -5,7 +5,7 @@ issueTrackerURL = "https://github.com/GrowthcraftCE/Growthcraft-1.16/issues"
 
 [[mods]]
 modId = "growthcraft"
-version = "6.0.6"
+version = "6.0.7"
 displayName = "Growthcraft"
 updateJSONURL = "https://raw.githubusercontent.com/GrowthcraftCE/Growthcraft-Updates/master/growthcraft-versions.json"
 displayURL = "https://github.com/GrowthcraftCE/Growthcraft-1.16/wiki"
@@ -32,7 +32,7 @@ side = "BOTH"
 
 [[mods]]
 modId = "growthcraft_cellar"
-version = "6.0.6"
+version = "6.0.7"
 displayName = "Growthcraft Cellar"
 logoFile = "growthcraft_cellar_logo.png"
 description = '''
