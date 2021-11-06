@@ -8,7 +8,7 @@ import net.minecraft.block.material.Material;
 public class AppleStairsBlock extends StairsBlock {
 
     public AppleStairsBlock() {
-        super(GrowthcraftApplesBlocks.applePlankStairs.get()::getDefaultState, getInitProperties());
+        super(GrowthcraftApplesBlocks.applePlankStairs.get().getDefaultState(), getInitProperties());
     }
 
     private static Properties getInitProperties() {

@@ -45,3 +45,19 @@ mandatory = true
 versionRange = "[6,)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[mods]]
+modId = "growthcraft_apples"
+version = "6.0.7"
+displayName = "Growthcraft Apples"
+logoFile = "growthcraft_apples_logo.png"
+description = '''
+            As a child mod to Growthcraft...
+            '''
+
+[[dependencies.growthcraft_apples]]
+modId = "growthcraft"
+mandatory = true
+versionRange = "[6,)"
+ordering = "AFTER"
+side = "BOTH"
