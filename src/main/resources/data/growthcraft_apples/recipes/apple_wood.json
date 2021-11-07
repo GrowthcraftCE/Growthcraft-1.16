@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bark",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "growthcraft_apples:apple_wood_log"
+    }
+  },
+  "result": {
+    "item": "growthcraft_apples:apple_wood",
+    "count": 3
+  }
+}
