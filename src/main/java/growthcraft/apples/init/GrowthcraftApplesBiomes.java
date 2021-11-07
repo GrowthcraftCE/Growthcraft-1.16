@@ -20,7 +20,7 @@ public class GrowthcraftApplesBiomes {
             "apple",
             Feature.TREE.withConfiguration((
                     new BaseTreeFeatureConfig.Builder(
-                            new SimpleBlockStateProvider(GrowthcraftApplesBlocks.appleWood.get().getDefaultState()),
+                            new SimpleBlockStateProvider(GrowthcraftApplesBlocks.appleWoodLog.get().getDefaultState()),
                             new SimpleBlockStateProvider(GrowthcraftApplesBlocks.appleTreeLeaves.get().getDefaultState()),
                             new BlobFoliagePlacer(FeatureSpread.create(2), FeatureSpread.create(0), 3),
                             new StraightTrunkPlacer(4, 2, 0),
