@@ -13,11 +13,14 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class GrapeVineLeavesCrop extends GrowthcraftCropsRopeBlock {
@@ -36,7 +39,6 @@ public class GrapeVineLeavesCrop extends GrowthcraftCropsRopeBlock {
 
     public GrapeVineLeavesCrop() {
         super();
-        GrowthcraftCropsRopeBlock.SHAPE_BY_AGE = CUSTOM_SHAPE_BY_AGE;
         super.setDefaultState(this.stateContainer.getBaseState()
                 .with(AGE, 0)
                 .with(NORTH, false)
@@ -125,5 +127,27 @@ public class GrapeVineLeavesCrop extends GrowthcraftCropsRopeBlock {
             }
         }
 
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        VoxelShape ropeVoxel = super.getShape(state, worldIn, pos, context);
+
+        ArrayList<VoxelShape> voxelShapeArrayList = new ArrayList<VoxelShape>();
+        Map<String, Block> blockMap = BlockStateUtils.getSurroundingBlocks(worldIn, pos);
+
+        if (BlockStateUtils.isRopeBlock(blockMap.get("north"))) voxelShapeArrayList.add(NORTH_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("east"))) voxelShapeArrayList.add(EAST_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("south"))) voxelShapeArrayList.add(SOUTH_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("west"))) voxelShapeArrayList.add(WEST_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("up"))) voxelShapeArrayList.add(UP_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("down"))) voxelShapeArrayList.add(DOWN_BOUNDING_BOX);
+
+        voxelShapeArrayList.add(ropeVoxel);
+
+        VoxelShape[] voxelShapes = new VoxelShape[voxelShapeArrayList.size()];
+        voxelShapes = voxelShapeArrayList.toArray(voxelShapes);
+
+        return VoxelShapes.or(KNOT_BOUNDING_BOX, voxelShapes);
     }
 }
