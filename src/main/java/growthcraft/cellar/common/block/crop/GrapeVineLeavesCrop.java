@@ -136,6 +136,8 @@ public class GrapeVineLeavesCrop extends GrowthcraftCropsRopeBlock {
         ArrayList<VoxelShape> voxelShapeArrayList = new ArrayList<VoxelShape>();
         Map<String, Block> blockMap = BlockStateUtils.getSurroundingBlocks(worldIn, pos);
 
+        voxelShapeArrayList.add(CUSTOM_SHAPE_BY_AGE[0]);
+
         if (BlockStateUtils.isRopeBlock(blockMap.get("north"))) voxelShapeArrayList.add(NORTH_BOUNDING_BOX);
         if (BlockStateUtils.isRopeBlock(blockMap.get("east"))) voxelShapeArrayList.add(EAST_BOUNDING_BOX);
         if (BlockStateUtils.isRopeBlock(blockMap.get("south"))) voxelShapeArrayList.add(SOUTH_BOUNDING_BOX);
