@@ -24,28 +24,36 @@ import static growthcraft.cellar.shared.Reference.FluidName.*;
 public class GrowthcraftCellarItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MODID);
 
-    public static final RegistryObject<CellarPotionItem> ALE_POTION = ITEMS.register(
-            UnlocalizedName.ALE_POTION,
-            CellarPotionItem::new
-    );
-    // Foods
     public static final RegistryObject<GrowthcraftFoodItem> GRAPE_PURPLE = ITEMS.register(
             UnlocalizedName.GRAPE_PURPLE, GrowthcraftFoodItem::new
-    );
-    public static final RegistryObject<GrowthcraftFoodItem> GRAPE_RED = ITEMS.register(
-            UnlocalizedName.GRAPE_RED, GrowthcraftFoodItem::new
-    );
-    public static final RegistryObject<GrowthcraftFoodItem> GRAPE_WHITE = ITEMS.register(
-            UnlocalizedName.GRAPE_WHITE, GrowthcraftFoodItem::new
-    );
-    public static final RegistryObject<GrapeSeedsItem> GRAPE_RED_SEEDS = ITEMS.register(
-            UnlocalizedName.GRAPE_SEEDS_RED, () -> new GrapeSeedsItem(GRAPE_RED.get())
     );
     public static final RegistryObject<GrapeSeedsItem> GRAPE_PURPLE_SEEDS = ITEMS.register(
             UnlocalizedName.GRAPE_SEEDS_PURPLE, () -> new GrapeSeedsItem(GRAPE_PURPLE.get())
     );
+
+    public static final RegistryObject<GrowthcraftFoodItem> GRAPE_RED = ITEMS.register(
+            UnlocalizedName.GRAPE_RED, GrowthcraftFoodItem::new
+    );
+
+    public static final RegistryObject<GrapeSeedsItem> GRAPE_RED_SEEDS = ITEMS.register(
+            UnlocalizedName.GRAPE_SEEDS_RED, () -> new GrapeSeedsItem(GRAPE_RED.get())
+    );
+
+    public static final RegistryObject<CellarPotionItem> ALE_POTION = ITEMS.register(
+            UnlocalizedName.ALE_POTION,
+            CellarPotionItem::new
+    );
+    public static final RegistryObject<GrowthcraftFoodItem> GRAPE_WHITE = ITEMS.register(
+            UnlocalizedName.GRAPE_WHITE, GrowthcraftFoodItem::new
+    );
     public static final RegistryObject<GrapeSeedsItem> GRAPE_WHITE_SEEDS = ITEMS.register(
             UnlocalizedName.GRAPE_SEEDS_WHITE, () -> new GrapeSeedsItem(GRAPE_WHITE.get())
+    );
+    public static final RegistryObject<GrowthcraftItem> HOPS = ITEMS.register(
+            UnlocalizedName.HOPS, GrowthcraftItem::new
+    );
+    public static final RegistryObject<HopSeedsItem> HOPS_SEEDS = ITEMS.register(
+            UnlocalizedName.HOPS_SEEDS, HopSeedsItem::new
     );
     public static final RegistryObject<CellarPotionItem> LAGER_POTION = ITEMS.register(
             UnlocalizedName.LAGER_POTION,
@@ -57,6 +65,22 @@ public class GrowthcraftCellarItems {
     public static final RegistryObject<CellarPotionItem> WINE_POTION = ITEMS.register(
             UnlocalizedName.WINE_POTION,
             CellarPotionItem::new
+    );
+    public static final RegistryObject<GrowthcraftItem> YEAST_BAYANUS = ITEMS.register(
+            UnlocalizedName.YEAST_BAYANUS, GrowthcraftItem::new
+    );
+    public static final RegistryObject<GrowthcraftEnchantedItem> YEAST_BAYANUS_ETHEREAL = ITEMS.register(
+            UnlocalizedName.YEAST_BAYANUS_ETHEREAL, GrowthcraftEnchantedItem::new
+    );
+    //endregion
+    public static final RegistryObject<GrowthcraftItem> YEAST_BREWERS = ITEMS.register(
+            UnlocalizedName.YEAST_BREWERS, GrowthcraftItem::new
+    );
+    public static final RegistryObject<GrowthcraftEnchantedItem> YEAST_BREWERS_ETHEREAL = ITEMS.register(
+            UnlocalizedName.YEAST_BREWERS_ETHEREAL, GrowthcraftEnchantedItem::new
+    );
+    public static final RegistryObject<GrowthcraftItem> YEAST_ETHEREAL = ITEMS.register(
+            UnlocalizedName.YEAST_ETHEREAL, GrowthcraftItem::new
     );
     public static final RegistryObject<GrowthcraftItem> brew_kettle_lid = ITEMS.register(
             UnlocalizedName.BREW_KETTLE_LID,
@@ -88,29 +112,6 @@ public class GrowthcraftCellarItems {
     );
     public static final RegistryObject<GrainItem> grain_pale_golden = ITEMS.register(
             UnlocalizedName.GRAIN_PALE_GOLDEN, () -> new GrainItem(Reference.FluidColor.PALE_GOLDEN_WORT_FLUID_COLOR.getRGB())
-    );
-
-    public static final RegistryObject<GrowthcraftItem> HOPS = ITEMS.register(
-            UnlocalizedName.HOPS, GrowthcraftItem::new
-    );
-    public static final RegistryObject<HopSeedsItem> HOPS_SEEDS = ITEMS.register(
-            UnlocalizedName.HOPS_SEEDS, HopSeedsItem::new
-    );
-    public static final RegistryObject<GrowthcraftItem> YEAST_BAYANUS = ITEMS.register(
-            UnlocalizedName.YEAST_BAYANUS, GrowthcraftItem::new
-    );
-    public static final RegistryObject<GrowthcraftEnchantedItem> YEAST_BAYANUS_ETHEREAL = ITEMS.register(
-            UnlocalizedName.YEAST_BAYANUS_ETHEREAL, GrowthcraftEnchantedItem::new
-    );
-    //endregion
-    public static final RegistryObject<GrowthcraftItem> YEAST_BREWERS = ITEMS.register(
-            UnlocalizedName.YEAST_BREWERS, GrowthcraftItem::new
-    );
-    public static final RegistryObject<GrowthcraftEnchantedItem> YEAST_BREWERS_ETHEREAL = ITEMS.register(
-            UnlocalizedName.YEAST_BREWERS_ETHEREAL, GrowthcraftEnchantedItem::new
-    );
-    public static final RegistryObject<GrowthcraftItem> YEAST_ETHEREAL = ITEMS.register(
-            UnlocalizedName.YEAST_ETHEREAL, GrowthcraftItem::new
     );
     public static final RegistryObject<GrowthcraftItem> yeast_lager = ITEMS.register(
             UnlocalizedName.YEAST_LAGER, GrowthcraftItem::new

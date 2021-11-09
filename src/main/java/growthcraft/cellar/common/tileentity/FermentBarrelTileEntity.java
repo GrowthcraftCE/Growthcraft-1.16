@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.tileentity;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.client.container.FermentBarrelContainer;
 import growthcraft.cellar.common.recipe.FermentBarrelRecipe;
 import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
@@ -38,15 +37,12 @@ import java.util.Set;
 
 public class FermentBarrelTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
-    private int maxProcessingTime;
-    private int currentProcessingTime;
-    private ITextComponent customName;
-
     private final GrowthcraftItemHandler inventory;
-
     private final FluidTankHandler fluidTankHandler;
-
+    private int currentProcessingTime;
     private FermentBarrelRecipe currentRecipe;
+    private ITextComponent customName;
+    private int maxProcessingTime;
 
     public FermentBarrelTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
@@ -85,7 +81,6 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
                 if (recipe != null) {
                     this.maxProcessingTime = recipe.getProcessingTime();
                     if (recipe != currentRecipe) {
-                        GrowthcraftCellar.LOGGER.error("Found recipe.");
                         currentRecipe = recipe;
                         // wait until next cycle to start processing
                     } else if (currentProcessingTime >= maxProcessingTime) {
@@ -113,6 +108,8 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     }
 
     private void processRecipeResult() {
+        // TODO[44]: Be able handle having to many input items for amount of fluid.
+
         // Determine if the current ingredients is a multiple of the recipe.
         Float multiplier = (float) this.inventory.getStackInSlot(0).getCount() / currentRecipe.getIngredientItemStack().getCount();
 
@@ -212,8 +209,6 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
         this.write(nbt);
         return nbt;
     }
-
-    // Heat Sources Handling - Not needed
 
     // Inventory
     @Override
