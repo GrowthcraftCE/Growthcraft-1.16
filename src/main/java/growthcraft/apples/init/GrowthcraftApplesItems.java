@@ -10,4 +10,6 @@ public class GrowthcraftApplesItems {
 
     private GrowthcraftApplesItems() { /* Prevent default public constructor */ }
 
+    // TODO[]: Register Apple Seeds and add verify recipe.
+
 }
