@@ -1,6 +1,5 @@
 package growthcraft.apples.common.block;
 
-import growthcraft.apples.GrowthcraftApples;
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
 import growthcraft.lib.common.block.GrowthcraftLogBlock;
 import growthcraft.lib.common.block.GrowthcraftTreeLeaves;
@@ -57,9 +56,9 @@ public class AppleTreeLeaves extends GrowthcraftTreeLeaves implements IGrowable 
     @Override
     public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
         super.tick(state, worldIn, pos, rand);
-        GrowthcraftApples.LOGGER.error("Tick testing for growth..." + pos);
+        //GrowthcraftApples.LOGGER.error("Tick testing for growth..." + pos);
         if (worldIn.isAirBlock(pos.down()) && rand.nextInt(100) < 10) {
-            GrowthcraftApples.LOGGER.error("Tick time to grow!" + tickCount);
+            //GrowthcraftApples.LOGGER.error("Tick time to grow!" + tickCount);
             grow(worldIn, rand, pos, state);
         }
 
