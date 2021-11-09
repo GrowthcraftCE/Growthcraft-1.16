@@ -34,7 +34,7 @@ public class HopsCrop extends GrowthcraftCropsRopeBlock {
             Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D)
     };
 
-    // TODO[]: Set hops fruit min/max via Config
+    // TODO[63]: Set hops fruit min/max via Config
     private static final int fruitMax = 3;
     private static final int fruitMin = 1;
 

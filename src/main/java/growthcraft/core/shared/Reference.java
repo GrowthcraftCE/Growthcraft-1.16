@@ -1,6 +1,6 @@
 package growthcraft.core.shared;
 
-import growthcraft.core.init.GrowthcraftItems;
+import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
@@ -27,18 +27,16 @@ public class Reference {
     public static final String CROWBAR_WHITE = "crowbar_white";
     public static final String CROWBAR_YELLOW = "crowbar_yellow";
 
-    // TODO[]:
+    // TODO[7]:
     public static final String SALT_ORE = "rocksalt_ore";
-    // TODO[]:
+    // TODO[5]:
     public static final String SALT_BLOCK = "salt_block";
-    // TODO[]:
+    // TODO[4]:
     public static final String SALT_ITEM = "salt";
 
-    // TODO[]:
     public static final String ROPE = "rope";
     public static final String ROPE_LINEN = "rope_linen";
 
-    // TODO[*]: Move tags to lib
     public static final String TAG_ROPE = "rope";
     public static final String TAG_ROPE_FENCE = "rope_fence";
     public static final String TAG_HEATSOURCES = "heatsources";
@@ -49,8 +47,7 @@ public class Reference {
     public static final ItemGroup growthcraftCreativeTab = new ItemGroup(Reference.MODID) {
         @Override
         public ItemStack createIcon() {
-            // TODO: Set as cellar ferment barrel.
-            return new ItemStack(GrowthcraftItems.CROWBAR_GREEN.get());
+            return new ItemStack(GrowthcraftCellarBlocks.barrel_ferment_oak.get());
         }
     };
 

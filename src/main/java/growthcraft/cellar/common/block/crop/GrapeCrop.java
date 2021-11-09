@@ -39,9 +39,9 @@ public class GrapeCrop extends GrowthcraftCropsRopeBlock {
             Block.makeCuboidShape(4.0D, 4.0D, 4.0D, 12.0D, 16.0D, 12.0D),
             Block.makeCuboidShape(4.0D, 4.0D, 4.0D, 12.0D, 16.0D, 12.0D)};
 
-    // TODO[]: Set grapes fruit min/max via Config
-    private static int fruitMax = 3;
-    private static int fruitMin = 1;
+    // TODO[63]: Set grapes fruit min/max via Config
+    private static final int fruitMax = 3;
+    private static final int fruitMin = 1;
 
     public GrapeCrop() {
         super(getInitProperties());
