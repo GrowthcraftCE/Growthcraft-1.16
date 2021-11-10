@@ -1,7 +1,10 @@
 package growthcraft.apples.init;
 
-import growthcraft.cellar.shared.Reference;
+import growthcraft.apples.common.item.AppleSeedsItem;
+import growthcraft.apples.shared.Reference;
+import growthcraft.apples.shared.UnlocalizedName;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -10,6 +13,9 @@ public class GrowthcraftApplesItems {
 
     private GrowthcraftApplesItems() { /* Prevent default public constructor */ }
 
-    // TODO[]: Register Apple Seeds and add verify recipe.
+    public static final RegistryObject<AppleSeedsItem> APPLE_SEEDS = ITEMS.register(
+            UnlocalizedName.APPLE_SEEDS,
+            AppleSeedsItem::new
+    );
 
 }
