@@ -108,24 +108,26 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     }
 
     private void processRecipeResult() {
-        // TODO[44]: Be able handle having to many input items for amount of fluid.
-
         // Determine if the current ingredients is a multiple of the recipe.
-        Float multiplier = (float) this.inventory.getStackInSlot(0).getCount() / currentRecipe.getIngredientItemStack().getCount();
+        Float fluidMultiplier = (float) this.getFluidTank(0).getFluidAmount() / currentRecipe.getResultingFluid().getAmount();
 
-        if (multiplier % 1 == 0) {
-            if (currentRecipe.getResultingFluid().getAmount() * multiplier.intValue()
-                    == this.getFluidTank(0).getFluidAmount()) {
+        // We have to have a multiple of the fluid in order to replace all of it at one time.
+        if (fluidMultiplier % 1 == 0) {
+            int itemStackShrinkCount = currentRecipe.getIngredientItemStack().getCount() * fluidMultiplier.intValue();
+
+            // Check that there are enough input items
+            if (this.inventory.getStackInSlot(0).getCount() > itemStackShrinkCount) {
+                // Then we have enough items for the amount of fluid we have.
+
                 // Process recipe inputs
-                this.getFluidTank(0).drain(currentRecipe.getIngredientFluidStack().getAmount() * multiplier.intValue(),
+                this.getFluidTank(0).drain(currentRecipe.getIngredientFluidStack().getAmount() * fluidMultiplier.intValue(),
                         IFluidHandler.FluidAction.EXECUTE);
-                this.inventory.getStackInSlot(0).shrink(currentRecipe.getIngredientItemStack().getCount() * multiplier.intValue());
+                this.inventory.getStackInSlot(0).shrink(itemStackShrinkCount);
 
                 // Process recipe outputs
                 FluidStack resultFluidStack = currentRecipe.getResultingFluid();
-                resultFluidStack.setAmount(currentRecipe.getResultingFluid().getAmount() * multiplier.intValue());
+                resultFluidStack.setAmount(currentRecipe.getResultingFluid().getAmount() * fluidMultiplier.intValue());
                 this.getFluidTank(0).fill(resultFluidStack, IFluidHandler.FluidAction.EXECUTE);
-
             }
         } else {
             // Something isn't right we do not have ingredients for a whole recipe.
