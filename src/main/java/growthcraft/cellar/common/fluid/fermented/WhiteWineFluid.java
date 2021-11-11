@@ -22,7 +22,7 @@ public abstract class WhiteWineFluid extends ForgeFlowingFluid {
 
     private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.WHITE_WINE_FLUID_BLOCK;
     private static final Color color = WHITE_WINE_FLUID_COLOR;
-    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_purple_wine;
+    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_white_wine;
     private static final RegistryObject<WhiteWineFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.WHITE_WINE_FLUID_FLOWING;
     private static final RegistryObject<WhiteWineFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.WHITE_WINE_FLUID_STILL;
 

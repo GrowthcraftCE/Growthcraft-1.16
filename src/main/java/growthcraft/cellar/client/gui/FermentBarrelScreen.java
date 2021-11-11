@@ -79,8 +79,10 @@ public class FermentBarrelScreen extends ContainerScreen<FermentBarrelContainer>
         int guiBubbleX = this.guiLeft + 58;
         int guiBubbleY = this.guiTop + 19;
 
+        int guiBubbleHeight = this.container.getProcessingTimeScaled(28);
+
         this.blit(matrixStack, guiBubbleX, guiBubbleY, 176, 0, 9,
-                this.container.getProcessingTimeScaled(28));
+                guiBubbleHeight);
 
         // Input fluid tank
         int guiInputFluidTankX = guiLeft + 72;
