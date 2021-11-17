@@ -2,6 +2,7 @@ package growthcraft.cellar.common.block.crop;
 
 import growthcraft.cellar.common.tileentity.GrapeVineTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
+import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.lib.common.block.GrowthcraftCropsRopeBlock;
 import growthcraft.lib.util.BlockStateUtils;
 import growthcraft.lib.util.WorldUtils;
@@ -39,9 +40,8 @@ public class GrapeCrop extends GrowthcraftCropsRopeBlock {
             Block.makeCuboidShape(4.0D, 4.0D, 4.0D, 12.0D, 16.0D, 12.0D),
             Block.makeCuboidShape(4.0D, 4.0D, 4.0D, 12.0D, 16.0D, 12.0D)};
 
-    // TODO[63]: Set grapes fruit min/max via Config
-    private static final int fruitMax = 3;
-    private static final int fruitMin = 1;
+    private static final int fruitMax = GrowthcraftCellarConfig.getGrapeVineMaxFruitYield();
+    private static final int fruitMin = GrowthcraftCellarConfig.getGrapeVineMinFruitYield();
 
     public GrapeCrop() {
         super(getInitProperties());

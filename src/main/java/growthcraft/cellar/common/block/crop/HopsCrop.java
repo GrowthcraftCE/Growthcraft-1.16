@@ -1,6 +1,7 @@
 package growthcraft.cellar.common.block.crop;
 
 import growthcraft.cellar.init.GrowthcraftCellarItems;
+import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.lib.common.block.GrowthcraftCropsRopeBlock;
 import growthcraft.lib.util.BlockStateUtils;
 import net.minecraft.block.Block;
@@ -34,9 +35,8 @@ public class HopsCrop extends GrowthcraftCropsRopeBlock {
             Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D)
     };
 
-    // TODO[63]: Set hops fruit min/max via Config
-    private static final int fruitMax = 3;
-    private static final int fruitMin = 1;
+    private static final int fruitMax = GrowthcraftCellarConfig.getHopsCropMaxFruitYield();
+    private static final int fruitMin = GrowthcraftCellarConfig.getHopsCropMinFruitYield();
 
     public HopsCrop() {
         super();
