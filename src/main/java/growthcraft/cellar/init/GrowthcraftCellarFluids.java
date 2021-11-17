@@ -149,7 +149,7 @@ public class GrowthcraftCellarFluids {
 			UnlocalizedName.getFluidNames(FluidName.VIENNA_LAGER).get(STILL), ViennaLagerFluid.Source::new);
 	public static final RegistryObject<ViennaLagerFluid.Flowing> VIENNA_LAGER_FLUID_FLOWING = FLUIDS.register(
 			UnlocalizedName.getFluidNames(FluidName.VIENNA_LAGER).get(FLOWING), ViennaLagerFluid.Flowing::new);
-	public static final RegistryObject<FlowingFluidBlock> VIENNA_FLUID_BLOCK =
+	public static final RegistryObject<FlowingFluidBlock> VIENNA_LAGER_FLUID_BLOCK =
 			GrowthcraftCellarBlocks.BLOCKS.register(UnlocalizedName.getFluidNames(FluidName.VIENNA_LAGER).get(BLOCK),
 					() -> new FlowingFluidBlock(VIENNA_LAGER_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
 

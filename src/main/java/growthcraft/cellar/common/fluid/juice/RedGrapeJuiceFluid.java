@@ -2,6 +2,7 @@ package growthcraft.cellar.common.fluid.juice;
 
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
+import growthcraft.lib.util.ColorUtils;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
@@ -21,7 +22,7 @@ import static growthcraft.cellar.shared.Reference.FluidResource.*;
 public abstract class RedGrapeJuiceFluid extends ForgeFlowingFluid {
 
     private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.RED_GRAPE_JUICE_FLUID_BLOCK;
-    private static final Color color = RED_GRAPE_JUICE_COLOR;
+    private static final ColorUtils.GrowthcraftColor color = RED_GRAPE_JUICE_COLOR;
     private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_red_grape_juice;
     private static final RegistryObject<RedGrapeJuiceFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.RED_GRAPE_JUICE_FLUID_FLOWING;
     private static final RegistryObject<RedGrapeJuiceFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.RED_GRAPE_JUICE_FLUID_STILL;
@@ -30,8 +31,8 @@ public abstract class RedGrapeJuiceFluid extends ForgeFlowingFluid {
             registry_fluid_still,
             registry_fluid_flowing,
             FluidAttributes.builder(STILL, FLOWING)
-                    .color(color.getRGB())
-                    .density(0).viscosity(0)
+                    .color(color.toIntValue())
+                    .density(3000).luminosity(2).viscosity(1000)
                     .sound(SoundEvents.ITEM_BUCKET_FILL, SoundEvents.ITEM_BUCKET_EMPTY)
                     .overlay(OVERLAY))
             .block(block)
@@ -42,7 +43,7 @@ public abstract class RedGrapeJuiceFluid extends ForgeFlowingFluid {
     }
 
     public static Color getColor() {
-        return color;
+        return color.getColor();
     }
 
     @Override

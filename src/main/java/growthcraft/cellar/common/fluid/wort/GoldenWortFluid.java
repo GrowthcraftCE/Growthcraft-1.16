@@ -2,6 +2,7 @@ package growthcraft.cellar.common.fluid.wort;
 
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
+import growthcraft.lib.util.ColorUtils;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
@@ -21,7 +22,7 @@ import static growthcraft.cellar.shared.Reference.FluidResource.*;
 public abstract class GoldenWortFluid extends ForgeFlowingFluid {
 
     private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.GOLDEN_WORT_FLUID_BLOCK;
-    private static final Color color = GOLDEN_WORT_FLUID_COLOR;
+    private static final ColorUtils.GrowthcraftColor color = GOLDEN_WORT_FLUID_COLOR;
     private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_golden_wort;
     private static final RegistryObject<GoldenWortFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.GOLDEN_WORT_FLUID_FLOWING;
     private static final RegistryObject<GoldenWortFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.GOLDEN_WORT_FLUID_STILL;
@@ -30,8 +31,8 @@ public abstract class GoldenWortFluid extends ForgeFlowingFluid {
             registry_fluid_still,
             registry_fluid_flowing,
             FluidAttributes.builder(STILL, FLOWING)
-                    .color(color.getRGB())
-                    .density(0).viscosity(0)
+                    .color(color.toIntValue())
+                    .density(3000).luminosity(2).viscosity(1000)
                     .sound(SoundEvents.ITEM_BUCKET_FILL, SoundEvents.ITEM_BUCKET_EMPTY)
                     .overlay(OVERLAY))
             .block(block)
@@ -42,7 +43,7 @@ public abstract class GoldenWortFluid extends ForgeFlowingFluid {
     }
 
     public static Color getColor() {
-        return color;
+        return color.getColor();
     }
 
     @Override
