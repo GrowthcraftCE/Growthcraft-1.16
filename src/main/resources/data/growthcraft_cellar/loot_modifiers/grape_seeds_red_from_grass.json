@@ -1,0 +1,14 @@
+{
+  "type": "growthcraft_cellar:global_block_loot_modifier",
+  "conditions": [
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.02
+    },
+    {
+      "condition": "block_state_property",
+      "block": "minecraft:grass"
+    }
+  ],
+  "item": "growthcraft_cellar:grape_seeds_red"
+}

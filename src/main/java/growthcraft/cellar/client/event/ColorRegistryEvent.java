@@ -3,6 +3,7 @@ package growthcraft.cellar.client.event;
 import growthcraft.cellar.common.item.GrainItem;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,6 +18,7 @@ public class ColorRegistryEvent {
     }
 
     @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
     public static void registerItemColors(ColorHandlerEvent.Item event) {
 
         List<GrainItem> grainItems = new ArrayList<>();
