@@ -153,7 +153,7 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
                         // If the currentSmeltTime is greater than the max, then we need to
                         // move some items and fluids around.
                         this.inputFluidTank.drain(recipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
-                        this.inventory.getStackInSlot(0).shrink(recipe.getInputItem().getCount());
+                        this.inventory.getStackInSlot(0).shrink(recipe.getInputItemStack().getCount());
                         this.outputFluidTank.forceFill(recipe.getOutputFluidStack(), IFluidHandler.FluidAction.EXECUTE);
                         if (new Random().nextInt(4) == 1) {
                             this.inventory.insertItem(1, recipe.getByProduct(), false);

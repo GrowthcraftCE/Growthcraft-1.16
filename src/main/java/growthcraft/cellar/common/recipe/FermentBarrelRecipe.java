@@ -8,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
@@ -20,17 +22,17 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
     private final ResourceLocation recipeId;
     private final FluidStack inputFluidStack;
     private final FluidStack outputFluidStack;
-    private final ItemStack inputItem;
+    private final ItemStack inputItemStack;
     private final List<CellarPotionEffect> potionEffects;
     private final int processingTime;
     private final Color color;
     private final CellarPotionItem bottleItem;
 
-    public FermentBarrelRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItem, FluidStack outputFluidStack, int processingTime, List<CellarPotionEffect> potionEffects, ItemStack bottle, Color color) {
+    public FermentBarrelRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItemStack, FluidStack outputFluidStack, int processingTime, List<CellarPotionEffect> potionEffects, ItemStack bottle, Color color) {
         this.recipeId = recipeId;
         this.inputFluidStack = inputFluidStack;
         this.outputFluidStack = outputFluidStack;
-        this.inputItem = inputItem;
+        this.inputItemStack = inputItemStack;
         this.processingTime = processingTime;
         this.potionEffects = potionEffects;
         this.bottleItem = (CellarPotionItem) bottle.getItem();
@@ -43,8 +45,8 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
     }
 
     public boolean matches(ItemStack inputItemStack, FluidStack inputFluidStack) {
-        boolean inputItemMatches = this.inputItem.getItem() == inputItemStack.getItem()
-                && this.inputItem.getCount() <= inputItemStack.getCount();
+        boolean inputItemMatches = this.inputItemStack.getItem() == inputItemStack.getItem()
+                && this.inputItemStack.getCount() <= inputItemStack.getCount();
 
         boolean inputFluidMatches = this.inputFluidStack.getFluid() == inputFluidStack.getFluid()
                 && this.inputFluidStack.getAmount() <= inputFluidStack.getAmount();
@@ -110,7 +112,7 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
     }
 
     public ItemStack getIngredientItemStack() {
-        return this.inputItem;
+        return this.inputItemStack;
     }
 
     public FluidStack getResultingFluid() {
@@ -135,5 +137,10 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
 
     public Color getColor() {
         return color;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return NonNullList.from(Ingredient.EMPTY, Ingredient.fromStacks(inputItemStack));
     }
 }
