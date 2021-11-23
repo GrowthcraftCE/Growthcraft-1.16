@@ -101,7 +101,6 @@ public class BrewKettleRecipeCategory implements IRecipeCategory<BrewKettleRecip
 
         // Set Output ItemStack and ByProduct ItemStack
         List<ItemStack> outputItemStacks = new ArrayList<>();
-        outputItemStacks.add(recipe.getInputItemStack());
         outputItemStacks.add(recipe.getByProduct());
         ingredients.setOutputs(VanillaTypes.ITEM, outputItemStacks);
 
@@ -113,17 +112,23 @@ public class BrewKettleRecipeCategory implements IRecipeCategory<BrewKettleRecip
     public void setRecipe(IRecipeLayout layout, BrewKettleRecipe recipe, IIngredients ingredients) {
         try {
             // Set Input ItemStack GUI
-            layout.getItemStacks().init(0, true, 83, 24);
+            layout.getItemStacks().init(0, true, 69, 24);
             layout.getItemStacks().set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
 
             // Set Input FluidStack GUI
             IGuiFluidStackGroup guiFluidStacks = layout.getFluidStacks();
-            guiFluidStacks.init(0, true, 55, 8, 16, 52, 1000, false, overlayTank);
+            guiFluidStacks.init(0, true, 36, 7, 16, 52, 4000, false, overlayTank);
             guiFluidStacks.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0));
 
             // Set Output FluidStack GUI
-// set Output ItemStack ByProduct GUI
-            ingredients.setOutput(VanillaTypes.ITEM, recipe.getByProduct());
+            guiFluidStacks.init(1, true, 104, 7, 16, 52, 4000, false, overlayTank);
+            guiFluidStacks.set(1, ingredients.getOutputs(VanillaTypes.FLUID).get(0));
+
+            // set Output ItemStack ByProduct GUI
+            layout.getItemStacks().init(1, true, 130, 6);
+            layout.getItemStacks().set(1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
+
+            //T TODO: Set the Brew Kettle Lid GUI if needed
 
         } catch (Exception ex) {
             GrowthcraftCellar.LOGGER.error("Failure to set recipe mapping for Brew Kettle recipe.");
@@ -133,7 +138,7 @@ public class BrewKettleRecipeCategory implements IRecipeCategory<BrewKettleRecip
     @Override
     public void draw(BrewKettleRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
         try {
-            overlayHeated.draw(matrixStack, 71, 47);
+            overlayHeated.draw(matrixStack, 59, 44);
         } catch (Exception ex) {
             GrowthcraftCellar.LOGGER.error("Failure to draw heat texture for Brew Kettle recipe.");
         }

@@ -10,6 +10,7 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
+import mezz.jei.api.gui.ingredient.IGuiFluidStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
@@ -64,7 +65,7 @@ public class FermentBarrelRecipeCategory implements IRecipeCategory<FermentBarre
 
     @Override
     public String getTitle() {
-        return null;
+        return title;
     }
 
     @Override
@@ -98,7 +99,17 @@ public class FermentBarrelRecipeCategory implements IRecipeCategory<FermentBarre
     @Override
     public void setRecipe(IRecipeLayout layout, FermentBarrelRecipe recipe, IIngredients ingredients) {
         try {
+            // Set Input ItemStack GUI
+            layout.getItemStacks().init(0, true, 41, 42);
+            layout.getItemStacks().set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
 
+            // Set Input FluidStack GUI
+            IGuiFluidStackGroup guiFluidStacks = layout.getFluidStacks();
+            guiFluidStacks.init(0, true, 69, 7, 16, 52, 4000, false, overlayTank);
+            guiFluidStacks.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0));
+
+            guiFluidStacks.init(1, true, 90, 7, 16, 52, 4000, false, overlayTank);
+            guiFluidStacks.set(1, ingredients.getOutputs(VanillaTypes.FLUID).get(0));
         } catch (Exception ex) {
             GrowthcraftCellar.LOGGER.error("Failure to set recipe mapping for Ferment Barrel recipe.");
         }

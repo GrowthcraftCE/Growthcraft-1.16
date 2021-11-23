@@ -1,6 +1,8 @@
 package growthcraft.cellar.common.recipe;
 
+import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -13,6 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 
+@MethodsReturnNonnullByDefault
 public class BrewKettleRecipe implements IRecipe<IInventory> {
 
     private final ResourceLocation recipeId;
@@ -99,7 +102,11 @@ public class BrewKettleRecipe implements IRecipe<IInventory> {
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return NonNullList.from(Ingredient.EMPTY, Ingredient.fromStacks(inputItemStack));
+        return NonNullList.from(
+                Ingredient.EMPTY,
+                this.requiresLid ?
+                        Ingredient.fromStacks(inputItemStack, new ItemStack(GrowthcraftCellarItems.brew_kettle_lid.get()))
+                        : Ingredient.fromStacks(inputItemStack));
     }
 
 }

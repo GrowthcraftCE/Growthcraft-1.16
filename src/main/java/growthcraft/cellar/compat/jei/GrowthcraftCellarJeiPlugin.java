@@ -2,6 +2,7 @@ package growthcraft.cellar.compat.jei;
 
 import growthcraft.cellar.compat.jei.category.BrewKettleRecipeCategory;
 import growthcraft.cellar.compat.jei.category.CultureJarRecipeCategory;
+import growthcraft.cellar.compat.jei.category.FermentBarrelRecipeCategory;
 import growthcraft.cellar.compat.jei.category.RoasterRecipeCategory;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.shared.Reference;
@@ -30,6 +31,9 @@ public class GrowthcraftCellarJeiPlugin implements IModPlugin {
         // Culture Jar Recipes
         registry.addRecipes(RecipeUtils.findRecipesByType(Minecraft.getInstance().world,
                 GrowthcraftCellarRecipes.CULTURE_JAR_RECIPE_TYPE), CultureJarRecipeCategory.ID);
+        // Ferment Barrel Recipes
+        registry.addRecipes(RecipeUtils.findRecipesByType(Minecraft.getInstance().world,
+                GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE), FermentBarrelRecipeCategory.ID);
         // Roaster Recipes
         registry.addRecipes(RecipeUtils.findRecipesByType(Minecraft.getInstance().world,
                 GrowthcraftCellarRecipes.ROASTER_RECIPE_TYPE), RoasterRecipeCategory.ID);
@@ -40,6 +44,7 @@ public class GrowthcraftCellarJeiPlugin implements IModPlugin {
         // Register the recipe categories with JEI
         registry.addRecipeCategories(
                 new BrewKettleRecipeCategory(registry.getJeiHelpers().getGuiHelper()),
+                new FermentBarrelRecipeCategory(registry.getJeiHelpers().getGuiHelper()),
                 new CultureJarRecipeCategory(registry.getJeiHelpers().getGuiHelper()),
                 new RoasterRecipeCategory(registry.getJeiHelpers().getGuiHelper())
         );
