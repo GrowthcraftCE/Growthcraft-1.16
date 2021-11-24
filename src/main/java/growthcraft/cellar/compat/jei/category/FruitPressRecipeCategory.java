@@ -10,6 +10,7 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
+import mezz.jei.api.gui.ingredient.IGuiFluidStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
@@ -98,6 +99,14 @@ public class FruitPressRecipeCategory implements IRecipeCategory<FruitPressRecip
     @Override
     public void setRecipe(IRecipeLayout layout, FruitPressRecipe recipe, IIngredients ingredients) {
         try {
+// Set Input ItemStack GUI
+            layout.getItemStacks().init(0, true, 41, 42);
+            layout.getItemStacks().set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
+
+            // Set Input FluidStack GUI
+            IGuiFluidStackGroup guiFluidStacks = layout.getFluidStacks();
+            guiFluidStacks.init(0, true, 62, 7, 50, 52, 4000, false, overlayTank);
+            guiFluidStacks.set(0, ingredients.getOutputs(VanillaTypes.FLUID).get(0));
 
         } catch (Exception ex) {
             GrowthcraftCellar.LOGGER.error("Failure to set recipe mapping for Fruit Press recipe.");
