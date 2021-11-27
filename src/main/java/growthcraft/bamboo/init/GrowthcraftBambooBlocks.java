@@ -4,10 +4,7 @@ import growthcraft.bamboo.GrowthcraftBamboo;
 import growthcraft.bamboo.common.block.BambooLogBlock;
 import growthcraft.bamboo.shared.Reference;
 import growthcraft.bamboo.shared.UnlocalizedName;
-import growthcraft.lib.common.block.GrowthcraftButtonBlock;
-import growthcraft.lib.common.block.GrowthcraftDoorBlock;
-import growthcraft.lib.common.block.GrowthcraftPlankBlock;
-import growthcraft.lib.common.block.GrowthcraftPressurePlateBlock;
+import growthcraft.lib.common.block.*;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.StairsBlock;
@@ -50,6 +47,10 @@ public class GrowthcraftBambooBlocks {
                     () -> GrowthcraftBambooBlocks.BAMBOO_PLANK.get().getDefaultState(),
                     AbstractBlock.Properties.from(GrowthcraftBambooBlocks.BAMBOO_PLANK.get())
             )
+    );
+
+    public static final RegistryObject<GrowthcraftTrapdoor> BAMBOO_PLANK_TRAPDOOR = BLOCKS.register(
+            UnlocalizedName.BAMBOO_PLANK_TRAPDOOR, GrowthcraftTrapdoor::new
     );
 
     public static final RegistryObject<BambooLogBlock> BAMBOO_WOOD = BLOCKS.register(
