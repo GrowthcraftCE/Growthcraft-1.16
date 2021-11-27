@@ -5,15 +5,21 @@ import net.minecraft.block.material.Material;
 
 public class GrowthcraftSlabBlock extends SlabBlock {
 
-    private String unlocalizedName;
-
-    public GrowthcraftSlabBlock(String unlocalizedName) {
-        this(unlocalizedName, getInitProperties(Material.WOOD));
+    public GrowthcraftSlabBlock() {
+        this(getInitProperties(Material.WOOD));
     }
 
-    public GrowthcraftSlabBlock(String unlocalizedName, Properties properties) {
+    public GrowthcraftSlabBlock(Material material) {
+        this(getInitProperties(material));
+    }
+
+    @Deprecated
+    public GrowthcraftSlabBlock(String unlocalizedName) {
+        this(getInitProperties(Material.WOOD));
+    }
+
+    public GrowthcraftSlabBlock(Properties properties) {
         super(properties);
-        this.unlocalizedName = unlocalizedName;
     }
 
     private static Properties getInitProperties(Material material) {

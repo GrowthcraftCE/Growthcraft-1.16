@@ -28,25 +28,28 @@ public class GrowthcraftBambooBlocks {
             UnlocalizedName.BAMBOO_PLANK, () -> new GrowthcraftPlankBlock(Material.BAMBOO)
     );
 
-    public static final RegistryObject<GrowthcraftButtonBlock> BAMBOO_PLANK_BUTTON = BLOCKS.register(
-            UnlocalizedName.BAMBOO_PLANK_BUTTON, GrowthcraftButtonBlock::new
-    );
-
-    public static final RegistryObject<GrowthcraftDoorBlock> BAMBOO_PLANK_DOOR = BLOCKS.register(
-            UnlocalizedName.BAMBOO_PLANK_DOOR,
-            GrowthcraftDoorBlock::new
-    );
-
-    public static final RegistryObject<GrowthcraftPressurePlateBlock> BAMBOO_PLANK_PRESSURE_PLATE = BLOCKS.register(
-            UnlocalizedName.BAMBOO_PLANK_PRESSURE_PLATE, GrowthcraftPressurePlateBlock::new
-    );
-
     public static final RegistryObject<Block> BAMBOO_PLANK_STAIRS = BLOCKS.register(
             UnlocalizedName.BAMBOO_PLANK_STAIRS,
             () -> new StairsBlock(
                     () -> GrowthcraftBambooBlocks.BAMBOO_PLANK.get().getDefaultState(),
                     AbstractBlock.Properties.from(GrowthcraftBambooBlocks.BAMBOO_PLANK.get())
             )
+    );
+
+    public static final RegistryObject<GrowthcraftButtonBlock> BAMBOO_PLANK_BUTTON = BLOCKS.register(
+            UnlocalizedName.BAMBOO_PLANK_BUTTON, GrowthcraftButtonBlock::new
+    );
+
+    public static final RegistryObject<GrowthcraftDoorBlock> BAMBOO_PLANK_DOOR = BLOCKS.register(
+            UnlocalizedName.BAMBOO_PLANK_DOOR, GrowthcraftDoorBlock::new
+    );
+
+    public static final RegistryObject<GrowthcraftPressurePlateBlock> BAMBOO_PLANK_PRESSURE_PLATE = BLOCKS.register(
+            UnlocalizedName.BAMBOO_PLANK_PRESSURE_PLATE, GrowthcraftPressurePlateBlock::new
+    );
+
+    public static final RegistryObject<GrowthcraftSlabBlock> BAMBOO_PLANK_SLAB = BLOCKS.register(
+            UnlocalizedName.BAMBOO_PLANK_SLAB, GrowthcraftSlabBlock::new
     );
 
     public static final RegistryObject<GrowthcraftTrapdoor> BAMBOO_PLANK_TRAPDOOR = BLOCKS.register(
