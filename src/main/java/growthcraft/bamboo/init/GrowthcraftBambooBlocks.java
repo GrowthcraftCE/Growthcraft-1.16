@@ -1,6 +1,7 @@
 package growthcraft.bamboo.init;
 
 import growthcraft.bamboo.GrowthcraftBamboo;
+import growthcraft.bamboo.common.block.BambooLogBlock;
 import growthcraft.bamboo.shared.Reference;
 import growthcraft.bamboo.shared.UnlocalizedName;
 import growthcraft.lib.common.block.GrowthcraftButtonBlock;
@@ -22,6 +23,19 @@ public class GrowthcraftBambooBlocks {
 
     public static final RegistryObject<GrowthcraftButtonBlock> BAMBOO_PLANK_BUTTON = BLOCKS.register(
             UnlocalizedName.BAMBOO_PLANK_BUTTON, GrowthcraftButtonBlock::new
+    );
+
+    public static final RegistryObject<BambooLogBlock> BAMBOO_WOOD = BLOCKS.register(
+            UnlocalizedName.BAMBOO_WOOD, BambooLogBlock::new
+    );
+    public static final RegistryObject<BambooLogBlock> BAMBOO_WOOD_LOG = BLOCKS.register(
+            UnlocalizedName.BAMBOO_WOOD_LOG, BambooLogBlock::new
+    );
+    public static final RegistryObject<BambooLogBlock> BAMBOO_WOOD_LOG_STRIPPED = BLOCKS.register(
+            UnlocalizedName.BAMBOO_WOOD_LOG_STRIPPED, BambooLogBlock::new
+    );
+    public static final RegistryObject<BambooLogBlock> BAMBOO_WOOD_STRIPPED = BLOCKS.register(
+            UnlocalizedName.BAMBOO_WOOD_STRIPPED, BambooLogBlock::new
     );
 
     private GrowthcraftBambooBlocks() {
