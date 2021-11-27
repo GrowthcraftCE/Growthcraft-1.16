@@ -3,43 +3,38 @@ package growthcraft.lib.common.block;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraftforge.common.ToolType;
 
 public class GrowthcraftPressurePlateBlock extends PressurePlateBlock {
 
-    private final String unlocalizedName;
+    public GrowthcraftPressurePlateBlock() {
+        this(Sensitivity.EVERYTHING, getInitProperties(Material.WOOD));
+    }
+
+    public GrowthcraftPressurePlateBlock(Material material) {
+        this(Sensitivity.EVERYTHING, getInitProperties(material));
+    }
 
     /**
-     * Constructor for a standar wooden pressure plate.
+     * Constructor for a standard wooden pressure plate.
      *
      * @param unlocalizedName Unlocalized name
      */
+    @Deprecated
     public GrowthcraftPressurePlateBlock(String unlocalizedName) {
-        this(unlocalizedName, Sensitivity.EVERYTHING, getInitProperties(Material.WOOD));
+        this(Sensitivity.EVERYTHING, getInitProperties(Material.WOOD));
     }
 
-    /**
-     * Constructor for a wooden pressure plate with custom sensitivity.
-     *
-     * @param unlocalizedName Unlocalized name
-     * @param sensitivity     Sensitivity type.
-     */
-    public GrowthcraftPressurePlateBlock(String unlocalizedName, Sensitivity sensitivity) {
-        this(unlocalizedName, sensitivity, getInitProperties(Material.WOOD));
-    }
-
-    public GrowthcraftPressurePlateBlock(String unlocalizedName, Sensitivity sensitivity, Properties properties) {
+    public GrowthcraftPressurePlateBlock(Sensitivity sensitivity, Properties properties) {
         super(sensitivity, properties);
-        this.unlocalizedName = unlocalizedName;
     }
 
     private static Properties getInitProperties(Material material) {
         Properties properties = Properties.create(material);
         properties.hardnessAndResistance(1.5F);
         properties.sound(SoundType.WOOD);
+        properties.harvestTool(ToolType.AXE);
         return properties;
     }
 
-    public String getUnlocalizedName() {
-        return unlocalizedName;
-    }
 }

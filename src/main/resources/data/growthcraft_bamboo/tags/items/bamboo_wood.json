@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "growthcraft_bamboo:bamboo_wood_log",
+    "growthcraft_bamboo:bamboo_wood",
+    "growthcraft_bamboo:bamboo_wood_log_stripped",
+    "growthcraft_bamboo:bamboo_wood_stripped"
+  ]
+}

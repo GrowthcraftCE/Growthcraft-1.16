@@ -7,6 +7,7 @@ import growthcraft.bamboo.shared.UnlocalizedName;
 import growthcraft.lib.common.block.GrowthcraftButtonBlock;
 import growthcraft.lib.common.block.GrowthcraftDoorBlock;
 import growthcraft.lib.common.block.GrowthcraftPlankBlock;
+import growthcraft.lib.common.block.GrowthcraftPressurePlateBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.StairsBlock;
@@ -37,6 +38,10 @@ public class GrowthcraftBambooBlocks {
     public static final RegistryObject<GrowthcraftDoorBlock> BAMBOO_PLANK_DOOR = BLOCKS.register(
             UnlocalizedName.BAMBOO_PLANK_DOOR,
             GrowthcraftDoorBlock::new
+    );
+
+    public static final RegistryObject<GrowthcraftPressurePlateBlock> BAMBOO_PLANK_PRESSURE_PLATE = BLOCKS.register(
+            UnlocalizedName.BAMBOO_PLANK_PRESSURE_PLATE, GrowthcraftPressurePlateBlock::new
     );
 
     public static final RegistryObject<Block> BAMBOO_PLANK_STAIRS = BLOCKS.register(
