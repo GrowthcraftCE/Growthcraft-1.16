@@ -2,6 +2,7 @@ package growthcraft.cellar.common.fluid.fermented;
 
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
+import growthcraft.lib.util.ColorUtils;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
@@ -21,7 +22,7 @@ import static growthcraft.cellar.shared.Reference.FluidResource.*;
 public abstract class PaleLagerFluid extends ForgeFlowingFluid {
 
     private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.PALE_LAGER_FLUID_BLOCK;
-    private static final Color color = PALE_LAGER_FLUID_COLOR;
+    private static final ColorUtils.GrowthcraftColor color = PALE_LAGER_FLUID_COLOR;
     private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_pale_lager;
     private static final RegistryObject<PaleLagerFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.PALE_LAGER_FLUID_FLOWING;
     private static final RegistryObject<PaleLagerFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.PALE_LAGER_FLUID_STILL;
@@ -30,8 +31,8 @@ public abstract class PaleLagerFluid extends ForgeFlowingFluid {
             registry_fluid_still,
             registry_fluid_flowing,
             FluidAttributes.builder(STILL, FLOWING)
-                    .color(color.getRGB())
-                    .density(0).viscosity(0)
+                    .color(color.toIntValue())
+                    .density(3000).luminosity(2).viscosity(1000)
                     .sound(SoundEvents.ITEM_BUCKET_FILL, SoundEvents.ITEM_BUCKET_EMPTY)
                     .overlay(OVERLAY))
             .block(block)
@@ -42,7 +43,7 @@ public abstract class PaleLagerFluid extends ForgeFlowingFluid {
     }
 
     public static Color getColor() {
-        return color;
+        return color.getColor();
     }
 
     @Override

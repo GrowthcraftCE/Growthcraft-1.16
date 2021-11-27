@@ -1,6 +1,7 @@
 package growthcraft.cellar.common.recipe;
 
 import com.google.gson.JsonObject;
+import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.lib.util.CraftingUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -18,7 +19,7 @@ public class BrewKettleRecipeSerializer extends ForgeRegistryEntry<IRecipeSerial
     @Override
     public BrewKettleRecipe read(ResourceLocation recipeId, JsonObject json) {
         // Requirements
-        boolean requireLid = JSONUtils.getBoolean(json,"requires_lid");
+        boolean requireLid = JSONUtils.getBoolean(json, "requires_lid");
         // Input
         FluidStack inputFluid = CraftingUtils.getFluidStack(JSONUtils.getJsonObject(json, "input_fluid"));
         ItemStack inputItem = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "input_item"), false);
@@ -32,11 +33,30 @@ public class BrewKettleRecipeSerializer extends ForgeRegistryEntry<IRecipeSerial
     @Nullable
     @Override
     public BrewKettleRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-        return null;
+        try {
+            ItemStack inputItem = buffer.readItemStack();
+            FluidStack inputFluid = buffer.readFluidStack();
+            FluidStack outputFluid = buffer.readFluidStack();
+            ItemStack byProduct = buffer.readItemStack();
+            boolean lid = buffer.readBoolean();
+            return new BrewKettleRecipe(recipeId, inputFluid, inputItem, outputFluid, byProduct, lid);
+        } catch (Exception ex) {
+            GrowthcraftCellar.LOGGER.error("Unable to read recipe from network buffer!");
+            throw ex;
+        }
     }
 
     @Override
     public void write(PacketBuffer buffer, BrewKettleRecipe recipe) {
-
+        try {
+            buffer.writeItemStack(recipe.getInputItemStack());
+            buffer.writeFluidStack(recipe.getInputFluidStack());
+            buffer.writeFluidStack(recipe.getOutputFluidStack());
+            buffer.writeItemStack(recipe.getByProduct());
+            buffer.writeBoolean(recipe.getLidRequired());
+        } catch (Exception ex) {
+            GrowthcraftCellar.LOGGER.error("Unable to read recipe from network buffer!");
+            throw ex;
+        }
     }
 }

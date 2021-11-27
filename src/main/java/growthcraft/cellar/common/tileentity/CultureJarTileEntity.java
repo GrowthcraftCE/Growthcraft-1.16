@@ -3,8 +3,8 @@ package growthcraft.cellar.common.tileentity;
 import growthcraft.cellar.client.container.CultureJarContainer;
 import growthcraft.cellar.common.block.CultureJarBlock;
 import growthcraft.cellar.common.recipe.CultureJarRecipe;
-import growthcraft.cellar.common.recipe.CultureJarRecipeType;
 import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
+import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
@@ -264,7 +264,7 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
 
     @Nullable
     private CultureJarRecipe getRecipe(ItemStack itemStack, FluidStack fluidStack, boolean requiresHeatSource) {
-        Set<IRecipe<?>> recipes = findRecipesByType(new CultureJarRecipeType(), this.world);
+        Set<IRecipe<?>> recipes = findRecipesByType(GrowthcraftCellarRecipes.CULTURE_JAR_RECIPE_TYPE, this.world);
         for (IRecipe<?> recipe : recipes) {
             CultureJarRecipe cultureJarRecipe = (CultureJarRecipe) recipe;
             if (cultureJarRecipe.matches(itemStack, fluidStack, requiresHeatSource)) return cultureJarRecipe;

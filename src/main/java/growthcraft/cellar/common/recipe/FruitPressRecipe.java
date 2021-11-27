@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
@@ -71,7 +73,7 @@ public class FruitPressRecipe implements IRecipe<IInventory> {
 
     @Override
     public IRecipeType<?> getType() {
-        return new FruitPressRecipeType();
+        return GrowthcraftCellarRecipes.FRUIT_PRESS_RECIPE_TYPE;
     }
 
     @Override
@@ -91,11 +93,17 @@ public class FruitPressRecipe implements IRecipe<IInventory> {
         return outputFluidStack;
     }
 
-    public ItemStack getItemByProduct() {
+    public ItemStack getByProduct() {
         return itemByProduct;
     }
 
     public FluidStack getResultingFluid() {
         return this.outputFluidStack;
     }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return NonNullList.from(Ingredient.EMPTY, Ingredient.fromStacks(inputItemStack));
+    }
+
 }

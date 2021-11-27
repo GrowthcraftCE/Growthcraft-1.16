@@ -1,7 +1,9 @@
 package growthcraft.cellar.common.block.crop;
 
 import growthcraft.cellar.init.GrowthcraftCellarItems;
+import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.lib.common.block.GrowthcraftCropsRopeBlock;
+import growthcraft.lib.util.BlockStateUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,8 +13,14 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class HopsCrop extends GrowthcraftCropsRopeBlock {
 
@@ -24,15 +32,36 @@ public class HopsCrop extends GrowthcraftCropsRopeBlock {
             Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D),
             Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D),
             Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D),
-            Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D)};
+            Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D)
+    };
 
-    // TODO[]: Set hops fruit min/max via Config
-    private static int fruitMax = 3;
-    private static int fruitMin = 1;
+    private static final int fruitMax = GrowthcraftCellarConfig.getHopsCropMaxFruitYield();
+    private static final int fruitMin = GrowthcraftCellarConfig.getHopsCropMinFruitYield();
 
     public HopsCrop() {
         super();
-        GrowthcraftCropsRopeBlock.SHAPE_BY_AGE = CUSTOM_SHAPE_BY_AGE;
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        VoxelShape ropeVoxel = super.getShape(state, worldIn, pos, context);
+
+        ArrayList<VoxelShape> voxelShapeArrayList = new ArrayList<VoxelShape>();
+        Map<String, Block> blockMap = BlockStateUtils.getSurroundingBlocks(worldIn, pos);
+
+        if (BlockStateUtils.isRopeBlock(blockMap.get("north"))) voxelShapeArrayList.add(NORTH_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("east"))) voxelShapeArrayList.add(EAST_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("south"))) voxelShapeArrayList.add(SOUTH_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("west"))) voxelShapeArrayList.add(WEST_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("up"))) voxelShapeArrayList.add(UP_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeBlock(blockMap.get("down"))) voxelShapeArrayList.add(DOWN_BOUNDING_BOX);
+
+        voxelShapeArrayList.add(ropeVoxel);
+
+        VoxelShape[] voxelShapes = new VoxelShape[voxelShapeArrayList.size()];
+        voxelShapes = voxelShapeArrayList.toArray(voxelShapes);
+
+        return VoxelShapes.or(KNOT_BOUNDING_BOX, voxelShapes);
     }
 
     @Override
@@ -48,4 +77,5 @@ public class HopsCrop extends GrowthcraftCropsRopeBlock {
         }
         return ActionResultType.PASS;
     }
+
 }

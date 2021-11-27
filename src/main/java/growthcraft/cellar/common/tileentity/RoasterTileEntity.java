@@ -31,6 +31,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
@@ -71,9 +72,9 @@ public class RoasterTileEntity extends LockableLootTileEntity implements ITickab
         }
     }
 
-    //public IItemHandler getInventory() {
-    //     return this.items;
-    //}
+    public IItemHandler getInventory() {
+        return this.items;
+    }
 
     @Override
     public NonNullList<ItemStack> getItems() {

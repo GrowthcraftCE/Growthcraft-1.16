@@ -1,5 +1,5 @@
 {
-  "parent": "builtin/generated",
+  "parent": "item/generated",
   "textures": {
     "layer0": "growthcraft_cellar:item/potion/brew_bottle_contents",
     "layer1": "growthcraft_cellar:item/potion/brew_bottle_base"

@@ -68,8 +68,8 @@ public class FruitPressScreen extends ContainerScreen<FruitPressContainer> {
         blit(matrixStack, this.guiLeft, this.guiTop, baseX, baseY, this.xSize, this.ySize, maxX, maxY);
 
         // Progress Bar
-        int guiProgressX = this.guiLeft + 82;
-        int guiProgressY = this.guiTop + 30;
+        int guiProgressX = this.guiLeft + 56;
+        int guiProgressY = this.guiTop + 20;
 
         this.blit(matrixStack, guiProgressX, guiProgressY, 176, 0, 9,
                 this.container.getProcessingTimeScaled(28));
