@@ -2,6 +2,7 @@ package growthcraft.bamboo;
 
 import growthcraft.bamboo.client.proxy.ClientProxy;
 import growthcraft.bamboo.common.proxy.CommonProxy;
+import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
 import growthcraft.bamboo.shared.Reference;
 import growthcraft.lib.proxy.IProxy;
 import net.minecraft.item.Item;
@@ -35,7 +36,7 @@ public class GrowthcraftBamboo {
 
         // TODO: Register Items and Blocks
         // GrowthcraftBambooItems.ITEMS.register(modEventBus);
-        // GrowthcraftBambooBlocks.BLOCKS.register(modEventBus);
+        GrowthcraftBambooBlocks.BLOCKS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -50,7 +51,8 @@ public class GrowthcraftBamboo {
     public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
         final IForgeRegistry<Item> itemRegistry = event.getRegistry();
         final Item.Properties properties = new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab);
-        // TODO: Register Growthcraft Bamboo Block Items
+        // Register Growthcraft Bamboo Block Items
+        GrowthcraftBambooBlocks.registerBlockItems(itemRegistry, properties);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
