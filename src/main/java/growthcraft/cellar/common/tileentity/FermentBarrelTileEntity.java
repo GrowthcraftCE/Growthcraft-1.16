@@ -5,6 +5,8 @@ import growthcraft.cellar.common.recipe.FermentBarrelRecipe;
 import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
+import growthcraft.cellar.shared.Reference;
+import growthcraft.cellar.shared.UnlocalizedName;
 import growthcraft.lib.common.tank.handler.FluidTankHandler;
 import growthcraft.lib.util.RecipeUtils;
 import net.minecraft.block.BlockState;
@@ -23,6 +25,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
@@ -142,7 +145,8 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
 
     @Override
     protected ITextComponent getDefaultName() {
-        return this.getBlockState().getBlock().getTranslatedName();
+        String translationKey = String.format("container.%s.%s", Reference.MODID, UnlocalizedName.FERMENT_BARREL);
+        return new TranslationTextComponent(translationKey);
     }
 
     @Override

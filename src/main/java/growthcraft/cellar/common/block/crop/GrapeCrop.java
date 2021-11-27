@@ -95,14 +95,16 @@ public class GrapeCrop extends GrowthcraftCropsRopeBlock {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (state.get(AGE) == this.getMaxAge()) {
-            GrapeVineTileEntity grapeVineTileEntity = (GrapeVineTileEntity) worldIn.getTileEntity(pos);
-            ItemStack itemStack = grapeVineTileEntity.getInventory().getStackInSlot(1);
-            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), itemStack);
-            // Empty out the loot inventory
-            grapeVineTileEntity.getInventory().setStackInSlot(1, ItemStack.EMPTY);
-            // Decrease age to 4
-            worldIn.setBlockState(pos, this.getActualBlockStateWithAge(worldIn, pos, 4), 2);
+        if (!worldIn.isRemote()) {
+            if (state.get(AGE) == this.getMaxAge()) {
+                GrapeVineTileEntity grapeVineTileEntity = (GrapeVineTileEntity) worldIn.getTileEntity(pos);
+                ItemStack itemStack = grapeVineTileEntity.getInventory().getStackInSlot(1);
+                InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), itemStack);
+                // Empty out the loot inventory
+                grapeVineTileEntity.getInventory().setStackInSlot(1, ItemStack.EMPTY);
+                // Decrease age to 4
+                worldIn.setBlockState(pos, this.getActualBlockStateWithAge(worldIn, pos, 4), 2);
+            }
         }
         return ActionResultType.PASS;
     }
