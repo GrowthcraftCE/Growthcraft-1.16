@@ -3,6 +3,7 @@ package growthcraft.bamboo;
 import growthcraft.bamboo.client.proxy.ClientProxy;
 import growthcraft.bamboo.common.proxy.CommonProxy;
 import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
+import growthcraft.bamboo.init.client.GrowthcraftBambooBlockRenders;
 import growthcraft.bamboo.shared.Reference;
 import growthcraft.lib.proxy.IProxy;
 import net.minecraft.item.Item;
@@ -62,8 +63,8 @@ public class GrowthcraftBamboo {
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-        // TODO: Register Block Renders
-        //GrowthcraftBambooBlockRenders.setRenderLayers();
+        // Register Block Renders
+        GrowthcraftBambooBlockRenders.setRenderLayers();
     }
 
 }

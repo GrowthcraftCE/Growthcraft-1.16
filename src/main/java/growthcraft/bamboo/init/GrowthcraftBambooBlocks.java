@@ -5,6 +5,7 @@ import growthcraft.bamboo.common.block.BambooLogBlock;
 import growthcraft.bamboo.shared.Reference;
 import growthcraft.bamboo.shared.UnlocalizedName;
 import growthcraft.lib.common.block.GrowthcraftButtonBlock;
+import growthcraft.lib.common.block.GrowthcraftDoorBlock;
 import growthcraft.lib.common.block.GrowthcraftPlankBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -31,6 +32,11 @@ public class GrowthcraftBambooBlocks {
 
     public static final RegistryObject<GrowthcraftButtonBlock> BAMBOO_PLANK_BUTTON = BLOCKS.register(
             UnlocalizedName.BAMBOO_PLANK_BUTTON, GrowthcraftButtonBlock::new
+    );
+
+    public static final RegistryObject<GrowthcraftDoorBlock> BAMBOO_PLANK_DOOR = BLOCKS.register(
+            UnlocalizedName.BAMBOO_PLANK_DOOR,
+            GrowthcraftDoorBlock::new
     );
 
     public static final RegistryObject<Block> BAMBOO_PLANK_STAIRS = BLOCKS.register(
@@ -89,7 +95,7 @@ public class GrowthcraftBambooBlocks {
      * Exclude blocks from the item registry. These blocks are not to be crafted or
      * accessible through the creative screen.
      *
-     * @param registryName Resource Location of the block to query against the exclude list.
+     * @param registryName Resource Location of the block to query against the exclusion list.
      * @return boolean If block is to be excluded from the item registry.
      */
     private static boolean excludeBlockItemRegistry(ResourceLocation registryName) {
