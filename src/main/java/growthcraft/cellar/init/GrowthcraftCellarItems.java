@@ -22,7 +22,24 @@ import java.awt.*;
 import static growthcraft.cellar.shared.Reference.FluidName.*;
 
 public class GrowthcraftCellarItems {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
+            ForgeRegistries.ITEMS, Reference.MODID
+    );
+
+    public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(
+            ForgeRegistries.POTION_TYPES, growthcraft.core.shared.Reference.MODID
+    );
+
+    public static final RegistryObject<CellarPotionItem> POTION_WINE = ITEMS.register(
+            UnlocalizedName.WINE_POTION, CellarPotionItem::new
+    );
+
+    /*
+    public static final RegistryObject<CellarPotionItem> WINE_POTION = ITEMS.register(
+            UnlocalizedName.WINE_POTION,
+            CellarPotionItem::new
+    );
+     */
 
     public static final RegistryObject<GrowthcraftFoodItem> GRAPE_PURPLE = ITEMS.register(
             UnlocalizedName.GRAPE_PURPLE, GrowthcraftFoodItem::new
@@ -59,13 +76,7 @@ public class GrowthcraftCellarItems {
             UnlocalizedName.LAGER_POTION,
             CellarPotionItem::new
     );
-    public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(
-            ForgeRegistries.POTION_TYPES, growthcraft.core.shared.Reference.MODID
-    );
-    public static final RegistryObject<CellarPotionItem> WINE_POTION = ITEMS.register(
-            UnlocalizedName.WINE_POTION,
-            CellarPotionItem::new
-    );
+
     public static final RegistryObject<GrowthcraftItem> YEAST_BAYANUS = ITEMS.register(
             UnlocalizedName.YEAST_BAYANUS, GrowthcraftItem::new
     );

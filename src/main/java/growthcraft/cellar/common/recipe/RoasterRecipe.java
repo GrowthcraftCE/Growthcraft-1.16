@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.recipe;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -43,10 +42,6 @@ public class RoasterRecipe implements IRecipe<IInventory> {
         if (inputValid && redstoneValid) {
             if (this.outputItemStack.getCount() > 1) {
                 this.outputItemStack.setCount(1);
-
-                GrowthcraftCellar.LOGGER.info(
-                        String.format("Recipe matches(%s): %s (%d)", this.recipeId.toString(), this.outputItemStack.getItem().getRegistryName(), this.outputItemStack.getCount())
-                );
             }
         }
         return inputValid && redstoneValid;
@@ -92,7 +87,7 @@ public class RoasterRecipe implements IRecipe<IInventory> {
 
     @Override
     public IRecipeType<?> getType() {
-        return new RoasterRecipeType();
+        return GrowthcraftCellarRecipes.ROASTER_RECIPE_TYPE;
     }
 
     @Override
@@ -110,5 +105,9 @@ public class RoasterRecipe implements IRecipe<IInventory> {
 
     public ResourceLocation getRecipeID() {
         return this.recipeId;
+    }
+
+    public ItemStack getRedstoneTimerItemStack() {
+        return redstoneTimerItemStack;
     }
 }

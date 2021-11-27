@@ -3,8 +3,8 @@ package growthcraft.cellar.common.tileentity;
 import growthcraft.cellar.client.container.BrewKettleContainer;
 import growthcraft.cellar.common.block.BrewKettleBlock;
 import growthcraft.cellar.common.recipe.BrewKettleRecipe;
-import growthcraft.cellar.common.recipe.BrewKettleRecipeType;
 import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
+import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.Reference;
@@ -269,7 +269,7 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
     /* Recipe Handling */
     @Nullable
     private BrewKettleRecipe getRecipe(ItemStack itemStack, FluidStack fluidStack, boolean requiresLid) {
-        Set<IRecipe<?>> recipes = findRecipesByType(new BrewKettleRecipeType(), this.world);
+        Set<IRecipe<?>> recipes = findRecipesByType(GrowthcraftCellarRecipes.BREW_KETTLE_RECIPE_TYPE, this.world);
         for (IRecipe<?> recipe : recipes) {
             BrewKettleRecipe brewKettleRecipe = (BrewKettleRecipe) recipe;
             if (brewKettleRecipe.matches(itemStack, fluidStack, requiresLid)) return brewKettleRecipe;

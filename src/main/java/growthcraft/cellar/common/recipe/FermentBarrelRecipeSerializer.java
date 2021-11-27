@@ -2,8 +2,10 @@ package growthcraft.cellar.common.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import growthcraft.cellar.lib.effect.CellarPotionEffect;
+import growthcraft.cellar.GrowthcraftCellar;
+import growthcraft.cellar.lib.item.CellarPotionItem;
 import growthcraft.lib.util.CraftingUtils;
+import growthcraft.lib.util.EffectUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.network.PacketBuffer;
@@ -17,8 +19,6 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FermentBarrelRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<FermentBarrelRecipe> {
 
@@ -37,9 +37,8 @@ public class FermentBarrelRecipeSerializer extends ForgeRegistryEntry<IRecipeSer
         // Outputs
         FluidStack outputFluid = CraftingUtils.getFluidStack(JSONUtils.getJsonObject(json, "result"));
 
-        ItemStack bottle = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "bottle"), false);
-
-        List<CellarPotionEffect> effects = new ArrayList<>();
+        CellarPotionItem bottleItem = (CellarPotionItem) CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "bottle"), false).getItem();
+        ItemStack bottleItemStack = new ItemStack(bottleItem);
 
         //Effects
         JsonArray recipeEffects = JSONUtils.getJsonArray(json, "effects");
@@ -49,23 +48,43 @@ public class FermentBarrelRecipeSerializer extends ForgeRegistryEntry<IRecipeSer
             int effectAmplifier = JSONUtils.getInt(recipeEffects.get(i).getAsJsonObject(), "amplifier", 0);
 
             Effect effect = ForgeRegistries.POTIONS.getValue(new ResourceLocation(effectRegistryName));
-
-            effects.add(new CellarPotionEffect(effect, effectDuration, effectAmplifier));
-
+            EffectUtils.addEffect(bottleItemStack, effect, effectDuration, effectAmplifier);
         }
 
-        return new FermentBarrelRecipe(recipeId, inputFluid, inputItem, outputFluid, processingTime, effects, bottle, color);
+        return new FermentBarrelRecipe(recipeId, inputFluid, inputItem, outputFluid, processingTime, bottleItemStack, color);
+    }
+
+    @Override
+    public void write(PacketBuffer buffer, FermentBarrelRecipe recipe) {
+        try {
+            buffer.writeItemStack(recipe.getIngredientItemStack());
+            buffer.writeFluidStack(recipe.getIngredientFluidStack());
+            buffer.writeFluidStack(recipe.getResultingFluid());
+            buffer.writeItemStack(recipe.getBottleItemStack());
+            buffer.writeVarInt(recipe.getProcessingTime());
+            buffer.writeVarInt(recipe.getColor().hashCode());
+        } catch (Exception ex) {
+            GrowthcraftCellar.LOGGER.error("Unable to write recipe from network buffer!");
+            throw ex;
+        }
     }
 
     @Nullable
     @Override
     public FermentBarrelRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-        return null;
-    }
+        try {
+            ItemStack inputItem = buffer.readItemStack();
+            FluidStack inputFluid = buffer.readFluidStack();
+            FluidStack outputFluid = buffer.readFluidStack();
+            ItemStack outputBottleItem = buffer.readItemStack();
+            int processingTime = buffer.readVarInt();
+            Color color = new Color(buffer.readVarInt());
 
-    @Override
-    public void write(PacketBuffer buffer, FermentBarrelRecipe recipe) {
-
+            return new FermentBarrelRecipe(recipeId, inputFluid, inputItem, outputFluid, processingTime, outputBottleItem, color);
+        } catch (Exception ex) {
+            GrowthcraftCellar.LOGGER.error("Unable to read recipe from network buffer!");
+            throw ex;
+        }
     }
 
 }

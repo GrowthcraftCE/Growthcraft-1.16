@@ -82,7 +82,7 @@ public class CultureJarRecipe implements IRecipe<IInventory> {
 
     @Override
     public IRecipeType<?> getType() {
-        return new CultureJarRecipeType();
+        return GrowthcraftCellarRecipes.CULTURE_JAR_RECIPE_TYPE;
     }
 
     @Override

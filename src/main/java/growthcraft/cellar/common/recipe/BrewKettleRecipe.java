@@ -92,7 +92,7 @@ public class BrewKettleRecipe implements IRecipe<IInventory> {
 
     @Override
     public IRecipeType<?> getType() {
-        return new BrewKettleRecipeType();
+        return GrowthcraftCellarRecipes.BREW_KETTLE_RECIPE_TYPE;
     }
 
     @Override

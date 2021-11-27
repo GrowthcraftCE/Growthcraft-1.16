@@ -116,7 +116,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
             int itemStackShrinkCount = currentRecipe.getIngredientItemStack().getCount() * fluidMultiplier.intValue();
 
             // Check that there are enough input items
-            if (this.inventory.getStackInSlot(0).getCount() > itemStackShrinkCount) {
+            if (this.inventory.getStackInSlot(0).getCount() >= itemStackShrinkCount) {
                 // Then we have enough items for the amount of fluid we have.
 
                 // Process recipe inputs

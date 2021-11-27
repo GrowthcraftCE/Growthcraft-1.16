@@ -73,7 +73,7 @@ public class FruitPressRecipe implements IRecipe<IInventory> {
 
     @Override
     public IRecipeType<?> getType() {
-        return new FruitPressRecipeType();
+        return GrowthcraftCellarRecipes.FRUIT_PRESS_RECIPE_TYPE;
     }
 
     @Override
