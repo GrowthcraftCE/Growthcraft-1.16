@@ -6,7 +6,9 @@ import growthcraft.bamboo.shared.Reference;
 import growthcraft.bamboo.shared.UnlocalizedName;
 import growthcraft.lib.common.block.GrowthcraftButtonBlock;
 import growthcraft.lib.common.block.GrowthcraftPlankBlock;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.StairsBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -29,6 +31,14 @@ public class GrowthcraftBambooBlocks {
 
     public static final RegistryObject<GrowthcraftButtonBlock> BAMBOO_PLANK_BUTTON = BLOCKS.register(
             UnlocalizedName.BAMBOO_PLANK_BUTTON, GrowthcraftButtonBlock::new
+    );
+
+    public static final RegistryObject<Block> BAMBOO_PLANK_STAIRS = BLOCKS.register(
+            UnlocalizedName.BAMBOO_PLANK_STAIRS,
+            () -> new StairsBlock(
+                    () -> GrowthcraftBambooBlocks.BAMBOO_PLANK.get().getDefaultState(),
+                    AbstractBlock.Properties.from(GrowthcraftBambooBlocks.BAMBOO_PLANK.get())
+            )
     );
 
     public static final RegistryObject<BambooLogBlock> BAMBOO_WOOD = BLOCKS.register(
