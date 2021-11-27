@@ -44,12 +44,15 @@ public class GrowthcraftBambooBlocks {
     public static final RegistryObject<BambooLogBlock> BAMBOO_WOOD = BLOCKS.register(
             UnlocalizedName.BAMBOO_WOOD, BambooLogBlock::new
     );
+
     public static final RegistryObject<BambooLogBlock> BAMBOO_WOOD_LOG = BLOCKS.register(
             UnlocalizedName.BAMBOO_WOOD_LOG, BambooLogBlock::new
     );
+
     public static final RegistryObject<BambooLogBlock> BAMBOO_WOOD_LOG_STRIPPED = BLOCKS.register(
             UnlocalizedName.BAMBOO_WOOD_LOG_STRIPPED, BambooLogBlock::new
     );
+
     public static final RegistryObject<BambooLogBlock> BAMBOO_WOOD_STRIPPED = BLOCKS.register(
             UnlocalizedName.BAMBOO_WOOD_STRIPPED, BambooLogBlock::new
     );
@@ -58,6 +61,12 @@ public class GrowthcraftBambooBlocks {
         /* Prevent default public constructor */
     }
 
+    /**
+     * Register Block Items.
+     *
+     * @param itemRegistry Delegated forge registry.
+     * @param properties   Item Properties.
+     */
     public static void registerBlockItems(IForgeRegistry<Item> itemRegistry, Item.Properties properties) {
         GrowthcraftBamboo.LOGGER.debug(
                 String.format("<%s> Registration of itemBlocks started ...", Reference.NAME)
@@ -76,10 +85,16 @@ public class GrowthcraftBambooBlocks {
         );
     }
 
+    /**
+     * Exclude blocks from the item registry. These blocks are not to be crafted or
+     * accessible through the creative screen.
+     *
+     * @param registryName Resource Location of the block to query against the exclude list.
+     * @return boolean If block is to be excluded from the item registry.
+     */
     private static boolean excludeBlockItemRegistry(ResourceLocation registryName) {
         ArrayList<String> excludeBlocks = new ArrayList<>();
-        //excludeBlocks.add(Reference.MODID + ":" + growthcraft.cellar.shared.UnlocalizedName.FRUIT_PRESS_PISTON);
-
+        // Add any blocks that need to be excluded.
         return excludeBlocks.contains(registryName.toString());
     }
 
