@@ -5,7 +5,9 @@ import growthcraft.bamboo.common.block.BambooLogBlock;
 import growthcraft.bamboo.shared.Reference;
 import growthcraft.bamboo.shared.UnlocalizedName;
 import growthcraft.lib.common.block.GrowthcraftButtonBlock;
+import growthcraft.lib.common.block.GrowthcraftPlankBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -19,6 +21,10 @@ import java.util.ArrayList;
 public class GrowthcraftBambooBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(
             ForgeRegistries.BLOCKS, Reference.MODID
+    );
+
+    public static final RegistryObject<GrowthcraftPlankBlock> BAMBOO_PLANK = BLOCKS.register(
+            UnlocalizedName.BAMBOO_PLANK, () -> new GrowthcraftPlankBlock(Material.BAMBOO)
     );
 
     public static final RegistryObject<GrowthcraftButtonBlock> BAMBOO_PLANK_BUTTON = BLOCKS.register(

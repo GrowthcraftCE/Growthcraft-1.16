@@ -7,15 +7,16 @@ import net.minecraftforge.common.ToolType;
 
 public class GrowthcraftPlankBlock extends Block {
 
-    private final String unlocalizedName;
-
-    public GrowthcraftPlankBlock(String unlocalizedName) {
-        this(unlocalizedName, getInitProperties(Material.WOOD));
+    public GrowthcraftPlankBlock() {
+        this(getInitProperties(Material.WOOD));
     }
 
-    public GrowthcraftPlankBlock(String unlocalizedName, Properties properties) {
+    public GrowthcraftPlankBlock(Material material) {
+        this(getInitProperties(material));
+    }
+
+    public GrowthcraftPlankBlock(Properties properties) {
         super(properties);
-        this.unlocalizedName = unlocalizedName;
     }
 
     private static Properties getInitProperties(Material material) {
@@ -25,10 +26,6 @@ public class GrowthcraftPlankBlock extends Block {
         properties.harvestLevel(1);
         properties.sound(SoundType.WOOD);
         return properties;
-    }
-
-    public String getUnlocalizedName() {
-        return unlocalizedName;
     }
 
 }
