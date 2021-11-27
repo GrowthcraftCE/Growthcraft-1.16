@@ -3,6 +3,7 @@ package growthcraft.cellar.client.container;
 import growthcraft.cellar.common.tileentity.BrewKettleTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarContainers;
+import growthcraft.lib.common.handler.OutputSlotItemHandler;
 import growthcraft.lib.util.FunctionalIntReferenceHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -46,7 +47,7 @@ public class BrewKettleContainer extends Container {
         SlotItemHandler fluidInputSlot;
 
         /* Output Slot */
-        this.addSlot(new SlotItemHandler(
+        this.addSlot(new OutputSlotItemHandler(
                 brewKettleTileEntity.getInventory(),
                 index,
                 141, 17)

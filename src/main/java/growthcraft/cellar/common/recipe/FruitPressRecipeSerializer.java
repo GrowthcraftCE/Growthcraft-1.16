@@ -1,6 +1,7 @@
 package growthcraft.cellar.common.recipe;
 
 import com.google.gson.JsonObject;
+import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.lib.util.CraftingUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -43,11 +44,28 @@ public class FruitPressRecipeSerializer extends ForgeRegistryEntry<IRecipeSerial
     @Nullable
     @Override
     public FruitPressRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-        return null;
+        try {
+            ItemStack inputItemStack = buffer.readItemStack();
+            FluidStack outputFluidStack = buffer.readFluidStack();
+            ItemStack byProductItemStack = buffer.readItemStack();
+            int processingTime = buffer.readVarInt();
+            return new FruitPressRecipe(recipeId, inputItemStack, outputFluidStack, byProductItemStack, processingTime);
+        } catch (Exception ex) {
+            GrowthcraftCellar.LOGGER.error("Unable to read recipe from network buffer!");
+            throw ex;
+        }
     }
 
     @Override
     public void write(PacketBuffer buffer, FruitPressRecipe recipe) {
-
+        try {
+            buffer.writeItemStack(recipe.getInputItemStack());
+            buffer.writeFluidStack(recipe.getOutputFluidStack());
+            buffer.writeItemStack(recipe.getByProduct());
+            buffer.writeVarInt(recipe.getProcessingTime());
+        } catch (Exception ex) {
+            GrowthcraftCellar.LOGGER.error("Unable to write recipe from network buffer!");
+            throw ex;
+        }
     }
 }

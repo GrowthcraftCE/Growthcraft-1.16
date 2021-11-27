@@ -6,15 +6,20 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class ColorRegistryEvent {
+
+    private ColorRegistryEvent() {
+    }
 
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
-    public void registerItemColors(ColorHandlerEvent.Item event) {
+    public static void registerItemColors(ColorHandlerEvent.Item event) {
 
         List<GrainItem> grainItems = new ArrayList<>();
         grainItems.add(GrowthcraftCellarItems.grain_amber.get());

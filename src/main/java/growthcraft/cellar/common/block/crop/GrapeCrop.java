@@ -2,6 +2,7 @@ package growthcraft.cellar.common.block.crop;
 
 import growthcraft.cellar.common.tileentity.GrapeVineTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
+import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.lib.common.block.GrowthcraftCropsRopeBlock;
 import growthcraft.lib.util.BlockStateUtils;
 import growthcraft.lib.util.WorldUtils;
@@ -39,9 +40,8 @@ public class GrapeCrop extends GrowthcraftCropsRopeBlock {
             Block.makeCuboidShape(4.0D, 4.0D, 4.0D, 12.0D, 16.0D, 12.0D),
             Block.makeCuboidShape(4.0D, 4.0D, 4.0D, 12.0D, 16.0D, 12.0D)};
 
-    // TODO[]: Set grapes fruit min/max via Config
-    private static int fruitMax = 3;
-    private static int fruitMin = 1;
+    private static final int fruitMax = GrowthcraftCellarConfig.getGrapeVineMaxFruitYield();
+    private static final int fruitMin = GrowthcraftCellarConfig.getGrapeVineMinFruitYield();
 
     public GrapeCrop() {
         super(getInitProperties());
@@ -95,14 +95,16 @@ public class GrapeCrop extends GrowthcraftCropsRopeBlock {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (state.get(AGE) == this.getMaxAge()) {
-            GrapeVineTileEntity grapeVineTileEntity = (GrapeVineTileEntity) worldIn.getTileEntity(pos);
-            ItemStack itemStack = grapeVineTileEntity.getInventory().getStackInSlot(1);
-            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), itemStack);
-            // Empty out the loot inventory
-            grapeVineTileEntity.getInventory().setStackInSlot(1, ItemStack.EMPTY);
-            // Decrease age to 4
-            worldIn.setBlockState(pos, this.getActualBlockStateWithAge(worldIn, pos, 4), 2);
+        if (!worldIn.isRemote()) {
+            if (state.get(AGE) == this.getMaxAge()) {
+                GrapeVineTileEntity grapeVineTileEntity = (GrapeVineTileEntity) worldIn.getTileEntity(pos);
+                ItemStack itemStack = grapeVineTileEntity.getInventory().getStackInSlot(1);
+                InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), itemStack);
+                // Empty out the loot inventory
+                grapeVineTileEntity.getInventory().setStackInSlot(1, ItemStack.EMPTY);
+                // Decrease age to 4
+                worldIn.setBlockState(pos, this.getActualBlockStateWithAge(worldIn, pos, 4), 2);
+            }
         }
         return ActionResultType.PASS;
     }

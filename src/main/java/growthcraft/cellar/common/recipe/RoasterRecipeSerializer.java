@@ -1,6 +1,7 @@
 package growthcraft.cellar.common.recipe;
 
 import com.google.gson.JsonObject;
+import growthcraft.cellar.GrowthcraftCellar;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.network.PacketBuffer;
@@ -30,11 +31,26 @@ public class RoasterRecipeSerializer extends ForgeRegistryEntry<IRecipeSerialize
     @Nullable
     @Override
     public RoasterRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-        return null;
+        try {
+            ItemStack inputItemStack = buffer.readItemStack();
+            ItemStack outputItemStack = buffer.readItemStack();
+            ItemStack redstoneTimerItem = buffer.readItemStack();
+            return new RoasterRecipe(recipeId, inputItemStack, outputItemStack, redstoneTimerItem);
+        } catch (Exception ex) {
+            GrowthcraftCellar.LOGGER.error("Unable to read recipe from network buffer!");
+            throw ex;
+        }
     }
 
     @Override
     public void write(PacketBuffer buffer, RoasterRecipe recipe) {
-
+        try {
+            buffer.writeItemStack(recipe.getInputItemStack());
+            buffer.writeItemStack(recipe.getRecipeOutput());
+            buffer.writeItemStack(recipe.getRedstoneTimerItemStack());
+        } catch (Exception ex) {
+            GrowthcraftCellar.LOGGER.error("Unable to write recipe to network buffer!");
+            throw ex;
+        }
     }
 }

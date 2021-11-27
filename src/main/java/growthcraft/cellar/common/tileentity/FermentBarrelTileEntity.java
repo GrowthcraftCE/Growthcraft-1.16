@@ -1,11 +1,12 @@
 package growthcraft.cellar.common.tileentity;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.client.container.FermentBarrelContainer;
 import growthcraft.cellar.common.recipe.FermentBarrelRecipe;
 import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
+import growthcraft.cellar.shared.Reference;
+import growthcraft.cellar.shared.UnlocalizedName;
 import growthcraft.lib.common.tank.handler.FluidTankHandler;
 import growthcraft.lib.util.RecipeUtils;
 import net.minecraft.block.BlockState;
@@ -24,6 +25,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
@@ -38,15 +40,12 @@ import java.util.Set;
 
 public class FermentBarrelTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
-    private int maxProcessingTime;
-    private int currentProcessingTime;
-    private ITextComponent customName;
-
     private final GrowthcraftItemHandler inventory;
-
     private final FluidTankHandler fluidTankHandler;
-
+    private int currentProcessingTime;
     private FermentBarrelRecipe currentRecipe;
+    private ITextComponent customName;
+    private int maxProcessingTime;
 
     public FermentBarrelTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
@@ -85,7 +84,6 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
                 if (recipe != null) {
                     this.maxProcessingTime = recipe.getProcessingTime();
                     if (recipe != currentRecipe) {
-                        GrowthcraftCellar.LOGGER.error("Found recipe.");
                         currentRecipe = recipe;
                         // wait until next cycle to start processing
                     } else if (currentProcessingTime >= maxProcessingTime) {
@@ -114,21 +112,25 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
 
     private void processRecipeResult() {
         // Determine if the current ingredients is a multiple of the recipe.
-        Float multiplier = (float) this.inventory.getStackInSlot(0).getCount() / currentRecipe.getIngredientItemStack().getCount();
+        Float fluidMultiplier = (float) this.getFluidTank(0).getFluidAmount() / currentRecipe.getResultingFluid().getAmount();
 
-        if (multiplier % 1 == 0) {
-            if (currentRecipe.getResultingFluid().getAmount() * multiplier.intValue()
-                    == this.getFluidTank(0).getFluidAmount()) {
+        // We have to have a multiple of the fluid in order to replace all of it at one time.
+        if (fluidMultiplier % 1 == 0) {
+            int itemStackShrinkCount = currentRecipe.getIngredientItemStack().getCount() * fluidMultiplier.intValue();
+
+            // Check that there are enough input items
+            if (this.inventory.getStackInSlot(0).getCount() >= itemStackShrinkCount) {
+                // Then we have enough items for the amount of fluid we have.
+
                 // Process recipe inputs
-                this.getFluidTank(0).drain(currentRecipe.getIngredientFluidStack().getAmount() * multiplier.intValue(),
+                this.getFluidTank(0).drain(currentRecipe.getIngredientFluidStack().getAmount() * fluidMultiplier.intValue(),
                         IFluidHandler.FluidAction.EXECUTE);
-                this.inventory.getStackInSlot(0).shrink(currentRecipe.getIngredientItemStack().getCount() * multiplier.intValue());
+                this.inventory.getStackInSlot(0).shrink(itemStackShrinkCount);
 
                 // Process recipe outputs
                 FluidStack resultFluidStack = currentRecipe.getResultingFluid();
-                resultFluidStack.setAmount(currentRecipe.getResultingFluid().getAmount() * multiplier.intValue());
+                resultFluidStack.setAmount(currentRecipe.getResultingFluid().getAmount() * fluidMultiplier.intValue());
                 this.getFluidTank(0).fill(resultFluidStack, IFluidHandler.FluidAction.EXECUTE);
-
             }
         } else {
             // Something isn't right we do not have ingredients for a whole recipe.
@@ -143,7 +145,8 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
 
     @Override
     protected ITextComponent getDefaultName() {
-        return this.getBlockState().getBlock().getTranslatedName();
+        String translationKey = String.format("container.%s.%s", Reference.MODID, UnlocalizedName.FERMENT_BARREL);
+        return new TranslationTextComponent(translationKey);
     }
 
     @Override
@@ -212,8 +215,6 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
         this.write(nbt);
         return nbt;
     }
-
-    // Heat Sources Handling - Not needed
 
     // Inventory
     @Override

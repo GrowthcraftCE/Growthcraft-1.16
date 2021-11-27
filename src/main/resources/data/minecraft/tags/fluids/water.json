@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "growthcraft_cellar:red_wine_fluid_flowing",
+    "growthcraft_cellar:red_wine_fluid"
+  ]
+}

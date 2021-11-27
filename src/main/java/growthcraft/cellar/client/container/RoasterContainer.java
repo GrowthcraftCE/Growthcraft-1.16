@@ -2,6 +2,7 @@ package growthcraft.cellar.client.container;
 
 import growthcraft.cellar.common.tileentity.RoasterTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarContainers;
+import growthcraft.lib.common.handler.OutputSlotItemHandler;
 import growthcraft.lib.util.FunctionalIntReferenceHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -50,8 +51,8 @@ public class RoasterContainer extends Container {
 
         // Output Slot
         this.addSlot(
-                new Slot(
-                        this.roasterTileEntity,
+                new OutputSlotItemHandler(
+                        this.roasterTileEntity.getInventory(),
                         index, 106, 42
                 )
         );

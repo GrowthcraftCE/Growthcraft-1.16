@@ -22,5 +22,4 @@ public class GrowthcraftItem extends Item {
         properties.maxStackSize(maxStackSize);
         return properties;
     }
-
 }

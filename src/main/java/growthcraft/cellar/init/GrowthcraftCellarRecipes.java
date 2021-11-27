@@ -5,6 +5,7 @@ import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -44,11 +45,16 @@ public class GrowthcraftCellarRecipes {
     //endregion
 
     //region Recipe Types
-    public static final IRecipeType<BrewKettleRecipe> BREW_KETTLE_RECIPE_TYPE = new BrewKettleRecipeType();
-    public static final IRecipeType<CultureJarRecipe> CULTURE_JAR_RECIPE_TYPE = new CultureJarRecipeType();
-    public static final IRecipeType<FermentBarrelRecipe> FERMENT_BARREL_RECIPE_TYPE = new FermentBarrelRecipeType();
-    public static final IRecipeType<RoasterRecipe> ROASTER_RECIPE_TYPE = new RoasterRecipeType();
-    public static final IRecipeType<FruitPressRecipe> FRUIT_PRESS_RECIPE_TYPE = new FruitPressRecipeType();
+    public static final IRecipeType<BrewKettleRecipe> BREW_KETTLE_RECIPE_TYPE
+            = IRecipeType.register(new ResourceLocation(Reference.MODID, UnlocalizedName.BREW_KETTLE_RECIPE).toString());
+    public static final IRecipeType<CultureJarRecipe> CULTURE_JAR_RECIPE_TYPE
+            = IRecipeType.register(new ResourceLocation(Reference.MODID, UnlocalizedName.CULTURE_JAR_RECIPE).toString());
+    public static final IRecipeType<FermentBarrelRecipe> FERMENT_BARREL_RECIPE_TYPE
+            = IRecipeType.register(new ResourceLocation(Reference.MODID, UnlocalizedName.FERMENT_BARREL_RECIPE).toString());
+    public static final IRecipeType<RoasterRecipe> ROASTER_RECIPE_TYPE
+            = IRecipeType.register(new ResourceLocation(Reference.MODID, UnlocalizedName.ROASTER_RECIPE).toString());
+    public static final IRecipeType<FruitPressRecipe> FRUIT_PRESS_RECIPE_TYPE
+            = IRecipeType.register(new ResourceLocation(Reference.MODID, UnlocalizedName.FRUIT_PRESS_RECIPE).toString());
     //endregion
 
     private GrowthcraftCellarRecipes() {

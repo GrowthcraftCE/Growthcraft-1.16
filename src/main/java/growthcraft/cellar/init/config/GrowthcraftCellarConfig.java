@@ -29,9 +29,13 @@ public class GrowthcraftCellarConfig {
     private static ForgeConfigSpec.IntValue grape_vine_min_fruit;
     private static ForgeConfigSpec.IntValue grape_vine_max_fruit;
 
+    private static ForgeConfigSpec.IntValue hops_min_fruit;
+    private static ForgeConfigSpec.IntValue hops_max_fruit;
+
     static {
         initBrewKettleConfig(SERVER_BUILDER);
         initGrapeVineConfig(SERVER_BUILDER);
+        initHopsCropConfig(SERVER_BUILDER);
         //initWorldGenConfig(SERVER_BUILDER);
 
         SERVER = SERVER_BUILDER.build();
@@ -74,6 +78,16 @@ public class GrowthcraftCellarConfig {
                 .defineInRange("grape_vine.max_fruit_yield", 4, 1, 100);
     }
 
+    public static void initHopsCropConfig(ForgeConfigSpec.Builder server) {
+        hops_min_fruit = server
+                .comment("Set to the minimum amount of hops dropped by Hope crops.")
+                .defineInRange("hops_crop.min_fruit_yield", 1, 1, 100);
+        hops_max_fruit = server
+                .comment("Set to the maximum amount of hops dropped by Hope crops.")
+                .defineInRange("hops_crop.max_fruit_yield", 3, 1, 100);
+
+    }
+
     /**
      * World generation settings for Growthcraft Apples. World generation is server side only.
      *
@@ -101,4 +115,21 @@ public class GrowthcraftCellarConfig {
     public static int getDefaultProcessingTime() {
         return default_brewing_ticks.get();
     }
+
+    public static int getGrapeVineMinFruitYield() {
+        return grape_vine_min_fruit.get();
+    }
+
+    public static int getGrapeVineMaxFruitYield() {
+        return grape_vine_max_fruit.get();
+    }
+
+    public static int getHopsCropMinFruitYield() {
+        return hops_min_fruit.get();
+    }
+
+    public static int getHopsCropMaxFruitYield() {
+        return hops_max_fruit.get();
+    }
+
 }

@@ -67,12 +67,22 @@ public class FermentBarrelScreen extends ContainerScreen<FermentBarrelContainer>
 
         blit(matrixStack, this.guiLeft, this.guiTop, baseX, baseY, this.xSize, this.ySize, maxX, maxY);
 
+        // TODO[42]: Make fermentation barrel progress go upwards.
         // Progress Bar
-        int guiProgressX = this.guiLeft + 82;
-        int guiProgressY = this.guiTop + 30;
+        int guiProgressX = this.guiLeft + 48;
+        int guiProgressY = this.guiTop + 19;
 
-        this.blit(matrixStack, guiProgressX, guiProgressY, 176, 0, 9,
+        this.blit(matrixStack, guiProgressX, guiProgressY, 188, 0, 9,
                 this.container.getProcessingTimeScaled(28));
+
+        // Bubble Bar
+        int guiBubbleX = this.guiLeft + 58;
+        int guiBubbleY = this.guiTop + 19;
+
+        int guiBubbleHeight = this.container.getProcessingTimeScaled(28);
+
+        this.blit(matrixStack, guiBubbleX, guiBubbleY, 176, 0, 9,
+                guiBubbleHeight);
 
         // Input fluid tank
         int guiInputFluidTankX = guiLeft + 72;

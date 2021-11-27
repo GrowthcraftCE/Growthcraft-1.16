@@ -125,7 +125,7 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
             int outputAmount = this.currentRecipe.getOutputFluidStack().getAmount();
             int tankCapacity = this.getFluidTank(index).getCapacity();
 
-            return this.getFluidTank(index).getFluidAmount() + currentRecipe.getOutputFluidStack().getAmount() >= this.getFluidTank(0).getCapacity();
+            return this.getFluidTank(index).getFluidAmount() + currentRecipe.getOutputFluidStack().getAmount() > this.getFluidTank(0).getCapacity();
         } catch (Exception ex) {
             // Then there isn't a current recipe, and we need to return true to prevent processing.
             return true;

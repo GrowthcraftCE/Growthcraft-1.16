@@ -2,6 +2,10 @@
   "replace": false,
   "entries": [
     "growthcraft_cellar:yeast_brewers",
-    "growthcraft_cellar:yeast_lager"
+    "growthcraft_cellar:yeast_lager",
+    "growthcraft_cellar:grape_seeds_red_from_grass",
+    "growthcraft_cellar:grape_seeds_purple_from_grass",
+    "growthcraft_cellar:grape_seeds_white_from_grass",
+    "growthcraft_cellar:hops_seeds_from_grass"
   ]
 }
