@@ -1,11 +1,10 @@
-package growthcraft.apples.common.proxy;
+package growthcraft.bamboo.common.proxy;
 
 import growthcraft.lib.proxy.IProxy;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
 public class CommonProxy implements IProxy {
-
     @Override
     public void init() {
         // Server side proxy initialization

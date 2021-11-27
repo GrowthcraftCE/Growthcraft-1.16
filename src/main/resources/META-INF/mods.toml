@@ -5,7 +5,7 @@ issueTrackerURL = "https://github.com/GrowthcraftCE/Growthcraft-1.16/issues"
 
 [[mods]]
 modId = "growthcraft"
-version = "6.0.7"
+version = "6.0.8"
 displayName = "Growthcraft"
 updateJSONURL = "https://raw.githubusercontent.com/GrowthcraftCE/Growthcraft-Updates/master/growthcraft-versions.json"
 displayURL = "https://github.com/GrowthcraftCE/Growthcraft-1.16/wiki"
@@ -32,7 +32,7 @@ side = "BOTH"
 
 [[mods]]
 modId = "growthcraft_cellar"
-version = "6.0.7"
+version = "6.0.8"
 displayName = "Growthcraft Cellar"
 logoFile = "growthcraft_cellar_logo.png"
 description = '''
@@ -48,14 +48,30 @@ side = "BOTH"
 
 [[mods]]
 modId = "growthcraft_apples"
-version = "6.0.7"
+version = "6.0.8"
 displayName = "Growthcraft Apples"
 logoFile = "growthcraft_apples_logo.png"
 description = '''
-            As a child mod to Growthcraft...
+            Growthcraft Apples adds Apple Trees.
             '''
 
 [[dependencies.growthcraft_apples]]
+modId = "growthcraft"
+mandatory = true
+versionRange = "[6,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[mods]]
+modId = "growthcraft_bamboo"
+version = "6.0.8"
+displayName = "Growthcraft Bamboo"
+logoFile = "growthcraft_bamboo_logo.png"
+description = '''
+            Growthcraft Bamboo adds a custom Bamboo Tree and blocks.
+            '''
+
+[[dependencies.growthcraft_bamboo]]
 modId = "growthcraft"
 mandatory = true
 versionRange = "[6,)"

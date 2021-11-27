@@ -1,23 +1,23 @@
-package growthcraft.apples.common.proxy;
+package growthcraft.bamboo.client.proxy;
 
 import growthcraft.lib.proxy.IProxy;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
-public class CommonProxy implements IProxy {
-
+public class ClientProxy implements IProxy {
     @Override
     public void init() {
-        // Server side proxy initialization
+        // Set client side initializations.
     }
 
     @Override
     public World getClientWorld() {
-        throw new IllegalStateException("Only run this on the client!");
+        return Minecraft.getInstance().world;
     }
 
     @Override
     public PlayerEntity getClientPlayer() {
-        throw new IllegalStateException("Only run this on the client!");
+        return null;
     }
 }
