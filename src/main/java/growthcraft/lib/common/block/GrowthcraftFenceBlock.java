@@ -7,11 +7,21 @@ import net.minecraft.block.material.MaterialColor;
 
 public class GrowthcraftFenceBlock extends FenceBlock {
 
-    private final String unlocalizedName;
+    public GrowthcraftFenceBlock() {
+        this(getInitProperties(Material.WOOD));
+    }
 
+    public GrowthcraftFenceBlock(Material material) {
+        this(getInitProperties(material));
+    }
+
+    public GrowthcraftFenceBlock(Properties properties) {
+        super(properties);
+    }
+
+    @Deprecated
     public GrowthcraftFenceBlock(String unlocalizedName) {
         super(getInitProperties(Material.WOOD));
-        this.unlocalizedName = unlocalizedName;
     }
 
     private static Properties getInitProperties(Material material) {

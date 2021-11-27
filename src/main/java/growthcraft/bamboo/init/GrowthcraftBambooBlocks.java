@@ -44,6 +44,14 @@ public class GrowthcraftBambooBlocks {
             UnlocalizedName.BAMBOO_PLANK_DOOR, GrowthcraftDoorBlock::new
     );
 
+    public static final RegistryObject<GrowthcraftFenceBlock> BAMBOO_PLANK_FENCE = BLOCKS.register(
+            UnlocalizedName.BAMBOO_PLANK_FENCE, GrowthcraftFenceBlock::new
+    );
+
+    public static final RegistryObject<GrowthcraftFenceGateBlock> BAMBOO_PLANK_FENCE_GATE = BLOCKS.register(
+            UnlocalizedName.BAMBOO_PLANK_FENCE_GATE, GrowthcraftFenceGateBlock::new
+    );
+
     public static final RegistryObject<GrowthcraftPressurePlateBlock> BAMBOO_PLANK_PRESSURE_PLATE = BLOCKS.register(
             UnlocalizedName.BAMBOO_PLANK_PRESSURE_PLATE, GrowthcraftPressurePlateBlock::new
     );
