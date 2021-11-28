@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "growthcraft_apples:bamboo_plank_button"
+          "name": "growthcraft_bamboo:bamboo_plank_button"
         }
       ],
       "conditions": [
