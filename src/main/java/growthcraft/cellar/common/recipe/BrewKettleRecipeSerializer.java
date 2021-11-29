@@ -19,15 +19,18 @@ public class BrewKettleRecipeSerializer extends ForgeRegistryEntry<IRecipeSerial
     @Override
     public BrewKettleRecipe read(ResourceLocation recipeId, JsonObject json) {
         // Requirements
-        boolean requireLid = JSONUtils.getBoolean(json, "requires_lid");
+        boolean requireLid = JSONUtils.getBoolean(json, "requires_lid", false);
         // Input
         FluidStack inputFluid = CraftingUtils.getFluidStack(JSONUtils.getJsonObject(json, "input_fluid"));
         ItemStack inputItem = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "input_item"), false);
+
         // Output
         FluidStack outputFluid = CraftingUtils.getFluidStack(JSONUtils.getJsonObject(json, "output_fluid"));
         ItemStack byProduct = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "by_product"), false);
+        // ByProduct Chance
+        int byProductChance = JSONUtils.getInt(json, "by_product_chance", 25);
 
-        return new BrewKettleRecipe(recipeId, inputFluid, inputItem, outputFluid, byProduct, requireLid);
+        return new BrewKettleRecipe(recipeId, inputFluid, inputItem, outputFluid, byProduct, requireLid, byProductChance);
     }
 
     @Nullable
@@ -39,7 +42,9 @@ public class BrewKettleRecipeSerializer extends ForgeRegistryEntry<IRecipeSerial
             FluidStack outputFluid = buffer.readFluidStack();
             ItemStack byProduct = buffer.readItemStack();
             boolean lid = buffer.readBoolean();
-            return new BrewKettleRecipe(recipeId, inputFluid, inputItem, outputFluid, byProduct, lid);
+            int byProductChance = buffer.readVarInt();
+
+            return new BrewKettleRecipe(recipeId, inputFluid, inputItem, outputFluid, byProduct, lid, byProductChance);
         } catch (Exception ex) {
             GrowthcraftCellar.LOGGER.error("Unable to read recipe from network buffer!");
             throw ex;
@@ -54,6 +59,7 @@ public class BrewKettleRecipeSerializer extends ForgeRegistryEntry<IRecipeSerial
             buffer.writeFluidStack(recipe.getOutputFluidStack());
             buffer.writeItemStack(recipe.getByProduct());
             buffer.writeBoolean(recipe.getLidRequired());
+            buffer.writeVarInt(recipe.getByProductChance());
         } catch (Exception ex) {
             GrowthcraftCellar.LOGGER.error("Unable to read recipe from network buffer!");
             throw ex;

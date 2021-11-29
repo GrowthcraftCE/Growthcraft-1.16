@@ -155,7 +155,7 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
                         this.inputFluidTank.drain(recipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
                         this.inventory.getStackInSlot(0).shrink(recipe.getInputItemStack().getCount());
                         this.outputFluidTank.forceFill(recipe.getOutputFluidStack(), IFluidHandler.FluidAction.EXECUTE);
-                        if (new Random().nextInt(4) == 1) {
+                        if (new Random().nextInt(100) <= recipe.getByProductChance()) {
                             this.inventory.insertItem(1, recipe.getByProduct(), false);
                         }
 

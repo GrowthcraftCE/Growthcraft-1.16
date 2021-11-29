@@ -6,7 +6,7 @@
     "amount": 250
   },
   "input_item": {
-    "item": "growthcraft_apiary:honey_comb_empty",
+    "item": "growthcraft_apiary:honey_comb_full",
     "count": 1
   },
   "output_fluid": {
@@ -16,5 +16,6 @@
   "by_product": {
     "item": "growthcraft_apiary:bees_wax",
     "count": 1
-  }
+  },
+  "by_product_chance": 100
 }

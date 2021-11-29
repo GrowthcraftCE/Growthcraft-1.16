@@ -24,14 +24,16 @@ public class BrewKettleRecipe implements IRecipe<IInventory> {
     private final FluidStack outputFluidStack;
     private final ItemStack byProduct ;
     private final boolean requiresLid;
+    private final int byProductChance;
 
-    public BrewKettleRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItem, FluidStack outputFluidStack, ItemStack byProduct, boolean requiresLid) {
+    public BrewKettleRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItem, FluidStack outputFluidStack, ItemStack byProduct, boolean requiresLid, int byProductChance) {
         this.recipeId = recipeId;
         this.inputFluidStack = inputFluidStack;
         this.inputItemStack = inputItem;
         this.outputFluidStack = outputFluidStack;
         this.byProduct = byProduct;
         this.requiresLid = requiresLid;
+        this.byProductChance = Math.min(byProductChance, 100);
     }
 
     @Override
@@ -107,6 +109,10 @@ public class BrewKettleRecipe implements IRecipe<IInventory> {
                 this.requiresLid ?
                         Ingredient.fromStacks(inputItemStack, new ItemStack(GrowthcraftCellarItems.brew_kettle_lid.get()))
                         : Ingredient.fromStacks(inputItemStack));
+    }
+
+    public int getByProductChance() {
+        return this.byProductChance;
     }
 
 }

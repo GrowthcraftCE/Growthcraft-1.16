@@ -2,7 +2,9 @@ package growthcraft.apiary;
 
 import growthcraft.apiary.client.proxy.ClientProxy;
 import growthcraft.apiary.common.proxy.CommonProxy;
+import growthcraft.apiary.init.GrowthcraftApiaryBlocks;
 import growthcraft.apiary.init.GrowthcraftApiaryItems;
+import growthcraft.apiary.init.client.GrowthcraftApiaryBlockRenders;
 import growthcraft.apiary.init.config.GrowthcraftApiaryConfig;
 import growthcraft.apiary.shared.Reference;
 import growthcraft.lib.proxy.IProxy;
@@ -33,9 +35,9 @@ public class GrowthcraftApiary {
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        GrowthcraftApiaryBlocks.BLOCKS.register(modEventBus);
         GrowthcraftApiaryItems.ITEMS.register(modEventBus);
-        //GrowthcraftApplesBlocks.BLOCKS.register(modEventBus);
-        //GrowthcraftApplesTileEntities.TILE_ENTITIES.register(modEventBus);
+        //GrowthcraftApiaryTileEntities.TILE_ENTITIES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -45,7 +47,7 @@ public class GrowthcraftApiary {
         final IForgeRegistry<Item> itemRegistry = event.getRegistry();
         final Item.Properties properties = new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab);
         // Block Items cannot be deferred.
-        //GrowthcraftApplesBlocks.registerBlockItems(itemRegistry, properties);
+        GrowthcraftApiaryBlocks.registerBlockItems(itemRegistry, properties);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -54,6 +56,6 @@ public class GrowthcraftApiary {
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-        //GrowthcraftApplesBlockRenders.setRenderLayers();
+        GrowthcraftApiaryBlockRenders.setRenderLayers();
     }
 }
