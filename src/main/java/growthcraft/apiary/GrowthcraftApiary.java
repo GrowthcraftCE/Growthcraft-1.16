@@ -3,6 +3,7 @@ package growthcraft.apiary;
 import growthcraft.apiary.client.proxy.ClientProxy;
 import growthcraft.apiary.common.proxy.CommonProxy;
 import growthcraft.apiary.init.GrowthcraftApiaryBlocks;
+import growthcraft.apiary.init.GrowthcraftApiaryFluids;
 import growthcraft.apiary.init.GrowthcraftApiaryItems;
 import growthcraft.apiary.init.client.GrowthcraftApiaryBlockRenders;
 import growthcraft.apiary.init.config.GrowthcraftApiaryConfig;
@@ -37,6 +38,7 @@ public class GrowthcraftApiary {
 
         GrowthcraftApiaryBlocks.BLOCKS.register(modEventBus);
         GrowthcraftApiaryItems.ITEMS.register(modEventBus);
+        GrowthcraftApiaryFluids.FLUIDS.register(modEventBus);
         //GrowthcraftApiaryTileEntities.TILE_ENTITIES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);

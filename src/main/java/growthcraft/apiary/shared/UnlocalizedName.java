@@ -28,9 +28,27 @@ public class UnlocalizedName {
 
     private UnlocalizedName() { /* Disable default public constructor. */ }
 
+    // TODO: Add wax fluid color names.
     public static class FluidName {
         public static final String HONEY = "honey";
         public static final String HONEY_MEAD = "honey_mead";
+        public static final String WAX_BLACK = "wax_black";
+        public static final String WAX_BLUE = "wax_blue";
+        public static final String WAX_BROWN = "wax_brown";
+        public static final String WAX_CYAN = "wax_cyan";
+        public static final String WAX_GRAY = "wax_gray";
+        public static final String WAX_GREEN = "wax_green";
+        public static final String WAX_LIGHT_BLUE = "wax_light_blue";
+        public static final String WAX_LIGHT_GRAY = "wax_light_gray";
+        public static final String WAX_LIME = "wax_lime";
+        public static final String WAX_MAGENTA = "wax_magenta";
+        public static final String WAX_ORANGE = "wax_orange";
+        public static final String WAX_PINK = "wax_pink";
+        public static final String WAX_PURPLE = "wax_purple";
+        public static final String WAX_RED = "wax_red";
+        public static final String WAX_WHITE = "wax_white";
+        public static final String WAX_YELLOW = "wax_yellow";
+
     }
 
 }

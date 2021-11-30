@@ -129,12 +129,13 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
             if (isHeated()) {
                 this.world.setBlockState(this.getPos(), this.getBlockState().with(BrewKettleBlock.LIT, true));
                 // Check for valid slots before looking for recipe.
-                if (this.inventory.getStackInSlot(0).getItem() != Items.AIR && !inputFluidTank.isEmpty() && outputFluidTank.getFluidAmount() < outputFluidTank.getCapacity()) {
+                if (this.inventory.getStackInSlot(0).getItem() != Items.AIR) {
 
                     BrewKettleRecipe recipe = this.getRecipe(
                             this.inventory.getStackInSlot(0),
                             inputFluidTank.getFluid(),
                             this.inventory.getStackInSlot(2).getItem() == brew_kettle_lid.get());
+
                     if (currentRecipe != null && currentRecipe == recipe) {
                         // If the current recipe is not null and it equals the new recipe,
                         // then increment the smelting counter.

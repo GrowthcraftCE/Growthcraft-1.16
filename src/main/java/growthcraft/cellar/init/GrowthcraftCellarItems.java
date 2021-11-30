@@ -34,13 +34,6 @@ public class GrowthcraftCellarItems {
             UnlocalizedName.WINE_POTION, CellarPotionItem::new
     );
 
-    /*
-    public static final RegistryObject<CellarPotionItem> WINE_POTION = ITEMS.register(
-            UnlocalizedName.WINE_POTION,
-            CellarPotionItem::new
-    );
-     */
-
     public static final RegistryObject<GrowthcraftFoodItem> GRAPE_PURPLE = ITEMS.register(
             UnlocalizedName.GRAPE_PURPLE, GrowthcraftFoodItem::new
     );

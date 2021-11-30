@@ -7,6 +7,11 @@ import java.util.Map;
 
 public class FluidUtils {
 
+    public static final String STILL = "fluid";
+    public static final String FLOWING = "flowing";
+    public static final String BLOCK = "block";
+    public static final String BUCKET = "bucket";
+
     public static class FluidResource {
         public static final ResourceLocation FLOWING = new ResourceLocation("block/water_flow");
         public static final ResourceLocation OVERLAY = new ResourceLocation("block/water_overlay");

@@ -117,9 +117,11 @@ public class BrewKettleRecipeCategory implements IRecipeCategory<BrewKettleRecip
 
             // Set Input FluidStack GUI
             IGuiFluidStackGroup guiFluidStacks = layout.getFluidStacks();
-            guiFluidStacks.init(0, true, 36, 7, 16, 52, 4000, false, overlayTank);
-            guiFluidStacks.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0));
 
+            if (!ingredients.getInputs(VanillaTypes.FLUID).get(0).get(0).isEmpty()) {
+                guiFluidStacks.init(0, true, 36, 7, 16, 52, 4000, false, overlayTank);
+                guiFluidStacks.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0));
+            }
             // Set Output FluidStack GUI
             guiFluidStacks.init(1, true, 104, 7, 16, 52, 4000, false, overlayTank);
             guiFluidStacks.set(1, ingredients.getOutputs(VanillaTypes.FLUID).get(0));

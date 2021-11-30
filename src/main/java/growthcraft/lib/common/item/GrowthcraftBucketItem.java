@@ -21,4 +21,8 @@ public class GrowthcraftBucketItem extends BucketItem {
         return this.color;
     }
 
+    public int getColor(int i) {
+        return i == 0 ? this.color : 0xFFFFFF;
+    }
+
 }

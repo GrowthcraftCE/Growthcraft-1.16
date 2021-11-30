@@ -1,0 +1,21 @@
+{
+  "type": "growthcraft_cellar:brew_kettle_recipe",
+  "requires_lid": "false",
+  "input_fluid": {
+    "fluid": "minecraft:empty",
+    "amount": 250
+  },
+  "input_item": {
+    "item": "growthcraft_apiary:bees_wax_orange",
+    "count": 1
+  },
+  "output_fluid": {
+    "fluid": "growthcraft_apiary:wax_orange_fluid",
+    "amount": 250
+  },
+  "by_product": {
+    "item": "growthcraft_apiary:bees_wax",
+    "count": 1
+  },
+  "by_product_chance": 0
+}
