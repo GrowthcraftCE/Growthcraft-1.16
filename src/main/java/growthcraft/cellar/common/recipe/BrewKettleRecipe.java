@@ -24,15 +24,17 @@ public class BrewKettleRecipe implements IRecipe<IInventory> {
     private final FluidStack outputFluidStack;
     private final ItemStack byProduct ;
     private final boolean requiresLid;
+    private final boolean requiresHeat;
     private final int byProductChance;
 
-    public BrewKettleRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItem, FluidStack outputFluidStack, ItemStack byProduct, boolean requiresLid, int byProductChance) {
+    public BrewKettleRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItem, FluidStack outputFluidStack, ItemStack byProduct, boolean requiresLid, boolean requiresHeat, int byProductChance) {
         this.recipeId = recipeId;
         this.inputFluidStack = inputFluidStack;
         this.inputItemStack = inputItem;
         this.outputFluidStack = outputFluidStack;
         this.byProduct = byProduct;
         this.requiresLid = requiresLid;
+        this.requiresHeat = requiresHeat;
         this.byProductChance = Math.min(byProductChance, 100);
     }
 
@@ -41,10 +43,10 @@ public class BrewKettleRecipe implements IRecipe<IInventory> {
         return false;
     }
 
-    public boolean matches(ItemStack itemStack, FluidStack fluidStack, boolean needsLid) {
+    public boolean matches(ItemStack itemStack, FluidStack fluidStack, boolean needsLid, boolean needsHeat) {
         return this.inputItemStack.getItem() == itemStack.getItem() && this.inputItemStack.getCount() <= itemStack.getCount()
                 && this.inputFluidStack.getFluid() == fluidStack.getFluid() && this.inputFluidStack.getAmount() <= fluidStack.getAmount()
-                && this.requiresLid == needsLid;
+                && this.requiresLid == needsLid && this.requiresHeat == needsHeat;
     }
 
     public FluidStack getInputFluidStack() {
@@ -65,6 +67,10 @@ public class BrewKettleRecipe implements IRecipe<IInventory> {
 
     public boolean getLidRequired() {
         return requiresLid;
+    }
+
+    public boolean isHeatRequired() {
+        return this.requiresHeat;
     }
 
     @Override

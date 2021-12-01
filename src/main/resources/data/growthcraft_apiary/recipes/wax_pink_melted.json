@@ -1,5 +1,6 @@
 {
   "type": "growthcraft_cellar:brew_kettle_recipe",
+  "requires_heat": true,
   "requires_lid": "false",
   "input_fluid": {
     "fluid": "minecraft:empty",

@@ -17,8 +17,8 @@ dyes = [
   "blue",
   "brown",
   "green",
-  "red",
-  "clear"
+  "red"
+  #"clear"
   # "black"
 ]
 
@@ -26,13 +26,16 @@ for dye in dyes:
   if dye == templateBaseDye:
     continue
   sourceFiles = [
-    "data/growthcraft_apiary/recipes/bees_wax_%s.json" % templateBaseDye,
+    "assets/growthcraft_apiary/models/item/candle_%s.json" % templateBaseDye,
+    #"assets/growthcraft_apiary/blockstates/candle_%s_wall.json" % templateBaseDye
     # "models/block/panel_glass_%s.json" % templateBaseDye,
     # "models/item/panel_glass_%s.json" % templateBaseDye,
     # "models/item/panel_glass_%s_glowing.json" % templateBaseDye
+    "data/growthcraft_apiary/recipes/candle_%s.json" % templateBaseDye,
   ]
   targetFiles = [
-    "data/growthcraft_apiary/recipes/bees_wax_%s.json" % dye,
+    "assets/growthcraft_apiary/models/item/candle_%s.json" % dye,
+    "data/growthcraft_apiary/recipes/candle_%s.json" % dye,
     # "models/block/panel_glass_%s.json" % dye,
     # "models/item/panel_glass_%s.json" % dye,
     #"models/item/panel_glass_%s_glowing.json" % dye

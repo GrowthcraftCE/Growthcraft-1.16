@@ -1,13 +1,12 @@
 package growthcraft.apiary.init;
 
+import growthcraft.apiary.common.CandleItem;
 import growthcraft.apiary.shared.Reference;
 import growthcraft.apiary.shared.UnlocalizedName;
 import growthcraft.lib.common.item.GrowthcraftBucketItem;
 import growthcraft.lib.common.item.GrowthcraftItem;
 import growthcraft.lib.util.FluidUtils;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.WallOrFloorItem;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -218,12 +217,131 @@ public class GrowthcraftApiaryItems {
             UnlocalizedName.BEES_WAX_YELLOW, GrowthcraftItem::new
     );
 
-    public static final RegistryObject<WallOrFloorItem> CANDLE_BLACK = ITEMS.register(
+    public static final RegistryObject<CandleItem> CANDLE_BLACK = ITEMS.register(
             UnlocalizedName.CANDLE_BLACK,
-            () -> new WallOrFloorItem(
+            () -> new CandleItem(
                     GrowthcraftApiaryBlocks.CANDLE_BLACK.get(),
                     GrowthcraftApiaryBlocks.CANDLE_BLACK_WALL.get(),
-                    (new Item.Properties()).group(ItemGroup.DECORATIONS))
+                    Reference.FluidColor.WAX_BLACK_COLOR.getColor())
+    );
+
+    public static final RegistryObject<CandleItem> CANDLE_BLUE = ITEMS.register(
+            UnlocalizedName.CANDLE_BLUE,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_BLUE.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_BLUE_WALL.get(),
+                    Reference.FluidColor.WAX_BLUE_COLOR.getColor())
+    );
+
+    public static final RegistryObject<CandleItem> CANDLE_BROWN = ITEMS.register(
+            UnlocalizedName.CANDLE_BROWN,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_BROWN.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_BROWN_WALL.get(),
+                    Reference.FluidColor.WAX_BROWN_COLOR.getColor())
+    );
+
+    public static final RegistryObject<CandleItem> CANDLE_CYAN = ITEMS.register(
+            UnlocalizedName.CANDLE_CYAN,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_CYAN.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_CYAN_WALL.get(),
+                    Reference.FluidColor.WAX_CYAN_COLOR.getColor())
+    );
+
+    public static final RegistryObject<CandleItem> CANDLE_GRAY = ITEMS.register(
+            UnlocalizedName.CANDLE_GRAY,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_GRAY.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_GRAY_WALL.get(),
+                    Reference.FluidColor.WAX_GRAY_COLOR.getColor())
+    );
+    public static final RegistryObject<CandleItem> CANDLE_GREEN = ITEMS.register(
+            UnlocalizedName.CANDLE_GREEN,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_GREEN.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_GREEN_WALL.get(),
+                    Reference.FluidColor.WAX_GREEN_COLOR.getColor())
+    );
+
+    public static final RegistryObject<CandleItem> CANDLE_LIGHT_BLUE = ITEMS.register(
+            UnlocalizedName.CANDLE_LIGHT_BLUE,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_LIGHT_BLUE.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_LIGHT_BLUE_WALL.get(),
+                    Reference.FluidColor.WAX_LIGHT_BLUE_COLOR.getColor())
+    );
+
+    public static final RegistryObject<CandleItem> CANDLE_LIGHT_GRAY = ITEMS.register(
+            UnlocalizedName.CANDLE_LIGHT_GRAY,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_LIGHT_GRAY.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_LIGHT_GRAY_WALL.get(),
+                    Reference.FluidColor.WAX_LIGHT_GRAY_COLOR.getColor())
+    );
+
+    public static final RegistryObject<CandleItem> CANDLE_LIME = ITEMS.register(
+            UnlocalizedName.CANDLE_LIME,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_LIME.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_LIME_WALL.get(),
+                    Reference.FluidColor.WAX_LIME_COLOR.getColor())
+    );
+
+    public static final RegistryObject<CandleItem> CANDLE_MAGENTA = ITEMS.register(
+            UnlocalizedName.CANDLE_MAGENTA,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_MAGENTA.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_MAGENTA_WALL.get(),
+                    Reference.FluidColor.WAX_MAGENTA_COLOR.getColor())
+    );
+
+    public static final RegistryObject<CandleItem> CANDLE_ORANGE = ITEMS.register(
+            UnlocalizedName.CANDLE_ORANGE,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_ORANGE.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_ORANGE_WALL.get(),
+                    Reference.FluidColor.WAX_ORANGE_COLOR.getColor())
+    );
+
+    public static final RegistryObject<CandleItem> CANDLE_PINK = ITEMS.register(
+            UnlocalizedName.CANDLE_PINK,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_PINK.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_PINK_WALL.get(),
+                    Reference.FluidColor.WAX_PINK_COLOR.getColor())
+    );
+
+    public static final RegistryObject<CandleItem> CANDLE_PURPLE = ITEMS.register(
+            UnlocalizedName.CANDLE_PURPLE,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_PURPLE.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_PURPLE_WALL.get(),
+                    Reference.FluidColor.WAX_PURPLE_COLOR.getColor())
+    );
+
+    public static final RegistryObject<CandleItem> CANDLE_RED = ITEMS.register(
+            UnlocalizedName.CANDLE_RED,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_RED.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_RED_WALL.get(),
+                    Reference.FluidColor.WAX_RED_COLOR.getColor())
+    );
+
+    public static final RegistryObject<CandleItem> CANDLE_WHITE = ITEMS.register(
+            UnlocalizedName.CANDLE_WHITE,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_WHITE.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_WHITE_WALL.get(),
+                    Reference.FluidColor.WAX_WHITE_COLOR.getColor())
+    );
+
+    public static final RegistryObject<CandleItem> CANDLE_YELLOW = ITEMS.register(
+            UnlocalizedName.CANDLE_YELLOW,
+            () -> new CandleItem(
+                    GrowthcraftApiaryBlocks.CANDLE_YELLOW.get(),
+                    GrowthcraftApiaryBlocks.CANDLE_YELLOW_WALL.get(),
+                    Reference.FluidColor.WAX_YELLOW_COLOR.getColor())
     );
 
     public static final RegistryObject<GrowthcraftItem> HONEY_COMB_EMPTY = ITEMS.register(
