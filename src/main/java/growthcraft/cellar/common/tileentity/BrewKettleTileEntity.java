@@ -136,36 +136,39 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
                         inputFluidTank.getFluid(),
                         this.inventory.getStackInSlot(2).getItem() == brew_kettle_lid.get());
 
-                if (recipe.isHeatRequired() == isHeated()) {
-                    if (currentRecipe != null && currentRecipe == recipe) {
-                        // If the current recipe is not null and it equals the new recipe,
-                        // then increment the smelting counter.
-                        this.currentSmeltTime++;
-                        dirty = true;
-                    } else if (currentRecipe == null && recipe != null) {
-                        // If the current recipe is null and the new recipe is not null,
-                        // then assign the current recipe and we will start processing at
-                        // the next tick.
-                        currentSmeltTime = 0;
-                        currentRecipe = recipe;
-                        dirty = true;
-                    }
-
-                    if (currentSmeltTime > maxSmeltTime) {
-                        // If the currentSmeltTime is greater than the max, then we need to
-                        // move some items and fluids around.
-                        this.inputFluidTank.drain(recipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
-                        this.inventory.getStackInSlot(0).shrink(recipe.getInputItemStack().getCount());
-                        this.outputFluidTank.forceFill(recipe.getOutputFluidStack(), IFluidHandler.FluidAction.EXECUTE);
-                        if (new Random().nextInt(100) <= recipe.getByProductChance()) {
-                            this.inventory.insertItem(1, recipe.getByProduct(), false);
+                if (recipe != null) {
+                    if (recipe.isHeatRequired() == this.isHeated()) {
+                        if (currentRecipe != null && currentRecipe == recipe) {
+                            // If the current recipe is not null and it equals the new recipe,
+                            // then increment the smelting counter.
+                            this.currentSmeltTime++;
+                            dirty = true;
+                        } else if (currentRecipe == null && recipe != null) {
+                            // If the current recipe is null and the new recipe is not null,
+                            // then assign the current recipe and we will start processing at
+                            // the next tick.
+                            currentSmeltTime = 0;
+                            currentRecipe = recipe;
+                            dirty = true;
                         }
 
-                        currentRecipe = null;
-                        currentSmeltTime = 0;
-                        dirty = true;
+                        if (currentSmeltTime > maxSmeltTime) {
+                            // If the currentSmeltTime is greater than the max, then we need to
+                            // move some items and fluids around.
+                            this.inputFluidTank.drain(recipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
+                            this.inventory.getStackInSlot(0).shrink(recipe.getInputItemStack().getCount());
+                            this.outputFluidTank.forceFill(recipe.getOutputFluidStack(), IFluidHandler.FluidAction.EXECUTE);
+                            if (new Random().nextInt(100) <= recipe.getByProductChance()) {
+                                this.inventory.insertItem(1, recipe.getByProduct(), false);
+                            }
+
+                            currentRecipe = null;
+                            currentSmeltTime = 0;
+                            dirty = true;
+                        }
                     }
                 }
+
             } else {
                 currentRecipe = null;
                 currentSmeltTime = 0;

@@ -25,33 +25,17 @@ public class GrowthcraftCellarItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
             ForgeRegistries.ITEMS, Reference.MODID
     );
-
-    public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(
-            ForgeRegistries.POTION_TYPES, growthcraft.core.shared.Reference.MODID
-    );
-
-    public static final RegistryObject<CellarPotionItem> POTION_WINE = ITEMS.register(
-            UnlocalizedName.WINE_POTION, CellarPotionItem::new
-    );
-
     public static final RegistryObject<GrowthcraftFoodItem> GRAPE_PURPLE = ITEMS.register(
             UnlocalizedName.GRAPE_PURPLE, GrowthcraftFoodItem::new
     );
     public static final RegistryObject<GrapeSeedsItem> GRAPE_PURPLE_SEEDS = ITEMS.register(
             UnlocalizedName.GRAPE_SEEDS_PURPLE, () -> new GrapeSeedsItem(GRAPE_PURPLE.get())
     );
-
     public static final RegistryObject<GrowthcraftFoodItem> GRAPE_RED = ITEMS.register(
             UnlocalizedName.GRAPE_RED, GrowthcraftFoodItem::new
     );
-
     public static final RegistryObject<GrapeSeedsItem> GRAPE_RED_SEEDS = ITEMS.register(
             UnlocalizedName.GRAPE_SEEDS_RED, () -> new GrapeSeedsItem(GRAPE_RED.get())
-    );
-
-    public static final RegistryObject<CellarPotionItem> ALE_POTION = ITEMS.register(
-            UnlocalizedName.ALE_POTION,
-            CellarPotionItem::new
     );
     public static final RegistryObject<GrowthcraftFoodItem> GRAPE_WHITE = ITEMS.register(
             UnlocalizedName.GRAPE_WHITE, GrowthcraftFoodItem::new
@@ -65,18 +49,26 @@ public class GrowthcraftCellarItems {
     public static final RegistryObject<HopSeedsItem> HOPS_SEEDS = ITEMS.register(
             UnlocalizedName.HOPS_SEEDS, HopSeedsItem::new
     );
-    public static final RegistryObject<CellarPotionItem> LAGER_POTION = ITEMS.register(
-            UnlocalizedName.LAGER_POTION,
+    public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(
+            ForgeRegistries.POTION_TYPES, growthcraft.core.shared.Reference.MODID
+    );
+    public static final RegistryObject<CellarPotionItem> POTION_ALE = ITEMS.register(
+            UnlocalizedName.POTION_ALE,
             CellarPotionItem::new
     );
-
+    public static final RegistryObject<CellarPotionItem> POTION_LAGER = ITEMS.register(
+            UnlocalizedName.POTION_LAGER,
+            CellarPotionItem::new
+    );
+    public static final RegistryObject<CellarPotionItem> POTION_WINE = ITEMS.register(
+            UnlocalizedName.POTION_WINE, CellarPotionItem::new
+    );
     public static final RegistryObject<GrowthcraftItem> YEAST_BAYANUS = ITEMS.register(
             UnlocalizedName.YEAST_BAYANUS, GrowthcraftItem::new
     );
     public static final RegistryObject<GrowthcraftEnchantedItem> YEAST_BAYANUS_ETHEREAL = ITEMS.register(
             UnlocalizedName.YEAST_BAYANUS_ETHEREAL, GrowthcraftEnchantedItem::new
     );
-    //endregion
     public static final RegistryObject<GrowthcraftItem> YEAST_BREWERS = ITEMS.register(
             UnlocalizedName.YEAST_BREWERS, GrowthcraftItem::new
     );
@@ -134,10 +126,7 @@ public class GrowthcraftCellarItems {
                     new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
             )
     );
-    //endregion
-    /**
-     * Ale Fluids
-     */
+
     public static final RegistryObject<BucketItem> bucket_pale_golden_wort = ITEMS.register(
             UnlocalizedName.getFluidNames(PALE_GOLDEN_WORT).get(BUCKET),
             () -> new BucketItem(
@@ -251,7 +240,6 @@ public class GrowthcraftCellarItems {
                     new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
             )
     );
-    //region Fermented Lager Buckets
     public static final RegistryObject<BucketItem> bucket_pale_lager = ITEMS.register(
             UnlocalizedName.getFluidNames(PALE_LAGER).get(BUCKET),
             () -> new GrowthcraftBucketItem(GrowthcraftCellarFluids.PALE_LAGER_FLUID_STILL, Reference.FluidColor.PALE_LAGER_FLUID_COLOR.getColor())

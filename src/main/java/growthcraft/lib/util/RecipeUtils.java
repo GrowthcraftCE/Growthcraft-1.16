@@ -1,6 +1,8 @@
 package growthcraft.lib.util;
 
+import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.common.recipe.FermentBarrelRecipe;
+import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
@@ -19,6 +21,13 @@ import java.util.stream.Collectors;
 
 public class RecipeUtils {
 
+    /**
+     * Search for recipes that result in the given fluid.
+     * @param world World object
+     * @param fluidStack FluidStack with expected recipe result
+     * @return FermentBarrelRecipe that produces the given fluid.
+     * @throws ToManyMatchingRecipes
+     */
     public static FermentBarrelRecipe findFermentRecipesByResult(World world, FluidStack fluidStack) throws ToManyMatchingRecipes {
         Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(world, GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
         List<FermentBarrelRecipe> matchingRecipes = new ArrayList<>();

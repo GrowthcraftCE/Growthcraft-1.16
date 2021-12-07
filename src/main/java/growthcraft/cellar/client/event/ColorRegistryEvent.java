@@ -39,8 +39,8 @@ public class ColorRegistryEvent {
         }
 
         event.getItemColors().register(
-                (itemStack, i) -> GrowthcraftCellarItems.ALE_POTION.get().getColor(),
-                GrowthcraftCellarItems.ALE_POTION.get()
+                (itemStack, i) -> GrowthcraftCellarItems.POTION_ALE.get().getColor(),
+                GrowthcraftCellarItems.POTION_ALE.get()
         );
 
     }

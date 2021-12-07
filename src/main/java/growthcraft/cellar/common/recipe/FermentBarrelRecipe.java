@@ -25,7 +25,8 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
     private final Color color;
     private final ItemStack potionItemStack;
 
-    public FermentBarrelRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItemStack, FluidStack outputFluidStack, int processingTime, ItemStack bottle, Color color) {
+    public FermentBarrelRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItemStack,
+                               FluidStack outputFluidStack, int processingTime, ItemStack bottle, Color color) {
         this.recipeId = recipeId;
         this.inputFluidStack = inputFluidStack;
         this.outputFluidStack = outputFluidStack;
@@ -116,7 +117,7 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
     }
 
     public int getProcessingTime() {
-        return processingTime;
+        return this.processingTime;
     }
 
     public boolean hasEffects() {
@@ -128,12 +129,12 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
     }
 
     public Color getColor() {
-        return color;
+        return this.color;
     }
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return NonNullList.from(Ingredient.EMPTY, Ingredient.fromStacks(inputItemStack));
+        return NonNullList.from(Ingredient.EMPTY, Ingredient.fromStacks(this.inputItemStack));
     }
 
     public ItemStack getBottleItemStack() {
