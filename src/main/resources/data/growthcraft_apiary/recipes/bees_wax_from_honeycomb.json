@@ -1,0 +1,22 @@
+{
+  "type": "growthcraft_cellar:brew_kettle_recipe",
+  "requires_heat": true,
+  "requires_lid": "false",
+  "input_fluid": {
+    "fluid": "minecraft:water",
+    "amount": 250
+  },
+  "input_item": {
+    "item": "minecraft:honeycomb",
+    "count": 1
+  },
+  "output_fluid": {
+    "fluid": "minecraft:water",
+    "amount": 250
+  },
+  "by_product": {
+    "item": "growthcraft_apiary:bees_wax",
+    "count": 1
+  },
+  "by_product_chance": 100
+}

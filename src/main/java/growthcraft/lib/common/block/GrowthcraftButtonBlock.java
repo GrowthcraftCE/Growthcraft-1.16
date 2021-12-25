@@ -6,6 +6,10 @@ import net.minecraft.block.material.Material;
 
 public class GrowthcraftButtonBlock extends WoodButtonBlock {
 
+    public GrowthcraftButtonBlock() {
+        super(getInitProperties(Material.WOOD));
+    }
+
     public GrowthcraftButtonBlock(String unlocalizedName) {
         super(getInitProperties(Material.WOOD));
     }

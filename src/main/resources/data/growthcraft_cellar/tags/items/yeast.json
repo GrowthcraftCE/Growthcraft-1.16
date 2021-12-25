@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "growthcraft_cellar:yeast_brewers",
+    "growthcraft_cellar:yeast_bayanus",
+    "growthcraft_cellar:yeast_lager"
+  ]
+}

@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class FluidTankHandler {
 
-    private Map<Integer, FluidTank> fluidTanks;
+    private final Map<Integer, FluidTank> fluidTanks;
 
     public FluidTankHandler(int tanks, int capacity) {
         fluidTanks = new HashMap<>();
@@ -36,5 +36,9 @@ public class FluidTankHandler {
 
     public void updateFluidTank(int tank, FluidTank fluidTank) {
         fluidTanks.put(tank, fluidTank);
+    }
+
+    public void drain(int index, int amount) {
+        this.getTank(index).drain(amount, IFluidHandler.FluidAction.EXECUTE);
     }
 }

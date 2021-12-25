@@ -1,0 +1,22 @@
+{
+  "type": "growthcraft_cellar:brew_kettle_recipe",
+  "requires_heat": false,
+  "requires_lid": "false",
+  "input_fluid": {
+    "fluid": "growthcraft_apiary:wax_black_fluid",
+    "amount": 250
+  },
+  "input_item": {
+    "item": "minecraft:string",
+    "count": 1
+  },
+  "output_fluid": {
+    "fluid": "minecraft:empty",
+    "amount": 250
+  },
+  "by_product": {
+    "item": "growthcraft_apiary:candle_black",
+    "count": 4
+  },
+  "by_product_chance": 100
+}

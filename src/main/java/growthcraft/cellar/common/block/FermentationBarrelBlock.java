@@ -8,11 +8,13 @@ import growthcraft.lib.util.BlockStateUtils;
 import growthcraft.lib.util.RecipeUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.CauldronBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.GlassBottleItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -83,8 +85,9 @@ public class FermentationBarrelBlock extends Block {
     @Override
     @SuppressWarnings("deprecation")
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
-                || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
+        if (!(player.getHeldItem(handIn).getItem() instanceof GlassBottleItem)
+                && (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
+                || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent())) {
             return ActionResultType.SUCCESS;
         }
 
@@ -92,9 +95,11 @@ public class FermentationBarrelBlock extends Block {
             FermentBarrelTileEntity fermentBarrelTileEntity = (FermentBarrelTileEntity) worldIn.getTileEntity(pos);
             ItemStack activeItem = player.getHeldItem(handIn);
 
-            if (activeItem.getItem() instanceof GlassBottleItem && fermentBarrelTileEntity.getFluidTank(0).getFluidAmount() > 0) {
+            if (fermentBarrelTileEntity!= null && activeItem.getItem() instanceof GlassBottleItem
+                    && fermentBarrelTileEntity.getFluidTankHandler().getTank(0).getFluidAmount() > 0) {
                 try {
                     FermentBarrelRecipe recipe = RecipeUtils.findFermentRecipesByResult(worldIn, fermentBarrelTileEntity.getFluidTank(0).getFluid());
+                    // Handle double call for alternative hand
                     if (recipe.getBottleItemStack().getItem() != Items.AIR) {
                         ItemStack bottleItemStack = recipe.getBottleItemStack();
 
@@ -104,12 +109,24 @@ public class FermentationBarrelBlock extends Block {
                                         .appendSibling(new TranslationTextComponent(fermentBarrelTileEntity.getFluidTank(0).getFluid().getTranslationKey()))
                         );
 
-                        fermentBarrelTileEntity.getFluidTank(0).drain(250, IFluidHandler.FluidAction.EXECUTE);
+
+                        GrowthcraftCellar.LOGGER.error(
+                                String.format("FluidTank (%s) %dmb.", fermentBarrelTileEntity.getFluidTank(0).getFluid().getTranslationKey(), fermentBarrelTileEntity.getFluidTank(0).getFluidAmount()
+                                ));
+
+                        fermentBarrelTileEntity.getFluidTankHandler().drain(0, 250);
+
+                        GrowthcraftCellar.LOGGER.error(
+                                String.format("FluidTank (%s) %dmb.", fermentBarrelTileEntity.getFluidTank(0).getFluid().getTranslationKey(), fermentBarrelTileEntity.getFluidTank(0).getFluidAmount()
+                                ));
+
                         player.getHeldItem(handIn).shrink(1);
 
                         if (!player.inventory.addItemStackToInventory(bottleItemStack)) {
                             player.dropItem(bottleItemStack, false);
                         }
+
+                        worldIn.updateBlock(pos, this);
                     }
                 } catch (NullPointerException npe) {
                     // Do nothing as it isn't a fermentable fluid and a bucket should be used.

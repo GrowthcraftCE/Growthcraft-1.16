@@ -8,7 +8,7 @@ public class CommonProxy implements IProxy {
 
     @Override
     public void init() {
-
+        // Server side proxy initialization
     }
 
     @Override

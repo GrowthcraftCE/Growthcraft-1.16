@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "growthcraft_cellar:brew_kettle"
+    }
+  ],
+  "result": {
+    "item": "growthcraft_cellar:roaster"
+  }
+}

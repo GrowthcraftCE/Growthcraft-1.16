@@ -174,9 +174,9 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
 
         this.currentProcessingTime = compound.getInt("CurrentProcessingTime");
 
-        for (int i = 0; i < fluidTankHandler.getNumberTanks(); i++) {
-            fluidTankHandler.getTank(i).readFromNBT(compound.getCompound("tank" + i));
-        }
+        // Read the tank data from NBT
+        this.getFluidTankHandler().getTank(0).readFromNBT(compound.getCompound("tank0"));
+
     }
 
     @Override
@@ -188,10 +188,9 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
 
         ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());
         compound.putInt("CurrentProcessingTime", this.currentProcessingTime);
-        for (int i = 0; i < fluidTankHandler.getNumberTanks(); i++) {
-            CompoundNBT tankNBT = fluidTankHandler.getTank(i).writeToNBT(new CompoundNBT());
-            compound.put("tank" + i, tankNBT);
-        }
+
+        // Save the tank to the NBTTag
+        compound.put("tank0", this.getFluidTankHandler().getTank(0).writeToNBT(new CompoundNBT()));
 
         return super.write(compound);
     }
@@ -261,11 +260,11 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     }
 
     public FluidTankHandler getFluidTankHandler() {
-        return fluidTankHandler;
+        return this.fluidTankHandler;
     }
 
     public FluidTank getFluidTank(int tank) {
-        return fluidTankHandler.getTank(tank);
+        return this.getFluidTankHandler().getTank(tank);
     }
 
 }

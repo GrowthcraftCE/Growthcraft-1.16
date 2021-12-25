@@ -25,8 +25,9 @@ public class GrowthcraftApplesBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Reference.MODID);
 
     public static final RegistryObject<GrowthcraftPlankBlock> applePlank = BLOCKS.register(
-            UnlocalizedName.APPLE_PLANK, () -> new GrowthcraftPlankBlock(UnlocalizedName.APPLE_PLANK)
+            UnlocalizedName.APPLE_PLANK, GrowthcraftPlankBlock::new
     );
+
     public static final RegistryObject<Block> applePlankStairs = BLOCKS.register(
             UnlocalizedName.APPLE_PLANK_STAIRS,
             () -> new StairsBlock(
@@ -34,6 +35,7 @@ public class GrowthcraftApplesBlocks {
                     AbstractBlock.Properties.from(GrowthcraftApplesBlocks.applePlank.get())
             )
     );
+
     public static final RegistryObject<GrowthcraftButtonBlock> applePlankButton = BLOCKS.register(
             UnlocalizedName.APPLE_PLANK_BUTTON, () -> new GrowthcraftButtonBlock(UnlocalizedName.APPLE_PLANK_BUTTON)
     );

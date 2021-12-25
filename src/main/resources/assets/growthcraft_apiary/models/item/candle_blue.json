@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "growthcraft_apiary:block/candle_simple"
+  }
+}

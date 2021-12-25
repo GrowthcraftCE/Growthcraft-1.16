@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class UnlocalizedName {
 
-    public static final String ALE_POTION = "potion_ale";
+    public static final String POTION_ALE = "potion_ale";
     public static final String BREW_KETTLE = "brew_kettle";
     public static final String BREW_KETTLE_LID = "brew_kettle_lid";
     public static final String BREW_KETTLE_RECIPE = "brew_kettle_recipe";
@@ -38,11 +38,11 @@ public class UnlocalizedName {
     public static final String HOPS = "hops";
     public static final String HOPS_SEEDS = "hops_seeds";
     public static final String HOPS_VINE = "hops_vine";
-    public static final String LAGER_POTION = "potion_lager";
+    public static final String POTION_LAGER = "potion_lager";
     public static final String LOOT_SERIALIZER_BLOCK = "global_block_loot_modifier";
     public static final String ROASTER = "roaster";
     public static final String ROASTER_RECIPE = "roaster_recipe";
-    public static final String WINE_POTION = "potion_wine";
+    public static final String POTION_WINE = "potion_wine";
     public static final String YEAST_BAYANUS = "yeast_bayanus";
     public static final String YEAST_BAYANUS_ETHEREAL = "yeast_bayanus_ethereal";
     public static final String YEAST_BREWERS = "yeast_brewers";
