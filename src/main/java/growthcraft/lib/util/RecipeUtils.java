@@ -1,8 +1,6 @@
 package growthcraft.lib.util;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.common.recipe.FermentBarrelRecipe;
-import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
@@ -23,12 +21,13 @@ public class RecipeUtils {
 
     /**
      * Search for recipes that result in the given fluid.
-     * @param world World object
+     *
+     * @param world      World object
      * @param fluidStack FluidStack with expected recipe result
      * @return FermentBarrelRecipe that produces the given fluid.
      * @throws ToManyMatchingRecipes
      */
-    public static FermentBarrelRecipe findFermentRecipesByResult(World world, FluidStack fluidStack) throws ToManyMatchingRecipes {
+    public static FermentBarrelRecipe findFermentRecipeByResult(World world, FluidStack fluidStack) {
         Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(world, GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
         List<FermentBarrelRecipe> matchingRecipes = new ArrayList<>();
 
@@ -38,11 +37,22 @@ public class RecipeUtils {
                 matchingRecipes.add(fermentBarrelRecipe);
             }
         }
-        if (matchingRecipes.size() > 1) {
-            throw new ToManyMatchingRecipes("Recipe is returning too many matches!");
-        }
 
         return matchingRecipes.get(0);
+    }
+
+    public static List<FermentBarrelRecipe> findFermentRecipesByResult(World world, FluidStack fluidStack) {
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(world, GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
+        List<FermentBarrelRecipe> matchingRecipes = new ArrayList<>();
+
+        for (IRecipe<?> recipe : recipes) {
+            FermentBarrelRecipe fermentBarrelRecipe = (FermentBarrelRecipe) recipe;
+            if (fermentBarrelRecipe.matches(fluidStack)) {
+                matchingRecipes.add(fermentBarrelRecipe);
+            }
+        }
+
+        return matchingRecipes;
     }
 
     public static Set<IRecipe<?>> findRecipesByType(World world, IRecipeType<?> recipeType) {

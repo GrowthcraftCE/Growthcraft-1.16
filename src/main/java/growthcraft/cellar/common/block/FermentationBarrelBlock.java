@@ -8,13 +8,11 @@ import growthcraft.lib.util.BlockStateUtils;
 import growthcraft.lib.util.RecipeUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.CauldronBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.BucketItem;
 import net.minecraft.item.GlassBottleItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -29,7 +27,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -88,55 +85,48 @@ public class FermentationBarrelBlock extends Block {
         if (!(player.getHeldItem(handIn).getItem() instanceof GlassBottleItem)
                 && (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
                 || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent())) {
+            GrowthcraftCellar.LOGGER.warn("Player is not holding Bottle and other stuff.");
             return ActionResultType.SUCCESS;
         }
 
-        if (!worldIn.isRemote) {
-            FermentBarrelTileEntity fermentBarrelTileEntity = (FermentBarrelTileEntity) worldIn.getTileEntity(pos);
-            ItemStack activeItem = player.getHeldItem(handIn);
+        if (!worldIn.isRemote && player.getHeldItem(handIn).getItem() == Items.GLASS_BOTTLE) {
+            GrowthcraftCellar.LOGGER.warn("Server side call for ferment barrel.");
+            try {
 
-            if (fermentBarrelTileEntity!= null && activeItem.getItem() instanceof GlassBottleItem
-                    && fermentBarrelTileEntity.getFluidTankHandler().getTank(0).getFluidAmount() > 0) {
-                try {
-                    FermentBarrelRecipe recipe = RecipeUtils.findFermentRecipesByResult(worldIn, fermentBarrelTileEntity.getFluidTank(0).getFluid());
-                    // Handle double call for alternative hand
-                    if (recipe.getBottleItemStack().getItem() != Items.AIR) {
-                        ItemStack bottleItemStack = recipe.getBottleItemStack();
+                FermentBarrelTileEntity tileEntity = (FermentBarrelTileEntity) worldIn.getTileEntity(pos);
+                int fluidTankAmount = tileEntity.getFluidTankHandler().getTank(0).getFluidAmount();
 
-                        bottleItemStack.setDisplayName(
-                                bottleItemStack.getDisplayName().copyRaw()
-                                        .appendString(" ")
-                                        .appendSibling(new TranslationTextComponent(fermentBarrelTileEntity.getFluidTank(0).getFluid().getTranslationKey()))
-                        );
+                GrowthcraftCellar.LOGGER.debug(
+                        String.format("FermentBarrel Fluid Tank Data: %s (%dmb)",
+                                tileEntity.getFluidTankHandler().getTank(0).getFluid().getDisplayName().getString(),
+                                fluidTankAmount)
+                );
 
+                FermentBarrelRecipe recipe = RecipeUtils.findFermentRecipeByResult(worldIn, tileEntity.getFluidTankHandler().getTank(0).getFluid());
 
-                        GrowthcraftCellar.LOGGER.error(
-                                String.format("FluidTank (%s) %dmb.", fermentBarrelTileEntity.getFluidTank(0).getFluid().getTranslationKey(), fermentBarrelTileEntity.getFluidTank(0).getFluidAmount()
-                                ));
+                GrowthcraftCellar.LOGGER.debug(
+                        String.format("Recipe = %s ()", recipe.getBottleItemStack().toString())
+                );
 
-                        fermentBarrelTileEntity.getFluidTankHandler().drain(0, 250);
+                // Drain the fluid tank of 250 mb of fluid.
+                tileEntity.getFluidTankHandler().getTank(0).drain(250, IFluidHandler.FluidAction.EXECUTE);
 
-                        GrowthcraftCellar.LOGGER.error(
-                                String.format("FluidTank (%s) %dmb.", fermentBarrelTileEntity.getFluidTank(0).getFluid().getTranslationKey(), fermentBarrelTileEntity.getFluidTank(0).getFluidAmount()
-                                ));
+                GrowthcraftCellar.LOGGER.debug(
+                        String.format("FermentBarrel Fluid Tank Data: %s (%dmb)",
+                                tileEntity.getFluidTankHandler().getTank(0).getFluid().getDisplayName().getString(),
+                                fluidTankAmount)
+                );
 
-                        player.getHeldItem(handIn).shrink(1);
+                // Shrink the player item inventory.
 
-                        if (!player.inventory.addItemStackToInventory(bottleItemStack)) {
-                            player.dropItem(bottleItemStack, false);
-                        }
+                // Add the resulting item to the player inventory or drop to the ground.
 
-                        worldIn.updateBlock(pos, this);
-                    }
-                } catch (NullPointerException npe) {
-                    // Do nothing as it isn't a fermentable fluid and a bucket should be used.
-                    throw npe;
-                } catch (RecipeUtils.ToManyMatchingRecipes ex) {
-                    GrowthcraftCellar.LOGGER.error(ex);
-                }
-
-                return ActionResultType.SUCCESS;
+            } catch (NullPointerException npe) {
+                // Do nothing
+                GrowthcraftCellar.LOGGER.debug("NullPointerException thrown while trying to activate FermentBarrel Block with Glass_Bottle.");
             }
+
+            return ActionResultType.SUCCESS;
         }
 
         if (!worldIn.isRemote) {
