@@ -1,11 +1,9 @@
 package growthcraft.cellar.common.block;
 
 import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.common.recipe.FermentBarrelRecipe;
 import growthcraft.cellar.common.tileentity.FermentBarrelTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.lib.util.BlockStateUtils;
-import growthcraft.lib.util.RecipeUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -33,7 +31,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
@@ -85,45 +82,27 @@ public class FermentationBarrelBlock extends Block {
         if (!(player.getHeldItem(handIn).getItem() instanceof GlassBottleItem)
                 && (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
                 || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent())) {
-            GrowthcraftCellar.LOGGER.warn("Player is not holding Bottle and other stuff.");
             return ActionResultType.SUCCESS;
         }
 
         if (!worldIn.isRemote && player.getHeldItem(handIn).getItem() == Items.GLASS_BOTTLE) {
-            GrowthcraftCellar.LOGGER.warn("Server side call for ferment barrel.");
             try {
-
                 FermentBarrelTileEntity tileEntity = (FermentBarrelTileEntity) worldIn.getTileEntity(pos);
-                int fluidTankAmount = tileEntity.getFluidTankHandler().getTank(0).getFluidAmount();
-
-                GrowthcraftCellar.LOGGER.debug(
-                        String.format("FermentBarrel Fluid Tank Data: %s (%dmb)",
-                                tileEntity.getFluidTankHandler().getTank(0).getFluid().getDisplayName().getString(),
-                                fluidTankAmount)
-                );
-
-                FermentBarrelRecipe recipe = RecipeUtils.findFermentRecipeByResult(worldIn, tileEntity.getFluidTankHandler().getTank(0).getFluid());
-
-                GrowthcraftCellar.LOGGER.debug(
-                        String.format("Recipe = %s ()", recipe.getBottleItemStack().toString())
-                );
-
-                // Drain the fluid tank of 250 mb of fluid.
-                tileEntity.getFluidTankHandler().getTank(0).drain(250, IFluidHandler.FluidAction.EXECUTE);
-
-                GrowthcraftCellar.LOGGER.debug(
-                        String.format("FermentBarrel Fluid Tank Data: %s (%dmb)",
-                                tileEntity.getFluidTankHandler().getTank(0).getFluid().getDisplayName().getString(),
-                                fluidTankAmount)
-                );
-
-                // Shrink the player item inventory.
-
-                // Add the resulting item to the player inventory or drop to the ground.
-
+                if (tileEntity.getFluidTankHandler().getTank(0).getFluidAmount() >= 250) {
+                    // Drain the fluid tank of 250 mb of fluid.
+                    tileEntity.drainTank(0, 250);
+                    // Shrink the player item inventory.
+                    player.getHeldItem(handIn).shrink(1);
+                    // Add the resulting item to the player inventory or drop to the ground. This has to be a copy
+                    // otherwise the inventory helper shrinks the ItemStack in the recipe object.
+                    ItemStack tileEntityCurrentPotionItemStack = tileEntity.getCurrentPotionItemStack().copy();
+                    if (!player.inventory.addItemStackToInventory(tileEntityCurrentPotionItemStack)) {
+                        player.dropItem(tileEntityCurrentPotionItemStack, false);
+                    }
+                }
             } catch (NullPointerException npe) {
-                // Do nothing
-                GrowthcraftCellar.LOGGER.debug("NullPointerException thrown while trying to activate FermentBarrel Block with Glass_Bottle.");
+                // Just log it, for reporting.
+                GrowthcraftCellar.LOGGER.error("[Growthcraft-Cellar] NullPointerException thrown while trying to activate FermentBarrel Block with Glass_Bottle.");
             }
 
             return ActionResultType.SUCCESS;

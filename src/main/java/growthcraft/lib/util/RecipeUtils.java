@@ -37,8 +37,7 @@ public class RecipeUtils {
                 matchingRecipes.add(fermentBarrelRecipe);
             }
         }
-
-        return matchingRecipes.get(0);
+        return matchingRecipes.size() > 0 ? matchingRecipes.get(0) : null;
     }
 
     public static List<FermentBarrelRecipe> findFermentRecipesByResult(World world, FluidStack fluidStack) {
@@ -50,6 +49,17 @@ public class RecipeUtils {
             if (fermentBarrelRecipe.matches(fluidStack)) {
                 matchingRecipes.add(fermentBarrelRecipe);
             }
+        }
+
+        return matchingRecipes;
+    }
+
+    public static List<FermentBarrelRecipe> findFermentRecipes() {
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(Minecraft.getInstance().world, GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
+        List<FermentBarrelRecipe> matchingRecipes = new ArrayList<>();
+
+        for (IRecipe<?> recipe : recipes) {
+            if (recipe instanceof FermentBarrelRecipe) matchingRecipes.add((FermentBarrelRecipe) recipe);
         }
 
         return matchingRecipes;

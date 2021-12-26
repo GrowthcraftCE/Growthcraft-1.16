@@ -3,7 +3,6 @@ package growthcraft.cellar.common.recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.lib.item.CellarPotionItem;
 import growthcraft.lib.util.CraftingUtils;
 import growthcraft.lib.util.EffectUtils;
 import net.minecraft.item.ItemStack;
