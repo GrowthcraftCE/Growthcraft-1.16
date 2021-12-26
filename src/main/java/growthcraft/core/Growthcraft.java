@@ -2,6 +2,7 @@ package growthcraft.core;
 
 import growthcraft.core.client.proxy.ClientProxy;
 import growthcraft.core.common.proxy.CommonProxy;
+import growthcraft.core.common.world.GrowthcraftOreGeneration;
 import growthcraft.core.init.GrowthcraftBlocks;
 import growthcraft.core.init.GrowthcraftItems;
 import growthcraft.core.init.GrowthcraftTileEntities;
@@ -12,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -34,6 +36,7 @@ public class Growthcraft {
     public Growthcraft() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, GrowthcraftOreGeneration::generateOres);
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
