@@ -1,6 +1,7 @@
 {
   "replace": false,
   "entries": [
+    "growthcraft_cellar:yeast_bayanus",
     "growthcraft_cellar:yeast_brewers",
     "growthcraft_cellar:yeast_lager",
     "growthcraft_cellar:grape_seeds_red_from_grass",
