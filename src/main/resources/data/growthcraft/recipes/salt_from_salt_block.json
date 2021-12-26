@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "growthcraft:salt_block"
+    }
+  ],
+  "result": {
+    "item": "growthcraft:salt",
+    "count": 9
+  }
+}
