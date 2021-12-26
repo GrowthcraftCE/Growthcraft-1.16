@@ -19,7 +19,6 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
@@ -33,6 +32,7 @@ public class GrowthcraftCellar {
     public static final IProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
     public GrowthcraftCellar() {
+
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         FMLJavaModLoadingContext.get().getModEventBus().register(ColorRegistryEvent.class);
@@ -69,13 +69,6 @@ public class GrowthcraftCellar {
         GrowthcraftCellarBlockRenders.setRenderLayers();
         GrowthcraftCellarTileEntityRenders.bindTileEntityRenderers();
         GrowthcraftCellarScreenManager.registerFactories();
-
     }
-
-    @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
-        // Do nothing at this time.
-    }
-
 
 }

@@ -1,20 +1,16 @@
 package growthcraft.cellar.common.block;
 
 import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.common.recipe.FermentBarrelRecipe;
 import growthcraft.cellar.common.tileentity.FermentBarrelTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.lib.util.BlockStateUtils;
-import growthcraft.lib.util.RecipeUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.CauldronBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.BucketItem;
 import net.minecraft.item.GlassBottleItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -29,14 +25,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
@@ -91,52 +85,27 @@ public class FermentationBarrelBlock extends Block {
             return ActionResultType.SUCCESS;
         }
 
-        if (!worldIn.isRemote) {
-            FermentBarrelTileEntity fermentBarrelTileEntity = (FermentBarrelTileEntity) worldIn.getTileEntity(pos);
-            ItemStack activeItem = player.getHeldItem(handIn);
-
-            if (fermentBarrelTileEntity!= null && activeItem.getItem() instanceof GlassBottleItem
-                    && fermentBarrelTileEntity.getFluidTankHandler().getTank(0).getFluidAmount() > 0) {
-                try {
-                    FermentBarrelRecipe recipe = RecipeUtils.findFermentRecipesByResult(worldIn, fermentBarrelTileEntity.getFluidTank(0).getFluid());
-                    // Handle double call for alternative hand
-                    if (recipe.getBottleItemStack().getItem() != Items.AIR) {
-                        ItemStack bottleItemStack = recipe.getBottleItemStack();
-
-                        bottleItemStack.setDisplayName(
-                                bottleItemStack.getDisplayName().copyRaw()
-                                        .appendString(" ")
-                                        .appendSibling(new TranslationTextComponent(fermentBarrelTileEntity.getFluidTank(0).getFluid().getTranslationKey()))
-                        );
-
-
-                        GrowthcraftCellar.LOGGER.error(
-                                String.format("FluidTank (%s) %dmb.", fermentBarrelTileEntity.getFluidTank(0).getFluid().getTranslationKey(), fermentBarrelTileEntity.getFluidTank(0).getFluidAmount()
-                                ));
-
-                        fermentBarrelTileEntity.getFluidTankHandler().drain(0, 250);
-
-                        GrowthcraftCellar.LOGGER.error(
-                                String.format("FluidTank (%s) %dmb.", fermentBarrelTileEntity.getFluidTank(0).getFluid().getTranslationKey(), fermentBarrelTileEntity.getFluidTank(0).getFluidAmount()
-                                ));
-
-                        player.getHeldItem(handIn).shrink(1);
-
-                        if (!player.inventory.addItemStackToInventory(bottleItemStack)) {
-                            player.dropItem(bottleItemStack, false);
-                        }
-
-                        worldIn.updateBlock(pos, this);
+        if (!worldIn.isRemote && player.getHeldItem(handIn).getItem() == Items.GLASS_BOTTLE) {
+            try {
+                FermentBarrelTileEntity tileEntity = (FermentBarrelTileEntity) worldIn.getTileEntity(pos);
+                if (tileEntity.getFluidTankHandler().getTank(0).getFluidAmount() >= 250) {
+                    // Drain the fluid tank of 250 mb of fluid.
+                    tileEntity.drainTank(0, 250);
+                    // Shrink the player item inventory.
+                    player.getHeldItem(handIn).shrink(1);
+                    // Add the resulting item to the player inventory or drop to the ground. This has to be a copy
+                    // otherwise the inventory helper shrinks the ItemStack in the recipe object.
+                    ItemStack tileEntityCurrentPotionItemStack = tileEntity.getCurrentPotionItemStack().copy();
+                    if (!player.inventory.addItemStackToInventory(tileEntityCurrentPotionItemStack)) {
+                        player.dropItem(tileEntityCurrentPotionItemStack, false);
                     }
-                } catch (NullPointerException npe) {
-                    // Do nothing as it isn't a fermentable fluid and a bucket should be used.
-                    throw npe;
-                } catch (RecipeUtils.ToManyMatchingRecipes ex) {
-                    GrowthcraftCellar.LOGGER.error(ex);
                 }
-
-                return ActionResultType.SUCCESS;
+            } catch (NullPointerException npe) {
+                // Just log it, for reporting.
+                GrowthcraftCellar.LOGGER.error("[Growthcraft-Cellar] NullPointerException thrown while trying to activate FermentBarrel Block with Glass_Bottle.");
             }
+
+            return ActionResultType.SUCCESS;
         }
 
         if (!worldIn.isRemote) {
