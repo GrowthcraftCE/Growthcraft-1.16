@@ -55,7 +55,7 @@ import java.util.stream.Collectors;
 
 public class CultureJarTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
-    private int maxProcessingTime = 250;
+    private int maxProcessingTime;
     private int currentProcessingTicks;
     private ITextComponent customName;
 
@@ -72,6 +72,9 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
         super(tileEntityType);
         this.inventory = new GrowthcraftItemHandler(1);
         this.createFluidTanks();
+        // Defaults
+        this.maxProcessingTime = 600;
+        this.currentProcessingTicks = 0;
     }
 
     public CultureJarTileEntity() {
@@ -91,26 +94,24 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
                         isHeated()
                 );
 
-                if (currentRecipe != null && currentRecipe == recipe) {
+                if (recipe != null) {
                     this.maxProcessingTime = recipe.getProcessingTime();
-                    this.currentProcessingTicks++;
+                    if (recipe != this.currentRecipe) {
+                        this.currentRecipe = recipe;
+                        // wait until next cycle to start processing
+                    } else if (this.currentProcessingTicks >= this.maxProcessingTime) {
+                        processRecipeResult();
+                        // reset counters
+                        this.currentRecipe = null;
+                        this.currentProcessingTicks = 0;
+                    } else {
+                        this.currentProcessingTicks++;
+                    }
                     dirty = true;
-                } else if (currentRecipe == null && recipe != null) {
-                    currentProcessingTicks = 0;
-                    currentRecipe = recipe;
-                    dirty = true;
-                }
-
-                if (currentProcessingTicks > maxProcessingTime) {
-                    this.inputFluidTank.drain(recipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
-                    this.inventory.getStackInSlot(0).grow(recipe.getInputItem().getCount());
-
-                    currentRecipe = null;
-                    currentProcessingTicks = 0;
-                    dirty = true;
+                } else {
+                    // Do nothing we do not have a valid recipe.
                 }
             }
-
         }
 
         if (dirty) {
@@ -118,6 +119,11 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
             this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
         }
 
+    }
+
+    private void processRecipeResult() {
+        this.inputFluidTank.drain(currentRecipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
+        this.inventory.getStackInSlot(0).grow(currentRecipe.getInputItem().getCount());
     }
 
     // TileEntityRenderer Distance
@@ -274,7 +280,7 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
 
     // Getters and Setters
     public int getCurrentProcessingTime() {
-        return currentProcessingTicks;
+        return this.currentProcessingTicks;
     }
 
     public void setCurrentProcessingTime(int ticks) {
