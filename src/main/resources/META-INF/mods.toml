@@ -5,7 +5,7 @@ issueTrackerURL = "https://github.com/GrowthcraftCE/Growthcraft-1.16/issues"
 
 [[mods]]
 modId = "growthcraft"
-version = "6.0.8"
+version = "6.0.9"
 displayName = "Growthcraft"
 updateJSONURL = "https://raw.githubusercontent.com/GrowthcraftCE/Growthcraft-Updates/master/growthcraft-versions.json"
 displayURL = "https://github.com/GrowthcraftCE/Growthcraft-1.16/wiki"
@@ -32,7 +32,7 @@ side = "BOTH"
 
 [[mods]]
 modId = "growthcraft_cellar"
-version = "6.0.8"
+version = "6.0.9"
 displayName = "Growthcraft Cellar"
 logoFile = "growthcraft_cellar_logo.png"
 description = '''
@@ -49,7 +49,7 @@ side = "BOTH"
 
 [[mods]]
 modId = "growthcraft_apiary"
-version = "6.0.8"
+version = "6.0.9"
 displayName = "Growthcraft Apiary"
 logoFile = "growthcraft_bees_logo.png"
 description = '''
@@ -65,7 +65,7 @@ side = "BOTH"
 
 [[mods]]
 modId = "growthcraft_apples"
-version = "6.0.8"
+version = "6.0.9"
 displayName = "Growthcraft Apples"
 logoFile = "growthcraft_apples_logo.png"
 description = '''
@@ -81,7 +81,7 @@ side = "BOTH"
 
 [[mods]]
 modId = "growthcraft_bamboo"
-version = "6.0.8"
+version = "6.0.9"
 displayName = "Growthcraft Bamboo"
 logoFile = "growthcraft_bamboo_logo.png"
 description = '''
