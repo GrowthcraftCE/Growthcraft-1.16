@@ -25,18 +25,21 @@ public class GrowthcraftCellarItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
             ForgeRegistries.ITEMS, Reference.MODID
     );
+
     public static final RegistryObject<GrowthcraftFoodItem> GRAPE_PURPLE = ITEMS.register(
             UnlocalizedName.GRAPE_PURPLE, GrowthcraftFoodItem::new
     );
     public static final RegistryObject<GrapeSeedsItem> GRAPE_PURPLE_SEEDS = ITEMS.register(
             UnlocalizedName.GRAPE_SEEDS_PURPLE, () -> new GrapeSeedsItem(GRAPE_PURPLE.get())
     );
+
     public static final RegistryObject<GrowthcraftFoodItem> GRAPE_RED = ITEMS.register(
             UnlocalizedName.GRAPE_RED, GrowthcraftFoodItem::new
     );
     public static final RegistryObject<GrapeSeedsItem> GRAPE_RED_SEEDS = ITEMS.register(
             UnlocalizedName.GRAPE_SEEDS_RED, () -> new GrapeSeedsItem(GRAPE_RED.get())
     );
+
     public static final RegistryObject<GrowthcraftFoodItem> GRAPE_WHITE = ITEMS.register(
             UnlocalizedName.GRAPE_WHITE, GrowthcraftFoodItem::new
     );
@@ -49,8 +52,9 @@ public class GrowthcraftCellarItems {
     public static final RegistryObject<HopSeedsItem> HOPS_SEEDS = ITEMS.register(
             UnlocalizedName.HOPS_SEEDS, HopSeedsItem::new
     );
-    public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(
-            ForgeRegistries.POTION_TYPES, growthcraft.core.shared.Reference.MODID
+
+    public static final RegistryObject<GrowthcraftItem> YEAST_BAYANUS = ITEMS.register(
+            UnlocalizedName.YEAST_BAYANUS, GrowthcraftItem::new
     );
     public static final RegistryObject<CellarPotionItem> POTION_ALE = ITEMS.register(
             UnlocalizedName.POTION_ALE,

@@ -2,6 +2,7 @@ package growthcraft.cellar.common.recipe;
 
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;

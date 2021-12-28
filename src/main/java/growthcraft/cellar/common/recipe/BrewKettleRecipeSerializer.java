@@ -60,6 +60,7 @@ public class BrewKettleRecipeSerializer extends ForgeRegistryEntry<IRecipeSerial
             buffer.writeFluidStack(recipe.getInputFluidStack());
             buffer.writeFluidStack(recipe.getOutputFluidStack());
             buffer.writeItemStack(recipe.getByProduct());
+            buffer.writeBoolean(recipe.getLidRequired());
             buffer.writeBoolean(recipe.isHeatRequired());
             buffer.writeVarInt(recipe.getByProductChance());
         } catch (Exception ex) {

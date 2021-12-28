@@ -29,6 +29,7 @@ public class Reference {
 
     // TODO[7]:
     public static final String SALT_ORE = "salt_ore";
+
     // TODO[5]:
     public static final String SALT_BLOCK = "salt_block";
     // TODO[4]:

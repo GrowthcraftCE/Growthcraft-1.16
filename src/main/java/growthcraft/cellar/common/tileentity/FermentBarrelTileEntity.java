@@ -83,6 +83,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
 
                 if (recipe != null) {
                     this.maxProcessingTime = recipe.getProcessingTime();
+
                     if (recipe != this.currentRecipe) {
                         this.currentRecipe = recipe;
                         // wait until next cycle to start processing
