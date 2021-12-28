@@ -19,7 +19,15 @@ import java.util.stream.Collectors;
 
 public class RecipeUtils {
 
-    public static FermentBarrelRecipe findFermentRecipesByResult(World world, FluidStack fluidStack) throws ToManyMatchingRecipes {
+    /**
+     * Search for recipes that result in the given fluid.
+     *
+     * @param world      World object
+     * @param fluidStack FluidStack with expected recipe result
+     * @return FermentBarrelRecipe that produces the given fluid.
+     * @throws ToManyMatchingRecipes
+     */
+    public static FermentBarrelRecipe findFermentRecipeByResult(World world, FluidStack fluidStack) {
         Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(world, GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
         List<FermentBarrelRecipe> matchingRecipes = new ArrayList<>();
 
@@ -29,11 +37,32 @@ public class RecipeUtils {
                 matchingRecipes.add(fermentBarrelRecipe);
             }
         }
-        if (matchingRecipes.size() > 1) {
-            throw new ToManyMatchingRecipes("Recipe is returning too many matches!");
+        return matchingRecipes.size() > 0 ? matchingRecipes.get(0) : null;
+    }
+
+    public static List<FermentBarrelRecipe> findFermentRecipesByResult(World world, FluidStack fluidStack) {
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(world, GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
+        List<FermentBarrelRecipe> matchingRecipes = new ArrayList<>();
+
+        for (IRecipe<?> recipe : recipes) {
+            FermentBarrelRecipe fermentBarrelRecipe = (FermentBarrelRecipe) recipe;
+            if (fermentBarrelRecipe.matches(fluidStack)) {
+                matchingRecipes.add(fermentBarrelRecipe);
+            }
         }
 
-        return matchingRecipes.get(0);
+        return matchingRecipes;
+    }
+
+    public static List<FermentBarrelRecipe> findFermentRecipes() {
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(Minecraft.getInstance().world, GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
+        List<FermentBarrelRecipe> matchingRecipes = new ArrayList<>();
+
+        for (IRecipe<?> recipe : recipes) {
+            if (recipe instanceof FermentBarrelRecipe) matchingRecipes.add((FermentBarrelRecipe) recipe);
+        }
+
+        return matchingRecipes;
     }
 
     public static Set<IRecipe<?>> findRecipesByType(World world, IRecipeType<?> recipeType) {

@@ -7,15 +7,21 @@ import net.minecraft.block.material.MaterialColor;
 
 public class GrowthcraftDoorBlock extends DoorBlock {
 
-    private final String unlocalizedName;
-
-    public GrowthcraftDoorBlock(String unlocalizedName) {
-        this(unlocalizedName, getInitProperties(Material.WOOD));
+    public GrowthcraftDoorBlock() {
+        this(getInitProperties(Material.WOOD));
     }
 
-    public GrowthcraftDoorBlock(String unlocalizedName, Properties properties) {
+    public GrowthcraftDoorBlock(Material material) {
+        this(getInitProperties(material));
+    }
+
+    @Deprecated
+    public GrowthcraftDoorBlock(String unlocalizedName) {
+        this();
+    }
+
+    public GrowthcraftDoorBlock(Properties properties) {
         super(properties);
-        this.unlocalizedName = unlocalizedName;
     }
 
     private static Properties getInitProperties(Material material) {

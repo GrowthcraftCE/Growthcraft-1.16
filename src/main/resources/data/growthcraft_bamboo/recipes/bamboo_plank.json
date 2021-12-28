@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "growthcraft_bamboo:bamboo_wood"
+    }
+  ],
+  "result": {
+    "item": "growthcraft_bamboo:bamboo_plank",
+    "count": 4
+  }
+}

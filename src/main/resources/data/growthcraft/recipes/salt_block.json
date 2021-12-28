@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "growthcraft:salt"
+    }
+  },
+  "result": {
+    "item": "growthcraft:salt_block",
+    "count": 1
+  }
+}

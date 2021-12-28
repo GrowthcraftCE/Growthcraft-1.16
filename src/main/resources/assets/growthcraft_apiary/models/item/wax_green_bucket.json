@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "growthcraft_apiary:item/bucket/bucket_fluid",
+    "layer1": "growthcraft_apiary:item/bucket/bucket_base"
+  }
+}

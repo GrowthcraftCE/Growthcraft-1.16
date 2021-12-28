@@ -3,6 +3,7 @@ package growthcraft.core.init;
 import growthcraft.core.common.item.CrowbarItem;
 import growthcraft.core.common.item.RopeLinenItem;
 import growthcraft.core.shared.Reference;
+import growthcraft.lib.common.item.GrowthcraftItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -67,6 +68,10 @@ public class GrowthcraftItems {
 
     public static final RegistryObject<RopeLinenItem> ROPE_LINEN = ITEMS.register(
             Reference.ROPE_LINEN, () -> new RopeLinenItem(GrowthcraftBlocks.ROPE_LINEN.get())
+    );
+
+    public static final RegistryObject<GrowthcraftItem> SALT = ITEMS.register(
+            Reference.SALT_ITEM, GrowthcraftItem::new
     );
 
 }

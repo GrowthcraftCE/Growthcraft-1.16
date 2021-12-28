@@ -83,22 +83,35 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
 
                 if (recipe != null) {
                     this.maxProcessingTime = recipe.getProcessingTime();
-                    if (recipe != currentRecipe) {
-                        currentRecipe = recipe;
+
+                    if (recipe != this.currentRecipe) {
+                        this.currentRecipe = recipe;
                         // wait until next cycle to start processing
-                    } else if (currentProcessingTime >= maxProcessingTime) {
+                    } else if (this.currentProcessingTime >= this.maxProcessingTime) {
                         processRecipeResult();
                         // reset counters
-                        currentProcessingTime = 0;
+                        this.currentProcessingTime = 0;
                     } else {
                         this.currentProcessingTime++;
                     }
                     dirty = true;
                 } else {
-                    // No matching recipe available
+                    // Check for the potion only recipe.
+                    if (currentProcessingTime > 0) {
+                        currentProcessingTime = 0;
+                    }
                 }
             } else {
-                // Inventory in insufficient to process a recipe.
+                // Inventory is insufficient to process a recipe, check for Potion Recipe
+                FermentBarrelRecipe recipe = this.getRecipe(
+                        this.getFluidTank(0).getFluid()
+                );
+
+                if (recipe != null) {
+                    if (recipe != currentRecipe) {
+                        this.currentRecipe = recipe;
+                    }
+                }
             }
         }
 
@@ -108,6 +121,13 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
                     this.getPos(), this.getBlockState(), this.getBlockState(),
                     Constants.BlockFlags.BLOCK_UPDATE);
         }
+    }
+
+    private void markUpdate() {
+        this.markDirty();
+        this.world.notifyBlockUpdate(
+                this.getPos(), this.getBlockState(), this.getBlockState(),
+                Constants.BlockFlags.BLOCK_UPDATE);
     }
 
     private void processRecipeResult() {
@@ -174,9 +194,9 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
 
         this.currentProcessingTime = compound.getInt("CurrentProcessingTime");
 
-        for (int i = 0; i < fluidTankHandler.getNumberTanks(); i++) {
-            fluidTankHandler.getTank(i).readFromNBT(compound.getCompound("tank" + i));
-        }
+        // Read the tank data from NBT
+        this.getFluidTankHandler().getTank(0).readFromNBT(compound.getCompound("tank0"));
+
     }
 
     @Override
@@ -188,20 +208,16 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
 
         ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());
         compound.putInt("CurrentProcessingTime", this.currentProcessingTime);
-        for (int i = 0; i < fluidTankHandler.getNumberTanks(); i++) {
-            CompoundNBT tankNBT = fluidTankHandler.getTank(i).writeToNBT(new CompoundNBT());
-            compound.put("tank" + i, tankNBT);
-        }
 
+        // Save the tank to the NBTTag
+        compound.put("tank0", this.getFluidTankHandler().getTank(0).writeToNBT(new CompoundNBT()));
         return super.write(compound);
     }
 
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        CompoundNBT nbt = new CompoundNBT();
-        this.write(nbt);
-        return new SUpdateTileEntityPacket(this.pos, 0, nbt);
+        return new SUpdateTileEntityPacket(this.pos, 1, getUpdateTag());
     }
 
     @Override
@@ -211,7 +227,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
 
     @Override
     public CompoundNBT getUpdateTag() {
-        CompoundNBT nbt = new CompoundNBT();
+        CompoundNBT nbt = super.getUpdateTag();
         this.write(nbt);
         return nbt;
     }
@@ -238,9 +254,32 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     @Nullable
     public FermentBarrelRecipe getRecipe(ItemStack inputItemStack, FluidStack inputFluidStack) {
         Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(this.world, GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
+
+        // Check for Ferment recipes
         for (IRecipe<?> recipe : recipes) {
             FermentBarrelRecipe fermentBarrelRecipe = (FermentBarrelRecipe) recipe;
             if (fermentBarrelRecipe.matches(inputItemStack, inputFluidStack)) {
+                return fermentBarrelRecipe;
+            }
+        }
+
+        // Reprocess for fluid only recipe.
+        for (IRecipe<?> recipe : recipes) {
+            FermentBarrelRecipe fermentBarrelRecipe = (FermentBarrelRecipe) recipe;
+            if (fermentBarrelRecipe.matches(inputFluidStack)) {
+                return fermentBarrelRecipe;
+            }
+        }
+
+        return null;
+    }
+
+    @Nullable
+    public FermentBarrelRecipe getRecipe(FluidStack inputFluidStack) {
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(this.world, GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
+        for (IRecipe<?> recipe : recipes) {
+            FermentBarrelRecipe fermentBarrelRecipe = (FermentBarrelRecipe) recipe;
+            if (fermentBarrelRecipe.matches(inputFluidStack)) {
                 return fermentBarrelRecipe;
             }
         }
@@ -261,11 +300,20 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     }
 
     public FluidTankHandler getFluidTankHandler() {
-        return fluidTankHandler;
+        return this.fluidTankHandler;
     }
 
     public FluidTank getFluidTank(int tank) {
-        return fluidTankHandler.getTank(tank);
+        return this.getFluidTankHandler().getTank(tank);
+    }
+
+    public void drainTank(int tank, int amount) {
+        this.getFluidTank(tank).drain(amount, IFluidHandler.FluidAction.EXECUTE);
+        markUpdate();
+    }
+
+    public ItemStack getCurrentPotionItemStack() {
+        return this.currentRecipe.getBottleItemStack();
     }
 
 }

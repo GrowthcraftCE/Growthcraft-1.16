@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "growthcraft_apiary:block/candle_wall"
+    },
+    "facing=north": {
+      "model": "growthcraft_apiary:block/candle_wall",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "growthcraft_apiary:block/candle_wall",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "growthcraft_apiary:block/candle_wall",
+      "y": 180
+    }
+  }
+}

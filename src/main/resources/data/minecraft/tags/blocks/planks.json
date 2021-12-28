@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "growthcraft_apples:apple_plank"
+    "growthcraft_apples:apple_plank",
+    "growthcraft_bamboo:bamboo_plank"
   ]
 }

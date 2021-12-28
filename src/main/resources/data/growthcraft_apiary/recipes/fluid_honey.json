@@ -1,0 +1,16 @@
+{
+  "type": "growthcraft_cellar:fruit_press_recipe",
+  "processing_time": 600,
+  "input_item": {
+    "item": "growthcraft_apiary:honey_comb_full",
+    "count": 1
+  },
+  "output_fluid": {
+    "fluid": "growthcraft_apiary:honey_fluid",
+    "amount": 250
+  },
+  "by_product": {
+    "item": "minecraft:bone_meal",
+    "count": 1
+  }
+}

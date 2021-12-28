@@ -10,6 +10,7 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -25,7 +26,8 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
     private final Color color;
     private final ItemStack potionItemStack;
 
-    public FermentBarrelRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItemStack, FluidStack outputFluidStack, int processingTime, ItemStack bottle, Color color) {
+    public FermentBarrelRecipe(ResourceLocation recipeId, FluidStack inputFluidStack, ItemStack inputItemStack,
+                               FluidStack outputFluidStack, int processingTime, ItemStack bottle, Color color) {
         this.recipeId = recipeId;
         this.inputFluidStack = inputFluidStack;
         this.outputFluidStack = outputFluidStack;
@@ -33,6 +35,13 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
         this.processingTime = processingTime;
         this.potionItemStack = bottle;
         this.color = color;
+
+        this.potionItemStack.setDisplayName(
+                this.potionItemStack.getDisplayName().copyRaw()
+                        .appendString(" ")
+                        .appendSibling(new TranslationTextComponent(this.outputFluidStack.getTranslationKey()))
+        );
+
     }
 
     @Override
@@ -40,12 +49,12 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
         return false;
     }
 
-    public boolean matches(ItemStack inputItemStack, FluidStack inputFluidStack) {
-        boolean inputItemMatches = this.inputItemStack.getItem() == inputItemStack.getItem()
-                && this.inputItemStack.getCount() <= inputItemStack.getCount();
+    public boolean matches(ItemStack matchInputItemStack, FluidStack matchInputFluidStack) {
+        boolean inputItemMatches = this.inputItemStack.getItem() == matchInputItemStack.getItem()
+                && this.inputItemStack.getCount() <= matchInputItemStack.getCount();
 
-        boolean inputFluidMatches = this.inputFluidStack.getFluid() == inputFluidStack.getFluid()
-                && this.inputFluidStack.getAmount() <= inputFluidStack.getAmount();
+        boolean inputFluidMatches = this.inputFluidStack.getFluid() == matchInputFluidStack.getFluid()
+                && this.inputFluidStack.getAmount() <= matchInputFluidStack.getAmount();
 
         return inputItemMatches && inputFluidMatches;
     }
@@ -116,24 +125,20 @@ public class FermentBarrelRecipe implements IRecipe<IInventory> {
     }
 
     public int getProcessingTime() {
-        return processingTime;
+        return this.processingTime;
     }
 
     public boolean hasEffects() {
-        return this.potionItemStack.getItem().hasEffect(potionItemStack);
-    }
-
-    public Item getBottle() {
-        return this.potionItemStack.getItem();
+        return this.potionItemStack.getItem().hasEffect(this.potionItemStack);
     }
 
     public Color getColor() {
-        return color;
+        return this.color;
     }
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return NonNullList.from(Ingredient.EMPTY, Ingredient.fromStacks(inputItemStack));
+        return NonNullList.from(Ingredient.EMPTY, Ingredient.fromStacks(this.inputItemStack));
     }
 
     public ItemStack getBottleItemStack() {

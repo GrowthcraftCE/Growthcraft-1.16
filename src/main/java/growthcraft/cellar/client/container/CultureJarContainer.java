@@ -1,5 +1,6 @@
 package growthcraft.cellar.client.container;
 
+import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.common.tileentity.CultureJarTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarContainers;
@@ -137,6 +138,13 @@ public class CultureJarContainer extends Container {
 
     @OnlyIn(Dist.CLIENT)
     public int getProcessingTimeScaled(int size) {
+        GrowthcraftCellar.LOGGER.error(
+                String.format("%d * %d / %d"
+                        , this.currentProcessingTime.get()
+                        , size
+                        , this.cultureJarTileEntity.getMaxProcessingTime()
+                )
+        );
         return this.currentProcessingTime.get() != 0 && this.cultureJarTileEntity.getMaxProcessingTime() != 0
                 ? this.currentProcessingTime.get() * size / this.cultureJarTileEntity.getMaxProcessingTime()
                 : 0;

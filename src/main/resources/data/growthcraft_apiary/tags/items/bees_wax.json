@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "growthcraft_apiary:bees_wax",
+    "growthcraft_apiary:bees_wax_black",
+    "growthcraft_apiary:bees_wax_blue",
+    "growthcraft_apiary:bees_wax_brown",
+    "growthcraft_apiary:bees_wax_cyan",
+    "growthcraft_apiary:bees_wax_gray",
+    "growthcraft_apiary:bees_wax_green",
+    "growthcraft_apiary:bees_wax_light_blue",
+    "growthcraft_apiary:bees_wax_light_gray",
+    "growthcraft_apiary:bees_wax_lime",
+    "growthcraft_apiary:bees_wax_magenta",
+    "growthcraft_apiary:bees_wax_orange",
+    "growthcraft_apiary:bees_wax_pink",
+    "growthcraft_apiary:bees_wax_purple",
+    "growthcraft_apiary:bees_wax_red",
+    "growthcraft_apiary:bees_wax_white",
+    "growthcraft_apiary:bees_wax_yellow"
+  ]
+}

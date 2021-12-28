@@ -3,7 +3,11 @@ package growthcraft.core.init;
 import growthcraft.core.Growthcraft;
 import growthcraft.core.common.block.RopeBlock;
 import growthcraft.core.shared.Reference;
+import growthcraft.lib.common.block.GrowthcraftBlock;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -25,6 +29,14 @@ public class GrowthcraftBlocks {
     public static final RegistryObject<RopeBlock> ROPE_LINEN = BLOCKS.register(
             Reference.ROPE_LINEN,
             RopeBlock::new
+    );
+
+    public static final RegistryObject<GrowthcraftBlock> SALT_BLOCK = BLOCKS.register(
+            Reference.SALT_BLOCK, () -> new GrowthcraftBlock(Material.ROCK)
+    );
+
+    public static final RegistryObject<GrowthcraftBlock> SALT_ORE = BLOCKS.register(
+            Reference.SALT_ORE, () -> new GrowthcraftBlock(AbstractBlock.Properties.from(Blocks.IRON_ORE))
     );
 
     public static void registerBlockItems(IForgeRegistry<Item> itemRegistry, Item.Properties properties) {

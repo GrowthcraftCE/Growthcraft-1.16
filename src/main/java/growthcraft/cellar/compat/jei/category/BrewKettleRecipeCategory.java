@@ -115,30 +115,36 @@ public class BrewKettleRecipeCategory implements IRecipeCategory<BrewKettleRecip
             layout.getItemStacks().init(0, true, 69, 24);
             layout.getItemStacks().set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
 
-            // Set Input FluidStack GUI
             IGuiFluidStackGroup guiFluidStacks = layout.getFluidStacks();
-            guiFluidStacks.init(0, true, 36, 7, 16, 52, 4000, false, overlayTank);
-            guiFluidStacks.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0));
+
+            // Set Input FluidStack GUI
+            if (!ingredients.getInputs(VanillaTypes.FLUID).get(0).get(0).isEmpty()) {
+                guiFluidStacks.init(0, true, 36, 7, 16, 52, 4000, false, overlayTank);
+                guiFluidStacks.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0));
+            }
 
             // Set Output FluidStack GUI
-            guiFluidStacks.init(1, true, 104, 7, 16, 52, 4000, false, overlayTank);
-            guiFluidStacks.set(1, ingredients.getOutputs(VanillaTypes.FLUID).get(0));
+            if (!ingredients.getOutputs(VanillaTypes.FLUID).get(0).get(0).isEmpty()) {
+                guiFluidStacks.init(1, true, 104, 7, 16, 52, 4000, false, overlayTank);
+                guiFluidStacks.set(1, ingredients.getOutputs(VanillaTypes.FLUID).get(0));
+            }
 
             // set Output ItemStack ByProduct GUI
             layout.getItemStacks().init(1, true, 130, 6);
             layout.getItemStacks().set(1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
 
-            //T TODO: Set the Brew Kettle Lid GUI if needed
+            // TODO: Set the Brew Kettle Lid GUI if needed
 
         } catch (Exception ex) {
             GrowthcraftCellar.LOGGER.error("Failure to set recipe mapping for Brew Kettle recipe.");
+            ex.printStackTrace();
         }
     }
 
     @Override
     public void draw(BrewKettleRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
         try {
-            overlayHeated.draw(matrixStack, 59, 44);
+            if (recipe.isHeatRequired()) overlayHeated.draw(matrixStack, 59, 44);
         } catch (Exception ex) {
             GrowthcraftCellar.LOGGER.error("Failure to draw heat texture for Brew Kettle recipe.");
         }
