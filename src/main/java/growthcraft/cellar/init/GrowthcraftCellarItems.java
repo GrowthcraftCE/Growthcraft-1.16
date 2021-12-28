@@ -12,7 +12,6 @@ import growthcraft.lib.common.item.GrowthcraftFoodItem;
 import growthcraft.lib.common.item.GrowthcraftItem;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
-import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -53,9 +52,6 @@ public class GrowthcraftCellarItems {
             UnlocalizedName.HOPS_SEEDS, HopSeedsItem::new
     );
 
-    public static final RegistryObject<GrowthcraftItem> YEAST_BAYANUS = ITEMS.register(
-            UnlocalizedName.YEAST_BAYANUS, GrowthcraftItem::new
-    );
     public static final RegistryObject<CellarPotionItem> POTION_ALE = ITEMS.register(
             UnlocalizedName.POTION_ALE,
             CellarPotionItem::new
