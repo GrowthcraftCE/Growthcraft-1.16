@@ -1,5 +1,5 @@
 {
-  "block.growthcraft_apiary.bee_box": "Bee Box",
+  "block.growthcraft_apiary.bee_box_oak": "Bee Box (Oak)",
   "block.growthcraft_apiary.candle_black": "Candle (Black)",
   "block.growthcraft_apiary.candle_blue": "Candle (Blue)",
   "block.growthcraft_apiary.candle_brown": "Candle (Brown)",
@@ -32,6 +32,8 @@
   "fluid.growthcraft_apiary.wax_red_fluid": "Melted Wax (Red)",
   "fluid.growthcraft_apiary.wax_white_fluid": "Melted Wax (White)",
   "fluid.growthcraft_apiary.wax_yellow_fluid": "Melted Wax (Yellow)",
+  "fluid.growthcraft_apiary.honey_fluid": "Honey",
+  "fluid.growthcraft_apiary.honey_mead_fluid": "Honey Mead",
   "item.growthcraft_apiary.bee": "Bee",
   "item.growthcraft_apiary.bees_wax": "Beeswax",
   "item.growthcraft_apiary.bees_wax_black": "Beeswax (Black)",
@@ -67,5 +69,7 @@
   "item.growthcraft_apiary.wax_purple_bucket": "Melted Wax (Purple) Bucket",
   "item.growthcraft_apiary.wax_red_bucket": "Melted Wax (Red) Bucket",
   "item.growthcraft_apiary.wax_white_bucket": "Melted Wax (White) Bucket",
-  "item.growthcraft_apiary.wax_yellow_bucket": "Melted Wax (Yellow) Bucket"
+  "item.growthcraft_apiary.wax_yellow_bucket": "Melted Wax (Yellow) Bucket",
+  "item.growthcraft_apiary.honey_bucket": "Honey Bucket",
+  "item.growthcraft_apiary.honey_mead_bucket": "Honey Mead Bucket"
 }

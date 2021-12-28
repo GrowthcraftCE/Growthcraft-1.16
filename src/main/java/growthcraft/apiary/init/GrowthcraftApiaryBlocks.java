@@ -1,5 +1,6 @@
 package growthcraft.apiary.init;
 
+import growthcraft.apiary.common.block.BeeBoxBlock;
 import growthcraft.apiary.common.block.CandleBlock;
 import growthcraft.apiary.common.block.CandleWallBlock;
 import growthcraft.apiary.shared.Reference;
@@ -20,6 +21,10 @@ public class GrowthcraftApiaryBlocks {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(
             ForgeRegistries.BLOCKS, Reference.MODID
+    );
+
+    public static final RegistryObject<BeeBoxBlock> BEE_BOX_OAK = BLOCKS.register(
+            UnlocalizedName.BEE_BOX_OAK, BeeBoxBlock::new
     );
 
     public static final RegistryObject<CandleBlock> CANDLE_BLACK = BLOCKS.register(
@@ -258,6 +263,9 @@ public class GrowthcraftApiaryBlocks {
         excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.WAX_RED).get(FluidUtils.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.WAX_WHITE).get(FluidUtils.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.WAX_YELLOW).get(FluidUtils.BLOCK));
+
+        excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.HONEY).get(FluidUtils.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.HONEY_MEAD).get(FluidUtils.BLOCK));
 
         return excludeBlocks.contains(registryName.toString());
     }

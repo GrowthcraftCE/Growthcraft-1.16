@@ -1,6 +1,7 @@
 package growthcraft.apiary.init;
 
 import growthcraft.apiary.common.fluid.*;
+import growthcraft.apiary.common.fluid.fermented.HoneyMeadFluid;
 import growthcraft.apiary.shared.Reference;
 import growthcraft.apiary.shared.UnlocalizedName;
 import growthcraft.lib.util.FluidUtils;
@@ -15,6 +16,22 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class GrowthcraftApiaryFluids {
 
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, Reference.MODID);
+
+    public static final RegistryObject<HoneyFluid.Source> HONEY_FLUID_STILL = FLUIDS.register(
+            FluidUtils.getFluidNames(UnlocalizedName.FluidName.HONEY).get(FluidUtils.STILL), HoneyFluid.Source::new);
+    public static final RegistryObject<HoneyFluid.Flowing> HONEY_FLUID_FLOWING = FLUIDS.register(
+            FluidUtils.getFluidNames(UnlocalizedName.FluidName.HONEY).get(FluidUtils.FLOWING), HoneyFluid.Flowing::new);
+    public static final RegistryObject<FlowingFluidBlock> HONEY_FLUID_BLOCK =
+            GrowthcraftApiaryBlocks.BLOCKS.register(FluidUtils.getFluidNames(UnlocalizedName.FluidName.HONEY).get(FluidUtils.BLOCK),
+                    () -> new FlowingFluidBlock(HONEY_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
+    public static final RegistryObject<HoneyMeadFluid.Source> HONEY_MEAD_FLUID_STILL = FLUIDS.register(
+            FluidUtils.getFluidNames(UnlocalizedName.FluidName.HONEY_MEAD).get(FluidUtils.STILL), HoneyMeadFluid.Source::new);
+    public static final RegistryObject<HoneyMeadFluid.Flowing> HONEY_MEAD_FLUID_FLOWING = FLUIDS.register(
+            FluidUtils.getFluidNames(UnlocalizedName.FluidName.HONEY_MEAD).get(FluidUtils.FLOWING), HoneyMeadFluid.Flowing::new);
+    public static final RegistryObject<FlowingFluidBlock> HONEY_MEAD_FLUID_BLOCK =
+            GrowthcraftApiaryBlocks.BLOCKS.register(FluidUtils.getFluidNames(UnlocalizedName.FluidName.HONEY_MEAD).get(FluidUtils.BLOCK),
+                    () -> new FlowingFluidBlock(HONEY_MEAD_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
 
     public static final RegistryObject<WaxBlackFluid.Source> WAX_BLACK_FLUID_STILL = FLUIDS.register(
             FluidUtils.getFluidNames(UnlocalizedName.FluidName.WAX_BLACK).get(FluidUtils.STILL), WaxBlackFluid.Source::new);

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "growthcraft_apiary:block/bee_box_oak"
+    },
+    "facing=south": {
+      "model": "growthcraft_apiary:block/bee_box_oak",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "growthcraft_apiary:block/bee_box_oak",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "growthcraft_apiary:block/bee_box_oak",
+      "y": 270
+    }
+  }
+}

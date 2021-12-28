@@ -25,6 +25,22 @@ public class GrowthcraftApiaryItems {
             UnlocalizedName.BEES_WAX, GrowthcraftItem::new
     );
 
+    public static final RegistryObject<GrowthcraftBucketItem> BUCKET_HONEY = ITEMS.register(
+            FluidUtils.getFluidNames(UnlocalizedName.FluidName.HONEY).get(FluidUtils.BUCKET),
+            () -> new GrowthcraftBucketItem(
+                    GrowthcraftApiaryFluids.HONEY_FLUID_STILL,
+                    Reference.FluidColor.HONEY_FLUID_COLOR.getColor()
+            )
+    );
+
+    public static final RegistryObject<GrowthcraftBucketItem> BUCKET_HONEY_MEAD = ITEMS.register(
+            FluidUtils.getFluidNames(UnlocalizedName.FluidName.HONEY_MEAD).get(FluidUtils.BUCKET),
+            () -> new GrowthcraftBucketItem(
+                    GrowthcraftApiaryFluids.HONEY_MEAD_FLUID_STILL,
+                    Reference.FluidColor.HONEY_MEAD_FLUID_COLOR.getColor()
+            )
+    );
+
     public static final RegistryObject<GrowthcraftBucketItem> BUCKET_WAX_BLACK = ITEMS.register(
             FluidUtils.getFluidNames(UnlocalizedName.FluidName.WAX_BLACK).get(FluidUtils.BUCKET),
             () -> new GrowthcraftBucketItem(

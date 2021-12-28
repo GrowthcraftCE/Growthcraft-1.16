@@ -6,6 +6,8 @@ public class Reference {
     public static final String MODID = "growthcraft_apiary";
     public static final String NAME = "Growthcraft Apiary";
     public static final String NAME_SHORT = "apiary";
+    public static final String TAG_BEES = "bees";
+    public static final String TAG_HONEY_COMBS = "honey_comb";
 
     public static final String VERSION = growthcraft.core.shared.Reference.VERSION;
 

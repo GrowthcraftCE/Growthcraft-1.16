@@ -21,6 +21,7 @@ public class UnlocalizedName {
     public static final String BEES_WAX_WHITE = "bees_wax_white";
     public static final String BEES_WAX_YELLOW = "bees_wax_yellow";
     public static final String BEE_BOX = "bee_box";
+    public static final String BEE_BOX_OAK = "bee_box_oak";
     public static final String CANDLE_BLACK = "candle_black";
     public static final String CANDLE_BLACK_WALL = "candle_black_wall";
     public static final String CANDLE_BLUE = "candle_blue";
@@ -55,6 +56,7 @@ public class UnlocalizedName {
     public static final String CANDLE_YELLOW_WALL = "candle_yellow_wall";
     public static final String HONEY_COMB_EMPTY = "honey_comb_empty";
     public static final String HONEY_COMB_FULL = "honey_comb_full";
+    public static final String LOOT_SERIALIZER_BLOCK = "global_block_loot_modifier";
 
     private UnlocalizedName() { /* Disable default public constructor. */ }
 

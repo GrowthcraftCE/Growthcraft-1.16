@@ -1,0 +1,27 @@
+{
+  "type": "growthcraft_cellar:ferment_barrel_recipe",
+  "processing_time": 260,
+  "ingredient_item": {
+    "item": "growthcraft_cellar:yeast_bayanus",
+    "count": 1
+  },
+  "ingredient_fluid": {
+    "fluid": "growthcraft_apiary:honey_fluid",
+    "amount": 1000
+  },
+  "result": {
+    "fluid": "growthcraft_apiary:honey_mead_fluid",
+    "amount": 1000
+  },
+  "effects": [
+    {
+      "effect": "minecraft:speed",
+      "duration": 3000,
+      "amplifier": 2
+    }
+  ],
+  "bottle": {
+    "item": "growthcraft_cellar:potion_wine"
+  },
+  "color": "0xF2BC69"
+}

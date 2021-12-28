@@ -2,10 +2,9 @@ package growthcraft.apiary;
 
 import growthcraft.apiary.client.proxy.ClientProxy;
 import growthcraft.apiary.common.proxy.CommonProxy;
-import growthcraft.apiary.init.GrowthcraftApiaryBlocks;
-import growthcraft.apiary.init.GrowthcraftApiaryFluids;
-import growthcraft.apiary.init.GrowthcraftApiaryItems;
+import growthcraft.apiary.init.*;
 import growthcraft.apiary.init.client.GrowthcraftApiaryBlockRenders;
+import growthcraft.apiary.init.client.GrowthcraftApiaryScreenManager;
 import growthcraft.apiary.init.config.GrowthcraftApiaryConfig;
 import growthcraft.apiary.shared.Reference;
 import growthcraft.lib.proxy.IProxy;
@@ -39,7 +38,9 @@ public class GrowthcraftApiary {
         GrowthcraftApiaryBlocks.BLOCKS.register(modEventBus);
         GrowthcraftApiaryItems.ITEMS.register(modEventBus);
         GrowthcraftApiaryFluids.FLUIDS.register(modEventBus);
-        //GrowthcraftApiaryTileEntities.TILE_ENTITIES.register(modEventBus);
+        GrowthcraftApiaryLootModifiers.LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
+        GrowthcraftApiaryTileEntities.TILE_ENTITIES.register(modEventBus);
+        GrowthcraftApiaryContainers.CONTAINERS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -59,5 +60,6 @@ public class GrowthcraftApiary {
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         GrowthcraftApiaryBlockRenders.setRenderLayers();
+        GrowthcraftApiaryScreenManager.registerFactories();
     }
 }
