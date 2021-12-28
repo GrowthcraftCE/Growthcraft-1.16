@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  A",
+    "CBC",
+    "A  "
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:iron_nugget"
+    },
+    "B": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:light_blue_carpet"
+    }
+  },
+  "result": {
+    "item": "growthcraft:crowbar_light_blue",
+    "count": 1
+  }
+}
