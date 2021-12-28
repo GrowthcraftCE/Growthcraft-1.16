@@ -88,6 +88,8 @@ public class ColorRegistryEvent {
         buckets.add(GrowthcraftApiaryItems.BUCKET_WAX_RED.get());
         buckets.add(GrowthcraftApiaryItems.BUCKET_WAX_WHITE.get());
         buckets.add(GrowthcraftApiaryItems.BUCKET_WAX_YELLOW.get());
+        buckets.add(GrowthcraftApiaryItems.BUCKET_HONEY.get());
+        buckets.add(GrowthcraftApiaryItems.BUCKET_HONEY_MEAD.get());
 
         buckets.forEach(bucket -> event.getItemColors().register((itemStack, i) -> bucket.getColor(i), bucket));
 
