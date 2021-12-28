@@ -94,3 +94,19 @@ mandatory = true
 versionRange = "[6,)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[mods]]
+modId = "growthcraft_rice"
+version = "6.0.9"
+displayName = "Growthcraft Rice"
+logoFile = "growthcraft_rice_logo.png"
+description = '''
+  Growthcraft Rice adds a rice to Minecraft, along with rice based drinks and water based crops.
+'''
+
+[[dependencies.growthcraft_rice]]
+modId = "growthcraft"
+mandatory = true
+versionRange = "[6,)"
+ordering = "AFTER"
+side = "BOTH"
