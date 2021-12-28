@@ -1,6 +1,6 @@
 {
   "type": "growthcraft_cellar:ferment_barrel_recipe",
-  "processing_time": 260,
+  "processing_time": 600,
   "ingredient_item": {
     "item": "growthcraft_cellar:yeast_bayanus",
     "count": 1

@@ -46,7 +46,6 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     private FermentBarrelRecipe currentRecipe;
     private ITextComponent customName;
     private int maxProcessingTime;
-    private ItemStack currentPotionItemStack = ItemStack.EMPTY;
 
     public FermentBarrelTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
@@ -97,6 +96,9 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
                     dirty = true;
                 } else {
                     // Check for the potion only recipe.
+                    if (currentProcessingTime > 0) {
+                        currentProcessingTime = 0;
+                    }
                 }
             } else {
                 // Inventory is insufficient to process a recipe, check for Potion Recipe
