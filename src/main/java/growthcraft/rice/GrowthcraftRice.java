@@ -3,6 +3,8 @@ package growthcraft.rice;
 import growthcraft.lib.proxy.IProxy;
 import growthcraft.rice.client.proxy.ClientProxy;
 import growthcraft.rice.common.proxy.CommonProxy;
+import growthcraft.rice.init.GrowthcraftRiceBlocks;
+import growthcraft.rice.init.GrowthcraftRiceItems;
 import growthcraft.rice.init.config.GrowthcraftRiceConfig;
 import growthcraft.rice.shared.Reference;
 import net.minecraft.item.Item;
@@ -33,10 +35,10 @@ public class GrowthcraftRice {
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        //GrowthcraftApplesItems.ITEMS.register(modEventBus);
-        //GrowthcraftApplesBlocks.BLOCKS.register(modEventBus);
-        //GrowthcraftApplesTileEntities.TILE_ENTITIES.register(modEventBus);
-        //GrowthcraftApplesBiomes.BIOMES.register(modEventBus);
+        GrowthcraftRiceBlocks.BLOCKS.register(modEventBus);
+        GrowthcraftRiceItems.ITEMS.register(modEventBus);
+        //GrowthcraftRiceTileEntities.TILE_ENTITIES.register(modEventBus);
+        //GrowthcraftRiceBiomes.BIOMES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -51,6 +53,7 @@ public class GrowthcraftRice {
         final IForgeRegistry<Item> itemRegistry = event.getRegistry();
         final Item.Properties properties = new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab);
         // TODO: Register Block Items
+        GrowthcraftRiceBlocks.registerBlockItems(itemRegistry, properties);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
