@@ -1,5 +1,9 @@
 package growthcraft.milk.init.client;
 
+import growthcraft.milk.init.GrowthcraftMilkFluids;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
+
 public class GrowthcraftMilkBlockRenders {
 
     private GrowthcraftMilkBlockRenders() {
@@ -7,8 +11,13 @@ public class GrowthcraftMilkBlockRenders {
     }
 
     public static void setRenderLayers() {
-        //RenderTypeLookup.setRenderLayer(GrowthcraftRiceBlocks.RICE_CROP.get(), RenderType.getCutout());
-        //RenderTypeLookup.setRenderLayer(GrowthcraftRiceFluids.RICE_WATER_FLUID_BLOCK.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.BUTTER_MILK_FLUID_BLOCK.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.CONDENSED_MILK_FLUID_BLOCK.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.CREAM_FLUID_BLOCK.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.KUMIS_FLUID_BLOCK.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.RENNET_FLUID_BLOCK.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.SKIM_MILK_FLUID_BLOCK.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.WHEY_FLUID_BLOCK.get(), RenderType.getTranslucent());
     }
 
 }

@@ -1,7 +1,9 @@
 package growthcraft.milk.init;
 
+import growthcraft.lib.util.FluidUtils;
 import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.shared.Reference;
+import growthcraft.milk.shared.UnlocalizedName;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -31,12 +33,20 @@ public class GrowthcraftMilkBlocks {
             }
         });
 
-        GrowthcraftMilk.LOGGER.debug("<Growthcraft-Cellar> Registration of itemBlocks finished.");
+        GrowthcraftMilk.LOGGER.debug("<Growthcraft-Milk> Registration of itemBlocks finished.");
     }
 
     private static boolean excludeBlockItemRegistry(ResourceLocation registryName) {
         ArrayList<String> excludeBlocks = new ArrayList<>();
-        //excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.FRUIT_PRESS_PISTON);
+        excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.BUTTER_MILK).get(FluidUtils.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.CONDENSED_MILK).get(FluidUtils.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.CREAM).get(FluidUtils.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.KUMIS).get(FluidUtils.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.MILK).get(FluidUtils.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.RENNET).get(FluidUtils.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.SKIM_MILK).get(FluidUtils.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.WHEY).get(FluidUtils.BLOCK));
+
         return excludeBlocks.contains(registryName.toString());
     }
 }

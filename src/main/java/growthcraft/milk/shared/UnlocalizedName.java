@@ -56,6 +56,7 @@ public class UnlocalizedName {
         public static final String KUMIS = "kumis";
         public static final String MILK = "milk";
         public static final String RENNET = "rennet";
+        public static final String SKIM_MILK = "skim_milk";
         public static final String WHEY = "whey";
 
     }

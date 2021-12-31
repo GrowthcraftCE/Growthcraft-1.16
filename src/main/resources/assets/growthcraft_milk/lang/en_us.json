@@ -1,3 +1,18 @@
 {
-  "block.growthcraft_example.placeholder": "placeholder"
+  "fluid.growthcraft_milk.butter_milk_fluid": "Butter Milk",
+  "fluid.growthcraft_milk.condensed_milk_fluid": "Condensed Milk",
+  "fluid.growthcraft_milk.cream_fluid": "Cream",
+  "fluid.growthcraft_milk.kumis_fluid": "Kumis",
+  "fluid.growthcraft_milk.milk_fluid": "Milk",
+  "fluid.growthcraft_milk.skim_milk_fluid": "Skim Milk",
+  "fluid.growthcraft_milk.rennet_fluid": "Rennet",
+  "fluid.growthcraft_milk.whey_fluid": "Whey",
+  "item.growthcraft_milk.butter_milk_bucket": "Butter Milk Bucket",
+  "item.growthcraft_milk.condensed_milk_bucket": "Condensed Milk Bucket",
+  "item.growthcraft_milk.cream_bucket": "Cream Bucket",
+  "item.growthcraft_milk.kumis_bucket": "Kumis Bucket",
+  "item.growthcraft_milk.milk_bucket": "Milk Bucket",
+  "item.growthcraft_milk.rennet_bucket": "Rennet Bucket",
+  "item.growthcraft_milk.skim_milk_bucket": "Skim Milk Bucket",
+  "item.growthcraft_milk.whey_bucket": "Whey Bucket"
 }
