@@ -7,6 +7,8 @@ import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.lib.proxy.IProxy;
 import growthcraft.milk.init.*;
 import growthcraft.milk.init.client.GrowthcraftMilkBlockRenders;
+import growthcraft.milk.init.client.GrowthcraftMilkScreenManager;
+import growthcraft.milk.init.client.GrowthcraftMilkTileEntityRenders;
 import growthcraft.milk.shared.Reference;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
@@ -39,7 +41,6 @@ public class GrowthcraftMilk {
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        // Add DeferredRegister<Item> to the mod event bus.
         GrowthcraftMilkBlocks.BLOCKS.register(modEventBus);
         GrowthcraftMilkItems.ITEMS.register(modEventBus);
         GrowthcraftMilkFluids.FLUIDS.register(modEventBus);
