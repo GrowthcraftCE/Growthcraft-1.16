@@ -32,7 +32,7 @@
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "growthcraft_rice:rice_stalk",
+          "block": "growthcraft_rice:rice_crop",
           "properties": {
             "age": "7"
           }

@@ -4,6 +4,7 @@ import growthcraft.lib.proxy.IProxy;
 import growthcraft.rice.client.proxy.ClientProxy;
 import growthcraft.rice.common.proxy.CommonProxy;
 import growthcraft.rice.init.GrowthcraftRiceBlocks;
+import growthcraft.rice.init.GrowthcraftRiceFluids;
 import growthcraft.rice.init.GrowthcraftRiceItems;
 import growthcraft.rice.init.client.GrowthcraftRiceBlockRenders;
 import growthcraft.rice.init.config.GrowthcraftRiceConfig;
@@ -38,6 +39,7 @@ public class GrowthcraftRice {
 
         GrowthcraftRiceBlocks.BLOCKS.register(modEventBus);
         GrowthcraftRiceItems.ITEMS.register(modEventBus);
+        GrowthcraftRiceFluids.FLUIDS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -51,7 +53,7 @@ public class GrowthcraftRice {
     public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
         final IForgeRegistry<Item> itemRegistry = event.getRegistry();
         final Item.Properties properties = new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab);
-        // TODO: Register Block Items
+
         GrowthcraftRiceBlocks.registerBlockItems(itemRegistry, properties);
     }
 

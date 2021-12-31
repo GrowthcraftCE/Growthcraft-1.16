@@ -14,4 +14,10 @@ public class UnlocalizedName {
     private UnlocalizedName() {
         /* Prevent generation of public constructor. */
     }
+
+    public static class FluidName {
+        public static final String RICE_WATER = "rice_water";
+        public static final String RICE_WINE = "rice_wine";
+        public static final String SAKE = "sake";
+    }
 }

@@ -1,5 +1,6 @@
 package growthcraft.rice.init;
 
+import growthcraft.lib.util.FluidUtils;
 import growthcraft.rice.common.block.CultivatedFarmlandBlock;
 import growthcraft.rice.common.block.RiceCropBlock;
 import growthcraft.rice.shared.Reference;
@@ -41,7 +42,9 @@ public class GrowthcraftRiceBlocks {
     private static boolean excludeBlockItemRegistry(ResourceLocation registryName) {
         ArrayList<String> excludeBlocks = new ArrayList<>();
         // Add any blocks that need to be excluded.
-        //excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.CANDLE_BLACK);
+        excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.RICE_WATER).get(FluidUtils.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.RICE_WINE).get(FluidUtils.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.SAKE).get(FluidUtils.BLOCK));
 
         return excludeBlocks.contains(registryName.toString());
     }
