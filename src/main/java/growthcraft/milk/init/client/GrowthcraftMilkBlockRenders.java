@@ -1,5 +1,6 @@
 package growthcraft.milk.init.client;
 
+import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -11,6 +12,7 @@ public class GrowthcraftMilkBlockRenders {
     }
 
     public static void setRenderLayers() {
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.THISTLE_CROP.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.BUTTER_MILK_FLUID_BLOCK.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.CONDENSED_MILK_FLUID_BLOCK.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.CREAM_FLUID_BLOCK.get(), RenderType.getTranslucent());

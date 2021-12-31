@@ -11,6 +11,7 @@ public class UnlocalizedName {
     public static final String ICE_CREAM_GRAPE_PURPLE = "ice_cream_grape_purple";
     public static final String ICE_CREAM_GRAPE_RED = "ice_cream_grape_red";
     public static final String ICE_CREAM_GRAPE_WHITE = "ice_cream_grape_white";
+    public static final String ICE_CREAM_HONEY = "ice_cream_honey";
     public static final String ICE_CREAM_PUMPKIN = "ice_cream_pumpkin";
     public static final String ICE_CREAM_WATERMELON = "ice_cream_watermelon";
     public static final String MIXING_VAT = "mixing_vat";
@@ -22,7 +23,7 @@ public class UnlocalizedName {
     public static final String THISTLE_CROP = "thistle_crop";
     public static final String THISTLE_SEED = "thistle_seed";
     public static final String YOGURT_APPLE = "yogurt_apple";
-    public static final String YOGURT_CHOCOLATE = "yogurt_chocoloate";
+    public static final String YOGURT_CHOCOLATE = "yogurt_chocolate";
     public static final String YOGURT_GRAPE_PURPLE = "yogurt_grape_purple";
     public static final String YOGURT_GRAPE_RED = "yogurt_grape_red";
     public static final String YOGURT_GRAPE_WHITE = "yogurt_grape_white";
