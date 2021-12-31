@@ -5,6 +5,7 @@ import growthcraft.rice.client.proxy.ClientProxy;
 import growthcraft.rice.common.proxy.CommonProxy;
 import growthcraft.rice.init.GrowthcraftRiceBlocks;
 import growthcraft.rice.init.GrowthcraftRiceItems;
+import growthcraft.rice.init.client.GrowthcraftRiceBlockRenders;
 import growthcraft.rice.init.config.GrowthcraftRiceConfig;
 import growthcraft.rice.shared.Reference;
 import net.minecraft.item.Item;
@@ -37,8 +38,6 @@ public class GrowthcraftRice {
 
         GrowthcraftRiceBlocks.BLOCKS.register(modEventBus);
         GrowthcraftRiceItems.ITEMS.register(modEventBus);
-        //GrowthcraftRiceTileEntities.TILE_ENTITIES.register(modEventBus);
-        //GrowthcraftRiceBiomes.BIOMES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -63,6 +62,7 @@ public class GrowthcraftRice {
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // Set Block Render Layers
+        GrowthcraftRiceBlockRenders.setRenderLayers();
         // Register Screen Manager Factories
     }
 }

@@ -1,5 +1,6 @@
 package growthcraft.rice.common.block;
 
+import growthcraft.rice.init.GrowthcraftRiceBlocks;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.fluid.FluidState;
@@ -150,4 +151,14 @@ public class CultivatedFarmlandBlock extends Block implements IWaterLoggable {
         return SHAPE;
     }
 
+    @Override
+    public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
+        BlockState plant = plantable.getPlant(world, pos);
+
+        if (plant.getBlock() == GrowthcraftRiceBlocks.RICE_CROP.get()) {
+            return state.get(WATERLOGGED);
+        }
+
+        return false;
+    }
 }
