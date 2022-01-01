@@ -2,6 +2,7 @@ package growthcraft.milk.init;
 
 import growthcraft.lib.util.FluidUtils;
 import growthcraft.milk.GrowthcraftMilk;
+import growthcraft.milk.common.block.ChurnBlock;
 import growthcraft.milk.common.block.ThistleCropBlock;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.UnlocalizedName;
@@ -19,6 +20,9 @@ import java.util.ArrayList;
 public class GrowthcraftMilkBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Reference.MODID);
 
+    public static final RegistryObject<ChurnBlock> CHURN = BLOCKS.register(
+            UnlocalizedName.CHURN, ChurnBlock::new
+    );
     public static final RegistryObject<ThistleCropBlock> THISTLE_CROP = BLOCKS.register(
             UnlocalizedName.THISTLE_CROP, ThistleCropBlock::new
     );
