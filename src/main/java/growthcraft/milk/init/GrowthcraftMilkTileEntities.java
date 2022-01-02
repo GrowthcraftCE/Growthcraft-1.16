@@ -1,6 +1,7 @@
 package growthcraft.milk.init;
 
 import growthcraft.milk.common.tileentity.ChurnTileEntity;
+import growthcraft.milk.common.tileentity.PancheonTileEntity;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.UnlocalizedName;
 import net.minecraft.tileentity.TileEntityType;
@@ -15,6 +16,13 @@ public class GrowthcraftMilkTileEntities {
             UnlocalizedName.CHURN,
             () -> TileEntityType.Builder.create(
                     ChurnTileEntity::new, GrowthcraftMilkBlocks.CHURN.get()
+            ).build(null)
+    );
+
+    public static final RegistryObject<TileEntityType<PancheonTileEntity>> PANCHEON_TILE_ENTITY = TILE_ENTITIES.register(
+            UnlocalizedName.PANCHEON,
+            () -> TileEntityType.Builder.create(
+                    PancheonTileEntity::new, GrowthcraftMilkBlocks.PANCHEON.get()
             ).build(null)
     );
 

@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "normal": {
+      "model": "growthcraft_milk:block/pancheon"
+    },
+    "facing=north": {
+      "model": "growthcraft_milk:block/pancheon"
+    },
+    "facing=south": {
+      "model": "growthcraft_milk:block/pancheon",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "growthcraft_milk:block/pancheon",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "growthcraft_milk:block/pancheon",
+      "y": 270
+    }
+  }
+}

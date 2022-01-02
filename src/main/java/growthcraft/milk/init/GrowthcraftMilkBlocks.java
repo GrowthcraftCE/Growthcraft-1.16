@@ -3,6 +3,7 @@ package growthcraft.milk.init;
 import growthcraft.lib.util.FluidUtils;
 import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.common.block.ChurnBlock;
+import growthcraft.milk.common.block.PancheonBlock;
 import growthcraft.milk.common.block.ThistleCropBlock;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.UnlocalizedName;
@@ -25,6 +26,9 @@ public class GrowthcraftMilkBlocks {
     );
     public static final RegistryObject<ThistleCropBlock> THISTLE_CROP = BLOCKS.register(
             UnlocalizedName.THISTLE_CROP, ThistleCropBlock::new
+    );
+    public static final RegistryObject<PancheonBlock> PANCHEON = BLOCKS.register(
+            UnlocalizedName.PANCHEON, PancheonBlock::new
     );
 
     private GrowthcraftMilkBlocks() {
