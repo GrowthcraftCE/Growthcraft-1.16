@@ -14,6 +14,10 @@ public class GrowthcraftMilkConfig {
     public static final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
     public static final String SERVER_CONFIG = String.format("growthcraft-%s-server.toml", Reference.NAME_SHORT);
 
+    private static final String CATEGORY_CHURN = "churn";
+
+    private static ForgeConfigSpec.BooleanValue churnGuiEnabled;
+
     static {
         initServerConfig(SERVER_BUILDER);
         SERVER = SERVER_BUILDER.build();
@@ -37,6 +41,13 @@ public class GrowthcraftMilkConfig {
 
     public static void initServerConfig(ForgeConfigSpec.Builder specBuilder) {
         // Init Server Side Configuration
+        churnGuiEnabled = specBuilder
+                .comment("Set to true to allow users to access the Churn GUI.")
+                .define(String.format("%s.%s", CATEGORY_CHURN, "guiEnabled"), false);
+    }
+
+    public static boolean isChurnGuiEnabled() {
+        return churnGuiEnabled.get();
     }
 
 }

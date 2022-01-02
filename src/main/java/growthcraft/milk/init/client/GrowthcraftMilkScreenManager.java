@@ -1,5 +1,9 @@
 package growthcraft.milk.init.client;
 
+import growthcraft.milk.client.gui.ChurnScreen;
+import growthcraft.milk.init.GrowthcraftMilkContainers;
+import net.minecraft.client.gui.ScreenManager;
+
 public class GrowthcraftMilkScreenManager {
 
     private GrowthcraftMilkScreenManager() {
@@ -7,7 +11,7 @@ public class GrowthcraftMilkScreenManager {
     }
 
     public static void registerFactories() {
-        //ScreenManager.registerFactory(
-        //        GrowthcraftCellarContainers.brew_kettle_container.get(), BrewKettleScreen::new);
+        ScreenManager.registerFactory(
+                GrowthcraftMilkContainers.CHURN_CONTAINER.get(), ChurnScreen::new);
     }
 }

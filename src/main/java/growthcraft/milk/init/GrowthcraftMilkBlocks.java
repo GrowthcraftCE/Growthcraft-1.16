@@ -55,6 +55,7 @@ public class GrowthcraftMilkBlocks {
         excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.RENNET).get(FluidUtils.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.SKIM_MILK).get(FluidUtils.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.WHEY).get(FluidUtils.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + UnlocalizedName.THISTLE_CROP);
 
         return excludeBlocks.contains(registryName.toString());
     }

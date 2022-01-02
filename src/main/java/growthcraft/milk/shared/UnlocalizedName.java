@@ -6,6 +6,7 @@ public class UnlocalizedName {
     public static final String BUTTER_SALTED = "butter_salted";
     public static final String CHEESE_CLOTH = "cheese_cloth";
     public static final String CHURN = "churn";
+    public static final String CHURN_RECIPE = "churn_recipe";
     public static final String ICE_CREAM_APPLE = "ice_cream_apple";
     public static final String ICE_CREAM_CHOCOLATE = "ice_cream_chocolate";
     public static final String ICE_CREAM_GRAPE_PURPLE = "ice_cream_grape_purple";
