@@ -368,8 +368,6 @@ public class GrowthcraftApiaryItems {
             UnlocalizedName.HONEY_COMB_FULL, GrowthcraftItem::new
     );
 
-    // TODO: Register Honey Bucket and Mead Bucket
-
     private GrowthcraftApiaryItems() {
         /* Prevent default public constructor */
     }

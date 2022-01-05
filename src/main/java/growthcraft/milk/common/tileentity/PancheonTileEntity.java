@@ -49,6 +49,8 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
 
     }
 
+    // TODO: Implement PancheonRecipe and the getRecipe() method.
+
     @Override
     protected ITextComponent getDefaultName() {
         return this.getBlockState().getBlock().getTranslatedName();

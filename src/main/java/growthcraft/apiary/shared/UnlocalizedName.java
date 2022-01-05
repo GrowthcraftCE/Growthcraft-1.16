@@ -60,7 +60,6 @@ public class UnlocalizedName {
 
     private UnlocalizedName() { /* Disable default public constructor. */ }
 
-    // TODO: Add wax fluid color names.
     public static class FluidName {
         public static final String HONEY = "honey";
         public static final String HONEY_MEAD = "honey_mead";
