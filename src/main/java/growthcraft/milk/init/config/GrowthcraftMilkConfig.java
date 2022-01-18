@@ -15,8 +15,10 @@ public class GrowthcraftMilkConfig {
     public static final String SERVER_CONFIG = String.format("growthcraft-%s-server.toml", Reference.NAME_SHORT);
 
     private static final String CATEGORY_CHURN = "churn";
+    private static final String CATEGORY_PANCHEON = "pancheon";
 
     private static ForgeConfigSpec.BooleanValue churnGuiEnabled;
+    private static ForgeConfigSpec.BooleanValue pancheonGuiEnabled;
 
     static {
         initServerConfig(SERVER_BUILDER);
@@ -44,10 +46,17 @@ public class GrowthcraftMilkConfig {
         churnGuiEnabled = specBuilder
                 .comment("Set to true to allow users to access the Churn GUI.")
                 .define(String.format("%s.%s", CATEGORY_CHURN, "guiEnabled"), false);
+        pancheonGuiEnabled = specBuilder
+                .comment("Set to true to allow users to access the Pancheon GUI.")
+                .define(String.format("%s.%s", CATEGORY_PANCHEON, "guiEnabled"), false);
     }
 
     public static boolean isChurnGuiEnabled() {
         return churnGuiEnabled.get();
+    }
+
+    public static boolean isPancheonGuiEnabled() {
+        return pancheonGuiEnabled.get();
     }
 
 }

@@ -88,4 +88,10 @@ public class RecipeUtils {
         }
     }
 
+    public static class InvalidRecipeFile extends Exception {
+        public InvalidRecipeFile(String message) {
+            super(message);
+        }
+    }
+
 }
