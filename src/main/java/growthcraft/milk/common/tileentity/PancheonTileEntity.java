@@ -2,6 +2,8 @@ package growthcraft.milk.common.tileentity;
 
 import growthcraft.lib.common.tank.handler.FluidTankHandler;
 import growthcraft.lib.common.tank.handler.FluidTankOutputHandler;
+import growthcraft.milk.GrowthcraftMilk;
+import growthcraft.milk.common.block.PancheonBlock;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
@@ -27,10 +29,11 @@ import javax.annotation.Nullable;
 
 public class PancheonTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
+    private int currentProcessingTime;
     // Innput Tank 2,000 mb top accessible
     // Output Tanks 1,000 mb each draw from the side or bottom only.
     private ITextComponent customName;
-    private int currentProcessingTime;
+    private boolean locked;
     private int maxProcessingTime;
     private FluidTankHandler inputFluidTankHandler;
     private FluidTankOutputHandler outputFluidTankHandler;
@@ -41,11 +44,25 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
 
     public PancheonTileEntity(TileEntityType<?> tileEntityType) {
         super(tileEntityType);
+        this.locked = false;
         this.createFluidTanks();
     }
 
     @Override
     public void tick() {
+        boolean dirty = false;
+
+        // TODO: While processing lock the fluid interaction.
+        if (this.currentProcessingTime > 0) {
+            this.world.setBlockState(this.getPos(), this.getBlockState().with(PancheonBlock.LOCKED, true));
+        } else {
+            this.world.setBlockState(this.getPos(), this.getBlockState().with(PancheonBlock.LOCKED, false));
+        }
+
+        if (dirty) {
+            this.markDirty();
+            this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
+        }
 
     }
 
@@ -96,10 +113,12 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
 
         this.currentProcessingTime = compound.getInt("CurrentProcessingTime");
         this.maxProcessingTime = compound.getInt("MaxProcessingTime");
+        this.locked = compound.getBoolean("IsLocked");
 
         this.inputFluidTankHandler.getTank(0).readFromNBT(compound.getCompound("tank0"));
         this.outputFluidTankHandler.getTank(0).readFromNBT(compound.getCompound("tank1"));
         this.outputFluidTankHandler.getTank(1).readFromNBT(compound.getCompound("tank2"));
+
     }
 
     @Override
@@ -111,6 +130,7 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
 
         compound.putInt("CurrentProcessingTime", this.currentProcessingTime);
         compound.putInt("MaxProcessingTime", this.maxProcessingTime);
+        compound.putBoolean("IsLocked", this.isLocked());
 
         compound.put("tank0", this.inputFluidTankHandler.getTank(0).writeToNBT(new CompoundNBT()));
         compound.put("tank1", this.outputFluidTankHandler.getTank(0).writeToNBT(new CompoundNBT()));
@@ -142,13 +162,40 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && side == Direction.UP) {
-            return this.inputFluidTankHandler.getFluidTankHandler(0).cast();
-        } else if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-            return this.outputFluidTankHandler.getTank(0).getFluidAmount() > 0
-                    ? this.outputFluidTankHandler.getFluidTankHandler(0).cast()
-                    : this.outputFluidTankHandler.getFluidTankHandler(1).cast();
+        if (!this.isLocked()) {
+            if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+                int inputFluidAmount = this.inputFluidTankHandler.getTank(0).getFluidAmount();
+                int outputFluidAmount0 = this.outputFluidTankHandler.getTank(0).getFluidAmount();
+                int outputFluidAmount1 = this.outputFluidTankHandler.getTank(1).getFluidAmount();
+
+                // TODO: Remove debug logging
+                GrowthcraftMilk.LOGGER.error(
+                        String.format("%d / %d / %d", inputFluidAmount, outputFluidAmount0, outputFluidAmount1)
+                );
+
+                // If inputTank has fluid or all tanks or empty, return the input tank.
+                if (inputFluidAmount > 0 || inputFluidAmount + outputFluidAmount0 + outputFluidAmount1 == 0) {
+                    GrowthcraftMilk.LOGGER.error("Returning inputFluidHandler");
+                    return this.inputFluidTankHandler.getFluidTankHandler(0).cast();
+                }
+                // If input is empty and output0 is not empty, return output0
+                if (inputFluidAmount == 0 && outputFluidAmount0 > 0) {
+                    GrowthcraftMilk.LOGGER.error("Returning outputFluidHandler0");
+                    return outputFluidTankHandler.getFluidTankHandler(0).cast();
+                }
+                // If input and output0 are empty but output1 is not empty, return Output1
+                if (inputFluidAmount == 0 && outputFluidAmount0 == 0 && outputFluidAmount1 > 0) {
+                    GrowthcraftMilk.LOGGER.error("Returning outputFluidHandler1");
+                    return outputFluidTankHandler.getFluidTankHandler(1).cast();
+                }
+
+            }
         }
         return super.getCapability(cap, side);
     }
+
+    public boolean isLocked() {
+        return this.locked;
+    }
+
 }
