@@ -23,6 +23,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -97,6 +98,19 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
     private void createFluidTanks() {
         this.inputFluidTankHandler = new FluidTankHandler(1, 2000);
         this.outputFluidTankHandler = new FluidTankOutputHandler(2, 1000);
+    }
+
+    public FluidTank getFluidTank(int slot) {
+        switch (slot) {
+            case 0:
+                return inputFluidTankHandler.getTank(0);
+            case 1:
+                return outputFluidTankHandler.getTank(0);
+            case 2:
+                return outputFluidTankHandler.getTank(1);
+            default:
+                return null;
+        }
     }
 
     @Override
@@ -197,5 +211,11 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
     public boolean isLocked() {
         return this.locked;
     }
+
+    public int getCurrentProcessingTime() { return this.currentProcessingTime; }
+
+    public int getMaxProcessingTime() { return this.maxProcessingTime; }
+
+    public void setCurrentProcessingTime(int processingTime) { this.currentProcessingTime = processingTime; }
 
 }
