@@ -25,7 +25,7 @@ public class PancheonContainer extends Container {
     public FunctionalIntReferenceHolder currentProcessingTime;
     private final IWorldPosCallable canInteractWithCallable;
 
-    protected PancheonContainer(final int windowID, final PlayerInventory playerInventory, final PancheonTileEntity tileEntity) {
+    public PancheonContainer(final int windowID, final PlayerInventory playerInventory, final PancheonTileEntity tileEntity) {
         super(GrowthcraftMilkContainers.PANCHEON_CONTAINTER.get(), windowID);
 
         this.tileEntity = tileEntity;
@@ -127,8 +127,8 @@ public class PancheonContainer extends Container {
 
     @OnlyIn(Dist.CLIENT)
     public int getProgressionScaled(int size) {
-        return this.currentProcessingTime.get() != 0 && this.tileEntity.getMaxProcessingTime != 0
-                ? this.currentProcessingTime.get() * size / this.tileEntity.getMaxProcessingTime
+        return this.currentProcessingTime.get() != 0 && this.tileEntity.getMaxProcessingTime() != 0
+                ? this.currentProcessingTime.get() * size / this.tileEntity.getMaxProcessingTime()
                 : 0;
     }
 

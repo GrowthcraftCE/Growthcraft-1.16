@@ -3,6 +3,7 @@ package growthcraft.milk.common.tileentity;
 import growthcraft.lib.common.tank.handler.FluidTankHandler;
 import growthcraft.lib.common.tank.handler.FluidTankOutputHandler;
 import growthcraft.milk.GrowthcraftMilk;
+import growthcraft.milk.client.container.PancheonContainer;
 import growthcraft.milk.common.block.PancheonBlock;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
 import net.minecraft.block.BlockState;
@@ -34,9 +35,9 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
     // Innput Tank 2,000 mb top accessible
     // Output Tanks 1,000 mb each draw from the side or bottom only.
     private ITextComponent customName;
+    private FluidTankHandler inputFluidTankHandler;
     private boolean locked;
     private int maxProcessingTime;
-    private FluidTankHandler inputFluidTankHandler;
     private FluidTankOutputHandler outputFluidTankHandler;
 
     public PancheonTileEntity() {
@@ -80,9 +81,8 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
     }
 
     @Override
-    protected Container createMenu(int id, PlayerInventory player) {
-        // TODO: Return a new PancheonContainer(...)
-        return null;
+    protected Container createMenu(int windowId, PlayerInventory playerInventory) {
+        return new PancheonContainer(windowId, playerInventory, this);
     }
 
     @Override
@@ -212,10 +212,16 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
         return this.locked;
     }
 
-    public int getCurrentProcessingTime() { return this.currentProcessingTime; }
+    public int getCurrentProcessingTime() {
+        return this.currentProcessingTime;
+    }
 
-    public int getMaxProcessingTime() { return this.maxProcessingTime; }
+    public void setCurrentProcessingTime(int processingTime) {
+        this.currentProcessingTime = processingTime;
+    }
 
-    public void setCurrentProcessingTime(int processingTime) { this.currentProcessingTime = processingTime; }
+    public int getMaxProcessingTime() {
+        return this.maxProcessingTime;
+    }
 
 }

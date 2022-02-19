@@ -65,14 +65,14 @@ public class PancheonScreen extends ContainerScreen<PancheonContainer> {
         blit(matrixStack, this.guiLeft, this.guiTop, baseX, baseY, this.xSize, this.ySize, maxX, maxY);
 
         // Progress bar
-        int guiProgressX = this.guiLeft + 98;
-        int guiProgressY = this.guiTop + 30;
+        int guiProgressX = this.guiLeft + 82;
+        int guiProgressY = this.guiTop + 57;
 
-        this.blit(matrixStack, guiProgressX, guiProgressY, 176, 0, 9, this.container.getProgressionScaled(28));
+        this.blit(matrixStack, guiProgressX, guiProgressY, 176, 42, 13, this.container.getProgressionScaled(28));
 
         // InputFluidTank Render
-        int guiInputTankX = guiLeft + 46;
-        int guiInputTankY = guiTop + 17;
+        int guiInputTankX = guiLeft + 62;
+        int guiInputTankY = guiTop + 18;
         int guiInputTankHeight = 52;
 
         if (this.container.getInputFluidTank(0).getFluidAmount() > 0) {
@@ -84,27 +84,27 @@ public class PancheonScreen extends ContainerScreen<PancheonContainer> {
         }
 
         // OutputFluidTank0 Render
-        int guiOutputTank0X = guiLeft + 114;
-        int guiOutputTank0Y = guiTop + 17;
-        int guiOutputTank0Height = 52;
+        int guiOutputTank0X = guiLeft + 98;
+        int guiOutputTank0Y = guiTop + 18;
+        int guiOutputTank0Height = 23;
 
-        if (this.container.getOutputFluidTank(0).getFluidAmount() > 0) {
-            FluidStack fluidStack = this.container.getOutputFluidTank(0).getFluid();
+        if (this.container.getOutputFluidTank(1).getFluidAmount() > 0) {
+            FluidStack fluidStack = this.container.getOutputFluidTank(1).getFluid();
 
-            int scaledFluidH = getScaledFluid(fluidStack.getAmount(), this.container.getOutputFluidTank(0).getCapacity(), guiOutputTank0Height);
+            int scaledFluidH = getScaledFluid(fluidStack.getAmount(), this.container.getOutputFluidTank(1).getCapacity(), guiOutputTank0Height);
             ClientUtils.drawRepeatedFluidSpriteGui(renderTypeBuffer, matrixStack, fluidStack,
                     guiOutputTank0X, guiOutputTank0Y + (guiOutputTank0Height - scaledFluidH), 16, scaledFluidH);
         }
 
         // OutputFluidTank1 Render
-        int guiOutputTank1X = guiLeft + 114;
-        int guiOutputTank1Y = guiTop + 17;
-        int guiOutputTank1Height = 52;
+        int guiOutputTank1X = guiLeft + 98;
+        int guiOutputTank1Y = guiTop + 47;
+        int guiOutputTank1Height = 23;
 
-        if (this.container.getOutputFluidTank(1).getFluidAmount() > 0) {
-            FluidStack fluidStack = this.container.getOutputFluidTank(1).getFluid();
+        if (this.container.getOutputFluidTank(2).getFluidAmount() > 0) {
+            FluidStack fluidStack = this.container.getOutputFluidTank(2).getFluid();
 
-            int scaledFluidH = getScaledFluid(fluidStack.getAmount(), this.container.getOutputFluidTank(1).getCapacity(), guiOutputTank1Height);
+            int scaledFluidH = getScaledFluid(fluidStack.getAmount(), this.container.getOutputFluidTank(2).getCapacity(), guiOutputTank1Height);
             ClientUtils.drawRepeatedFluidSpriteGui(renderTypeBuffer, matrixStack, fluidStack,
                     guiOutputTank1X, guiOutputTank1Y + (guiOutputTank1Height - scaledFluidH), 16, scaledFluidH);
         }
@@ -134,39 +134,44 @@ public class PancheonScreen extends ContainerScreen<PancheonContainer> {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
 
-        // TODO: Fix fluid tank on hover positions.
         // on hover for input fluid tank
-        int guiInputTankX = guiLeft + 46;
-        int guiInputTankY = guiTop + 17;
+        int guiInputTankX = guiLeft + 62;
+        int guiInputTankY = guiTop + 18;
         int guiInputTankHeight = 52;
 
         if (mouseX > guiInputTankX && mouseX < guiInputTankX + 16 && mouseY > guiInputTankY && mouseY < guiInputTankY + guiInputTankHeight) {
             FluidStack fluidStack = this.container.getInputFluidTank(0).getFluid();
-            String tooltip = String.format("%s %dmb", fluidStack.getDisplayName().getString(), fluidStack.getAmount());
+            String tooltip = fluidStack.getAmount() > 0
+                    ? String.format("%s %dmb", fluidStack.getDisplayName().getString(), fluidStack.getAmount())
+                    : "Empty";
             StringTextComponent stringTextComponent = new StringTextComponent(tooltip);
             this.renderTooltip(matrixStack, stringTextComponent, mouseX, mouseY);
         }
 
         // on hover for output fluid tank0
-        int guiOutputTank0X = guiLeft + 114;
-        int guiOutputTank0Y = guiTop + 17;
-        int guiOutputTank0Height = 52;
+        int guiOutputTank0X = guiLeft + 98;
+        int guiOutputTank0Y = guiTop + 18;
+        int guiOutputTank0Height = 23;
 
         if (mouseX > guiOutputTank0X && mouseX < guiOutputTank0X + 16 && mouseY > guiOutputTank0Y && mouseY < guiOutputTank0Y + guiOutputTank0Height) {
-            FluidStack fluidStack = this.container.getOutputFluidTank(0).getFluid();
-            String tooltip = String.format("%s %dmb", fluidStack.getDisplayName().getString(), fluidStack.getAmount());
+            FluidStack fluidStack = this.container.getOutputFluidTank(1).getFluid();
+            String tooltip = fluidStack.getAmount() > 0
+                    ? String.format("%s %dmb", fluidStack.getDisplayName().getString(), fluidStack.getAmount())
+                    : "Empty";
             StringTextComponent stringTextComponent = new StringTextComponent(tooltip);
             this.renderTooltip(matrixStack, stringTextComponent, mouseX, mouseY);
         }
 
         // on hover for output fluid tank1
-        int guiOutputTank1X = guiLeft + 114;
-        int guiOutputTank1Y = guiTop + 17;
-        int guiOutputTank1Height = 52;
+        int guiOutputTank1X = guiLeft + 98;
+        int guiOutputTank1Y = guiTop + 47;
+        int guiOutputTank1Height = 23;
 
         if (mouseX > guiOutputTank1X && mouseX < guiOutputTank1X + 16 && mouseY > guiOutputTank1Y && mouseY < guiOutputTank1Y + guiOutputTank1Height) {
-            FluidStack fluidStack = this.container.getOutputFluidTank(1).getFluid();
-            String tooltip = String.format("%s %dmb", fluidStack.getDisplayName().getString(), fluidStack.getAmount());
+            FluidStack fluidStack = this.container.getOutputFluidTank(2).getFluid();
+            String tooltip = fluidStack.getAmount() > 0
+                    ? String.format("%s %dmb", fluidStack.getDisplayName().getString(), fluidStack.getAmount())
+                    : "Empty";
             StringTextComponent stringTextComponent = new StringTextComponent(tooltip);
             this.renderTooltip(matrixStack, stringTextComponent, mouseX, mouseY);
         }

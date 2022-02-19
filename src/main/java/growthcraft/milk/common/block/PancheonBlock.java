@@ -1,8 +1,11 @@
 package growthcraft.milk.common.block;
 
+import growthcraft.milk.common.tileentity.PancheonTileEntity;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
+import growthcraft.milk.init.config.GrowthcraftMilkConfig;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
@@ -20,6 +23,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
@@ -84,7 +88,15 @@ public class PancheonBlock extends HorizontalBlock {
             return ActionResultType.SUCCESS;
         }
 
-        return ActionResultType.FAIL;
+        if (!worldIn.isRemote) {
+            PancheonTileEntity tileEntity = (PancheonTileEntity) worldIn.getTileEntity(pos);
+            if (player.isSneaking() && GrowthcraftMilkConfig.isPancheonGuiEnabled()) {
+                NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
+            }
+            return ActionResultType.SUCCESS;
+        }
+
+        return ActionResultType.SUCCESS;
     }
 
     @Override
