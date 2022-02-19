@@ -4,7 +4,8 @@
     "5": "growthcraft_milk:block/oak_planks",
     "particle": "growthcraft_milk:block/butter_churn/butter_churn",
     "1_0": "growthcraft_milk:block/butter_churn/butter_churn",
-    "1_1": "growthcraft_milk:block/butter_churn/butter_churn_top"
+    "1_1": "growthcraft_milk:block/butter_churn/butter_churn_top",
+    "missing": "growthcraft:block/missing"
   },
   "elements": [
     {

@@ -3,7 +3,8 @@
   "ambientocclusion": false,
   "textures": {
     "0": "growthcraft_milk:block/pancheon",
-    "particle": "growthcraft_milk:block/pancheon"
+    "particle": "growthcraft_milk:block/pancheon",
+    "missing": "growthcraft:block/missing"
   },
   "elements": [
     {

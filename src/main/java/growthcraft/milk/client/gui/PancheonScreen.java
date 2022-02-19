@@ -66,9 +66,9 @@ public class PancheonScreen extends ContainerScreen<PancheonContainer> {
 
         // Progress bar
         int guiProgressX = this.guiLeft + 82;
-        int guiProgressY = this.guiTop + 57;
+        int guiProgressY = this.guiTop + 29;
 
-        this.blit(matrixStack, guiProgressX, guiProgressY, 176, 42, 13, this.container.getProgressionScaled(28));
+        this.blit(matrixStack, guiProgressX, guiProgressY, 176, 42, 13, this.container.getProgressionScaled(29));
 
         // InputFluidTank Render
         int guiInputTankX = guiLeft + 62;

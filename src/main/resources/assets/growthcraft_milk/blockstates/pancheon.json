@@ -1,20 +1,38 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "growthcraft_milk:block/pancheon"
+    }
+  },
   "variants": {
-    "normal": {
+    "facing=north,is_locked=false": {
       "model": "growthcraft_milk:block/pancheon"
     },
-    "facing=north": {
-      "model": "growthcraft_milk:block/pancheon"
-    },
-    "facing=south": {
+    "facing=south,is_locked=false": {
       "model": "growthcraft_milk:block/pancheon",
       "y": 180
     },
-    "facing=east": {
+    "facing=east,is_locked=false": {
       "model": "growthcraft_milk:block/pancheon",
       "y": 90
     },
-    "facing=west": {
+    "facing=west,is_locked=false": {
+      "model": "growthcraft_milk:block/pancheon",
+      "y": 270
+    },
+    "facing=north,is_locked=true": {
+      "model": "growthcraft_milk:block/pancheon"
+    },
+    "facing=south,is_locked=true": {
+      "model": "growthcraft_milk:block/pancheon",
+      "y": 180
+    },
+    "facing=east,is_locked=true": {
+      "model": "growthcraft_milk:block/pancheon",
+      "y": 90
+    },
+    "facing=west,is_locked=true": {
       "model": "growthcraft_milk:block/pancheon",
       "y": 270
     }

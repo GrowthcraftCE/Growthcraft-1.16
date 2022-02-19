@@ -1,5 +1,6 @@
 package growthcraft.milk.common.recipe;
 
+import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -65,12 +66,12 @@ public class PancheonRecipe implements IRecipe<IInventory> {
 
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        return null;
+        return GrowthcraftMilkRecipes.PANCHEON_RECIPE_SERIALIZER.get();
     }
 
     @Override
     public IRecipeType<?> getType() {
-        return null;
+        return GrowthcraftMilkRecipes.PANCHEON_RECIPE_TYPE;
     }
 
     public FluidStack getInputFluidStack() {

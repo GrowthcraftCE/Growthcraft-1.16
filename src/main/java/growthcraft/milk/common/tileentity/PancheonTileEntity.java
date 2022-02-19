@@ -2,15 +2,19 @@ package growthcraft.milk.common.tileentity;
 
 import growthcraft.lib.common.tank.handler.FluidTankHandler;
 import growthcraft.lib.common.tank.handler.FluidTankOutputHandler;
+import growthcraft.lib.util.RecipeUtils;
 import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.client.container.PancheonContainer;
 import growthcraft.milk.common.block.PancheonBlock;
+import growthcraft.milk.common.recipe.PancheonRecipe;
+import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -23,11 +27,15 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Set;
 
 public class PancheonTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
@@ -39,6 +47,7 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
     private boolean locked;
     private int maxProcessingTime;
     private FluidTankOutputHandler outputFluidTankHandler;
+    private PancheonRecipe currentRecipe;
 
     public PancheonTileEntity() {
         this(GrowthcraftMilkTileEntities.PANCHEON_TILE_ENTITY.get());
@@ -61,6 +70,36 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
             this.world.setBlockState(this.getPos(), this.getBlockState().with(PancheonBlock.LOCKED, false));
         }
 
+        if (!this.inputFluidTankHandler.getTank(0).isEmpty()) {
+            PancheonRecipe recipe = this.getRecipe(this.inputFluidTankHandler.getTank(0).getFluid());
+
+            if (recipe != null) {
+                if (recipe != this.currentRecipe && this.inputFluidTankHandler.getTank(0).getFluidAmount() >= recipe.getInputFluidStack().getAmount()) {
+                    this.currentRecipe = recipe;
+                    currentProcessingTime = 0;
+                    maxProcessingTime = recipe.getProcessingTime();
+                    dirty = true;
+                } else {
+                    if (this.inputFluidTankHandler.getTank(0).getFluidAmount() >= recipe.getInputFluidStack().getAmount()) {
+                        this.currentProcessingTime++;
+                        dirty = true;
+                    }
+                }
+                if (currentProcessingTime > maxProcessingTime) {
+                    this.inputFluidTankHandler.getTank(0).drain(recipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
+                    this.outputFluidTankHandler.getTank(0).forceFill(recipe.getOutputFluidStack(0), IFluidHandler.FluidAction.EXECUTE);
+                    this.outputFluidTankHandler.getTank(1).forceFill(recipe.getOutputFluidStack(1), IFluidHandler.FluidAction.EXECUTE);
+
+                    currentRecipe = null;
+                    currentProcessingTime = 0;
+                    dirty = true;
+                }
+            }
+        } else {
+            currentRecipe = null;
+            currentProcessingTime = 0;
+        }
+
         if (dirty) {
             this.markDirty();
             this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
@@ -68,7 +107,16 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
 
     }
 
-    // TODO: Implement PancheonRecipe and the getRecipe() method.
+    @Nullable
+    @ParametersAreNonnullByDefault
+    private PancheonRecipe getRecipe(FluidStack fluidStack) {
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(this.world, GrowthcraftMilkRecipes.PANCHEON_RECIPE_TYPE);
+        for (IRecipe<?> recipe : recipes) {
+            PancheonRecipe pancheonRecipe = (PancheonRecipe) recipe;
+            if (pancheonRecipe.matches(fluidStack)) return pancheonRecipe;
+        }
+        return null;
+    }
 
     @Override
     protected ITextComponent getDefaultName() {

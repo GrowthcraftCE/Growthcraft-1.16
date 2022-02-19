@@ -3,12 +3,12 @@ package growthcraft.milk;
 import growthcraft.cellar.client.event.ColorRegistryEvent;
 import growthcraft.cellar.client.proxy.ClientProxy;
 import growthcraft.cellar.common.proxy.CommonProxy;
-import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.lib.proxy.IProxy;
 import growthcraft.milk.init.*;
 import growthcraft.milk.init.client.GrowthcraftMilkBlockRenders;
 import growthcraft.milk.init.client.GrowthcraftMilkScreenManager;
 import growthcraft.milk.init.client.GrowthcraftMilkTileEntityRenders;
+import growthcraft.milk.init.config.GrowthcraftMilkConfig;
 import growthcraft.milk.shared.Reference;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
@@ -37,7 +37,7 @@ public class GrowthcraftMilk {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         FMLJavaModLoadingContext.get().getModEventBus().register(ColorRegistryEvent.class);
 
-        GrowthcraftCellarConfig.loadConfig();
+        GrowthcraftMilkConfig.loadConfig();
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 

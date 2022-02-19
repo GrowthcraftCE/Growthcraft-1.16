@@ -17,6 +17,7 @@ public class UnlocalizedName {
     public static final String ICE_CREAM_WATERMELON = "ice_cream_watermelon";
     public static final String MIXING_VAT = "mixing_vat";
     public static final String PANCHEON = "pancheon";
+    public static final String PANCHEON_RECIPE = "pancheon_recipe";
     public static final String PRESS = "press";
     public static final String STARTER_CULTURE = "starter_culture";
     public static final String STOMACH = "stomach";
