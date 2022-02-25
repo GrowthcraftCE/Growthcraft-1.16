@@ -49,4 +49,9 @@ public class MixingVatItemRecipe extends MixingVatRecipe {
 
         return true;
     }
+
+    public ItemStack getResultItemStack() {
+        return this.resultItemStack;
+    }
+
 }

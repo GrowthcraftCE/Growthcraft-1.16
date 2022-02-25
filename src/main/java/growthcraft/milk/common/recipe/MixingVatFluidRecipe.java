@@ -35,4 +35,16 @@ public class MixingVatFluidRecipe extends MixingVatRecipe {
         // TODO: Complete matches method for MixingVatFluidRecipe
         return false;
     }
+
+    public FluidStack getReagentFluidStack() {
+        return this.reagentFluidStack;
+    }
+
+    public FluidStack getOutputFluidStack() {
+        return this.outputFluidStack;
+    }
+
+    public FluidStack getWasteFluidStack() {
+        return this.wasteFluidStack;
+    }
 }
