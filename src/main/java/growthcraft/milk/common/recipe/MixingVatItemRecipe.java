@@ -1,5 +1,6 @@
 package growthcraft.milk.common.recipe;
 
+import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
@@ -20,8 +21,7 @@ public class MixingVatItemRecipe extends MixingVatRecipe {
 
     @Override
     public IRecipeType<?> getType() {
-        // TODO: Set to sub-class specific recipe type.
-        return super.getType();
+        return GrowthcraftMilkRecipes.MIXING_VAT_ITEM_RECIPE_TYPE;
     }
 
     /**
@@ -35,7 +35,7 @@ public class MixingVatItemRecipe extends MixingVatRecipe {
      */
     public boolean matches(FluidStack testFluidStack, List<ItemStack> testIngredients) {
         if (testFluidStack.getFluid() != this.getInputFluidStack().getFluid()
-                && testFluidStack.getAmount() < this.getInputFluidStack().getAmount()) {
+                && testFluidStack.getAmount() <= this.getInputFluidStack().getAmount()) {
             return false;
         }
 

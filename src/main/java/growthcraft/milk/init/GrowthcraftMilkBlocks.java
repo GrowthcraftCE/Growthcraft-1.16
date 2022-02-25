@@ -3,9 +3,9 @@ package growthcraft.milk.init;
 import growthcraft.lib.util.FluidUtils;
 import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.common.block.ChurnBlock;
+import growthcraft.milk.common.block.MixingVatBlock;
 import growthcraft.milk.common.block.PancheonBlock;
 import growthcraft.milk.common.block.ThistleCropBlock;
-import growthcraft.milk.common.block.VatBlock;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.UnlocalizedName;
 import net.minecraft.block.Block;
@@ -22,8 +22,8 @@ import java.util.ArrayList;
 public class GrowthcraftMilkBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Reference.MODID);
 
-    public static final RegistryObject<VatBlock> MIXING_VAT = BLOCKS.register(
-            UnlocalizedName.MIXING_VAT, VatBlock::new
+    public static final RegistryObject<MixingVatBlock> MIXING_VAT = BLOCKS.register(
+            UnlocalizedName.MIXING_VAT, MixingVatBlock::new
     );
     public static final RegistryObject<ChurnBlock> CHURN = BLOCKS.register(
             UnlocalizedName.CHURN, ChurnBlock::new

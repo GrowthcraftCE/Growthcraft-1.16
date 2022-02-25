@@ -1,5 +1,6 @@
 package growthcraft.milk.common.recipe;
 
+import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
@@ -26,14 +27,29 @@ public class MixingVatFluidRecipe extends MixingVatRecipe {
 
     @Override
     public IRecipeType<?> getType() {
-        // TODO: Set to sub-class specific recipe type.
-        return super.getType();
+        return GrowthcraftMilkRecipes.MIXING_VAT_FLUID_RECIPE_TYPE;
     }
 
-    public boolean matches(FluidStack testInputFluidStack, FluidStack testReagentFluidStack,
+    public boolean matches(FluidStack testBaseFluidStack, FluidStack testReagentFluidStack,
                            List<ItemStack> testIngredients) {
-        // TODO: Complete matches method for MixingVatFluidRecipe
-        return false;
+        if (testBaseFluidStack.getFluid() != this.getInputFluidStack().getFluid()
+                && testBaseFluidStack.getAmount() <= this.getInputFluidStack().getAmount()) {
+            return false;
+        }
+
+        if (testBaseFluidStack.getFluid() != this.getReagentFluidStack().getFluid()
+                && testReagentFluidStack.getAmount() <= this.getReagentFluidStack().getAmount()) {
+            return false;
+        }
+
+        if (this.getIngredientList().size() == testIngredients.size()) {
+            for (int i = 0; i < testIngredients.size(); i++) {
+                if (!this.getIngredientList().contains(testIngredients.get(i))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public FluidStack getReagentFluidStack() {

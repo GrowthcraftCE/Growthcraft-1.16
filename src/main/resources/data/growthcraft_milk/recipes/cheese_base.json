@@ -1,5 +1,5 @@
 {
-  "type": "growthcraft_milk:mixing_vat_recipe",
+  "type": "growthcraft_milk:mixing_vat_fluid_recipe",
   "processing_time": 1200,
   "result_type": "fluid",
   "input_fluid": {

@@ -1,8 +1,8 @@
 package growthcraft.milk.init;
 
 import growthcraft.milk.common.tileentity.ChurnTileEntity;
+import growthcraft.milk.common.tileentity.MixingVatTileEntity;
 import growthcraft.milk.common.tileentity.PancheonTileEntity;
-import growthcraft.milk.common.tileentity.VatTileEntity;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.UnlocalizedName;
 import net.minecraft.tileentity.TileEntityType;
@@ -20,10 +20,10 @@ public class GrowthcraftMilkTileEntities {
             ).build(null)
     );
 
-    public static final RegistryObject<TileEntityType<VatTileEntity>> MIXING_VAT_TILE_ENTITY = TILE_ENTITIES.register(
+    public static final RegistryObject<TileEntityType<MixingVatTileEntity>> MIXING_VAT_TILE_ENTITY = TILE_ENTITIES.register(
             UnlocalizedName.MIXING_VAT,
             () -> TileEntityType.Builder.create(
-                    VatTileEntity::new, GrowthcraftMilkBlocks.MIXING_VAT.get()
+                    MixingVatTileEntity::new, GrowthcraftMilkBlocks.MIXING_VAT.get()
             ).build(null)
     );
 

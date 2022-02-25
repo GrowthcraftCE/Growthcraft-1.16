@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class VatBlock extends HorizontalBlock {
+public class MixingVatBlock extends HorizontalBlock {
 
     public static final VoxelShape BASE_BOUNDING_BOX = makeCuboidShape(
             1.0D, 0.0D, 1.0D,
@@ -30,11 +30,11 @@ public class VatBlock extends HorizontalBlock {
             14.0F, 15.0D, 14.0D
     );
 
-    public VatBlock() {
+    public MixingVatBlock() {
         this(getInitProperties());
     }
 
-    public VatBlock(Properties properties) {
+    public MixingVatBlock(Properties properties) {
         super(properties);
         this.setDefaultState(this.getStateContainer().getBaseState().with(HORIZONTAL_FACING, Direction.NORTH));
     }

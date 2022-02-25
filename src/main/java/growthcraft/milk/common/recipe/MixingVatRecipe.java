@@ -1,5 +1,6 @@
 package growthcraft.milk.common.recipe;
 
+import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -54,14 +55,12 @@ public class MixingVatRecipe implements IRecipe<IInventory> {
 
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        // TODO: Set the generic MixingVatSerilizer and override in the sub-class.
-        return null;
+        return GrowthcraftMilkRecipes.MIXING_VAT_RECIPE_SERIALIZER.get();
     }
 
     @Override
     public IRecipeType<?> getType() {
-        // TODO: Set the generic MixingVatRecipeType and override in the sub-class.
-        return null;
+        return GrowthcraftMilkRecipes.MIXING_VAT_RECIPE_TYPE;
     }
 
     @Override
