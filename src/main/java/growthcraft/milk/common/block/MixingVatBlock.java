@@ -1,6 +1,9 @@
 package growthcraft.milk.common.block;
 
+import growthcraft.milk.common.tileentity.MixingVatTileEntity;
+import growthcraft.milk.init.GrowthcraftMilkTileEntities;
 import net.minecraft.block.*;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.StateContainer;
@@ -16,6 +19,8 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 import javax.annotation.Nullable;
 
@@ -46,16 +51,15 @@ public class MixingVatBlock extends HorizontalBlock {
         return properties;
     }
 
-    // TODO: Create VatTileEntity
     @Override
     public boolean hasTileEntity(BlockState state) {
-        return super.hasTileEntity(state);
+        return true;
     }
 
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return super.createTileEntity(state, world);
+        return GrowthcraftMilkTileEntities.MIXING_VAT_TILE_ENTITY.get().create();
     }
 
     @Override
@@ -75,7 +79,22 @@ public class MixingVatBlock extends HorizontalBlock {
     @SuppressWarnings("deprecation")
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+
+        if (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
+                || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
+            return ActionResultType.SUCCESS;
+        }
+
         return ActionResultType.PASS;
+    }
+
+    @Override
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        TileEntity tileEntity = world.getTileEntity(pos);
+
+        if (tileEntity instanceof MixingVatTileEntity) {
+            ((MixingVatTileEntity) tileEntity).onEntityCollision(entity);
+        }
     }
 
     @Override

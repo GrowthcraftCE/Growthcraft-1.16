@@ -3,7 +3,6 @@ package growthcraft.milk.common.tileentity;
 import growthcraft.lib.common.tank.handler.FluidTankHandler;
 import growthcraft.lib.common.tank.handler.FluidTankOutputHandler;
 import growthcraft.lib.util.RecipeUtils;
-import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.client.container.PancheonContainer;
 import growthcraft.milk.common.block.PancheonBlock;
 import growthcraft.milk.common.recipe.PancheonRecipe;
@@ -230,24 +229,16 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
                 int outputFluidAmount0 = this.outputFluidTankHandler.getTank(0).getFluidAmount();
                 int outputFluidAmount1 = this.outputFluidTankHandler.getTank(1).getFluidAmount();
 
-                // TODO: Remove debug logging
-                GrowthcraftMilk.LOGGER.error(
-                        String.format("%d / %d / %d", inputFluidAmount, outputFluidAmount0, outputFluidAmount1)
-                );
-
                 // If inputTank has fluid or all tanks or empty, return the input tank.
                 if (inputFluidAmount > 0 || inputFluidAmount + outputFluidAmount0 + outputFluidAmount1 == 0) {
-                    GrowthcraftMilk.LOGGER.error("Returning inputFluidHandler");
                     return this.inputFluidTankHandler.getFluidTankHandler(0).cast();
                 }
                 // If input is empty and output0 is not empty, return output0
                 if (inputFluidAmount == 0 && outputFluidAmount0 > 0) {
-                    GrowthcraftMilk.LOGGER.error("Returning outputFluidHandler0");
                     return outputFluidTankHandler.getFluidTankHandler(0).cast();
                 }
                 // If input and output0 are empty but output1 is not empty, return Output1
                 if (inputFluidAmount == 0 && outputFluidAmount0 == 0 && outputFluidAmount1 > 0) {
-                    GrowthcraftMilk.LOGGER.error("Returning outputFluidHandler1");
                     return outputFluidTankHandler.getFluidTankHandler(1).cast();
                 }
 
