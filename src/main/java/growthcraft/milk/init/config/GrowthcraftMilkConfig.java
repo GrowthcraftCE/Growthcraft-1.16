@@ -15,9 +15,11 @@ public class GrowthcraftMilkConfig {
     public static final String SERVER_CONFIG = String.format("growthcraft-%s-server.toml", Reference.NAME_SHORT);
 
     private static final String CATEGORY_CHURN = "churn";
+    private static final String CATEGORY_MIXING_VAT = "mixing_vat";
     private static final String CATEGORY_PANCHEON = "pancheon";
 
     private static ForgeConfigSpec.BooleanValue churnGuiEnabled;
+    private static ForgeConfigSpec.BooleanValue mixingVatGuiEnabled;
     private static ForgeConfigSpec.BooleanValue pancheonGuiEnabled;
 
     static {
@@ -46,6 +48,9 @@ public class GrowthcraftMilkConfig {
         churnGuiEnabled = specBuilder
                 .comment("Set to true to allow users to access the Churn GUI.")
                 .define(String.format("%s.%s", CATEGORY_CHURN, "guiEnabled"), false);
+        mixingVatGuiEnabled = specBuilder
+                .comment("Set to true to allow users to access the Mixing Vat GUI.")
+                .define(String.format("%s.%s", CATEGORY_MIXING_VAT, "guiEnabled"), false);
         pancheonGuiEnabled = specBuilder
                 .comment("Set to true to allow users to access the Pancheon GUI.")
                 .define(String.format("%s.%s", CATEGORY_PANCHEON, "guiEnabled"), false);
@@ -59,4 +64,7 @@ public class GrowthcraftMilkConfig {
         return pancheonGuiEnabled.get();
     }
 
+    public static boolean isMixingVatGuiEnabled() {
+        return mixingVatGuiEnabled.get();
+    }
 }

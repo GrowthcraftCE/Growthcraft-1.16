@@ -1,9 +1,10 @@
 package growthcraft.milk.common.tileentity;
 
+import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
 import growthcraft.lib.common.tank.handler.FluidTankHandler;
-import growthcraft.lib.common.tank.handler.FluidTankOutputHandler;
 import growthcraft.lib.util.BlockStateUtils;
 import growthcraft.lib.util.RecipeUtils;
+import growthcraft.milk.client.container.MixingVatContainer;
 import growthcraft.milk.common.recipe.MixingVatFluidRecipe;
 import growthcraft.milk.common.recipe.MixingVatItemRecipe;
 import growthcraft.milk.common.recipe.MixingVatRecipe;
@@ -26,15 +27,17 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -50,15 +53,12 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
     private ITextComponent customName;
     private FluidTankHandler inputFluidTankHandler;
     private int maxProcessingTime;
-    private FluidTankOutputHandler outputFluidTankHandler;
-    private boolean heated = false;
+    private final boolean heated = false;
+    private final GrowthcraftItemHandler inventory;
     private boolean activated = false;
 
     private final int inputInventorySlots = 3;
-
-    private IItemHandlerModifiable items = createHandler();
-    private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
-    private NonNullList<ItemStack> inventoryItemStacks = NonNullList.withSize(4, ItemStack.EMPTY);
+    private FluidTankHandler outputFluidTankHandler;
 
     public MixingVatTileEntity() {
         this(GrowthcraftMilkTileEntities.MIXING_VAT_TILE_ENTITY.get());
@@ -66,16 +66,13 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
 
     public MixingVatTileEntity(TileEntityType<?> tileEntityType) {
         super(tileEntityType);
+        this.inventory = new GrowthcraftItemHandler(4);
         this.createFluidTanks();
-    }
-
-    private IItemHandlerModifiable createHandler() {
-        return new InvWrapper(this);
     }
 
     private void createFluidTanks() {
         this.inputFluidTankHandler = new FluidTankHandler(2, 4000);
-        this.outputFluidTankHandler = new FluidTankOutputHandler(1, 4000);
+        this.outputFluidTankHandler = new FluidTankHandler(1, 1000);
     }
 
     public FluidTank getFluidTank(int slot) {
@@ -99,7 +96,7 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
         // should we try and process.
         try {
             if (!inputFluidTankHandler.getTank(0).isEmpty() && this.isHeated() && outputFluidTankHandler.getTank(0).isEmpty()
-                    && items.getStackInSlot(3).isEmpty()) {
+                    && inventory.getStackInSlot(3).isEmpty()) {
                 if (checkCurrentRecipe()) {
                     // Then continue processing the recipe inventory.
                     currentProcessingTime++;
@@ -120,20 +117,17 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
         }
     }
 
-    private void vacuumDroppedItems() {
-    }
-
     private boolean checkCurrentRecipe() {
         MixingVatRecipe.MixingVatRecipeCategory category;
 
-        List<ItemStack> inventory = new ArrayList<>();
-        for (int i = 0; i < inputInventorySlots; i++) {
-            if (!items.getStackInSlot(i).isEmpty()) inventory.add(items.getStackInSlot(i));
+        List<ItemStack> currentItems = new ArrayList<>();
+        for (int i = 0; i < inventory.getSlots(); i++) {
+            if (!inventory.getStackInSlot(i).isEmpty()) currentItems.add(inventory.getStackInSlot(i));
         }
 
         MixingVatRecipe recipe = null;
 
-        if (!inventory.isEmpty()) {
+        if (!currentItems.isEmpty()) {
             if (!inputFluidTankHandler.getTank(1).isEmpty()) {
                 category = MixingVatRecipe.MixingVatRecipeCategory.FLUID;
             } else {
@@ -142,12 +136,12 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
 
             // Then we need to check of there is a valid recipe that needs to be activated.
             if (category == MixingVatRecipe.MixingVatRecipeCategory.ITEM) {
-                recipe = this.getItemRecipe(inputFluidTankHandler.getTank(0).getFluid(), inventory);
+                recipe = this.getItemRecipe(inputFluidTankHandler.getTank(0).getFluid(), currentItems);
             }
 
             if (category == MixingVatRecipe.MixingVatRecipeCategory.FLUID) {
                 recipe = this.getFluidRecipe(inputFluidTankHandler.getTank(0).getFluid(),
-                        inputFluidTankHandler.getTank(1).getFluid(), inventory);
+                        inputFluidTankHandler.getTank(1).getFluid(), currentItems);
             }
 
             if (recipe != null) {
@@ -207,25 +201,28 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
         return this.customName != null ? this.customName : this.getDefaultName();
     }
 
-    // TODO: Create GUI
     @Override
-    protected Container createMenu(int id, PlayerInventory player) {
-        return null;
+    protected Container createMenu(int windowId, PlayerInventory playerInventory) {
+        return new MixingVatContainer(windowId, playerInventory, this);
     }
 
     @Override
     protected NonNullList<ItemStack> getItems() {
-        return this.inventoryItemStacks;
+        return this.inventory.toNonNullList();
     }
 
     @Override
     protected void setItems(NonNullList<ItemStack> nonNullList) {
-        this.inventoryItemStacks = nonNullList;
+        this.inventory.setNonNullList(nonNullList);
     }
 
     @Override
     public int getSizeInventory() {
-        return this.inventoryItemStacks.size();
+        return this.inventory.getSlots();
+    }
+
+    public final IItemHandlerModifiable getInventory() {
+        return this.inventory;
     }
 
     public FluidTank getInputFluidTank(int tankId) {
@@ -238,6 +235,14 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
 
     public ItemStack getResultActivationTool() {
         return this.currentRecipe.getActivationTool();
+    }
+
+    public int getProcessingTime() {
+        return this.currentProcessingTime;
+    }
+
+    public void setProcessingTime(int time) {
+        this.currentProcessingTime = time;
     }
 
     @Override
@@ -254,10 +259,9 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
         this.inputFluidTankHandler.getTank(1).readFromNBT(compound.getCompound("tank1"));
         this.outputFluidTankHandler.getTank(0).readFromNBT(compound.getCompound("tank2"));
 
-        this.inventoryItemStacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-        if (!this.checkLootAndRead(compound)) {
-            ItemStackHelper.loadAllItems(compound, this.inventoryItemStacks);
-        }
+        NonNullList<ItemStack> inv = NonNullList.withSize(this.inventory.getSlots(), ItemStack.EMPTY);
+        ItemStackHelper.loadAllItems(compound, inv);
+        this.inventory.setNonNullList(inv);
     }
 
     @Override
@@ -274,7 +278,7 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
         compound.put("tank1", this.inputFluidTankHandler.getTank(1).writeToNBT(new CompoundNBT()));
         compound.put("tank2", this.outputFluidTankHandler.getTank(0).writeToNBT(new CompoundNBT()));
 
-        ItemStackHelper.saveAllItems(compound, this.inventoryItemStacks);
+        ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());
 
         return super.write(compound);
     }
@@ -301,9 +305,11 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
 
     private boolean tryPlaceItemInventory(ItemStack itemStack) {
         for (int i = 0; i < inputInventorySlots; i++) {
-            if (items.getStackInSlot(i).isEmpty()) {
-                items.setStackInSlot(i, itemStack);
-                if (!items.getStackInSlot(i).isEmpty()) return true;
+            if (this.getInventory().getStackInSlot(i).isEmpty()) {
+                this.getInventory().insertItem(i, itemStack, false);
+                if (!this.getInventory().getStackInSlot(i).isEmpty()) {
+                    return true;
+                }
             }
         }
 
@@ -314,10 +320,39 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
         if (entity instanceof ItemEntity && entity.getPosition().getX() == this.getPos().getX() && entity.getPosition().getZ() == this.getPos().getZ()) {
             ItemStack collisionItemStack = ((ItemEntity) entity).getItem();
             if (collisionItemStack.getCount() >= 1) {
-                if (this.tryPlaceItemInventory(collisionItemStack)) {
+                if (this.tryPlaceItemInventory(collisionItemStack.copy())) {
                     ((ItemEntity) entity).getItem().shrink(1);
                 }
             }
+            this.markDirty();
         }
     }
+
+    public int getMaxProcessingTime() {
+        return this.maxProcessingTime;
+    }
+
+    @Override
+    public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
+        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && side == Direction.UP) {
+            return this.outputFluidTankHandler.getFluidTankHandler(0).cast();
+        }
+
+        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && side != Direction.UP) {
+            return this.inputFluidTankHandler.getFluidTankHandler(0).cast();
+        }
+
+        return super.getCapability(cap, side);
+    }
+
+    @Nullable
+    public ItemStack getActivationTool() {
+        return this.currentRecipe != null ? this.currentRecipe.getActivationTool() : null;
+    }
+
+    public boolean activateRecipe(ItemStack itemStack) {
+        this.activated = this.getActivationTool().getItem() == itemStack.getItem();
+        return this.activated;
+    }
+
 }

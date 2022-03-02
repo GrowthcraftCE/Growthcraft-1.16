@@ -2,9 +2,11 @@ package growthcraft.milk.common.block;
 
 import growthcraft.milk.common.tileentity.MixingVatTileEntity;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
+import growthcraft.milk.init.config.GrowthcraftMilkConfig;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -21,6 +23,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
@@ -75,14 +78,27 @@ public class MixingVatBlock extends HorizontalBlock {
         return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
     }
 
-    // TODO: Handle VatBlock activation
     @SuppressWarnings("deprecation")
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 
-        if (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
+        if (!player.isSneaking() || FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
                 || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
             return ActionResultType.SUCCESS;
+        }
+
+        if (!worldIn.isRemote) {
+            MixingVatTileEntity tileEntity = (MixingVatTileEntity) worldIn.getTileEntity(pos);
+            if (player.isSneaking() && GrowthcraftMilkConfig.isMixingVatGuiEnabled()) {
+                NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
+            }
+
+            if (tileEntity.getActivationTool() != null) {
+                // Then we need to try and activate the recipe and consume the activation item.
+                if (tileEntity.activateRecipe(player.getHeldItem(handIn))) {
+                    player.getHeldItem(handIn).shrink(1);
+                }
+            }
         }
 
         return ActionResultType.PASS;
@@ -91,8 +107,7 @@ public class MixingVatBlock extends HorizontalBlock {
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         TileEntity tileEntity = world.getTileEntity(pos);
-
-        if (tileEntity instanceof MixingVatTileEntity) {
+        if (tileEntity instanceof MixingVatTileEntity && !world.isRemote) {
             ((MixingVatTileEntity) tileEntity).onEntityCollision(entity);
         }
     }
