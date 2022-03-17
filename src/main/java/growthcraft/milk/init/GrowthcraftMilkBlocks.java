@@ -6,6 +6,7 @@ import growthcraft.milk.common.block.ChurnBlock;
 import growthcraft.milk.common.block.MixingVatBlock;
 import growthcraft.milk.common.block.PancheonBlock;
 import growthcraft.milk.common.block.ThistleCropBlock;
+import growthcraft.milk.lib.common.block.CheeseCurdBlock;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.UnlocalizedName;
 import net.minecraft.block.Block;
@@ -34,6 +35,9 @@ public class GrowthcraftMilkBlocks {
     public static final RegistryObject<PancheonBlock> PANCHEON = BLOCKS.register(
             UnlocalizedName.PANCHEON, PancheonBlock::new
     );
+    public static final RegistryObject<CheeseCurdBlock> CHEESE_CURD_CHEDDAR = BLOCKS.register(
+            UnlocalizedName.CHEESE_CURDS_CHEDDAR, CheeseCurdBlock::new
+    );
 
     private GrowthcraftMilkBlocks() {
         /* Prevent generation of public constructor */
@@ -58,6 +62,7 @@ public class GrowthcraftMilkBlocks {
         excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.BUTTER_MILK).get(FluidUtils.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.CONDENSED_MILK).get(FluidUtils.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.CREAM).get(FluidUtils.BLOCK));
+        excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.CULTURED_MILK).get(FluidUtils.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.KUMIS).get(FluidUtils.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.MILK).get(FluidUtils.BLOCK));
         excludeBlocks.add(Reference.MODID + ":" + FluidUtils.getFluidNames(UnlocalizedName.FluidName.RENNET).get(FluidUtils.BLOCK));

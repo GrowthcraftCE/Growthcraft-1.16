@@ -40,7 +40,7 @@ public class MixingVatRecipeSerializer extends ForgeRegistryEntry<IRecipeSeriali
                 JSONUtils.getJsonObject(json, "input_fluid"));
 
         ItemStack activationTool = CraftingHelper.getItemStack(
-                JSONUtils.getJsonObject(json, "result_activation_tool"), false);
+                JSONUtils.getJsonObject(json, "activation_tool"), false);
 
         List<ItemStack> ingredients = new ArrayList<>();
         JsonArray jsonIngredients = JSONUtils.getJsonArray(json, "ingredients");
@@ -55,8 +55,10 @@ public class MixingVatRecipeSerializer extends ForgeRegistryEntry<IRecipeSeriali
         if (category == MixingVatRecipe.MixingVatRecipeCategory.ITEM) {
             ItemStack resultItemStack = CraftingHelper.getItemStack(
                     JSONUtils.getJsonObject(json, "result_item"), false);
+            ItemStack resultActivationTool = CraftingHelper.getItemStack(
+                    JSONUtils.getJsonObject(json, "result_activation_tool"), false);
             return new MixingVatItemRecipe(recipeId, MixingVatRecipe.MixingVatRecipeCategory.ITEM,
-                    inputFluid, ingredients, processingTime, resultItemStack, activationTool);
+                    inputFluid, ingredients, processingTime, resultItemStack, activationTool, resultActivationTool);
         }
 
         if (category == MixingVatRecipe.MixingVatRecipeCategory.FLUID) {
@@ -98,9 +100,10 @@ public class MixingVatRecipeSerializer extends ForgeRegistryEntry<IRecipeSeriali
 
             if (category == MixingVatRecipe.MixingVatRecipeCategory.ITEM) {
                 ItemStack resultingItemStack = buffer.readItemStack();
+                ItemStack resultActivationTool = buffer.readItemStack();
 
                 return new MixingVatItemRecipe(recipeId, category, inputFluidStack, ingredients,
-                        processingTime, resultingItemStack, activationTool);
+                        processingTime, resultingItemStack, activationTool, resultActivationTool);
 
             }
 
@@ -137,6 +140,7 @@ public class MixingVatRecipeSerializer extends ForgeRegistryEntry<IRecipeSeriali
         if (recipe.getCategory() == MixingVatRecipe.MixingVatRecipeCategory.ITEM) {
             MixingVatItemRecipe itemRecipe = (MixingVatItemRecipe) recipe;
             buffer.writeItemStack(itemRecipe.getResultItemStack());
+            buffer.writeItemStack(itemRecipe.getResultActivationTool());
         }
         if (recipe.getCategory() == MixingVatRecipe.MixingVatRecipeCategory.FLUID) {
             MixingVatFluidRecipe fluidRecipe = (MixingVatFluidRecipe) recipe;

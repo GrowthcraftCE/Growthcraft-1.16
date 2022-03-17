@@ -10,12 +10,15 @@ import java.util.List;
 
 public class MixingVatItemRecipe extends MixingVatRecipe {
     private final ItemStack resultItemStack;
+    private final ItemStack resultActivationTool;
 
     public MixingVatItemRecipe(ResourceLocation recipeId, MixingVatRecipeCategory category,
                                FluidStack inputFluidStack, List<ItemStack> ingredients, int processingTime,
-                               ItemStack resultItemStack, ItemStack activationTool) {
+                               ItemStack resultItemStack, ItemStack activationTool,
+                               ItemStack resultActivationTool) {
         super(recipeId, category, inputFluidStack, ingredients, processingTime, activationTool);
         this.resultItemStack = resultItemStack;
+        this.resultActivationTool = resultActivationTool;
 
     }
 
@@ -52,6 +55,10 @@ public class MixingVatItemRecipe extends MixingVatRecipe {
 
     public ItemStack getResultItemStack() {
         return this.resultItemStack;
+    }
+
+    public ItemStack getResultActivationTool() {
+        return this.resultActivationTool;
     }
 
 }

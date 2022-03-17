@@ -17,6 +17,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -65,7 +66,7 @@ public class MixingVatScreen extends ContainerScreen<MixingVatContainer> {
 
         // Heated
         int guiHeatLevelX = this.guiLeft + 98;
-        int guiHeatLevelY = this.guiTop + 69;
+        int guiHeatLevelY = this.guiTop + 56;
 
         if (this.container.isBurning()) {
             this.blit(matrixStack, guiHeatLevelX, guiHeatLevelY, 176, 28, 13, 13);
@@ -123,6 +124,39 @@ public class MixingVatScreen extends ContainerScreen<MixingVatContainer> {
     @Override
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         super.render(matrixStack, mouseX, mouseY, partialTicks);
+
+        int guiInputTankX = guiLeft + 49;
+        int guiInputTankY = guiTop + 32;
+        int guiInputTankHeight = 37;
+
+        if (mouseX > guiInputTankX && mouseX < guiInputTankX + 16 && mouseY > guiInputTankY && mouseY < guiInputTankY + guiInputTankHeight) {
+            FluidStack fluidStack = this.container.getInputFluidTank().getFluid();
+            String tooltip = String.format("%s %dmb", fluidStack.getDisplayName().getString(), fluidStack.getAmount());
+            StringTextComponent stringTextComponent = new StringTextComponent(tooltip);
+            this.renderTooltip(matrixStack, stringTextComponent, mouseX, mouseY);
+        }
+
+        int guiReagentTankX = guiLeft + 49;
+        int guiReagentTankY = guiTop + 18;
+        int guiReagentTankHeight = 10;
+
+        if (mouseX > guiReagentTankX && mouseX < guiReagentTankX + 16 && mouseY > guiReagentTankY && mouseY < guiReagentTankY + guiReagentTankHeight) {
+            FluidStack fluidStack = this.container.getReagentFluidTank().getFluid();
+            String tooltip = String.format("%s %dmb", fluidStack.getDisplayName().getString(), fluidStack.getAmount());
+            StringTextComponent stringTextComponent = new StringTextComponent(tooltip);
+            this.renderTooltip(matrixStack, stringTextComponent, mouseX, mouseY);
+        }
+
+        int guiOutputTankX = guiLeft + 124;
+        int guiOutputTankY = guiTop + 40;
+        int guiOutputTankHeight = 29;
+
+        if (mouseX > guiOutputTankX && mouseX < guiOutputTankX + 16 && mouseY > guiOutputTankY && mouseY < guiOutputTankY + guiOutputTankHeight) {
+            FluidStack fluidStack = this.container.getOutputFluidTank().getFluid();
+            String tooltip = String.format("%s %dmb", fluidStack.getDisplayName().getString(), fluidStack.getAmount());
+            StringTextComponent stringTextComponent = new StringTextComponent(tooltip);
+            this.renderTooltip(matrixStack, stringTextComponent, mouseX, mouseY);
+        }
     }
 
     private int getScaledFluid(float amount, float capacity, int maxPixelSize) {

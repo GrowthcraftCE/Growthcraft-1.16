@@ -2,6 +2,7 @@ package growthcraft.milk.common.recipe;
 
 import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -10,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MixingVatRecipe implements IRecipe<IInventory> {
@@ -87,6 +89,14 @@ public class MixingVatRecipe implements IRecipe<IInventory> {
 
     public List<ItemStack> getIngredientList() {
         return ingredients;
+    }
+
+    public List<Item> getIngredientItems() {
+        List<Item> ingredientItems = new ArrayList<>();
+        this.getIngredientList().forEach(
+                itemStack -> ingredientItems.add(itemStack.getItem())
+        );
+        return ingredientItems;
     }
 
     public int getProcessingTime() {

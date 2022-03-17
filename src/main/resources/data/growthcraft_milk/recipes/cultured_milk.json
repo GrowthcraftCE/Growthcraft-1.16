@@ -17,14 +17,14 @@
     }
   ],
   "result_fluid": {
-    "fluid": "growthcraft_milk:cheese_base_fluid",
+    "fluid": "growthcraft_milk:cultured_milk_fluid",
     "amount": 4000
   },
   "result_fluid_waste": {
     "fluid": "growthcraft_milk:whey_fluid",
     "amount": 1000
   },
-  "result_activation_tool": {
+  "activation_tool": {
     "item": "minecraft:stick"
   }
 }

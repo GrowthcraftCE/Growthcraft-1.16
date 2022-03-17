@@ -19,6 +19,9 @@
   "result_item": {
     "item": "growthcraft_milk:cheese_curds_cheddar"
   },
+  "activation_tool": {
+    "item": "minecraft:stick"
+  },
   "result_activation_tool": {
     "item": "growthcraft_milk:cheese_cloth"
   }

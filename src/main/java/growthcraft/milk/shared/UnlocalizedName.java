@@ -5,6 +5,8 @@ public class UnlocalizedName {
     public static final String BUTTER = "butter";
     public static final String BUTTER_SALTED = "butter_salted";
     public static final String CHEESE_CLOTH = "cheese_cloth";
+    public static final String CHEESE_CURDS_CHEDDAR = "cheese_curds_cheddar";
+    public static final String CHEESE_CURDS_CHEDDAR_DRAINED = "cheese_curds_cheddar_drained";
     public static final String CHURN = "churn";
     public static final String CHURN_RECIPE = "churn_recipe";
     public static final String ICE_CREAM_APPLE = "ice_cream_apple";
@@ -59,6 +61,7 @@ public class UnlocalizedName {
         public static final String BUTTER_MILK = "butter_milk";
         public static final String CONDENSED_MILK = "condensed_milk";
         public static final String CREAM = "cream";
+        public static final String CULTURED_MILK = "cultured_milk";
         public static final String KUMIS = "kumis";
         public static final String MILK = "milk";
         public static final String RENNET = "rennet";

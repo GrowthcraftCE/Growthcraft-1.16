@@ -39,6 +39,14 @@ public class GrowthcraftMilkFluids {
     public static final RegistryObject<CreamFluid.Flowing> CREAM_FLUID_FLOWING = FLUIDS.register(
             FluidUtils.getFluidNames(UnlocalizedName.FluidName.CREAM).get(FluidUtils.FLOWING), CreamFluid.Flowing::new);
 
+    public static final RegistryObject<CulturedMilkFluid.Flowing> CULTURED_MILK_FLUID_FLOWING = FLUIDS.register(
+            FluidUtils.getFluidNames(UnlocalizedName.FluidName.CULTURED_MILK).get(FluidUtils.FLOWING), CulturedMilkFluid.Flowing::new);
+    public static final RegistryObject<CulturedMilkFluid.Source> CULTURED_MILK_FLUID_STILL = FLUIDS.register(
+            FluidUtils.getFluidNames(UnlocalizedName.FluidName.CULTURED_MILK).get(FluidUtils.STILL), CulturedMilkFluid.Source::new);
+    public static final RegistryObject<FlowingFluidBlock> CULTURED_MILK_FLUID_BLOCK =
+            GrowthcraftMilkBlocks.BLOCKS.register(FluidUtils.getFluidNames(UnlocalizedName.FluidName.CULTURED_MILK).get(FluidUtils.BLOCK),
+                    () -> new FlowingFluidBlock(CULTURED_MILK_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
     public static final RegistryObject<KumisFluid.Source> KUMIS_FLUID_STILL = FLUIDS.register(
             FluidUtils.getFluidNames(UnlocalizedName.FluidName.KUMIS).get(FluidUtils.STILL), KumisFluid.Source::new);
     public static final RegistryObject<FlowingFluidBlock> KUMIS_FLUID_BLOCK =

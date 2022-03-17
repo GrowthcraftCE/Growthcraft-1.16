@@ -1,9 +1,13 @@
 package growthcraft.milk.init.client;
 
+import growthcraft.milk.client.ter.MixingVatTileEntityRender;
+import growthcraft.milk.init.GrowthcraftMilkTileEntities;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+
 public class GrowthcraftMilkTileEntityRenders {
     public static void bindTileEntityRenderers() {
-        //ClientRegistry.bindTileEntityRenderer(GrowthcraftCellarTileEntities.brew_kettle_tileentity.get(),
-        //        BrewKettleTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(GrowthcraftMilkTileEntities.MIXING_VAT_TILE_ENTITY.get(),
+                MixingVatTileEntityRender::new);
     }
 
     private GrowthcraftMilkTileEntityRenders() {

@@ -31,6 +31,7 @@ public class ColorRegistryEvent {
         buckets.add(GrowthcraftMilkItems.BUCKET_BUTTER_MILK.get());
         buckets.add(GrowthcraftMilkItems.BUCKET_MILK.get());
         buckets.add(GrowthcraftMilkItems.BUCKET_CREAM.get());
+        buckets.add(GrowthcraftMilkItems.BUCKET_CULTURED_MILK.get());
         buckets.add(GrowthcraftMilkItems.BUCKET_WHEY.get());
         buckets.add(GrowthcraftMilkItems.BUCKET_KUMIS.get());
         buckets.add(GrowthcraftMilkItems.BUCKET_CONDENSED_MILK.get());

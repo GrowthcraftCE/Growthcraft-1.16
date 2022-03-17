@@ -38,6 +38,13 @@ public class GrowthcraftMilkItems {
                     Reference.FluidColor.CREAM_FLUID_COLOR.getColor()
             )
     );
+    public static final RegistryObject<GrowthcraftBucketItem> BUCKET_CULTURED_MILK = ITEMS.register(
+            FluidUtils.getFluidNames(UnlocalizedName.FluidName.CULTURED_MILK).get(FluidUtils.BUCKET),
+            () -> new GrowthcraftBucketItem(
+                    GrowthcraftMilkFluids.CULTURED_MILK_FLUID_STILL,
+                    Reference.FluidColor.CULTURED_MILK_FLUID_COLOR.getColor()
+            )
+    );
     public static final RegistryObject<GrowthcraftBucketItem> BUCKET_KUMIS = ITEMS.register(
             FluidUtils.getFluidNames(UnlocalizedName.FluidName.KUMIS).get(FluidUtils.BUCKET),
             () -> new GrowthcraftBucketItem(
@@ -144,6 +151,10 @@ public class GrowthcraftMilkItems {
     );
     public static final RegistryObject<GrowthcraftFoodItem> YOGURT_WATERMELON = ITEMS.register(
             UnlocalizedName.YOGURT_WATERMELON, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+    );
+
+    public static final RegistryObject<GrowthcraftItem> CHEESE_CURDS_CHEDDAR_DRAINED = ITEMS.register(
+            UnlocalizedName.CHEESE_CURDS_CHEDDAR_DRAINED, GrowthcraftItem::new
     );
 
     private GrowthcraftMilkItems() {

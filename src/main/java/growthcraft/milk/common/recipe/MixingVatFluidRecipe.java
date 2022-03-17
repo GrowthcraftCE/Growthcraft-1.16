@@ -37,14 +37,14 @@ public class MixingVatFluidRecipe extends MixingVatRecipe {
             return false;
         }
 
-        if (testBaseFluidStack.getFluid() != this.getReagentFluidStack().getFluid()
+        if (testReagentFluidStack.getFluid() != this.getReagentFluidStack().getFluid()
                 && testReagentFluidStack.getAmount() <= this.getReagentFluidStack().getAmount()) {
             return false;
         }
 
         if (this.getIngredientList().size() == testIngredients.size()) {
             for (int i = 0; i < testIngredients.size(); i++) {
-                if (!this.getIngredientList().contains(testIngredients.get(i))) {
+                if (!this.getIngredientItems().contains(testIngredients.get(i).getItem())) {
                     return false;
                 }
             }

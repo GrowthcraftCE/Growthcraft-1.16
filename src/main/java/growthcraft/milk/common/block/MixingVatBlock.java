@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
@@ -82,8 +83,9 @@ public class MixingVatBlock extends HorizontalBlock {
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 
-        if (!player.isSneaking() || FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
-                || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
+        if (!player.isSneaking()
+                && (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
+                || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent())) {
             return ActionResultType.SUCCESS;
         }
 
@@ -93,12 +95,22 @@ public class MixingVatBlock extends HorizontalBlock {
                 NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
             }
 
-            if (tileEntity.getActivationTool() != null) {
+            // Determine if we need to activate or draw the resulting item
+            if (tileEntity.hasResultActivationTool()) {
+                ItemStack resultActivationTool = tileEntity.getResultActivationTool();
+                if (tileEntity.activateResult(resultActivationTool)) {
+
+                }
+            }
+
+            if (tileEntity.hasActivationTool()) {
+                ItemStack activationTool = tileEntity.getActivationTool();
                 // Then we need to try and activate the recipe and consume the activation item.
                 if (tileEntity.activateRecipe(player.getHeldItem(handIn))) {
                     player.getHeldItem(handIn).shrink(1);
                 }
             }
+
         }
 
         return ActionResultType.PASS;

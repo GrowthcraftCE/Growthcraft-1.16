@@ -13,7 +13,9 @@ public class GrowthcraftMilkBlockRenders {
 
     public static void setRenderLayers() {
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.THISTLE_CROP.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.MIXING_VAT.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.PANCHEON.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.CHEESE_CURD_CHEDDAR.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.BUTTER_MILK_FLUID_BLOCK.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.CONDENSED_MILK_FLUID_BLOCK.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.CREAM_FLUID_BLOCK.get(), RenderType.getTranslucent());
