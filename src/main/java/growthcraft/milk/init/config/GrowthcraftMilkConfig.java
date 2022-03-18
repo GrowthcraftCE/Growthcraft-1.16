@@ -20,6 +20,7 @@ public class GrowthcraftMilkConfig {
 
     private static ForgeConfigSpec.BooleanValue churnGuiEnabled;
     private static ForgeConfigSpec.BooleanValue mixingVatGuiEnabled;
+    private static ForgeConfigSpec.BooleanValue mixingVatConsumeActivationItem;
     private static ForgeConfigSpec.BooleanValue pancheonGuiEnabled;
 
     static {
@@ -51,6 +52,9 @@ public class GrowthcraftMilkConfig {
         mixingVatGuiEnabled = specBuilder
                 .comment("Set to true to allow users to access the Mixing Vat GUI.")
                 .define(String.format("%s.%s", CATEGORY_MIXING_VAT, "guiEnabled"), false);
+        mixingVatConsumeActivationItem = specBuilder
+                .comment("Set to true to allow users to access the Mixing Vat GUI.")
+                .define(String.format("%s.%s", CATEGORY_MIXING_VAT, "consumeMixingVatActivator"), false);
         pancheonGuiEnabled = specBuilder
                 .comment("Set to true to allow users to access the Pancheon GUI.")
                 .define(String.format("%s.%s", CATEGORY_PANCHEON, "guiEnabled"), false);
@@ -66,5 +70,9 @@ public class GrowthcraftMilkConfig {
 
     public static boolean isMixingVatGuiEnabled() {
         return mixingVatGuiEnabled.get();
+    }
+
+    public static boolean isConsumeMixingVatActivator() {
+        return mixingVatConsumeActivationItem.get();
     }
 }

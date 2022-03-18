@@ -99,7 +99,7 @@ public class MixingVatBlock extends HorizontalBlock {
             if (tileEntity.hasResultActivationTool()) {
                 ItemStack resultActivationTool = tileEntity.getResultActivationTool();
                 if (tileEntity.activateResult(resultActivationTool)) {
-
+                    player.getHeldItem(handIn).shrink(1);
                 }
             }
 
@@ -107,7 +107,8 @@ public class MixingVatBlock extends HorizontalBlock {
                 ItemStack activationTool = tileEntity.getActivationTool();
                 // Then we need to try and activate the recipe and consume the activation item.
                 if (tileEntity.activateRecipe(player.getHeldItem(handIn))) {
-                    player.getHeldItem(handIn).shrink(1);
+                    if (GrowthcraftMilkConfig.isConsumeMixingVatActivator())
+                        player.getHeldItem(handIn).shrink(1);
                 }
             }
 
