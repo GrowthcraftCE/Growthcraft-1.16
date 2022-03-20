@@ -24,6 +24,13 @@ public class GrowthcraftMilkItems {
                     Reference.FluidColor.BUTTER_MILK_FLUID_COLOR.getColor()
             )
     );
+    public static final RegistryObject<GrowthcraftBucketItem> BUCKET_CHEESE_BASE = ITEMS.register(
+            FluidUtils.getFluidNames(UnlocalizedName.FluidName.CHEESE_BASE).get(FluidUtils.BUCKET),
+            () -> new GrowthcraftBucketItem(
+                    GrowthcraftMilkFluids.CHEESE_BASE_FLUID_STILL,
+                    Reference.FluidColor.CHEESE_BASE_FLUID_COLOR.getColor()
+            )
+    );
     public static final RegistryObject<GrowthcraftBucketItem> BUCKET_CONDENSED_MILK = ITEMS.register(
             FluidUtils.getFluidNames(UnlocalizedName.FluidName.CONDENSED_MILK).get(FluidUtils.BUCKET),
             () -> new GrowthcraftBucketItem(

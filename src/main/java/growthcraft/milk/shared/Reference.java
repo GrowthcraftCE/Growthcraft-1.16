@@ -17,6 +17,7 @@ public class Reference {
     public static class FluidColor {
         // Set Fluid Colors
         public static final ColorUtils.GrowthcraftColor BUTTER_MILK_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xFFFEF1B5);
+        public static final ColorUtils.GrowthcraftColor CHEESE_BASE_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xFFFDD0);
         public static final ColorUtils.GrowthcraftColor CONDENSED_MILK_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xFFFFFFFA);
         public static final ColorUtils.GrowthcraftColor CREAM_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xFFFFFDD0);
         public static final ColorUtils.GrowthcraftColor CULTURED_MILK_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xF7D99E);

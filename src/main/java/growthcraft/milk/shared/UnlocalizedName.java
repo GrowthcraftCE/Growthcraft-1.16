@@ -59,6 +59,7 @@ public class UnlocalizedName {
 
     public static class FluidName {
         public static final String BUTTER_MILK = "butter_milk";
+        public static final String CHEESE_BASE = "cheese_base";
         public static final String CONDENSED_MILK = "condensed_milk";
         public static final String CREAM = "cream";
         public static final String CULTURED_MILK = "cultured_milk";

@@ -1,5 +1,6 @@
 package growthcraft.milk.common.block;
 
+import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.common.tileentity.MixingVatTileEntity;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
 import growthcraft.milk.init.config.GrowthcraftMilkConfig;
@@ -9,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
@@ -83,20 +85,41 @@ public class MixingVatBlock extends HorizontalBlock {
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 
-        if (!player.isSneaking()
-                && (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
-                || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent())) {
+        if (!player.isSneaking() && player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
+            // Becuase of our two tank system and abnormal shape, we need to control which face of the block
+            // is activated and not let the simple interactWithFluidHandler with ht.getFace() figure it out.
+            if (player.getHeldItem(handIn).getItem() == Items.BUCKET) {
+                // Then we have an empty bucket and need to determine where to draw from.
+                MixingVatTileEntity tileEntity = (MixingVatTileEntity) worldIn.getTileEntity(pos);
+                if (tileEntity.getFluidTank(2).getFluidAmount() > 0) {
+                    FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, Direction.UP);
+                } else if (tileEntity.getFluidTank(0).getFluidAmount() > 0) {
+                    FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, Direction.NORTH);
+                }
+            } else {
+                // We need to determine where to put the fluid.
+                MixingVatTileEntity tileEntity = (MixingVatTileEntity) worldIn.getTileEntity(pos);
+                if (tileEntity.getFluidTank(0).getFluidAmount() < 4000) {
+                    GrowthcraftMilk.LOGGER.warn("Need to interact with the input tank.");
+                    FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, Direction.NORTH);
+                } else if (tileEntity.getFluidTank(2).getFluidAmount() < 1000) {
+                    FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, Direction.UP);
+                }
+            }
+
             return ActionResultType.SUCCESS;
         }
 
         if (!worldIn.isRemote) {
             MixingVatTileEntity tileEntity = (MixingVatTileEntity) worldIn.getTileEntity(pos);
+
             if (player.isSneaking() && GrowthcraftMilkConfig.isMixingVatGuiEnabled()) {
                 NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
             }
 
             // Determine if we need to activate or draw the resulting item
             if (tileEntity.hasResultActivationTool()) {
+
                 ItemStack resultActivationTool = tileEntity.getResultActivationTool();
                 if (tileEntity.activateResult(resultActivationTool)) {
                     player.getHeldItem(handIn).shrink(1);

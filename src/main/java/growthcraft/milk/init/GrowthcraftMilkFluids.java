@@ -23,6 +23,14 @@ public class GrowthcraftMilkFluids {
     public static final RegistryObject<ButterMilkFluid.Flowing> BUTTER_MILK_FLUID_FLOWING = FLUIDS.register(
             FluidUtils.getFluidNames(UnlocalizedName.FluidName.BUTTER_MILK).get(FluidUtils.FLOWING), ButterMilkFluid.Flowing::new);
 
+    public static final RegistryObject<CheeseBaseFluid.Flowing> CHEESE_BASE_FLUID_FLOWING = FLUIDS.register(
+            FluidUtils.getFluidNames(UnlocalizedName.FluidName.CHEESE_BASE).get(FluidUtils.FLOWING), CheeseBaseFluid.Flowing::new);
+    public static final RegistryObject<CheeseBaseFluid.Source> CHEESE_BASE_FLUID_STILL = FLUIDS.register(
+            FluidUtils.getFluidNames(UnlocalizedName.FluidName.CHEESE_BASE).get(FluidUtils.STILL), CheeseBaseFluid.Source::new);
+    public static final RegistryObject<FlowingFluidBlock> CHEESE_BASE_FLUID_BLOCK =
+            GrowthcraftMilkBlocks.BLOCKS.register(FluidUtils.getFluidNames(UnlocalizedName.FluidName.CHEESE_BASE).get(FluidUtils.BLOCK),
+                    () -> new FlowingFluidBlock(CHEESE_BASE_FLUID_STILL, AbstractBlock.Properties.from(Blocks.WATER)));
+
     public static final RegistryObject<CondensedMilkFluid.Source> CONDENSED_MILK_FLUID_STILL = FLUIDS.register(
             FluidUtils.getFluidNames(UnlocalizedName.FluidName.CONDENSED_MILK).get(FluidUtils.STILL), CondensedMilkFluid.Source::new);
     public static final RegistryObject<FlowingFluidBlock> CONDENSED_MILK_FLUID_BLOCK =

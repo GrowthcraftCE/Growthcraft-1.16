@@ -411,11 +411,16 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
+
         if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && side == Direction.UP) {
+            GrowthcraftMilk.LOGGER.warn(cap + " requesting cap from " + side);
             return this.outputFluidTankHandler.getFluidTankHandler(0).cast();
         }
 
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && side != Direction.UP) {
+        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && side == Direction.NORTH) {
+            GrowthcraftMilk.LOGGER.warn(cap + " requesting cap from " + side);
+
+            GrowthcraftMilk.LOGGER.warn("Interacting with input tank.");
             return this.inputFluidTankHandler.getFluidTankHandler(0).cast();
         }
 
@@ -443,5 +448,9 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
 
     public boolean activateResult(ItemStack resultActivationTool) {
         return this.getResultActivationTool().getItem() == resultActivationTool.getItem();
+    }
+
+    public Boolean hasValidRecipe() {
+        return this.currentRecipe != null;
     }
 }
