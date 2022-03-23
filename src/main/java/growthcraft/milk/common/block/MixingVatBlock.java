@@ -86,6 +86,7 @@ public class MixingVatBlock extends HorizontalBlock {
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 
         if (!player.isSneaking() && player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
+            GrowthcraftMilk.LOGGER.warn("Item has fluid handler.");
             // Becuase of our two tank system and abnormal shape, we need to control which face of the block
             // is activated and not let the simple interactWithFluidHandler with ht.getFace() figure it out.
             if (player.getHeldItem(handIn).getItem() == Items.BUCKET) {
@@ -111,22 +112,30 @@ public class MixingVatBlock extends HorizontalBlock {
         }
 
         if (!worldIn.isRemote) {
+            GrowthcraftMilk.LOGGER.warn("Activating the block");
+
             MixingVatTileEntity tileEntity = (MixingVatTileEntity) worldIn.getTileEntity(pos);
 
             if (player.isSneaking() && GrowthcraftMilkConfig.isMixingVatGuiEnabled()) {
                 NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
             }
-
+            
             // Determine if we need to activate or draw the resulting item
             if (tileEntity.hasResultActivationTool()) {
-
+                GrowthcraftMilk.LOGGER.warn("hasResultActivationTool");
                 ItemStack resultActivationTool = tileEntity.getResultActivationTool();
                 if (tileEntity.activateResult(resultActivationTool)) {
-                    player.getHeldItem(handIn).shrink(1);
+                    if (GrowthcraftMilkConfig.isConsumeMixingVatActivator())
+                        player.getHeldItem(handIn).shrink(1);
+                    if (!player.inventory.addItemStackToInventory(tileEntity.getRecipeResultingItem())) {
+                        player.dropItem(tileEntity.getRecipeResultingItem(), false);
+                    }
                 }
             }
 
             if (tileEntity.hasActivationTool()) {
+                GrowthcraftMilk.LOGGER.warn("hasActivationTool");
+
                 ItemStack activationTool = tileEntity.getActivationTool();
                 // Then we need to try and activate the recipe and consume the activation item.
                 if (tileEntity.activateRecipe(player.getHeldItem(handIn))) {

@@ -113,6 +113,7 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
                     }
                 }
             } else if (!inputFluidTankHandler.getTank(0).isEmpty()
+                    && outputFluidTankHandler.getTank(0).isEmpty()
                     && !inventory.getStackInSlot(0).isEmpty()) {
                 // Then we need to process MixingVatRecipe.MixingVatRecipeCategory.ITEM
                 if (checkCurrentRecipe()) {
@@ -159,7 +160,9 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
 
             // Then we need to check of there is a valid recipe that needs to be activated.
             if (category == MixingVatRecipe.MixingVatRecipeCategory.ITEM) {
+                GrowthcraftMilk.LOGGER.warn("We should still be checking for an Item based recipe.");
                 recipe = this.getItemRecipe(inputFluidTankHandler.getTank(0).getFluid(), currentItems);
+                GrowthcraftMilk.LOGGER.warn("We have a item recipe!" + recipe.getId().toString());
             }
 
             if (category == MixingVatRecipe.MixingVatRecipeCategory.FLUID) {
@@ -173,7 +176,6 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
                     this.currentProcessingTime = 0;
                     this.maxProcessingTime = recipe.getProcessingTime();
                     this.activationTool = recipe.getActivationTool();
-                    this.resultActivationTool = recipe.getCategory() == MixingVatRecipe.MixingVatRecipeCategory.ITEM ? ((MixingVatItemRecipe) recipe).getResultActivationTool() : null;
                 } else {
                     return true;
                 }
@@ -211,16 +213,28 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
             this.outputFluidTankHandler.getTank(0).setFluid((fluidRecipe.getWasteFluidStack()));
 
         } else if (category == MixingVatRecipe.MixingVatRecipeCategory.ITEM) {
-            // TODO: Cast to a MixingVatItemRecipe
+            MixingVatItemRecipe itemRecipe = (MixingVatItemRecipe) this.currentRecipe;
 
-            // TODO: Drain recipe input fluids.
+            // Drain recipe input fluids.
+            this.inputFluidTankHandler.getTank(0).drain(
+                    itemRecipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE
+            );
+            // Process the ingredient items.
+            List<ItemStack> ingredients = itemRecipe.getIngredientList();
+            for (ItemStack itemStack : ingredients) {
+                for (int i = 0; i < this.getInventory().getSlots(); i++) {
+                    if (this.getInventory().getStackInSlot(i).getItem() == itemStack.getItem()) {
+                        this.getInventory().getStackInSlot(i).shrink(1);
+                    }
+                }
+            }
 
-            // TODO: Process the ingredient items.
+            // Insert the resulting item
+            this.getInventory().setStackInSlot(3, itemRecipe.getResultItemStack());
 
-            // TODO: Insert the resulting item
-
-            // TODO: Set the Result Activation Item.
-
+            // Set the Result Activation Item.
+            this.resultActivationTool = itemRecipe.getResultActivationTool();
+            this.activationTool = null;
         }
 
         this.resetAllProcessing();
@@ -447,7 +461,12 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
     }
 
     public boolean activateResult(ItemStack resultActivationTool) {
+
         return this.getResultActivationTool().getItem() == resultActivationTool.getItem();
+    }
+
+    public ItemStack getRecipeResultingItem() {
+        return this.currentRecipe.getCategory() == MixingVatRecipe.MixingVatRecipeCategory.ITEM ? ((MixingVatItemRecipe) this.currentRecipe).getResultItemStack() : null;
     }
 
     public Boolean hasValidRecipe() {
