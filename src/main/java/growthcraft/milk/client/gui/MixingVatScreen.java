@@ -157,6 +157,9 @@ public class MixingVatScreen extends ContainerScreen<MixingVatContainer> {
             StringTextComponent stringTextComponent = new StringTextComponent(tooltip);
             this.renderTooltip(matrixStack, stringTextComponent, mouseX, mouseY);
         }
+
+        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+
     }
 
     private int getScaledFluid(float amount, float capacity, int maxPixelSize) {
