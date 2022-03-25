@@ -1,7 +1,10 @@
 package growthcraft.milk.client.event;
 
 import growthcraft.lib.common.item.GrowthcraftBucketItem;
+import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkItems;
+import growthcraft.milk.lib.common.block.CheeseCurdBlock;
+import growthcraft.milk.lib.common.item.CheeseCurdsDrainedItem;
 import growthcraft.rice.shared.Reference;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -22,6 +25,22 @@ public class ColorRegistryEvent {
     @OnlyIn(Dist.CLIENT)
     public static void registerBlockColors(ColorHandlerEvent.Block event) {
         // Register Block Colorizers
+        List<CheeseCurdBlock> cheeseCurdBlocks = new ArrayList<>();
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.APPENZELLER_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.ASIAGO_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.CHEDDAR_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.EMMENTALER_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.GORGONZOLA_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.GOUDA_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.CASU_MARZU_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.EMMENTALER_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.MONTEREY_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.PARMESAN_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.PROVOLONE_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.RICOTTA_CHEESE_CURDS.get());
+
+        cheeseCurdBlocks.forEach(block -> event.getBlockColors().register((blockstate, reader, pos, i) -> block.getColor(i), block));
+
     }
 
     @SubscribeEvent
@@ -36,7 +55,40 @@ public class ColorRegistryEvent {
         buckets.add(GrowthcraftMilkItems.BUCKET_KUMIS.get());
         buckets.add(GrowthcraftMilkItems.BUCKET_CONDENSED_MILK.get());
         buckets.add(GrowthcraftMilkItems.BUCKET_RENNET.get());
+        buckets.add(GrowthcraftMilkItems.BUCKET_CHEESE_BASE.get());
 
         buckets.forEach(bucket -> event.getItemColors().register((itemStack, i) -> bucket.getColor(i), bucket));
+
+        List<CheeseCurdsDrainedItem> drainedCurds = new ArrayList<>();
+        drainedCurds.add(GrowthcraftMilkItems.APPENZELLER_CHEESE_CURDS_DRAINED.get());
+        drainedCurds.add(GrowthcraftMilkItems.ASIAGO_CHEESE_CURDS_DRAINED.get());
+        drainedCurds.add(GrowthcraftMilkItems.EMMENTALER_CHEESE_CURDS_DRAINED.get());
+        drainedCurds.add(GrowthcraftMilkItems.GORGONZOLA_CHEESE_CURDS_DRAINED.get());
+        drainedCurds.add(GrowthcraftMilkItems.PARMESAN_CHEESE_CURDS_DRAINED.get());
+        drainedCurds.add(GrowthcraftMilkItems.PROVOLONE_CHEESE_CURDS_DRAINED.get());
+        drainedCurds.add(GrowthcraftMilkItems.CASU_MARZU_CHEESE_CURDS_DRAINED.get());
+        drainedCurds.add(GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS_DRAINED.get());
+        drainedCurds.add(GrowthcraftMilkItems.CHEDDAR_CHEESE_CURDS_DRAINED.get());
+        drainedCurds.add(GrowthcraftMilkItems.MONTEREY_CHEESE_CURDS_DRAINED.get());
+        drainedCurds.add(GrowthcraftMilkItems.GOUDA_CHEESE_CURDS_DRAINED.get());
+
+        drainedCurds.forEach(drainedCurd -> event.getItemColors().register((itemStack, i) -> drainedCurd.getColor(i), drainedCurd));
+
+        List<CheeseCurdBlock> cheeseCurdBlocks = new ArrayList<>();
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.APPENZELLER_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.ASIAGO_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.CHEDDAR_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.EMMENTALER_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.GORGONZOLA_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.GOUDA_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.CASU_MARZU_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.EMMENTALER_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.MONTEREY_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.PARMESAN_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.PROVOLONE_CHEESE_CURDS.get());
+        cheeseCurdBlocks.add(GrowthcraftMilkBlocks.RICOTTA_CHEESE_CURDS.get());
+
+        cheeseCurdBlocks.forEach(block -> event.getItemColors().register((itemStack, i) -> block.getColor(i), block.asItem()));
+
     }
 }

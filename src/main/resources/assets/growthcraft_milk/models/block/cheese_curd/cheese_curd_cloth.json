@@ -412,7 +412,8 @@
             6,
             6
           ],
-          "texture": "#1"
+          "texture": "#1",
+          "tintindex": 0
         }
       }
     }

@@ -15,6 +15,7 @@ public class Reference {
     }
 
     public static class ItemColor {
+        // TODO: Determine Cheese Colors
         public static final ColorUtils.GrowthcraftColor APPENZELLER_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
         public static final ColorUtils.GrowthcraftColor ASIAGO_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
         public static final ColorUtils.GrowthcraftColor CASU_MAZU_CHEESE = new ColorUtils.GrowthcraftColor(0x0);

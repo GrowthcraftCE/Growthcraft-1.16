@@ -14,9 +14,12 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.server.ServerWorld;
 
+import java.awt.*;
 import java.util.Random;
 
 public class CheeseCurdBlock extends Block {
+
+    private final int color;
 
     public static final VoxelShape BASE_BOUNDING_BOX = Block.makeCuboidShape(
             4.0D, 2.0D, 4.0D,
@@ -25,8 +28,9 @@ public class CheeseCurdBlock extends Block {
 
     private static final IntegerProperty AGE = BlockStateProperties.AGE_0_7;
 
-    public CheeseCurdBlock() {
+    public CheeseCurdBlock(Color color) {
         super(getInitProperties());
+        this.color = color.getRGB();
     }
 
     private static Properties getInitProperties() {
@@ -85,5 +89,9 @@ public class CheeseCurdBlock extends Block {
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return BASE_BOUNDING_BOX;
+    }
+
+    public int getColor(int i) {
+        return i == 0 ? this.color : 0xFFFFFF;
     }
 }
