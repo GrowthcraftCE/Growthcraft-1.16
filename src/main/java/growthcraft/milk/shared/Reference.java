@@ -14,6 +14,20 @@ public class Reference {
         /* Prevent generation of public constructor. */
     }
 
+    public static class ItemColor {
+        public static final ColorUtils.GrowthcraftColor APPENZELLER_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
+        public static final ColorUtils.GrowthcraftColor ASIAGO_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
+        public static final ColorUtils.GrowthcraftColor CASU_MAZU_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
+        public static final ColorUtils.GrowthcraftColor CHEDDAR_CHEESE = new ColorUtils.GrowthcraftColor(0xF2BE6F);
+        public static final ColorUtils.GrowthcraftColor EMMENTALER_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
+        public static final ColorUtils.GrowthcraftColor GORGONZOLA_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
+        public static final ColorUtils.GrowthcraftColor GOUDA_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
+        public static final ColorUtils.GrowthcraftColor MONTEREY_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
+        public static final ColorUtils.GrowthcraftColor PARMESAN_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
+        public static final ColorUtils.GrowthcraftColor PROVOLONE_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
+        public static final ColorUtils.GrowthcraftColor RICOTTA_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
+    }
+
     public static class FluidColor {
         // Set Fluid Colors
         public static final ColorUtils.GrowthcraftColor BUTTER_MILK_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xFFFEF1B5);

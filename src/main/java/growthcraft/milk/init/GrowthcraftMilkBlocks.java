@@ -1,5 +1,6 @@
 package growthcraft.milk.init;
 
+import growthcraft.lib.util.CheeseUtils;
 import growthcraft.lib.util.FluidUtils;
 import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.common.block.ChurnBlock;
@@ -23,20 +24,47 @@ import java.util.ArrayList;
 public class GrowthcraftMilkBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Reference.MODID);
 
-    public static final RegistryObject<MixingVatBlock> MIXING_VAT = BLOCKS.register(
-            UnlocalizedName.MIXING_VAT, MixingVatBlock::new
+    public static final RegistryObject<CheeseCurdBlock> APPENZELLER_CHEESE_CURDS = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.APPENZELLER).get(CheeseUtils.CURDS), CheeseCurdBlock::new
+    );
+    public static final RegistryObject<CheeseCurdBlock> ASIAGO_CHEESE_CURDS = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.ASIAGO).get(CheeseUtils.CURDS), CheeseCurdBlock::new
+    );
+    public static final RegistryObject<CheeseCurdBlock> CASU_MARZU_CHEESE_CURDS = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.CASU_MARZU).get(CheeseUtils.CURDS), CheeseCurdBlock::new
+    );
+    public static final RegistryObject<CheeseCurdBlock> CHEDDAR_CHEESE_CURDS = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.CHEDDAR).get(CheeseUtils.CURDS), CheeseCurdBlock::new
     );
     public static final RegistryObject<ChurnBlock> CHURN = BLOCKS.register(
             UnlocalizedName.CHURN, ChurnBlock::new
     );
-    public static final RegistryObject<ThistleCropBlock> THISTLE_CROP = BLOCKS.register(
-            UnlocalizedName.THISTLE_CROP, ThistleCropBlock::new
+    public static final RegistryObject<CheeseCurdBlock> EMMENTALER_CHEESE_CURDS = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.EMMENTALER).get(CheeseUtils.CURDS), CheeseCurdBlock::new
+    );
+    public static final RegistryObject<CheeseCurdBlock> GORGONZOLA_CHEESE_CURDS = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.GORGONZOLA).get(CheeseUtils.CURDS), CheeseCurdBlock::new
+    );
+    public static final RegistryObject<CheeseCurdBlock> GOUDA_CHEESE_CURDS = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.GOUDA).get(CheeseUtils.CURDS), CheeseCurdBlock::new
+    );
+    public static final RegistryObject<MixingVatBlock> MIXING_VAT = BLOCKS.register(
+            UnlocalizedName.MIXING_VAT, MixingVatBlock::new
+    );
+    public static final RegistryObject<CheeseCurdBlock> MONTEREY_CHEESE_CURDS = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.MONTEREY).get(CheeseUtils.CURDS), CheeseCurdBlock::new
     );
     public static final RegistryObject<PancheonBlock> PANCHEON = BLOCKS.register(
             UnlocalizedName.PANCHEON, PancheonBlock::new
     );
-    public static final RegistryObject<CheeseCurdBlock> CHEESE_CURD_CHEDDAR = BLOCKS.register(
-            UnlocalizedName.CHEESE_CURDS_CHEDDAR, CheeseCurdBlock::new
+    public static final RegistryObject<CheeseCurdBlock> PARMESAN_CHEESE_CURDS = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.PARMESAN).get(CheeseUtils.CURDS), CheeseCurdBlock::new
+    );
+    public static final RegistryObject<CheeseCurdBlock> RICOTTA_CHEESE_CURDS = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.RICOTTA).get(CheeseUtils.CURDS), CheeseCurdBlock::new
+    );
+    public static final RegistryObject<ThistleCropBlock> THISTLE_CROP = BLOCKS.register(
+            UnlocalizedName.THISTLE_CROP, ThistleCropBlock::new
     );
 
     private GrowthcraftMilkBlocks() {
