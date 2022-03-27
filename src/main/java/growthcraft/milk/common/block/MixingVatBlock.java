@@ -9,7 +9,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -26,6 +25,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
@@ -85,70 +85,78 @@ public class MixingVatBlock extends HorizontalBlock {
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 
-        if (!player.isSneaking() && player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
-            GrowthcraftMilk.LOGGER.warn("Item has fluid handler.");
-            // Becuase of our two tank system and abnormal shape, we need to control which face of the block
-            // is activated and not let the simple interactWithFluidHandler with ht.getFace() figure it out.
-            if (player.getHeldItem(handIn).getItem() == Items.BUCKET) {
-                // Then we have an empty bucket and need to determine where to draw from.
-                MixingVatTileEntity tileEntity = (MixingVatTileEntity) worldIn.getTileEntity(pos);
-                if (tileEntity.getFluidTank(2).getFluidAmount() > 0) {
-                    FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, Direction.UP);
-                } else if (tileEntity.getFluidTank(0).getFluidAmount() > 0) {
-                    FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, Direction.NORTH);
-                }
-            } else {
-                // We need to determine where to put the fluid.
-                MixingVatTileEntity tileEntity = (MixingVatTileEntity) worldIn.getTileEntity(pos);
-                if (tileEntity.getFluidTank(0).getFluidAmount() < 4000) {
-                    GrowthcraftMilk.LOGGER.warn("Need to interact with the input tank.");
-                    FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, Direction.NORTH);
-                } else if (tileEntity.getFluidTank(2).getFluidAmount() < 1000) {
-                    FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, Direction.UP);
-                }
-            }
+        MixingVatTileEntity tileEntity = (MixingVatTileEntity) worldIn.getTileEntity(pos);
 
-            return ActionResultType.SUCCESS;
-        }
+        if (tileEntity != null) {
 
-        if (!worldIn.isRemote) {
-            GrowthcraftMilk.LOGGER.warn("Activating the block");
+            if (player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
+                GrowthcraftMilk.LOGGER.debug("MixingVatBlock is being activated at {} with {} [{}]",
+                        pos, "FLUID_HANDLER_ITEM_CAPABILITY", player.getHeldItem(handIn).getItem());
 
-            MixingVatTileEntity tileEntity = (MixingVatTileEntity) worldIn.getTileEntity(pos);
+                FluidTank inputTank = tileEntity.getInputFluidTank(0);
+                FluidTank outputTank = tileEntity.getOutputFluidTank(0);
 
-            if (player.isSneaking() && GrowthcraftMilkConfig.isMixingVatGuiEnabled()) {
-                NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
-            }
-            
-            // Determine if we need to activate or draw the resulting item
-            if (tileEntity.hasResultActivationTool()) {
-                GrowthcraftMilk.LOGGER.warn("hasResultActivationTool");
-                ItemStack resultActivationTool = tileEntity.getResultActivationTool();
-                if (tileEntity.activateResult(resultActivationTool)) {
-                    if (GrowthcraftMilkConfig.isConsumeMixingVatActivator())
-                        player.getHeldItem(handIn).shrink(1);
-                    if (!player.inventory.addItemStackToInventory(tileEntity.getRecipeResultingItem())) {
-                        player.dropItem(tileEntity.getRecipeResultingItem(), false);
+                /**
+                 * If the player is holding an empty Bucket then we need to draw from the tanks, otherwise
+                 * determine which tank to try and place the fluid into.
+                 */
+                if (player.getHeldItem(handIn).getItem() == Items.BUCKET) {
+                    if (outputTank.getFluidAmount() > 0) {
+                        FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, Direction.UP);
+                    } else if (inputTank.getFluidAmount() > 0) {
+                        FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, Direction.NORTH);
+                    } else {
+                        return ActionResultType.FAIL;
+                    }
+                } else {
+                    if (inputTank.getFluidAmount() < 4000) {
+                        FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, Direction.NORTH);
+                    } else if (outputTank.getFluidAmount() < 1000) {
+                        FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, Direction.UP);
+                    } else {
+                        return ActionResultType.FAIL;
                     }
                 }
+
+                return ActionResultType.SUCCESS;
+
             }
 
-            if (tileEntity.hasActivationTool()) {
-                GrowthcraftMilk.LOGGER.warn("hasActivationTool");
+            if (!worldIn.isRemote) {
+                GrowthcraftMilk.LOGGER.debug(
+                        "MixingVatBlock being activated at {} with {}.",
+                        pos, player.getHeldItem(handIn).getItem());
 
-                ItemStack activationTool = tileEntity.getActivationTool();
-                // Then we need to try and activate the recipe and consume the activation item.
-                if (tileEntity.activateRecipe(player.getHeldItem(handIn))) {
+                if (player.isSneaking() && GrowthcraftMilkConfig.isMixingVatGuiEnabled()) {
+                    NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
+                } else if (tileEntity.activateResult(player, player.getHeldItem(handIn))) {
+                    GrowthcraftMilk.LOGGER.debug(
+                            "MixingVatTileEntity at {} result activation tool = {}",
+                            pos, tileEntity.getResultActivationTool().getItem());
+                    player.getHeldItem(handIn).shrink(1);
+                    return ActionResultType.SUCCESS;
+                } else if (tileEntity.activateRecipe(player.getHeldItem(handIn))) {
+                    GrowthcraftMilk.LOGGER.debug(
+                            "MixingVatTileEntity at {} activation tool = {}",
+                            pos, tileEntity.getActivationTool().getItem());
+
                     if (GrowthcraftMilkConfig.isConsumeMixingVatActivator())
                         player.getHeldItem(handIn).shrink(1);
+                    return ActionResultType.SUCCESS;
                 }
             }
 
+        } else {
+            GrowthcraftMilk.LOGGER.error(
+                    "MixingVatTileEntity is NULL at {}",
+                    pos);
+            return ActionResultType.FAIL;
         }
 
         return ActionResultType.PASS;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         TileEntity tileEntity = world.getTileEntity(pos);
@@ -157,6 +165,7 @@ public class MixingVatBlock extends HorizontalBlock {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return VoxelShapes.combineAndSimplify(

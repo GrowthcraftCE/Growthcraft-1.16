@@ -1,6 +1,5 @@
 package growthcraft.milk.common.recipe;
 
-import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
@@ -44,19 +43,18 @@ public class MixingVatItemRecipe extends MixingVatRecipe {
         }
 
         if (this.getIngredientList().size() == testIngredients.size()) {
-            this.getIngredientItems().forEach(
-                    itemStack -> GrowthcraftMilk.LOGGER.warn(itemStack)
-            );
-
             for (int i = 0; i < testIngredients.size(); i++) {
                 if (!this.getIngredientItems().contains(testIngredients.get(i).getItem())) {
-                    GrowthcraftMilk.LOGGER.error("Recipe does not contain: " + testIngredients.get(i));
                     return false;
                 }
             }
         }
 
         return true;
+    }
+
+    public boolean matchResult(ItemStack itemStack) {
+        return this.resultItemStack.getItem() == itemStack.getItem() && this.resultItemStack.getCount() == itemStack.getCount();
     }
 
     public ItemStack getResultItemStack() {

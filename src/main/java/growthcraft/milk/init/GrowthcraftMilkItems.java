@@ -132,7 +132,7 @@ public class GrowthcraftMilkItems {
     );
     public static final RegistryObject<CheeseCurdsDrainedItem> CASU_MARZU_CHEESE_CURDS_DRAINED = ITEMS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.CASU_MARZU).get(CheeseUtils.DRAINED),
-            () -> new CheeseCurdsDrainedItem(Reference.ItemColor.CASU_MAZU_CHEESE.getColor())
+            () -> new CheeseCurdsDrainedItem(Reference.ItemColor.CASU_MARZU_CHEESE.getColor())
     );
     public static final RegistryObject<CheeseCurdsDrainedItem> CHEDDAR_CHEESE_CURDS_DRAINED = ITEMS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.CHEDDAR).get(CheeseUtils.DRAINED),

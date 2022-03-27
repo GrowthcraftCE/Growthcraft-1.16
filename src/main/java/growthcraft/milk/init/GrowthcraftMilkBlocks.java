@@ -34,7 +34,7 @@ public class GrowthcraftMilkBlocks {
     );
     public static final RegistryObject<CheeseCurdBlock> CASU_MARZU_CHEESE_CURDS = BLOCKS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.CASU_MARZU).get(CheeseUtils.CURDS),
-            () -> new CheeseCurdBlock(Reference.ItemColor.CASU_MAZU_CHEESE.getColor())
+            () -> new CheeseCurdBlock(Reference.ItemColor.CASU_MARZU_CHEESE.getColor())
     );
     public static final RegistryObject<CheeseCurdBlock> CHEDDAR_CHEESE_CURDS = BLOCKS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.CHEDDAR).get(CheeseUtils.CURDS),

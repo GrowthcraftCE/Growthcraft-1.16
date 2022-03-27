@@ -59,10 +59,10 @@ public class MixingVatScreen extends ContainerScreen<MixingVatContainer> {
         blit(matrixStack, this.guiLeft, this.guiTop, baseX, baseY, this.xSize, this.ySize, maxX, maxY);
 
         // Progress bar
-        int guiProgressX = this.guiLeft + 98;
-        int guiProgressY = this.guiTop + 30;
+        int guiProgressX = this.guiLeft + 99;
+        int guiProgressY = this.guiTop + 21;
 
-        this.blit(matrixStack, guiProgressX, guiProgressY, 176, 0, 9, this.container.getProgressionScaled(28));
+        this.blit(matrixStack, guiProgressX, guiProgressY, 177, 43, 13, this.container.getProgressionScaled(28));
 
         // Heated
         int guiHeatLevelX = this.guiLeft + 98;
@@ -99,6 +99,7 @@ public class MixingVatScreen extends ContainerScreen<MixingVatContainer> {
         }
 
         // OutputFluidTank Render
+        /* Ended up not needing the output tank.
         int guiOutputTankX = guiLeft + 124;
         int guiOutputTankY = guiTop + 40;
         int guiOutputTankHeight = 29;
@@ -110,7 +111,7 @@ public class MixingVatScreen extends ContainerScreen<MixingVatContainer> {
             ClientUtils.drawRepeatedFluidSpriteGui(renderTypeBuffer, matrixStack, fluidStack,
                     guiOutputTankX, guiOutputTankY + (guiOutputTankHeight - scaledFluidH), 16, scaledFluidH);
         }
-
+        */
         renderTypeBuffer.finish();
     }
 

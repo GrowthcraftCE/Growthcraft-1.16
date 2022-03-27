@@ -15,18 +15,18 @@ public class Reference {
     }
 
     public static class ItemColor {
-        // TODO: Determine Cheese Colors
-        public static final ColorUtils.GrowthcraftColor APPENZELLER_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
-        public static final ColorUtils.GrowthcraftColor ASIAGO_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
-        public static final ColorUtils.GrowthcraftColor CASU_MAZU_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
+        // Cheese Colors
+        public static final ColorUtils.GrowthcraftColor APPENZELLER_CHEESE = new ColorUtils.GrowthcraftColor(0xE9DA9A);
+        public static final ColorUtils.GrowthcraftColor ASIAGO_CHEESE = new ColorUtils.GrowthcraftColor(0xC1B9A0);
+        public static final ColorUtils.GrowthcraftColor CASU_MARZU_CHEESE = new ColorUtils.GrowthcraftColor(0x886C33);
         public static final ColorUtils.GrowthcraftColor CHEDDAR_CHEESE = new ColorUtils.GrowthcraftColor(0xF2BE6F);
-        public static final ColorUtils.GrowthcraftColor EMMENTALER_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
-        public static final ColorUtils.GrowthcraftColor GORGONZOLA_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
-        public static final ColorUtils.GrowthcraftColor GOUDA_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
-        public static final ColorUtils.GrowthcraftColor MONTEREY_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
-        public static final ColorUtils.GrowthcraftColor PARMESAN_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
-        public static final ColorUtils.GrowthcraftColor PROVOLONE_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
-        public static final ColorUtils.GrowthcraftColor RICOTTA_CHEESE = new ColorUtils.GrowthcraftColor(0x0);
+        public static final ColorUtils.GrowthcraftColor EMMENTALER_CHEESE = new ColorUtils.GrowthcraftColor(0xF9F3CC);
+        public static final ColorUtils.GrowthcraftColor GORGONZOLA_CHEESE = new ColorUtils.GrowthcraftColor(0xD0C3B9);
+        public static final ColorUtils.GrowthcraftColor GOUDA_CHEESE = new ColorUtils.GrowthcraftColor(0xB99F3B);
+        public static final ColorUtils.GrowthcraftColor MONTEREY_CHEESE = new ColorUtils.GrowthcraftColor(0xF4F2DB);
+        public static final ColorUtils.GrowthcraftColor PARMESAN_CHEESE = new ColorUtils.GrowthcraftColor(0xE3D7B9);
+        public static final ColorUtils.GrowthcraftColor PROVOLONE_CHEESE = new ColorUtils.GrowthcraftColor(0xC3BCA3);
+        public static final ColorUtils.GrowthcraftColor RICOTTA_CHEESE = new ColorUtils.GrowthcraftColor(0xEEEDEC);
     }
 
     public static class FluidColor {

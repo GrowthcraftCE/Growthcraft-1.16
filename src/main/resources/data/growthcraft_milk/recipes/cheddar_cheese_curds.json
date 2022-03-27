@@ -3,7 +3,7 @@
   "processing_time": 1200,
   "result_type": "item",
   "input_fluid": {
-    "fluid": "growthcraft_milk:cheese_base_fluid",
+    "fluid": "growthcraft_milk:cultured_milk_fluid",
     "amount": 4000
   },
   "ingredients": [
