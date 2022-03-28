@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "growthcraft_milk:block/thistle_crop_stage0"
+  }
+}

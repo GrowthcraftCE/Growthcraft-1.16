@@ -8,7 +8,7 @@ public class Reference {
 
     public static final String MODID = "growthcraft";
     public static final String NAME = "Growthcraft";
-    public static final String VERSION = "6.0.8";
+    public static final String VERSION = "6.0.9";
 
     public static final String CROWBAR_BLACK = "crowbar_black";
     public static final String CROWBAR_BLUE = "crowbar_blue";
@@ -27,12 +27,8 @@ public class Reference {
     public static final String CROWBAR_WHITE = "crowbar_white";
     public static final String CROWBAR_YELLOW = "crowbar_yellow";
 
-    // TODO[7]:
     public static final String SALT_ORE = "salt_ore";
-
-    // TODO[5]:
     public static final String SALT_BLOCK = "salt_block";
-    // TODO[4]:
     public static final String SALT_ITEM = "salt";
 
     public static final String ROPE = "rope";

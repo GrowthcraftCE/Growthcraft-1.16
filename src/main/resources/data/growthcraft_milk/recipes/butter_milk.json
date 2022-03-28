@@ -1,0 +1,17 @@
+{
+  "type": "growthcraft_milk:churn_recipe",
+  "plunges": 7,
+  "input_fluid": {
+    "fluid": "growthcraft_milk:cream_fluid",
+    "amount": 1000
+  },
+  "output_fluid": {
+    "fluid": "growthcraft_milk:butter_milk_fluid",
+    "amount": 1000
+  },
+  "by_product": {
+    "item": "growthcraft_milk:butter",
+    "count": 1
+  },
+  "by_product_chance": 100
+}

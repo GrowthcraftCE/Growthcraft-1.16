@@ -1,0 +1,18 @@
+{
+  "type": "growthcraft_milk:pancheon_recipe",
+  "processing_time": 1200,
+  "input_fluid": {
+    "fluid": "growthcraft_milk:milk_fluid",
+    "amount": 2000
+  },
+  "output_fluids": [
+    {
+      "fluid": "growthcraft_milk:skim_milk_fluid",
+      "amount": 1000
+    },
+    {
+      "fluid": "growthcraft_milk:cream_fluid",
+      "amount": 1000
+    }
+  ]
+}

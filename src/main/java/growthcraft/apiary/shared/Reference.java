@@ -11,7 +11,6 @@ public class Reference {
 
     public static final String VERSION = growthcraft.core.shared.Reference.VERSION;
 
-    // TODO: Add Wax fluid colors.
     public static class FluidColor {
         public static final ColorUtils.GrowthcraftColor HONEY_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xFFFFBF00);
         public static final ColorUtils.GrowthcraftColor HONEY_MEAD_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xFFD79334);

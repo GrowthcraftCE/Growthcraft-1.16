@@ -1,0 +1,22 @@
+{
+  "type": "growthcraft_cellar:brew_kettle_recipe",
+  "requires_heat": true,
+  "requires_lid": true,
+  "input_fluid": {
+    "fluid": "minecraft:water",
+    "amount": 250
+  },
+  "input_item": {
+    "item": "growthcraft_rice:rice",
+    "count": 1
+  },
+  "output_fluid": {
+    "fluid": "minecraft:empty",
+    "amount": 250
+  },
+  "by_product": {
+    "item": "growthcraft_rice:rice_cooked",
+    "count": 1
+  },
+  "by_product_chance": 100
+}

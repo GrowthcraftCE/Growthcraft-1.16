@@ -1,0 +1,40 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "growthcraft_milk:block/butter_churn/butter_churn"
+    }
+  },
+  "variants": {
+    "facing=north,plunged=false": {
+      "model": "growthcraft_milk:block/churn_up"
+    },
+    "facing=south,plunged=false": {
+      "model": "growthcraft_milk:block/churn_up",
+      "y": 180
+    },
+    "facing=east,plunged=false": {
+      "model": "growthcraft_milk:block/churn_up",
+      "y": 90
+    },
+    "facing=west,plunged=false": {
+      "model": "growthcraft_milk:block/churn_up",
+      "y": 270
+    },
+    "facing=north,plunged=true": {
+      "model": "growthcraft_milk:block/churn_down"
+    },
+    "facing=south,plunged=true": {
+      "model": "growthcraft_milk:block/churn_down",
+      "y": 180
+    },
+    "facing=east,plunged=true": {
+      "model": "growthcraft_milk:block/churn_down",
+      "y": 90
+    },
+    "facing=west,plunged=true": {
+      "model": "growthcraft_milk:block/churn_down",
+      "y": 270
+    }
+  }
+}

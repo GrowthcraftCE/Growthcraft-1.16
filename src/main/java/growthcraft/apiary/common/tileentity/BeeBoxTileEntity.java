@@ -216,6 +216,7 @@ public class BeeBoxTileEntity extends LockableLootTileEntity implements ITickabl
         return this.getName() != null ? this.getName() : this.getDefaultName();
     }
 
+    @Override
     public ITextComponent getName() {
         return this.customName != null ? this.customName : this.getDefaultName();
     }
