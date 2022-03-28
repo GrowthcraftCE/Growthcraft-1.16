@@ -1,0 +1,30 @@
+{
+  "type": "growthcraft_milk:mixing_vat_recipe",
+  "processing_time": 1200,
+  "result_type": "fluid",
+  "input_fluid": {
+    "fluid": "growthcraft_milk:milk_fluid",
+    "amount": 4000
+  },
+  "reagent_fluid": {
+    "fluid": "growthcraft_milk:rennet_fluid",
+    "amount": 1000
+  },
+  "ingredients": [
+    {
+      "item": "growthcraft_milk:starter_culture",
+      "count": 1
+    }
+  ],
+  "result_fluid": {
+    "fluid": "growthcraft_milk:cultured_milk_fluid",
+    "amount": 4000
+  },
+  "result_fluid_waste": {
+    "fluid": "growthcraft_milk:whey_fluid",
+    "amount": 1000
+  },
+  "activation_tool": {
+    "item": "minecraft:stick"
+  }
+}

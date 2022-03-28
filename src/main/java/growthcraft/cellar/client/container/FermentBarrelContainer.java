@@ -140,6 +140,7 @@ public class FermentBarrelContainer extends Container {
                 ? this.currentProcessingTime.get() * size / this.fermentBarrelTileEntity.getMaxProcessingTime()
                 : 0;
     }
+
     @OnlyIn(Dist.CLIENT)
     public FluidTank getTileEntityFluidTank(int slot) {
         return this.fermentBarrelTileEntity.getFluidTank(0);

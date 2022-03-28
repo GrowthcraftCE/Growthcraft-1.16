@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "growthcraft_rice:block/rice_crop_stage3"
+  }
+}

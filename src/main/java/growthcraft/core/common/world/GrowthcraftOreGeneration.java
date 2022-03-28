@@ -1,6 +1,7 @@
 package growthcraft.core.common.world;
 
 import growthcraft.core.init.GrowthcraftBlocks;
+import growthcraft.core.init.config.GrowthcraftConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
@@ -15,9 +16,13 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 public class GrowthcraftOreGeneration {
 
     public static void generateOres(final BiomeLoadingEvent event) {
-        if (!(event.getCategory().equals(Biome.Category.NETHER) || event.getCategory().equals(Biome.Category.THEEND))) {
+        if (GrowthcraftConfig.isSaltOreGenEnabled() && !(event.getCategory().equals(Biome.Category.NETHER) && !event.getCategory().equals(Biome.Category.THEEND))) {
             generateOre(event.getGeneration(), OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD,
-                    GrowthcraftBlocks.SALT_ORE.get().getDefaultState(), 5, 15, 64, 10);
+                    GrowthcraftBlocks.SALT_ORE.get().getDefaultState(),
+                    GrowthcraftConfig.getSaltOreGenVeinSize(),
+                    GrowthcraftConfig.getSaltOreGenHeightMin(),
+                    GrowthcraftConfig.getSaltOreGenHeightMax(),
+                    GrowthcraftConfig.getSaltOreGenSpreadAmount());
         }
     }
 

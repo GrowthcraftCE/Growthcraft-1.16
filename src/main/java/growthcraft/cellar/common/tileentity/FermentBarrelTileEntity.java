@@ -51,7 +51,6 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
         super(tileEntityTypeIn);
         this.inventory = new GrowthcraftItemHandler(1);
         this.fluidTankHandler = new FluidTankHandler(1, 4000);
-        this.maxProcessingTime = 1200;
         this.currentProcessingTime = 0;
     }
 
@@ -193,6 +192,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
         this.inventory.setNonNullList(inv);
 
         this.currentProcessingTime = compound.getInt("CurrentProcessingTime");
+        this.maxProcessingTime = compound.getInt("MaxProcessingTime");
 
         // Read the tank data from NBT
         this.getFluidTankHandler().getTank(0).readFromNBT(compound.getCompound("tank0"));
@@ -208,6 +208,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
 
         ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());
         compound.putInt("CurrentProcessingTime", this.currentProcessingTime);
+        compound.putInt("MaxProcessingTime", this.maxProcessingTime);
 
         // Save the tank to the NBTTag
         compound.put("tank0", this.getFluidTankHandler().getTank(0).writeToNBT(new CompoundNBT()));
@@ -296,7 +297,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     }
 
     public int getMaxProcessingTime() {
-        return this.maxProcessingTime;
+        return this.maxProcessingTime > 0 ? this.maxProcessingTime : 9600;
     }
 
     public FluidTankHandler getFluidTankHandler() {

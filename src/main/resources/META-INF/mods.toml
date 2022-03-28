@@ -96,6 +96,22 @@ ordering = "AFTER"
 side = "BOTH"
 
 [[mods]]
+modId = "growthcraft_milk"
+version = "6.0.9"
+displayName = "Growthcraft Milk"
+logoFile = "growthcraft_milk_logo.png"
+description = '''
+  Growthcraft Milk adds more usages for milk to Minecraft.
+'''
+
+[[dependencies.growthcraft_milk]]
+modId = "growthcraft"
+mandatory = true
+versionRange = "[6,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[mods]]
 modId = "growthcraft_rice"
 version = "6.0.9"
 displayName = "Growthcraft Rice"
@@ -110,3 +126,4 @@ mandatory = true
 versionRange = "[6,)"
 ordering = "AFTER"
 side = "BOTH"
+

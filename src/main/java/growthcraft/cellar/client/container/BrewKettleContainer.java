@@ -98,7 +98,8 @@ public class BrewKettleContainer extends Container {
         }
 
         this.trackInt(currentSmeltTime = new FunctionalIntReferenceHolder(
-                this.brewKettleTileEntity::getCurrentSmeltTime, this.brewKettleTileEntity::setCurrentSmeltTime
+                this.brewKettleTileEntity::getCurrentSmeltTime,
+                this.brewKettleTileEntity::setCurrentSmeltTime
         ));
     }
 

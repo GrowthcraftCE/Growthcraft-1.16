@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "growthcraft_milk:item/cheese/cheese_curds_drained_layer0",
+    "layer1": "growthcraft_milk:item/cheese/cheese_curds_drained_layer1"
+  }
+}

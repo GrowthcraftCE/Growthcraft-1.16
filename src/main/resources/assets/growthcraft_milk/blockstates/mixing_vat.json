@@ -1,0 +1,25 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "growthcraft_milk:block/mixing_vat"
+    }
+  },
+  "variants": {
+    "facing=north": {
+      "model": "growthcraft_milk:block/mixing_vat"
+    },
+    "facing=south": {
+      "model": "growthcraft_milk:block/mixing_vat",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "growthcraft_milk:block/mixing_vat",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "growthcraft_milk:block/mixing_vat",
+      "y": 270
+    }
+  }
+}
