@@ -1,0 +1,28 @@
+{
+  "type": "growthcraft_milk:mixing_vat_recipe",
+  "processing_time": 1200,
+  "result_type": "item",
+  "input_fluid": {
+    "fluid": "growthcraft_milk:cultured_milk_fluid",
+    "amount": 4000
+  },
+  "ingredients": [
+    {
+      "item": "growthcraft:salt",
+      "count": 1
+    },
+    {
+      "item": "growthcraft_cellar:grape_purple",
+      "count": 1
+    }
+  ],
+  "result_item": {
+    "item": "growthcraft_milk:gorgonzola_cheese_curds"
+  },
+  "activation_tool": {
+    "item": "minecraft:wooden_sword"
+  },
+  "result_activation_tool": {
+    "item": "growthcraft_milk:cheese_cloth"
+  }
+}

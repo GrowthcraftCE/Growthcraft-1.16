@@ -174,7 +174,7 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
             }
         } else {
             MixingVatItemRecipe itemRecipe = this.getRecipeByResult(this.inventory.getStackInSlot(3));
-            if (itemRecipe != null) this.activationTool = itemRecipe.getResultActivationTool();
+            if (itemRecipe != null) this.resultActivationTool = itemRecipe.getResultActivationTool();
         }
 
         this.markDirty();
@@ -455,9 +455,6 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
                 player.dropItem(itemStack, false);
             }
             return true;
-        } else {
-            GrowthcraftMilk.LOGGER.debug("MixingVatTileEntity activating result with {} != {}.",
-                    resultActivationTool.getItem(), this.getResultActivationTool().getItem());
         }
         return false;
     }
