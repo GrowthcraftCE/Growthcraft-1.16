@@ -1,0 +1,48 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_base"
+      }
+    },
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_north",
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_east",
+        "y": 90,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_south",
+        "y": 180,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_west",
+        "y": 270,
+        "uvlock": true
+      }
+    }
+  ]
+}
