@@ -3,10 +3,7 @@ package growthcraft.milk.init;
 import growthcraft.lib.util.CheeseUtils;
 import growthcraft.lib.util.FluidUtils;
 import growthcraft.milk.GrowthcraftMilk;
-import growthcraft.milk.common.block.ChurnBlock;
-import growthcraft.milk.common.block.MixingVatBlock;
-import growthcraft.milk.common.block.PancheonBlock;
-import growthcraft.milk.common.block.ThistleCropBlock;
+import growthcraft.milk.common.block.*;
 import growthcraft.milk.lib.common.block.CheeseCurdBlock;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.UnlocalizedName;
@@ -24,6 +21,10 @@ import java.util.ArrayList;
 public class GrowthcraftMilkBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Reference.MODID);
 
+    public static final RegistryObject<CheesePressBlock> CHEESE_PRESS = BLOCKS.register(
+            UnlocalizedName.CHEESE_PRESS,
+            CheesePressBlock::new
+    );
     public static final RegistryObject<CheeseCurdBlock> APPENZELLER_CHEESE_CURDS = BLOCKS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.APPENZELLER).get(CheeseUtils.CURDS),
             () -> new CheeseCurdBlock(Reference.ItemColor.APPENZELLER_CHEESE.getColor())

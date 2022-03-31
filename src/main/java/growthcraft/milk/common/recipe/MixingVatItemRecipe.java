@@ -65,4 +65,9 @@ public class MixingVatItemRecipe extends MixingVatRecipe {
         return this.resultActivationTool;
     }
 
+    @Override
+    public ItemStack getRecipeOutput() {
+        return this.getResultItemStack();
+    }
+
 }

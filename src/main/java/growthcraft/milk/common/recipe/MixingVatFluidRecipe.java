@@ -64,4 +64,10 @@ public class MixingVatFluidRecipe extends MixingVatRecipe {
     public FluidStack getWasteFluidStack() {
         return this.wasteFluidStack;
     }
+
+    @Override
+    public ItemStack getRecipeOutput() {
+        return this.getOutputFluidStack().getFluid().getFilledBucket().getDefaultInstance();
+    }
+
 }

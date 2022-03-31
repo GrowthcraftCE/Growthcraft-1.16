@@ -1,8 +1,8 @@
 package growthcraft.milk.compat.jei.category;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.lib.util.TextureHelper;
+import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.common.recipe.ChurnRecipe;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.shared.Reference;
@@ -119,7 +119,7 @@ public class ChurnRecipeCategory implements IRecipeCategory<ChurnRecipe> {
         try {
             overlayTransferArrow.draw(matrixStack, 57, 29);
         } catch (Exception ex) {
-            GrowthcraftCellar.LOGGER.error("Failure to draw heat texture for Culture Jar recipe.");
+            GrowthcraftMilk.LOGGER.error("Failure to draw heat texture for Churn recipe.");
         }
     }
 
