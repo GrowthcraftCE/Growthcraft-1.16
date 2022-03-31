@@ -89,10 +89,7 @@ public class MixingVatBlock extends HorizontalBlock {
 
         if (tileEntity != null) {
 
-            if (player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
-                GrowthcraftMilk.LOGGER.debug("MixingVatBlock is being activated at {} with {} [{}]",
-                        pos, "FLUID_HANDLER_ITEM_CAPABILITY", player.getHeldItem(handIn).getItem());
-
+            if (handIn.name().equals("MAIN_HAND") && player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
                 FluidTank inputTank = tileEntity.getInputFluidTank(0);
                 FluidTank outputTank = tileEntity.getOutputFluidTank(0);
 
@@ -122,7 +119,7 @@ public class MixingVatBlock extends HorizontalBlock {
 
             }
 
-            if (!worldIn.isRemote) {
+            if (handIn.name().equals("MAIN_HAND") && !worldIn.isRemote) {
                 GrowthcraftMilk.LOGGER.debug(
                         "MixingVatBlock being activated at {} with {}.",
                         pos, player.getHeldItem(handIn).getItem());
