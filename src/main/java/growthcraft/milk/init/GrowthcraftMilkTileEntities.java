@@ -1,5 +1,6 @@
 package growthcraft.milk.init;
 
+import growthcraft.milk.common.tileentity.CheesePressTileEntity;
 import growthcraft.milk.common.tileentity.ChurnTileEntity;
 import growthcraft.milk.common.tileentity.MixingVatTileEntity;
 import growthcraft.milk.common.tileentity.PancheonTileEntity;
@@ -12,6 +13,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class GrowthcraftMilkTileEntities {
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, Reference.MODID);
+
+    public static final RegistryObject<TileEntityType<CheesePressTileEntity>> CHEESE_PRESS_TILE_ENTITY = TILE_ENTITIES.register(
+            UnlocalizedName.CHEESE_PRESS,
+            () -> TileEntityType.Builder.create(
+                    CheesePressTileEntity::new, GrowthcraftMilkBlocks.CHEESE_PRESS.get()
+            ).build(null)
+    );
 
     public static final RegistryObject<TileEntityType<ChurnTileEntity>> CHURN_TILE_ENTITY = TILE_ENTITIES.register(
             UnlocalizedName.CHURN,

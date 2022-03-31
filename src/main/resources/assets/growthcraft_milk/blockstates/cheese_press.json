@@ -7,40 +7,80 @@
     },
     {
       "when": {
-        "facing": "north"
+        "rotation": "0"
       },
       "apply": {
-        "model": "growthcraft_milk:block/cheese_press_topper_north",
+        "model": "growthcraft_milk:block/cheese_press_topper_0",
         "uvlock": true
       }
     },
     {
       "when": {
-        "facing": "east"
+        "rotation": "1"
       },
       "apply": {
-        "model": "growthcraft_milk:block/cheese_press_topper_east",
+        "model": "growthcraft_milk:block/cheese_press_topper_1",
         "y": 90,
         "uvlock": true
       }
     },
     {
       "when": {
-        "facing": "south"
+        "rotation": "2"
       },
       "apply": {
-        "model": "growthcraft_milk:block/cheese_press_topper_south",
+        "model": "growthcraft_milk:block/cheese_press_topper_2",
+        "y": 90,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "rotation": "3"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_3",
         "y": 180,
         "uvlock": true
       }
     },
     {
       "when": {
-        "facing": "west"
+        "rotation": "4"
       },
       "apply": {
-        "model": "growthcraft_milk:block/cheese_press_topper_west",
+        "model": "growthcraft_milk:block/cheese_press_topper_4",
+        "y": 180,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "rotation": "5"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_5",
         "y": 270,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "rotation": "6"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_6",
+        "y": 270,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "rotation": "7"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_7",
+        "y": 360,
         "uvlock": true
       }
     }

@@ -4,6 +4,7 @@ import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
@@ -47,7 +48,7 @@ public class MixingVatRecipe implements IRecipe<IInventory> {
 
     @Override
     public ItemStack getRecipeOutput() {
-        return null;
+        return new ItemStack(Items.AIR);
     }
 
     @Override
