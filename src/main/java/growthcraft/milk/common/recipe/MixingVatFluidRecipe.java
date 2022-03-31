@@ -69,5 +69,4 @@ public class MixingVatFluidRecipe extends MixingVatRecipe {
     public ItemStack getRecipeOutput() {
         return this.getOutputFluidStack().getFluid().getFilledBucket().getDefaultInstance();
     }
-
 }
