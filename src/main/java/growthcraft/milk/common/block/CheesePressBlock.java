@@ -81,7 +81,7 @@ public class CheesePressBlock extends Block {
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
         if (!worldIn.isRemote) {
             CheesePressTileEntity tileEntity = (CheesePressTileEntity) worldIn.getTileEntity(pos);
-            if (player.getHeldItem(hand).isEmpty()) {
+            if (hand.name().equals("MAIN_HAND") && player.getHeldItem(hand).isEmpty()) {
                 if (!player.isSneaking()) {
                     // Tighten the vice
                     worldIn.setBlockState(pos, state.with(ROTATION, tileEntity.doRotation(true)), 2);
