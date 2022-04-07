@@ -3,7 +3,8 @@
 	"textures": {
 		"2": "growthcraft_milk:block/cheese_press/vice_top",
 		"3": "growthcraft_milk:block/cheese_press/iron_frame",
-		"default": "growthcraft_milk:block/cheese_press/base"
+		"default": "growthcraft_milk:block/cheese_press/base",
+		"missing": "growthcraft:block/missing"
 	},
 	"elements": [
 		{

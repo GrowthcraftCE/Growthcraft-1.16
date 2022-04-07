@@ -1,9 +1,6 @@
 package growthcraft.milk.init;
 
-import growthcraft.milk.common.tileentity.CheesePressTileEntity;
-import growthcraft.milk.common.tileentity.ChurnTileEntity;
-import growthcraft.milk.common.tileentity.MixingVatTileEntity;
-import growthcraft.milk.common.tileentity.PancheonTileEntity;
+import growthcraft.milk.common.tileentity.*;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.UnlocalizedName;
 import net.minecraft.tileentity.TileEntityType;
@@ -18,6 +15,14 @@ public class GrowthcraftMilkTileEntities {
             UnlocalizedName.CHEESE_PRESS,
             () -> TileEntityType.Builder.create(
                     CheesePressTileEntity::new, GrowthcraftMilkBlocks.CHEESE_PRESS.get()
+            ).build(null)
+    );
+
+    // TODO: Add more cheese wheel blocks.
+    public static final RegistryObject<TileEntityType<CheeseWheelTileEntity>> CHEESE_WHEEL_TILE_ENTITY = TILE_ENTITIES.register(
+            UnlocalizedName.CHEESE_WHEEL_TILE_ENTITY,
+            () -> TileEntityType.Builder.create(
+                    CheeseWheelTileEntity::new, GrowthcraftMilkBlocks.APPENZELLER_CHEESE_AGED.get()
             ).build(null)
     );
 

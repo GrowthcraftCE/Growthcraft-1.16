@@ -85,6 +85,7 @@ public class CheesePressTileEntity extends LockableLootTileEntity implements ITi
             // Fast track to 0
             this.rotation = 0;
         }
+        this.open = this.rotation == 0;
 
         return this.getRotation();
     }
