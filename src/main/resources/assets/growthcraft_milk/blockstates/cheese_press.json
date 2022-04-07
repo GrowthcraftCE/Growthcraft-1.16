@@ -20,7 +20,6 @@
       },
       "apply": {
         "model": "growthcraft_milk:block/cheese_press_topper_1",
-        "y": 90,
         "uvlock": true
       }
     },
@@ -30,7 +29,6 @@
       },
       "apply": {
         "model": "growthcraft_milk:block/cheese_press_topper_2",
-        "y": 90,
         "uvlock": true
       }
     },
@@ -40,7 +38,6 @@
       },
       "apply": {
         "model": "growthcraft_milk:block/cheese_press_topper_3",
-        "y": 180,
         "uvlock": true
       }
     },
@@ -50,7 +47,6 @@
       },
       "apply": {
         "model": "growthcraft_milk:block/cheese_press_topper_4",
-        "y": 180,
         "uvlock": true
       }
     },
@@ -60,7 +56,6 @@
       },
       "apply": {
         "model": "growthcraft_milk:block/cheese_press_topper_5",
-        "y": 270,
         "uvlock": true
       }
     },
@@ -70,7 +65,6 @@
       },
       "apply": {
         "model": "growthcraft_milk:block/cheese_press_topper_6",
-        "y": 270,
         "uvlock": true
       }
     },
@@ -80,7 +74,6 @@
       },
       "apply": {
         "model": "growthcraft_milk:block/cheese_press_topper_7",
-        "y": 360,
         "uvlock": true
       }
     }

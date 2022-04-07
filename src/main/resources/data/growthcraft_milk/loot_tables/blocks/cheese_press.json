@@ -1,0 +1,43 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "function": "minecraft:copy_nbt",
+                  "source": "block_entity",
+                  "ops": [
+                    {
+                      "source": "rotation",
+                      "target": "BlockEntityTag.rotation",
+                      "op": "replace"
+                    }
+                  ]
+                },
+                {
+                  "function": "minecraft:copy_state",
+                  "block": "growthcraft_milk:cheese_press",
+                  "properties": [
+                    "rotation"
+                  ]
+                }
+              ],
+              "name": "growthcraft_milk:cheese_press"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "growthcraft_milk:cheese_press"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

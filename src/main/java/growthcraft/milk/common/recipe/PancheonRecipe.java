@@ -57,7 +57,6 @@ public class PancheonRecipe implements IRecipe<IInventory> {
     @Override
     public ItemStack getRecipeOutput() {
         return this.getOutputFluidStack(0).getFluid().getFilledBucket().getDefaultInstance();
-
     }
 
     @Override
