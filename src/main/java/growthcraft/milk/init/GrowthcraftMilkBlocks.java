@@ -5,6 +5,7 @@ import growthcraft.lib.util.FluidUtils;
 import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.common.block.*;
 import growthcraft.milk.lib.common.block.CheeseCurdBlock;
+import growthcraft.milk.lib.common.block.CheeseWheelBlock;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.UnlocalizedName;
 import net.minecraft.block.Block;
@@ -24,6 +25,10 @@ public class GrowthcraftMilkBlocks {
     public static final RegistryObject<CheesePressBlock> CHEESE_PRESS = BLOCKS.register(
             UnlocalizedName.CHEESE_PRESS,
             CheesePressBlock::new
+    );
+    public static final RegistryObject<CheeseWheelBlock> APPENZELLER_CHEESE_AGED = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.APPENZELLER).get(CheeseUtils.AGED),
+            () -> new CheeseWheelBlock(Reference.ItemColor.APPENZELLER_CHEESE.getColor())
     );
     public static final RegistryObject<CheeseCurdBlock> APPENZELLER_CHEESE_CURDS = BLOCKS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.APPENZELLER).get(CheeseUtils.CURDS),
