@@ -1,19 +1,15 @@
 package growthcraft.apiary;
 
-import growthcraft.apiary.client.proxy.ClientProxy;
-import growthcraft.apiary.common.proxy.CommonProxy;
 import growthcraft.apiary.init.*;
 import growthcraft.apiary.init.client.GrowthcraftApiaryBlockRenders;
 import growthcraft.apiary.init.client.GrowthcraftApiaryScreenManager;
 import growthcraft.apiary.init.config.GrowthcraftApiaryConfig;
 import growthcraft.apiary.shared.Reference;
-import growthcraft.lib.proxy.IProxy;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -27,7 +23,7 @@ import org.apache.logging.log4j.Logger;
 public class GrowthcraftApiary {
 
     public static final Logger LOGGER = LogManager.getLogger();
-    public static final IProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+    //public static final IProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
     public GrowthcraftApiary() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -54,7 +50,7 @@ public class GrowthcraftApiary {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        proxy.init();
+        //PROXY.init();
         GrowthcraftApiaryConfig.loadConfig();
     }
 

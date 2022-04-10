@@ -1,5 +1,6 @@
 package growthcraft.cellar.common.tileentity;
 
+import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.client.container.FermentBarrelContainer;
 import growthcraft.cellar.common.recipe.FermentBarrelRecipe;
 import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
@@ -8,14 +9,12 @@ import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import growthcraft.lib.common.tank.handler.FluidTankHandler;
-import growthcraft.lib.util.RecipeUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -34,9 +33,10 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nullable;
-import java.util.Set;
+import java.util.List;
 
 public class FermentBarrelTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
@@ -71,7 +71,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     @Override
     public void tick() {
         boolean dirty = false;
-        if (world != null && !world.isRemote) {
+        if (this.world != null && !this.world.isRemote) {
             if (!this.inventory.getStackInSlot(0).isEmpty() && !this.getFluidTank(0).isEmpty()
                     && this.getFluidTank(0).getFluidAmount() <= this.getFluidTank(0).getCapacity()) {
 
@@ -80,8 +80,12 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
                         this.getFluidTank(0).getFluid()
                 );
 
+                GrowthcraftCellar.LOGGER.log(Level.WARN, "FermentBarrel contents match {}.", recipe.getId());
+
                 if (recipe != null) {
                     this.maxProcessingTime = recipe.getProcessingTime();
+
+                    GrowthcraftCellar.LOGGER.log(Level.WARN, "{} processing at {} / {}", recipe.getId(), this.currentProcessingTime, this.maxProcessingTime);
 
                     if (recipe != this.currentRecipe) {
                         this.currentRecipe = recipe;
@@ -140,7 +144,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
             // Check that there are enough input items
             if (this.inventory.getStackInSlot(0).getCount() >= itemStackShrinkCount) {
                 // Then we have enough items for the amount of fluid we have.
-
+                // TODO: Figure out why the tank is not draining and filling correctly.
                 // Process recipe inputs
                 this.getFluidTank(0).drain(currentRecipe.getIngredientFluidStack().getAmount() * fluidMultiplier.intValue(),
                         IFluidHandler.FluidAction.EXECUTE);
@@ -254,37 +258,31 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     // Recipe Handling
     @Nullable
     public FermentBarrelRecipe getRecipe(ItemStack inputItemStack, FluidStack inputFluidStack) {
-        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(this.world, GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
+        List<FermentBarrelRecipe> recipes = this.getRecipesByType();
 
         // Check for Ferment recipes
-        for (IRecipe<?> recipe : recipes) {
-            FermentBarrelRecipe fermentBarrelRecipe = (FermentBarrelRecipe) recipe;
-            if (fermentBarrelRecipe.matches(inputItemStack, inputFluidStack)) {
-                return fermentBarrelRecipe;
+        for (FermentBarrelRecipe recipe : recipes) {
+            if (recipe.matches(inputItemStack, inputFluidStack)) {
+                return recipe;
             }
         }
 
-        // Reprocess for fluid only recipe.
-        for (IRecipe<?> recipe : recipes) {
-            FermentBarrelRecipe fermentBarrelRecipe = (FermentBarrelRecipe) recipe;
-            if (fermentBarrelRecipe.matches(inputFluidStack)) {
-                return fermentBarrelRecipe;
-            }
-        }
-
-        return null;
+        return this.getRecipe(inputFluidStack);
     }
 
     @Nullable
     public FermentBarrelRecipe getRecipe(FluidStack inputFluidStack) {
-        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(this.world, GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
-        for (IRecipe<?> recipe : recipes) {
-            FermentBarrelRecipe fermentBarrelRecipe = (FermentBarrelRecipe) recipe;
-            if (fermentBarrelRecipe.matches(inputFluidStack)) {
-                return fermentBarrelRecipe;
+        List<FermentBarrelRecipe> recipes = this.getRecipesByType();
+        for (FermentBarrelRecipe recipe : recipes) {
+            if (recipe.matches(inputFluidStack)) {
+                return recipe;
             }
         }
         return null;
+    }
+
+    private List<FermentBarrelRecipe> getRecipesByType() {
+        return this.world.getRecipeManager().getRecipesForType(GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
     }
 
     // Getters and Setters

@@ -178,7 +178,7 @@ public class ChurnTileEntity extends LockableLootTileEntity implements ITickable
     @Nullable
     @ParametersAreNonnullByDefault
     private ChurnRecipe getRecipe(FluidStack fluidStack) {
-        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(this.world, GrowthcraftMilkRecipes.CHURN_RECIPE_TYPE);
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(GrowthcraftMilkRecipes.CHURN_RECIPE_TYPE);
         for (IRecipe<?> recipe : recipes) {
             ChurnRecipe churnRecipe = (ChurnRecipe) recipe;
             if (churnRecipe.matches(fluidStack)) return churnRecipe;

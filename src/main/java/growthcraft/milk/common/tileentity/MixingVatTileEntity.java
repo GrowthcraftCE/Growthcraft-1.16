@@ -240,7 +240,7 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
     @Nullable
     @ParametersAreNonnullByDefault
     private MixingVatItemRecipe getItemRecipe(FluidStack fluidStack, List<ItemStack> ingredients) {
-        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(this.world, GrowthcraftMilkRecipes.MIXING_VAT_ITEM_RECIPE_TYPE);
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(GrowthcraftMilkRecipes.MIXING_VAT_ITEM_RECIPE_TYPE);
         for (IRecipe<?> recipe : recipes) {
             MixingVatItemRecipe mixingVatRecipe = (MixingVatItemRecipe) recipe;
             if (mixingVatRecipe.matches(fluidStack, ingredients)) return mixingVatRecipe;
@@ -249,7 +249,7 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
     }
 
     private MixingVatItemRecipe getRecipeByResult(ItemStack itemStack) {
-        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(this.world, GrowthcraftMilkRecipes.MIXING_VAT_ITEM_RECIPE_TYPE);
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(GrowthcraftMilkRecipes.MIXING_VAT_ITEM_RECIPE_TYPE);
         for (IRecipe<?> recipe : recipes) {
             MixingVatItemRecipe mixingVatRecipe = (MixingVatItemRecipe) recipe;
             if (mixingVatRecipe.matchResult(itemStack)) return mixingVatRecipe;
@@ -260,7 +260,7 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
     @Nullable
     @ParametersAreNonnullByDefault
     private MixingVatFluidRecipe getFluidRecipe(FluidStack baseFluidStack, FluidStack reagentFluidStack, List<ItemStack> ingredients) {
-        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(this.world, GrowthcraftMilkRecipes.MIXING_VAT_FLUID_RECIPE_TYPE);
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(GrowthcraftMilkRecipes.MIXING_VAT_FLUID_RECIPE_TYPE);
         for (IRecipe<?> recipe : recipes) {
             MixingVatFluidRecipe mixingVatRecipe = (MixingVatFluidRecipe) recipe;
             if (mixingVatRecipe.matches(baseFluidStack, reagentFluidStack, ingredients)) return mixingVatRecipe;

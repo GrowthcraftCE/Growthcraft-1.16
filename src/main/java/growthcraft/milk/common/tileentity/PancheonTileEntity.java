@@ -109,7 +109,7 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
     @Nullable
     @ParametersAreNonnullByDefault
     private PancheonRecipe getRecipe(FluidStack fluidStack) {
-        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(this.world, GrowthcraftMilkRecipes.PANCHEON_RECIPE_TYPE);
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(GrowthcraftMilkRecipes.PANCHEON_RECIPE_TYPE);
         for (IRecipe<?> recipe : recipes) {
             PancheonRecipe pancheonRecipe = (PancheonRecipe) recipe;
             if (pancheonRecipe.matches(fluidStack)) return pancheonRecipe;

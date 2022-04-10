@@ -1,19 +1,15 @@
 package growthcraft.apples;
 
-import growthcraft.apples.client.proxy.ClientProxy;
-import growthcraft.apples.common.proxy.CommonProxy;
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
 import growthcraft.apples.init.GrowthcraftApplesItems;
 import growthcraft.apples.init.client.GrowthcraftApplesBlockRenders;
 import growthcraft.apples.shared.Reference;
-import growthcraft.lib.proxy.IProxy;
 import net.minecraft.item.Item;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -27,7 +23,7 @@ import org.apache.logging.log4j.Logger;
 public class GrowthcraftApples {
 
     public static final Logger LOGGER = LogManager.getLogger();
-    public static final IProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+    //public static final IProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
     public GrowthcraftApples() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -57,7 +53,7 @@ public class GrowthcraftApples {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        proxy.init();
+        //proxy.init();
         //GrowthcraftApplesConfig.loadConfig();
     }
 

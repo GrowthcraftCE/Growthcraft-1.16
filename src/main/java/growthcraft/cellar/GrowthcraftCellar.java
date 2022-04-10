@@ -1,21 +1,17 @@
 package growthcraft.cellar;
 
 import growthcraft.cellar.client.event.ColorRegistryEvent;
-import growthcraft.cellar.client.proxy.ClientProxy;
-import growthcraft.cellar.common.proxy.CommonProxy;
 import growthcraft.cellar.init.*;
 import growthcraft.cellar.init.client.GrowthcraftCellarBlockRenders;
 import growthcraft.cellar.init.client.GrowthcraftCellarScreenManager;
 import growthcraft.cellar.init.client.GrowthcraftCellarTileEntityRenders;
 import growthcraft.cellar.init.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.Reference;
-import growthcraft.lib.proxy.IProxy;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -29,7 +25,7 @@ import org.apache.logging.log4j.Logger;
 public class GrowthcraftCellar {
 
     public static final Logger LOGGER = LogManager.getLogger();
-    public static final IProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+    //public static final IProxy PROXY = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
     public GrowthcraftCellar() {
 
@@ -62,7 +58,7 @@ public class GrowthcraftCellar {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        proxy.init();
+        //PROXY.init();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

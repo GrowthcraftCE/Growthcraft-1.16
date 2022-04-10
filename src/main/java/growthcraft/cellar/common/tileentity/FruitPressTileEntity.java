@@ -185,8 +185,7 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
 
     @Nullable
     public FruitPressRecipe getRecipe(ItemStack inputStack) {
-        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(
-                this.world, GrowthcraftCellarRecipes.FRUIT_PRESS_RECIPE_TYPE);
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(GrowthcraftCellarRecipes.FRUIT_PRESS_RECIPE_TYPE);
 
         for (IRecipe<?> recipe : recipes) {
             FruitPressRecipe fruitPressRecipe = (FruitPressRecipe) recipe;

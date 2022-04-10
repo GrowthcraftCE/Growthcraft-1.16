@@ -9,7 +9,6 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IModIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
 @JeiPlugin
@@ -22,7 +21,7 @@ public class GrowthcraftMilkJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registry) {
-        registry.addRecipes(RecipeUtils.findRecipesByType(Minecraft.getInstance().world,
+        registry.addRecipes(RecipeUtils.findRecipesByType(
                 GrowthcraftMilkRecipes.CHURN_RECIPE_TYPE), ChurnRecipeCategory.ID);
     }
 
