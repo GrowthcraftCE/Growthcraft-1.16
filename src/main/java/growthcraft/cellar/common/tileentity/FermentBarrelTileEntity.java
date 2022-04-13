@@ -80,12 +80,12 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
                         this.getFluidTank(0).getFluid()
                 );
 
-                GrowthcraftCellar.LOGGER.log(Level.WARN, "FermentBarrel contents match {}.", recipe.getId());
-
                 if (recipe != null) {
                     this.maxProcessingTime = recipe.getProcessingTime();
 
-                    GrowthcraftCellar.LOGGER.log(Level.WARN, "{} processing at {} / {}", recipe.getId(), this.currentProcessingTime, this.maxProcessingTime);
+                    if(this.currentProcessingTime % this.maxProcessingTime == 0) {
+                        GrowthcraftCellar.LOGGER.log(Level.WARN, "{} processing at {} / {}", recipe.getId(), this.currentProcessingTime, this.maxProcessingTime);
+                    }
 
                     if (recipe != this.currentRecipe) {
                         this.currentRecipe = recipe;
@@ -133,9 +133,12 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
                 Constants.BlockFlags.BLOCK_UPDATE);
     }
 
+    /**
+     * Process the results from the current recipe.
+     */
     private void processRecipeResult() {
         // Determine if the current ingredients is a multiple of the recipe.
-        Float fluidMultiplier = (float) this.getFluidTank(0).getFluidAmount() / currentRecipe.getResultingFluid().getAmount();
+        Float fluidMultiplier = this.getFluidTank(0).getFluidAmount() / (float) this.currentRecipe.getResultingFluid().getAmount();
 
         // We have to have a multiple of the fluid in order to replace all of it at one time.
         if (fluidMultiplier % 1 == 0) {
@@ -145,15 +148,25 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
             if (this.inventory.getStackInSlot(0).getCount() >= itemStackShrinkCount) {
                 // Then we have enough items for the amount of fluid we have.
                 // TODO: Figure out why the tank is not draining and filling correctly.
+                int drainAmount = currentRecipe.getIngredientFluidStack().getAmount() * fluidMultiplier.intValue();
+
+                GrowthcraftCellar.LOGGER.log(Level.WARN, "Processing results: \n\tdraining: {} ({}mb)\n\tfilling: {} ({}mb)",
+                        currentRecipe.getIngredientFluidStack().getFluid(),
+                        drainAmount,
+                        currentRecipe.getResultingFluid().getFluid(),
+                        currentRecipe.getResultingFluid().getAmount() * fluidMultiplier.intValue()
+                );
+
                 // Process recipe inputs
-                this.getFluidTank(0).drain(currentRecipe.getIngredientFluidStack().getAmount() * fluidMultiplier.intValue(),
-                        IFluidHandler.FluidAction.EXECUTE);
                 this.inventory.getStackInSlot(0).shrink(itemStackShrinkCount);
 
-                // Process recipe outputs
+                // Process recipe outputs by replacing the fluid tank contents.
                 FluidStack resultFluidStack = currentRecipe.getResultingFluid();
                 resultFluidStack.setAmount(currentRecipe.getResultingFluid().getAmount() * fluidMultiplier.intValue());
-                this.getFluidTank(0).fill(resultFluidStack, IFluidHandler.FluidAction.EXECUTE);
+                this.getFluidTankHandler().getTank(0).setFluid(resultFluidStack);
+
+                // Trigger and update as we have an update.
+                this.markUpdate();
             }
         } else {
             // Something isn't right we do not have ingredients for a whole recipe.

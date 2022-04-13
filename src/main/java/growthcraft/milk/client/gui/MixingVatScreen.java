@@ -44,6 +44,7 @@ public class MixingVatScreen extends ContainerScreen<MixingVatContainer> {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
         matrixStack.push();
         IRenderTypeBuffer.Impl renderTypeBuffer = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());

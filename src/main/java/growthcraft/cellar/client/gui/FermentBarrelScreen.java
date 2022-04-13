@@ -52,6 +52,7 @@ public class FermentBarrelScreen extends ContainerScreen<FermentBarrelContainer>
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
         matrixStack.push();
         IRenderTypeBuffer.Impl renderTypeBuffer = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
@@ -95,8 +96,10 @@ public class FermentBarrelScreen extends ContainerScreen<FermentBarrelContainer>
             int scaledFluidHeight = getScaledFluid(fluidStack.getAmount(),
                     this.container.getTileEntityFluidTank(0).getCapacity(), guiInputFluidTankHeight);
 
+            float adjustedGuiInputFluidTankY = (guiInputFluidTankY + (guiInputFluidTankHeight - scaledFluidHeight));
+
             ClientUtils.drawRepeatedFluidSpriteGui(renderTypeBuffer, matrixStack, fluidStack, guiInputFluidTankX,
-                    guiInputFluidTankY + (guiInputFluidTankHeight - scaledFluidHeight), 50, scaledFluidHeight);
+                    adjustedGuiInputFluidTankY, 50, scaledFluidHeight);
 
         }
 
