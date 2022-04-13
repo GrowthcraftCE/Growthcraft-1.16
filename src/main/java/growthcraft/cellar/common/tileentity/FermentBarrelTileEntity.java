@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.tileentity;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.client.container.FermentBarrelContainer;
 import growthcraft.cellar.common.recipe.FermentBarrelRecipe;
 import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
@@ -33,7 +32,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -83,10 +81,6 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
                 if (recipe != null) {
                     this.maxProcessingTime = recipe.getProcessingTime();
 
-                    if(this.currentProcessingTime % this.maxProcessingTime == 0) {
-                        GrowthcraftCellar.LOGGER.log(Level.WARN, "{} processing at {} / {}", recipe.getId(), this.currentProcessingTime, this.maxProcessingTime);
-                    }
-
                     if (recipe != this.currentRecipe) {
                         this.currentRecipe = recipe;
                         // wait until next cycle to start processing
@@ -119,10 +113,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
         }
 
         if (dirty) {
-            this.markDirty();
-            this.world.notifyBlockUpdate(
-                    this.getPos(), this.getBlockState(), this.getBlockState(),
-                    Constants.BlockFlags.BLOCK_UPDATE);
+            this.markUpdate();
         }
     }
 
@@ -146,24 +137,13 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
 
             // Check that there are enough input items
             if (this.inventory.getStackInSlot(0).getCount() >= itemStackShrinkCount) {
-                // Then we have enough items for the amount of fluid we have.
-                // TODO: Figure out why the tank is not draining and filling correctly.
-                int drainAmount = currentRecipe.getIngredientFluidStack().getAmount() * fluidMultiplier.intValue();
+                this.inventory.setStackInSlot(0, ItemStack.EMPTY);
+                this.fluidTankHandler.getTank(0).setFluid(FluidStack.EMPTY);
 
-                GrowthcraftCellar.LOGGER.log(Level.WARN, "Processing results: \n\tdraining: {} ({}mb)\n\tfilling: {} ({}mb)",
-                        currentRecipe.getIngredientFluidStack().getFluid(),
-                        drainAmount,
-                        currentRecipe.getResultingFluid().getFluid(),
-                        currentRecipe.getResultingFluid().getAmount() * fluidMultiplier.intValue()
-                );
-
-                // Process recipe inputs
-                this.inventory.getStackInSlot(0).shrink(itemStackShrinkCount);
-
-                // Process recipe outputs by replacing the fluid tank contents.
                 FluidStack resultFluidStack = currentRecipe.getResultingFluid();
                 resultFluidStack.setAmount(currentRecipe.getResultingFluid().getAmount() * fluidMultiplier.intValue());
-                this.getFluidTankHandler().getTank(0).setFluid(resultFluidStack);
+
+                this.fluidTankHandler.getTank(0).setFluid(resultFluidStack);
 
                 // Trigger and update as we have an update.
                 this.markUpdate();
@@ -212,7 +192,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
         this.maxProcessingTime = compound.getInt("MaxProcessingTime");
 
         // Read the tank data from NBT
-        this.getFluidTankHandler().getTank(0).readFromNBT(compound.getCompound("tank0"));
+        this.fluidTankHandler.getTank(0).readFromNBT(compound.getCompound("tank0"));
 
     }
 
@@ -228,7 +208,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
         compound.putInt("MaxProcessingTime", this.maxProcessingTime);
 
         // Save the tank to the NBTTag
-        compound.put("tank0", this.getFluidTankHandler().getTank(0).writeToNBT(new CompoundNBT()));
+        compound.put("tank0", this.fluidTankHandler.getTank(0).writeToNBT(new CompoundNBT()));
         return super.write(compound);
     }
 
@@ -280,7 +260,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
             }
         }
 
-        return this.getRecipe(inputFluidStack);
+        return null;
     }
 
     @Nullable
