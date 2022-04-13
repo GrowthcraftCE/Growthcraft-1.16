@@ -217,12 +217,10 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
             this.getInventory().setStackInSlot(3, itemRecipe.getResultItemStack());
         }
 
-        // Process the ingredient items.
+        // Empty out the input inventory slots.
         for (ItemStack itemStack : ingredients) {
             for (int i = 0; i < this.getInventory().getSlots(); i++) {
-                if (this.getInventory().getStackInSlot(i).getItem() == itemStack.getItem()) {
-                    this.getInventory().getStackInSlot(i).shrink(itemStack.getCount());
-                }
+                    this.getInventory().setStackInSlot(i, ItemStack.EMPTY);
             }
         }
 
