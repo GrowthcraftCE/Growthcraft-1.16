@@ -255,7 +255,8 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
 
         // Check for Ferment recipes
         for (FermentBarrelRecipe recipe : recipes) {
-            if (recipe.matches(inputItemStack, inputFluidStack)) {
+            if (recipe.matches(inputItemStack, inputFluidStack)
+                    || ( this.inventory.getStackInSlot(0).isEmpty() && recipe.matches(inputFluidStack) )) {
                 return recipe;
             }
         }

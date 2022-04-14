@@ -85,6 +85,7 @@ public class FermentationBarrelBlock extends Block {
             return ActionResultType.SUCCESS;
         }
 
+        // TODO: Debug drawing out ales and wines.
         if (!worldIn.isRemote && player.getHeldItem(handIn).getItem() == Items.GLASS_BOTTLE) {
             try {
                 FermentBarrelTileEntity tileEntity = (FermentBarrelTileEntity) worldIn.getTileEntity(pos);
