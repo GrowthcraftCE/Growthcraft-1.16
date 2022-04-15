@@ -7,7 +7,6 @@ import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
-import growthcraft.lib.util.RecipeUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,7 +14,6 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -36,7 +34,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nullable;
-import java.util.Set;
+import java.util.List;
 
 public class FruitPressTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
@@ -82,7 +80,7 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
         boolean dirty = false;
 
         // Check if the FruitPressPiston is powered and the input slot is not empty
-        if (this.world.isBlockPowered(this.getPos().up()) && !this.inventory.getStackInSlot(0).isEmpty()) {
+        if (!this.world.isRemote && this.world.isBlockPowered(this.getPos().up()) && !this.inventory.getStackInSlot(0).isEmpty()) {
 
             FruitPressRecipe fruitPressRecipe = this.getRecipe(
                     this.inventory.getStackInSlot(0)
@@ -185,12 +183,11 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
 
     @Nullable
     public FruitPressRecipe getRecipe(ItemStack inputStack) {
-        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(GrowthcraftCellarRecipes.FRUIT_PRESS_RECIPE_TYPE);
+        List<FruitPressRecipe> recipes = this.world.getRecipeManager().getRecipesForType(GrowthcraftCellarRecipes.FRUIT_PRESS_RECIPE_TYPE);
 
-        for (IRecipe<?> recipe : recipes) {
-            FruitPressRecipe fruitPressRecipe = (FruitPressRecipe) recipe;
-            if (fruitPressRecipe.matches(inputStack)) {
-                return fruitPressRecipe;
+        for (FruitPressRecipe recipe : recipes) {
+            if (recipe.matches(inputStack)) {
+                return recipe;
             }
         }
 
