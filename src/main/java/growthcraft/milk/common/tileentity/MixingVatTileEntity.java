@@ -132,7 +132,6 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
             }
         } catch (Exception ex) {
             GrowthcraftMilk.LOGGER.error("MixingVatTileEntity threw an exception during ticking.");
-            ex.printStackTrace();
         }
 
     }
