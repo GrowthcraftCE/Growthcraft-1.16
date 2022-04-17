@@ -11,7 +11,6 @@ import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
 
 public class FruitPressPistonTileEntity extends LockableLootTileEntity implements ITickableTileEntity {
 
@@ -25,10 +24,11 @@ public class FruitPressPistonTileEntity extends LockableLootTileEntity implement
 
     @Override
     public void tick() {
-        World world = this.world;
-        BlockState state = world.getBlockState(this.getPos());
-        int powerLevel = world.getRedstonePowerFromNeighbors(this.getPos());
-        world.setBlockState(this.pos, state.with(FruitPressPistonBlock.PRESSED, powerLevel == 15));
+        if(world != null && !world.isRemote()) {
+            BlockState state = world.getBlockState(this.getPos());
+            int powerLevel = world.getRedstonePowerFromNeighbors(this.getPos());
+            world.setBlockState(this.pos, state.with(FruitPressPistonBlock.PRESSED, powerLevel == 15));
+        }
     }
 
     @Override

@@ -252,7 +252,7 @@ public class RoasterTileEntity extends LockableLootTileEntity implements ITickab
     // Recipe Handling
     @Nullable
     private RoasterRecipe getRecipe(ItemStack inputItemStack, ItemStack redstoneTimerItemStack) {
-        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(this.world, GrowthcraftCellarRecipes.ROASTER_RECIPE_TYPE);
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(GrowthcraftCellarRecipes.ROASTER_RECIPE_TYPE);
 
         for (IRecipe<?> recipe : recipes) {
             RoasterRecipe roasterRecipe = (RoasterRecipe) recipe;

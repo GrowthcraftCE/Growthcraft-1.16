@@ -1,9 +1,6 @@
 package growthcraft.milk;
 
 import growthcraft.cellar.client.event.ColorRegistryEvent;
-import growthcraft.cellar.client.proxy.ClientProxy;
-import growthcraft.cellar.common.proxy.CommonProxy;
-import growthcraft.lib.proxy.IProxy;
 import growthcraft.milk.init.*;
 import growthcraft.milk.init.client.GrowthcraftMilkBlockRenders;
 import growthcraft.milk.init.client.GrowthcraftMilkScreenManager;
@@ -15,7 +12,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -29,7 +25,7 @@ import org.apache.logging.log4j.Logger;
 public class GrowthcraftMilk {
 
     public static final Logger LOGGER = LogManager.getLogger();
-    public static final IProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+    //public static final IProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
     public GrowthcraftMilk() {
 
@@ -60,7 +56,7 @@ public class GrowthcraftMilk {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        proxy.init();
+        //proxy.init();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

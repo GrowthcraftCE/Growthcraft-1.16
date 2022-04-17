@@ -10,7 +10,6 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IModIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.Level;
 
@@ -28,19 +27,19 @@ public class GrowthcraftCellarJeiPlugin implements IModPlugin {
         GrowthcraftCellar.LOGGER.log(Level.DEBUG, "{} registering JEI Recipes.", Reference.MODID);
 
         // Brew Kettle Recipes
-        registry.addRecipes(RecipeUtils.findRecipesByType(Minecraft.getInstance().world,
+        registry.addRecipes(RecipeUtils.findRecipesByType(
                 GrowthcraftCellarRecipes.BREW_KETTLE_RECIPE_TYPE), BrewKettleRecipeCategory.ID);
         // Culture Jar Recipes
-        registry.addRecipes(RecipeUtils.findRecipesByType(Minecraft.getInstance().world,
+        registry.addRecipes(RecipeUtils.findRecipesByType(
                 GrowthcraftCellarRecipes.CULTURE_JAR_RECIPE_TYPE), CultureJarRecipeCategory.ID);
         // Ferment Barrel Recipes
-        registry.addRecipes(RecipeUtils.findRecipesByType(Minecraft.getInstance().world,
+        registry.addRecipes(RecipeUtils.findRecipesByType(
                 GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE), FermentBarrelRecipeCategory.ID);
         // Fruit Press Recipes
-        registry.addRecipes(RecipeUtils.findRecipesByType(Minecraft.getInstance().world,
+        registry.addRecipes(RecipeUtils.findRecipesByType(
                 GrowthcraftCellarRecipes.FRUIT_PRESS_RECIPE_TYPE), FruitPressRecipeCategory.ID);
         // Roaster Recipes
-        registry.addRecipes(RecipeUtils.findRecipesByType(Minecraft.getInstance().world,
+        registry.addRecipes(RecipeUtils.findRecipesByType(
                 GrowthcraftCellarRecipes.ROASTER_RECIPE_TYPE), RoasterRecipeCategory.ID);
     }
 

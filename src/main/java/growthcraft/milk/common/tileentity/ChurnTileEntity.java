@@ -143,7 +143,7 @@ public class ChurnTileEntity extends LockableLootTileEntity implements ITickable
 
     @Override
     public void tick() {
-        if (!world.isRemote()) {
+        if(world != null && !world.isRemote()) {
             boolean dirty = false;
             if (!this.fluidTankHandler.getTank(0).isEmpty() && this.items.getStackInSlot(0).isEmpty()) {
                 // Then check for a valid new recipe.
@@ -178,7 +178,7 @@ public class ChurnTileEntity extends LockableLootTileEntity implements ITickable
     @Nullable
     @ParametersAreNonnullByDefault
     private ChurnRecipe getRecipe(FluidStack fluidStack) {
-        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(this.world, GrowthcraftMilkRecipes.CHURN_RECIPE_TYPE);
+        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(GrowthcraftMilkRecipes.CHURN_RECIPE_TYPE);
         for (IRecipe<?> recipe : recipes) {
             ChurnRecipe churnRecipe = (ChurnRecipe) recipe;
             if (churnRecipe.matches(fluidStack)) return churnRecipe;

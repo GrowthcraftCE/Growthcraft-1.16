@@ -137,7 +137,6 @@ public class BrewKettleRecipeCategory implements IRecipeCategory<BrewKettleRecip
 
         } catch (Exception ex) {
             GrowthcraftCellar.LOGGER.error("Failure to set recipe mapping for Brew Kettle recipe.");
-            ex.printStackTrace();
         }
     }
 

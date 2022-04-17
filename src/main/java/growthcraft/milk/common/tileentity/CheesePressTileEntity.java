@@ -70,7 +70,10 @@ public class CheesePressTileEntity extends LockableLootTileEntity implements ITi
 
     @Override
     public void tick() {
+        // TODO: Make the cheese press actually do something.
+        if(world != null && !world.isRemote()) {
 
+        }
     }
 
     public int doRotation(boolean increase) {

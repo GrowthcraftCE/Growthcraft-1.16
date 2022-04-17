@@ -7,14 +7,7 @@
 
 name: Snyk Infrastructure as Code
 
-on:
-  push:
-    branches: [ release, development ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ release, dvelopment ]
-  schedule:
-    - cron: '27 14 * * 5'
+on: push
 
 jobs:
   snyk:
@@ -28,6 +21,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --sarif-file-output=snyk.sarif
+
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v1
         with:
