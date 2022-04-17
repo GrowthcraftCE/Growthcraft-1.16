@@ -70,11 +70,6 @@ public class RecipeUtils {
     }
 
     public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> recipeType) {
-
-
-        
-
-
         World world = Minecraft.getInstance().world;
         return world != null ?
                 world.getRecipeManager().getRecipes().stream()

@@ -61,47 +61,48 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
     @Override
     public void tick() {
         boolean dirty = false;
+        if(world != null && !world.isRemote()) {
+            // TODO: While processing lock the fluid interaction.
+            if (this.currentProcessingTime > 0) {
+                this.world.setBlockState(this.getPos(), this.getBlockState().with(PancheonBlock.LOCKED, true));
+            } else {
+                this.world.setBlockState(this.getPos(), this.getBlockState().with(PancheonBlock.LOCKED, false));
+            }
 
-        // TODO: While processing lock the fluid interaction.
-        if (this.currentProcessingTime > 0) {
-            this.world.setBlockState(this.getPos(), this.getBlockState().with(PancheonBlock.LOCKED, true));
-        } else {
-            this.world.setBlockState(this.getPos(), this.getBlockState().with(PancheonBlock.LOCKED, false));
-        }
+            if (!this.inputFluidTankHandler.getTank(0).isEmpty()) {
+                PancheonRecipe recipe = this.getRecipe(this.inputFluidTankHandler.getTank(0).getFluid());
 
-        if (!this.inputFluidTankHandler.getTank(0).isEmpty()) {
-            PancheonRecipe recipe = this.getRecipe(this.inputFluidTankHandler.getTank(0).getFluid());
+                if (recipe != null) {
+                    if (recipe != this.currentRecipe && this.inputFluidTankHandler.getTank(0).getFluidAmount() >= recipe.getInputFluidStack().getAmount()) {
+                        this.currentRecipe = recipe;
+                        currentProcessingTime = 0;
+                        maxProcessingTime = recipe.getProcessingTime();
+                        dirty = true;
+                    } else {
+                        if (this.inputFluidTankHandler.getTank(0).getFluidAmount() >= recipe.getInputFluidStack().getAmount()) {
+                            this.currentProcessingTime++;
+                            dirty = true;
+                        }
+                    }
+                    if (currentProcessingTime > maxProcessingTime) {
+                        this.inputFluidTankHandler.getTank(0).drain(recipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
+                        this.outputFluidTankHandler.getTank(0).forceFill(recipe.getOutputFluidStack(0), IFluidHandler.FluidAction.EXECUTE);
+                        this.outputFluidTankHandler.getTank(1).forceFill(recipe.getOutputFluidStack(1), IFluidHandler.FluidAction.EXECUTE);
 
-            if (recipe != null) {
-                if (recipe != this.currentRecipe && this.inputFluidTankHandler.getTank(0).getFluidAmount() >= recipe.getInputFluidStack().getAmount()) {
-                    this.currentRecipe = recipe;
-                    currentProcessingTime = 0;
-                    maxProcessingTime = recipe.getProcessingTime();
-                    dirty = true;
-                } else {
-                    if (this.inputFluidTankHandler.getTank(0).getFluidAmount() >= recipe.getInputFluidStack().getAmount()) {
-                        this.currentProcessingTime++;
+                        currentRecipe = null;
+                        currentProcessingTime = 0;
                         dirty = true;
                     }
                 }
-                if (currentProcessingTime > maxProcessingTime) {
-                    this.inputFluidTankHandler.getTank(0).drain(recipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
-                    this.outputFluidTankHandler.getTank(0).forceFill(recipe.getOutputFluidStack(0), IFluidHandler.FluidAction.EXECUTE);
-                    this.outputFluidTankHandler.getTank(1).forceFill(recipe.getOutputFluidStack(1), IFluidHandler.FluidAction.EXECUTE);
-
-                    currentRecipe = null;
-                    currentProcessingTime = 0;
-                    dirty = true;
-                }
+            } else {
+                currentRecipe = null;
+                currentProcessingTime = 0;
             }
-        } else {
-            currentRecipe = null;
-            currentProcessingTime = 0;
-        }
 
-        if (dirty) {
-            this.markDirty();
-            this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
+            if (dirty) {
+                this.markDirty();
+                this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
+            }
         }
 
     }

@@ -143,7 +143,7 @@ public class ChurnTileEntity extends LockableLootTileEntity implements ITickable
 
     @Override
     public void tick() {
-        if (!world.isRemote()) {
+        if(world != null && !world.isRemote()) {
             boolean dirty = false;
             if (!this.fluidTankHandler.getTank(0).isEmpty() && this.items.getStackInSlot(0).isEmpty()) {
                 // Then check for a valid new recipe.

@@ -80,7 +80,7 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
         boolean dirty = false;
 
         // Check if the FruitPressPiston is powered and the input slot is not empty
-        if (!this.world.isRemote && this.world.isBlockPowered(this.getPos().up()) && !this.inventory.getStackInSlot(0).isEmpty()) {
+        if (world != null && !world.isRemote() && this.world.isBlockPowered(this.getPos().up()) && !this.inventory.getStackInSlot(0).isEmpty()) {
 
             FruitPressRecipe fruitPressRecipe = this.getRecipe(
                     this.inventory.getStackInSlot(0)
