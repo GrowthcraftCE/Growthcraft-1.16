@@ -70,8 +70,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     public void tick() {
         boolean dirty = false;
         if (this.world != null && !this.world.isRemote) {
-            if (!this.inventory.getStackInSlot(0).isEmpty() && !this.getFluidTank(0).isEmpty()
-                    && this.getFluidTank(0).getFluidAmount() <= this.getFluidTank(0).getCapacity()) {
+            if (!this.inventory.getStackInSlot(0).isEmpty() && !this.getFluidTank(0).isEmpty()) {
 
                 FermentBarrelRecipe recipe = this.getRecipe(
                         this.inventory.getStackInSlot(0),
@@ -104,10 +103,8 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
                         this.getFluidTank(0).getFluid()
                 );
 
-                if (recipe != null) {
-                    if (recipe != currentRecipe) {
-                        this.currentRecipe = recipe;
-                    }
+                if (recipe != null && recipe != currentRecipe) {
+                    this.currentRecipe = recipe;
                 }
             }
         }
@@ -256,7 +253,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
         // Check for Ferment recipes
         for (FermentBarrelRecipe recipe : recipes) {
             if (recipe.matches(inputItemStack, inputFluidStack)
-                    || ( this.inventory.getStackInSlot(0).isEmpty() && recipe.matches(inputFluidStack) )) {
+                    || (this.inventory.getStackInSlot(0).isEmpty() && recipe.matches(inputFluidStack))) {
                 return recipe;
             }
         }
