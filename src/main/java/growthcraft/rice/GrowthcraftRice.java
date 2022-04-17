@@ -1,8 +1,5 @@
 package growthcraft.rice;
 
-import growthcraft.lib.proxy.IProxy;
-import growthcraft.rice.client.proxy.ClientProxy;
-import growthcraft.rice.common.proxy.CommonProxy;
 import growthcraft.rice.init.GrowthcraftRiceBlocks;
 import growthcraft.rice.init.GrowthcraftRiceFluids;
 import growthcraft.rice.init.GrowthcraftRiceItems;
@@ -15,7 +12,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -29,7 +25,7 @@ import org.apache.logging.log4j.Logger;
 public class GrowthcraftRice {
 
     public static final Logger LOGGER = LogManager.getLogger();
-    public static final IProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+    //public static final IProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
     public GrowthcraftRice() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -58,7 +54,7 @@ public class GrowthcraftRice {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        proxy.init();
+        //proxy.init();
         GrowthcraftRiceConfig.loadConfig();
     }
 

@@ -3,12 +3,9 @@ package growthcraft.lib.util;
 import growthcraft.cellar.common.recipe.FermentBarrelRecipe;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
@@ -72,9 +69,8 @@ public class RecipeUtils {
                 : Collections.emptySet();
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> recipeType) {
-        ClientWorld world = Minecraft.getInstance().world;
+        World world = Minecraft.getInstance().world;
         return world != null ?
                 world.getRecipeManager().getRecipes().stream()
                         .filter(recipe -> recipe.getType().toString().equals(recipeType.toString())).collect(Collectors.toSet())

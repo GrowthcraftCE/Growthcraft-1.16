@@ -33,8 +33,9 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
     @Override
     public void tick() {
         // TODO: at each stage of aging, markdirty and send out updates.
+        if(world != null && !world.isRemote()) {
 
-
+        }
     }
 
     @Override

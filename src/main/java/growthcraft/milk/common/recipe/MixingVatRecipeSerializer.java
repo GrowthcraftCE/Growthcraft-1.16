@@ -86,7 +86,7 @@ public class MixingVatRecipeSerializer extends ForgeRegistryEntry<IRecipeSeriali
     @Override
     public MixingVatRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
         try {
-            MixingVatRecipe.MixingVatRecipeCategory category = MixingVatRecipe.MixingVatRecipeCategory.valueOf(buffer.readString());
+            MixingVatRecipe.MixingVatRecipeCategory category = MixingVatRecipe.MixingVatRecipeCategory.with(buffer.readString());
 
             int processingTime = buffer.readVarInt();
             FluidStack inputFluidStack = buffer.readFluidStack();
