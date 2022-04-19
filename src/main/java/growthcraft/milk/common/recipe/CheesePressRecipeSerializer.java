@@ -11,7 +11,9 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.apache.logging.log4j.Level;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 public class CheesePressRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CheesePressRecipe> {
 
@@ -23,11 +25,11 @@ public class CheesePressRecipeSerializer extends ForgeRegistryEntry<IRecipeSeria
      * @return CheesePressRecipe a new instance of a CheesePressRecipe.
      */
     @Override
+    @ParametersAreNonnullByDefault
+    @Nonnull
     public CheesePressRecipe read(ResourceLocation recipeId, JsonObject json) {
         int processingTime = JSONUtils.getInt(json, "processing_time", 6000);
-
         ItemStack inputItemStack = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "ingredient"), true);
-
         ItemStack resultItemStack = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "result_item"), true);
 
         return new CheesePressRecipe(recipeId, inputItemStack, resultItemStack, processingTime);
@@ -36,12 +38,13 @@ public class CheesePressRecipeSerializer extends ForgeRegistryEntry<IRecipeSeria
     /**
      * Client side read from network buffer written from the serer.
      *
-     * @param recipeId
-     * @param buffer
-     * @return
+     * @param recipeId Resource location of the recipe
+     * @param buffer   Network buffer containing the recipe data
+     * @return CheesePressRecipe object
      */
     @Nullable
     @Override
+    @ParametersAreNonnullByDefault
     public CheesePressRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
         try {
             ItemStack a = buffer.readItemStack();
@@ -60,10 +63,11 @@ public class CheesePressRecipeSerializer extends ForgeRegistryEntry<IRecipeSeria
     /**
      * Server side write the recipe data to a buffer to be sent to the client side.
      *
-     * @param buffer
-     * @param recipe
+     * @param buffer Networker buffer that will contain the recipe data
+     * @param recipe Recipe object that has the source data for the buffer
      */
     @Override
+    @ParametersAreNonnullByDefault
     public void write(PacketBuffer buffer, CheesePressRecipe recipe) {
         try {
             buffer.writeItemStack(recipe.getRecipeInput());
