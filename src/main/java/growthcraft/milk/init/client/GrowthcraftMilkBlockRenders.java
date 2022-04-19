@@ -25,7 +25,7 @@ public class GrowthcraftMilkBlockRenders {
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.WHEY_FLUID_BLOCK.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.CHEDDAR_CHEESE_CURDS.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.APPENZELLER_CHEESE_CURDS.get(), RenderType.getCutout());
-        RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.APPENZELLER_CHEESE_AGED.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.APPENZELLER_CHEESE_PRESSED.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.ASIAGO_CHEESE_CURDS.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.EMMENTALER_CHEESE_CURDS.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.GORGONZOLA_CHEESE_CURDS.get(), RenderType.getCutout());

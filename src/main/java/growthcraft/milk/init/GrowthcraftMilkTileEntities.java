@@ -22,7 +22,7 @@ public class GrowthcraftMilkTileEntities {
     public static final RegistryObject<TileEntityType<CheeseWheelTileEntity>> CHEESE_WHEEL_TILE_ENTITY = TILE_ENTITIES.register(
             UnlocalizedName.CHEESE_WHEEL_TILE_ENTITY,
             () -> TileEntityType.Builder.create(
-                    CheeseWheelTileEntity::new, GrowthcraftMilkBlocks.APPENZELLER_CHEESE_AGED.get()
+                    CheeseWheelTileEntity::new, GrowthcraftMilkBlocks.APPENZELLER_CHEESE_PRESSED.get()
             ).build(null)
     );
 

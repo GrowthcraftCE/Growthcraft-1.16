@@ -26,8 +26,8 @@ public class GrowthcraftMilkBlocks {
             UnlocalizedName.CHEESE_PRESS,
             CheesePressBlock::new
     );
-    public static final RegistryObject<CheeseWheelBlock> APPENZELLER_CHEESE_AGED = BLOCKS.register(
-            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.APPENZELLER).get(CheeseUtils.AGED),
+    public static final RegistryObject<CheeseWheelBlock> APPENZELLER_CHEESE_PRESSED = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.APPENZELLER).get(CheeseUtils.CHEESE),
             () -> new CheeseWheelBlock(Reference.ItemColor.APPENZELLER_CHEESE.getColor())
     );
     public static final RegistryObject<CheeseCurdBlock> APPENZELLER_CHEESE_CURDS = BLOCKS.register(

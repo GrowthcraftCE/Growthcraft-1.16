@@ -1,0 +1,13 @@
+{
+  "type": "growthcraft_milk:cheese_press_recipe",
+  "processing_time": 6000,
+  "result_type": "item",
+  "ingredient": {
+    "item": "growthcraft_milk:cheddar_cheese_curds",
+    "count": 1
+  },
+  "result_item": {
+    "item": "growthcraft_milk:cheddar_cheese",
+    "count": 1
+  }
+}

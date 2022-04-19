@@ -18,13 +18,14 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
     private int sliceCountTop;
     private int sliceCountBottom;
     private int currentAging;
-    private int maxAging;
+    private final int maxAging = 24000 * 3;
 
     public CheeseWheelTileEntity() {
         this(GrowthcraftMilkTileEntities.CHEESE_WHEEL_TILE_ENTITY.get());
     }
     public CheeseWheelTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
+        this.currentAging = 0;
         this.aged = true;
         this.sliceCountBottom = 4;
         this.sliceCountTop = 0;
@@ -32,9 +33,17 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
 
     @Override
     public void tick() {
-        // TODO: at each stage of aging, markdirty and send out updates.
-        if(world != null && !world.isRemote()) {
-
+        if (world != null && !world.isRemote() && !world.getBlockState(pos).get(CheeseWheelBlock.AGED)) {
+            if (this.currentAging < this.maxAging) {
+                this.currentAging++;
+            } else {
+                BlockState state = this.world.getBlockState(pos);
+                this.world.setBlockState(pos, state.with(CheeseWheelBlock.AGED, true));
+                this.currentAging = 0;
+            }
+            this.markDirty();
+        } else {
+            // The cheese is aged, so there's nothing to do.
         }
     }
 
