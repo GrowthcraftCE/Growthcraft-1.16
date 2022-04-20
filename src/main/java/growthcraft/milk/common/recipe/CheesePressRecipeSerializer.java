@@ -63,7 +63,7 @@ public class CheesePressRecipeSerializer extends ForgeRegistryEntry<IRecipeSeria
     /**
      * Server side write the recipe data to a buffer to be sent to the client side.
      *
-     * @param buffer Networker buffer that will contain the recipe data
+     * @param buffer Network buffer that will contain the recipe data
      * @param recipe Recipe object that has the source data for the buffer
      */
     @Override
