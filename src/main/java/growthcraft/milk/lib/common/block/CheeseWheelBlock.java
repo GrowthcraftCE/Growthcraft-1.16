@@ -5,6 +5,7 @@ import growthcraft.milk.init.GrowthcraftMilkTileEntities;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
@@ -35,8 +36,9 @@ public class CheeseWheelBlock extends HorizontalBlock {
 
         this.setDefaultState(this.stateContainer.getBaseState()
                 .with(HORIZONTAL_FACING, Direction.NORTH)
-                .with(SLICE_COUNT_BOTTOM,4)
+                .with(SLICE_COUNT_BOTTOM, 4)
                 .with(SLICE_COUNT_TOP, 0)
+                .with(AGED, false)
         );
     }
 
@@ -50,7 +52,7 @@ public class CheeseWheelBlock extends HorizontalBlock {
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
-        builder.add(HORIZONTAL_FACING, SLICE_COUNT_BOTTOM, SLICE_COUNT_TOP);
+        builder.add(HORIZONTAL_FACING, SLICE_COUNT_BOTTOM, SLICE_COUNT_TOP, AGED);
     }
 
     @Nullable
@@ -72,24 +74,40 @@ public class CheeseWheelBlock extends HorizontalBlock {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(!worldIn.isRemote) {
+        if (!worldIn.isRemote && handIn.name().equals("MAIN_HAND")) {
             CheeseWheelTileEntity tileEntity = (CheeseWheelTileEntity) worldIn.getTileEntity(pos);
 
-            // TODO: If held cheese block matches this one, then stack them.
-            if(player.getHeldItemMainhand().getItem() == this.asItem()) {
+            if (player.getHeldItemMainhand().getItem() == this.asItem()) {
                 tileEntity.addSlice(4);
+                player.getHeldItemMainhand().shrink(1);
+                return ActionResultType.SUCCESS;
             }
 
             // TODO: If not sneaking and hand is empty, then take a slice.
-            if(!player.isSneaking() && player.getHeldItemMainhand().isEmpty()) {
-                if(tileEntity.canTakeSlice()) {
+            if (!player.isSneaking() && player.getHeldItemMainhand().isEmpty()) {
+                if (tileEntity.canTakeSlice()) {
                     tileEntity.takeSlice();
                 }
             }
-            // TODO: If sneaking then take a block off the top, then bottom.
+
+            if (player.isSneaking() && tileEntity.getSliceCount() > 4 || tileEntity.getSliceCount() == 4) {
+                tileEntity.takeSlice(4);
+                player.inventory.addItemStackToInventory(new ItemStack(this.asItem()));
+            }
+
+            if (tileEntity.getSliceCount() == 0) worldIn.destroyBlock(pos, false);
 
         }
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+
+        return ActionResultType.SUCCESS;
+    }
+
+    public int getColor() {
+        return this.color;
+    }
+
+    public int getColor(int i) {
+        return i == 0 ? this.color : 0xFFFFFF;
     }
 
 }

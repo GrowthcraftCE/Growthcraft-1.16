@@ -3,7 +3,7 @@
   "processing_time": 6000,
   "result_type": "item",
   "ingredient": {
-    "item": "growthcraft_milk:cheddar_cheese_curds",
+    "item": "growthcraft_milk:cheddar_cheese_curds_drained",
     "count": 1
   },
   "result_item": {

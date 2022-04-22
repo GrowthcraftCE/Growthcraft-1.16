@@ -166,6 +166,7 @@ public class GrowthcraftMilkItems {
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.RICOTTA).get(CheeseUtils.DRAINED),
             () -> new CheeseCurdsDrainedItem(Reference.ItemColor.RICOTTA_CHEESE.getColor())
     );
+
     public static final RegistryObject<GrowthcraftItem> STARTER_CULTURE = ITEMS.register(
             UnlocalizedName.STARTER_CULTURE, GrowthcraftItem::new
     );

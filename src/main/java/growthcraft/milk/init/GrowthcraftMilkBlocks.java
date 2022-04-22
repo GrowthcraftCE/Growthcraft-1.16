@@ -34,13 +34,25 @@ public class GrowthcraftMilkBlocks {
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.APPENZELLER).get(CheeseUtils.CURDS),
             () -> new CheeseCurdBlock(Reference.ItemColor.APPENZELLER_CHEESE.getColor())
     );
+    public static final RegistryObject<CheeseWheelBlock> ASIAGO_CHEESE = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.ASIAGO).get(CheeseUtils.CHEESE),
+            () -> new CheeseWheelBlock(Reference.ItemColor.ASIAGO_CHEESE.getColor())
+    );
     public static final RegistryObject<CheeseCurdBlock> ASIAGO_CHEESE_CURDS = BLOCKS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.ASIAGO).get(CheeseUtils.CURDS),
             () -> new CheeseCurdBlock(Reference.ItemColor.ASIAGO_CHEESE.getColor())
     );
+    public static final RegistryObject<CheeseWheelBlock> CASU_MARZU_CHEESE = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.CASU_MARZU).get(CheeseUtils.CHEESE),
+            () -> new CheeseWheelBlock(Reference.ItemColor.CASU_MARZU_CHEESE.getColor())
+    );
     public static final RegistryObject<CheeseCurdBlock> CASU_MARZU_CHEESE_CURDS = BLOCKS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.CASU_MARZU).get(CheeseUtils.CURDS),
             () -> new CheeseCurdBlock(Reference.ItemColor.CASU_MARZU_CHEESE.getColor())
+    );
+    public static final RegistryObject<CheeseWheelBlock> CHEDDAR_CHEESE = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.CHEDDAR).get(CheeseUtils.CHEESE),
+            () -> new CheeseWheelBlock(Reference.ItemColor.CHEDDAR_CHEESE.getColor())
     );
     public static final RegistryObject<CheeseCurdBlock> CHEDDAR_CHEESE_CURDS = BLOCKS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.CHEDDAR).get(CheeseUtils.CURDS),
@@ -49,13 +61,25 @@ public class GrowthcraftMilkBlocks {
     public static final RegistryObject<ChurnBlock> CHURN = BLOCKS.register(
             UnlocalizedName.CHURN, ChurnBlock::new
     );
+    public static final RegistryObject<CheeseWheelBlock> EMMENTALER_CHEESE = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.EMMENTALER).get(CheeseUtils.CHEESE),
+            () -> new CheeseWheelBlock(Reference.ItemColor.EMMENTALER_CHEESE.getColor())
+    );
     public static final RegistryObject<CheeseCurdBlock> EMMENTALER_CHEESE_CURDS = BLOCKS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.EMMENTALER).get(CheeseUtils.CURDS),
             () -> new CheeseCurdBlock(Reference.ItemColor.EMMENTALER_CHEESE.getColor())
     );
+    public static final RegistryObject<CheeseWheelBlock> GORGONZOLA_CHEESE = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.GORGONZOLA).get(CheeseUtils.CHEESE),
+            () -> new CheeseWheelBlock(Reference.ItemColor.GORGONZOLA_CHEESE.getColor())
+    );
     public static final RegistryObject<CheeseCurdBlock> GORGONZOLA_CHEESE_CURDS = BLOCKS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.GORGONZOLA).get(CheeseUtils.CURDS),
             () -> new CheeseCurdBlock(Reference.ItemColor.GORGONZOLA_CHEESE.getColor())
+    );
+    public static final RegistryObject<CheeseWheelBlock> GOUDA_CHEESE = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.GOUDA).get(CheeseUtils.CHEESE),
+            () -> new CheeseWheelBlock(Reference.ItemColor.GOUDA_CHEESE.getColor())
     );
     public static final RegistryObject<CheeseCurdBlock> GOUDA_CHEESE_CURDS = BLOCKS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.GOUDA).get(CheeseUtils.CURDS),
@@ -64,12 +88,20 @@ public class GrowthcraftMilkBlocks {
     public static final RegistryObject<MixingVatBlock> MIXING_VAT = BLOCKS.register(
             UnlocalizedName.MIXING_VAT, MixingVatBlock::new
     );
+    public static final RegistryObject<CheeseWheelBlock> MONTEREY_CHEESE = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.MONTEREY).get(CheeseUtils.CHEESE),
+            () -> new CheeseWheelBlock(Reference.ItemColor.MONTEREY_CHEESE.getColor())
+    );
     public static final RegistryObject<CheeseCurdBlock> MONTEREY_CHEESE_CURDS = BLOCKS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.MONTEREY).get(CheeseUtils.CURDS),
             () -> new CheeseCurdBlock(Reference.ItemColor.MONTEREY_CHEESE.getColor())
     );
     public static final RegistryObject<PancheonBlock> PANCHEON = BLOCKS.register(
             UnlocalizedName.PANCHEON, PancheonBlock::new
+    );
+    public static final RegistryObject<CheeseWheelBlock> PARMESAN_CHEESE = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.PARMESAN).get(CheeseUtils.CHEESE),
+            () -> new CheeseWheelBlock(Reference.ItemColor.PARMESAN_CHEESE.getColor())
     );
     public static final RegistryObject<CheeseCurdBlock> PARMESAN_CHEESE_CURDS = BLOCKS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.PARMESAN).get(CheeseUtils.CURDS),
@@ -78,6 +110,10 @@ public class GrowthcraftMilkBlocks {
     public static final RegistryObject<CheeseCurdBlock> RICOTTA_CHEESE_CURDS = BLOCKS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.RICOTTA).get(CheeseUtils.CURDS),
             () -> new CheeseCurdBlock(Reference.ItemColor.RICOTTA_CHEESE.getColor())
+    );
+    public static final RegistryObject<CheeseWheelBlock> PROVOLONE_CHEESE = BLOCKS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.PROVOLONE).get(CheeseUtils.CHEESE),
+            () -> new CheeseWheelBlock(Reference.ItemColor.PROVOLONE_CHEESE.getColor())
     );
     public static final RegistryObject<CheeseCurdBlock> PROVOLONE_CHEESE_CURDS = BLOCKS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.PROVOLONE).get(CheeseUtils.CURDS),

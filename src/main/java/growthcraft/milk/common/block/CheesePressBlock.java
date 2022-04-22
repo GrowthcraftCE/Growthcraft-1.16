@@ -27,6 +27,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -85,6 +86,8 @@ public class CheesePressBlock extends Block {
     }
 
     @Override
+    @Nonnull
+    @SuppressWarnings("deprecation")
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
         if (!worldIn.isRemote) {
             CheesePressTileEntity tileEntity = (CheesePressTileEntity) worldIn.getTileEntity(pos);
@@ -124,7 +127,6 @@ public class CheesePressBlock extends Block {
 
                         tileEntity.markDirty();
                     }
-
                 return ActionResultType.SUCCESS;
             }
         }
@@ -132,12 +134,14 @@ public class CheesePressBlock extends Block {
     }
 
     @SuppressWarnings("deprecation")
+    @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return BOUNDING_BOX;
     }
 
     @Override
+    @Nonnull
     @SuppressWarnings("deprecation")
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         TileEntity tileentity = builder.get(LootParameters.BLOCK_ENTITY);
@@ -147,7 +151,6 @@ public class CheesePressBlock extends Block {
                 for(int i = 0; i < cheesePressTileEntity.getSizeInventory(); ++i) {
                     stackConsumer.accept(cheesePressTileEntity.getStackInSlot(i));
                 }
-
             });
         }
 

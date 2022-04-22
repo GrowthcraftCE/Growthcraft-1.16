@@ -24,10 +24,14 @@ public class GrowthcraftMilkBlockRenders {
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.SKIM_MILK_FLUID_BLOCK.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkFluids.WHEY_FLUID_BLOCK.get(), RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.CHEDDAR_CHEESE_CURDS.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.CHEDDAR_CHEESE.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.APPENZELLER_CHEESE_CURDS.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.APPENZELLER_CHEESE_PRESSED.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.ASIAGO_CHEESE.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.ASIAGO_CHEESE_CURDS.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.EMMENTALER_CHEESE.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.EMMENTALER_CHEESE_CURDS.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.GORGONZOLA_CHEESE.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.GORGONZOLA_CHEESE_CURDS.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.GOUDA_CHEESE_CURDS.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.MONTEREY_CHEESE_CURDS.get(), RenderType.getCutout());
@@ -35,6 +39,11 @@ public class GrowthcraftMilkBlockRenders {
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.PROVOLONE_CHEESE_CURDS.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.CASU_MARZU_CHEESE_CURDS.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.RICOTTA_CHEESE_CURDS.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.GOUDA_CHEESE.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.MONTEREY_CHEESE.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.PARMESAN_CHEESE.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.PROVOLONE_CHEESE.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(GrowthcraftMilkBlocks.CASU_MARZU_CHEESE.get(), RenderType.getCutout());
 
     }
 

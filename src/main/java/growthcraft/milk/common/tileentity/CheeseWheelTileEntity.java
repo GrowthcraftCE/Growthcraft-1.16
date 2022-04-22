@@ -26,6 +26,7 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
     public CheeseWheelTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
         this.currentAging = 0;
+        // TODO: Implement aging process
         this.aged = true;
         this.sliceCountBottom = 4;
         this.sliceCountTop = 0;
@@ -33,7 +34,7 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
 
     @Override
     public void tick() {
-        if (world != null && !world.isRemote() && !world.getBlockState(pos).get(CheeseWheelBlock.AGED)) {
+        if (world != null && !world.isRemote() && Boolean.FALSE.equals(world.getBlockState(pos).get(CheeseWheelBlock.AGED))) {
             if (this.currentAging < this.maxAging) {
                 this.currentAging++;
             } else {
@@ -65,10 +66,14 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
     }
 
     public void takeSlice() {
-        if(this.sliceCountTop > 0) {
-            this.sliceCountTop--;
+        this.takeSlice(1);
+    }
+
+    public void takeSlice(int count) {
+        if (this.sliceCountTop > 0) {
+            this.sliceCountTop -= count;
         } else if (this.sliceCountBottom > 0) {
-            this.sliceCountBottom--;
+            this.sliceCountBottom -= count;
         }
         this.markDirty();
     }
@@ -123,4 +128,7 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
         return nbt;
     }
 
+    public int getSliceCount() {
+        return this.sliceCountBottom + this.sliceCountTop;
+    }
 }

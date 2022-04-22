@@ -4,6 +4,7 @@ import growthcraft.lib.common.item.GrowthcraftBucketItem;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.lib.common.block.CheeseCurdBlock;
+import growthcraft.milk.lib.common.block.CheeseWheelBlock;
 import growthcraft.milk.lib.common.item.CheeseCurdsDrainedItem;
 import growthcraft.rice.shared.Reference;
 import net.minecraftforge.api.distmarker.Dist;
@@ -40,6 +41,22 @@ public class ColorRegistryEvent {
         cheeseCurdBlocks.add(GrowthcraftMilkBlocks.RICOTTA_CHEESE_CURDS.get());
 
         cheeseCurdBlocks.forEach(block -> event.getBlockColors().register((blockstate, reader, pos, i) -> block.getColor(i), block));
+
+        List<CheeseWheelBlock> cheeseWheelBlocks = new ArrayList<>();
+
+        cheeseWheelBlocks.add(GrowthcraftMilkBlocks.APPENZELLER_CHEESE_PRESSED.get());
+        cheeseWheelBlocks.add(GrowthcraftMilkBlocks.ASIAGO_CHEESE.get());
+        cheeseWheelBlocks.add(GrowthcraftMilkBlocks.CHEDDAR_CHEESE.get());
+        cheeseWheelBlocks.add(GrowthcraftMilkBlocks.EMMENTALER_CHEESE.get());
+        cheeseWheelBlocks.add(GrowthcraftMilkBlocks.GORGONZOLA_CHEESE.get());
+        cheeseWheelBlocks.add(GrowthcraftMilkBlocks.GOUDA_CHEESE.get());
+        cheeseWheelBlocks.add(GrowthcraftMilkBlocks.CASU_MARZU_CHEESE.get());
+        cheeseWheelBlocks.add(GrowthcraftMilkBlocks.EMMENTALER_CHEESE.get());
+        cheeseWheelBlocks.add(GrowthcraftMilkBlocks.MONTEREY_CHEESE.get());
+        cheeseWheelBlocks.add(GrowthcraftMilkBlocks.PARMESAN_CHEESE.get());
+        cheeseWheelBlocks.add(GrowthcraftMilkBlocks.PROVOLONE_CHEESE.get());
+
+        cheeseWheelBlocks.forEach(block -> event.getBlockColors().register((blockstate, reader, pos, i) -> block.getColor(i), block));
 
     }
 
@@ -89,6 +106,21 @@ public class ColorRegistryEvent {
         cheeseCurdBlocks.add(GrowthcraftMilkBlocks.RICOTTA_CHEESE_CURDS.get());
 
         cheeseCurdBlocks.forEach(block -> event.getItemColors().register((itemStack, i) -> block.getColor(i), block.asItem()));
+
+        List<CheeseWheelBlock> cheeseBlocks = new ArrayList<>();
+        cheeseBlocks.add(GrowthcraftMilkBlocks.APPENZELLER_CHEESE_PRESSED.get());
+        cheeseBlocks.add(GrowthcraftMilkBlocks.ASIAGO_CHEESE.get());
+        cheeseBlocks.add(GrowthcraftMilkBlocks.CHEDDAR_CHEESE.get());
+        cheeseBlocks.add(GrowthcraftMilkBlocks.EMMENTALER_CHEESE.get());
+        cheeseBlocks.add(GrowthcraftMilkBlocks.GORGONZOLA_CHEESE.get());
+        cheeseBlocks.add(GrowthcraftMilkBlocks.GOUDA_CHEESE.get());
+        cheeseBlocks.add(GrowthcraftMilkBlocks.CASU_MARZU_CHEESE.get());
+        cheeseBlocks.add(GrowthcraftMilkBlocks.EMMENTALER_CHEESE.get());
+        cheeseBlocks.add(GrowthcraftMilkBlocks.MONTEREY_CHEESE.get());
+        cheeseBlocks.add(GrowthcraftMilkBlocks.PARMESAN_CHEESE.get());
+        cheeseBlocks.add(GrowthcraftMilkBlocks.PROVOLONE_CHEESE.get());
+
+        cheeseBlocks.forEach(block -> event.getItemColors().register((itemStack, i) -> block.getColor(i), block.asItem()));
 
     }
 }
