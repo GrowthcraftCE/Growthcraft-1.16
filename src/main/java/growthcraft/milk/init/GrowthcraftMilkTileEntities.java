@@ -18,7 +18,6 @@ public class GrowthcraftMilkTileEntities {
             ).build(null)
     );
 
-    // TODO: Add more cheese wheel blocks.
     public static final RegistryObject<TileEntityType<CheeseWheelTileEntity>> CHEESE_WHEEL_TILE_ENTITY = TILE_ENTITIES.register(
             UnlocalizedName.CHEESE_WHEEL_TILE_ENTITY,
             () -> TileEntityType.Builder.create(

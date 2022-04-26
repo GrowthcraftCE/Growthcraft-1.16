@@ -1,7 +1,6 @@
 package growthcraft.milk.common.tileentity;
 
 import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
-import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.common.recipe.CheesePressRecipe;
 import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
@@ -20,7 +19,6 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.util.Constants;
-import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -79,16 +77,10 @@ public class CheesePressTileEntity extends LockableLootTileEntity implements ITi
 
     @Override
     public void tick() {
-        // TODO: Make the cheese press actually do something.
         if (world != null && !world.isRemote() && !this.inventory.getStackInSlot(0).isEmpty() && this.getRotation() == 7) {
             if (isRecipeCurrent()) {
                 if (this.currentProcessingTicks < this.maxProcessingTicks) {
                     this.currentProcessingTicks++;
-                    if (this.currentProcessingTicks % 60 == 0) {
-                        GrowthcraftMilk.LOGGER.log(Level.WARN,
-                                "{} processing at {} / {}",
-                                this.currentRecipe.getId(), this.currentProcessingTicks, this.maxProcessingTicks);
-                    }
                     this.markDirty();
                 } else {
                     this.processCurrentRecipe();

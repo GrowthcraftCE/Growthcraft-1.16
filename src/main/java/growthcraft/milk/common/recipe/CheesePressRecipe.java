@@ -15,13 +15,15 @@ public class CheesePressRecipe implements IRecipe<IInventory> {
 
     private final ItemStack inputItemStack;
     private final ItemStack outputItemStack;
+    private final ItemStack sliceItemStack;
     private final int processingTime;
     private final ResourceLocation recipeId;
 
-    public CheesePressRecipe(ResourceLocation recipeId, ItemStack input, ItemStack result, int ticks) {
+    public CheesePressRecipe(ResourceLocation recipeId, ItemStack input, ItemStack result, ItemStack slice, int ticks) {
         this.recipeId = recipeId;
         this.inputItemStack = input;
         this.outputItemStack = result;
+        this.sliceItemStack = slice;
         this.processingTime = ticks;
     }
 
@@ -33,6 +35,11 @@ public class CheesePressRecipe implements IRecipe<IInventory> {
     public boolean matches(ItemStack itemStack) {
         return this.inputItemStack.getItem() == itemStack.getItem()
                 && this.inputItemStack.getCount() == itemStack.getCount();
+    }
+
+    public boolean matchesOutput(ItemStack itemStack) {
+        return this.outputItemStack.getItem() == itemStack.getItem()
+                && this.outputItemStack.getCount() == itemStack.getCount();
     }
 
     @Override
@@ -76,5 +83,9 @@ public class CheesePressRecipe implements IRecipe<IInventory> {
 
     public int getProcessingTime() {
         return this.processingTime;
+    }
+
+    public ItemStack getSliceItem() {
+        return this.sliceItemStack.copy();
     }
 }

@@ -83,14 +83,13 @@ public class CheeseWheelBlock extends HorizontalBlock {
                 return ActionResultType.SUCCESS;
             }
 
-            // TODO: If not sneaking and hand is empty, then take a slice.
             if (!player.isSneaking() && player.getHeldItemMainhand().isEmpty()) {
                 if (tileEntity.canTakeSlice()) {
-                    tileEntity.takeSlice();
+                    player.inventory.addItemStackToInventory(tileEntity.takeSlice());
                 }
             }
 
-            if (player.isSneaking() && tileEntity.getSliceCount() > 4 || tileEntity.getSliceCount() == 4) {
+            if (player.isSneaking() && (tileEntity.getSliceCount() > 4 || tileEntity.getSliceCount() == 4)) {
                 tileEntity.takeSlice(4);
                 player.inventory.addItemStackToInventory(new ItemStack(this.asItem()));
             }

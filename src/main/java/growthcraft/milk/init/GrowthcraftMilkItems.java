@@ -126,38 +126,87 @@ public class GrowthcraftMilkItems {
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.APPENZELLER).get(CheeseUtils.DRAINED),
             () -> new CheeseCurdsDrainedItem(Reference.ItemColor.APPENZELLER_CHEESE.getColor())
     );
+
+    public static final RegistryObject<GrowthcraftFoodItem> APPENZELLER_CHEESE_SLICE = ITEMS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.APPENZELLER).get(CheeseUtils.SLICE),
+            () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+    );
     public static final RegistryObject<CheeseCurdsDrainedItem> ASIAGO_CHEESE_CURDS_DRAINED = ITEMS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.ASIAGO).get(CheeseUtils.DRAINED),
             () -> new CheeseCurdsDrainedItem(Reference.ItemColor.ASIAGO_CHEESE.getColor())
+    );
+
+    public static final RegistryObject<GrowthcraftFoodItem> ASIAGO_CHEESE_SLICE = ITEMS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.ASIAGO).get(CheeseUtils.SLICE),
+            () -> new GrowthcraftFoodItem(2, 0.3F, 64)
     );
     public static final RegistryObject<CheeseCurdsDrainedItem> CASU_MARZU_CHEESE_CURDS_DRAINED = ITEMS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.CASU_MARZU).get(CheeseUtils.DRAINED),
             () -> new CheeseCurdsDrainedItem(Reference.ItemColor.CASU_MARZU_CHEESE.getColor())
     );
+
+    public static final RegistryObject<GrowthcraftFoodItem> CASU_MARZU_CHEESE_SLICE = ITEMS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.CASU_MARZU).get(CheeseUtils.SLICE),
+            () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+    );
     public static final RegistryObject<CheeseCurdsDrainedItem> CHEDDAR_CHEESE_CURDS_DRAINED = ITEMS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.CHEDDAR).get(CheeseUtils.DRAINED),
             () -> new CheeseCurdsDrainedItem(Reference.ItemColor.CHEDDAR_CHEESE.getColor())
+    );
+
+    public static final RegistryObject<GrowthcraftFoodItem> CHEDDAR_CHEESE_SLICE = ITEMS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.CHEDDAR).get(CheeseUtils.SLICE),
+            () -> new GrowthcraftFoodItem(2, 0.3F, 64)
     );
     public static final RegistryObject<CheeseCurdsDrainedItem> EMMENTALER_CHEESE_CURDS_DRAINED = ITEMS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.EMMENTALER).get(CheeseUtils.DRAINED),
             () -> new CheeseCurdsDrainedItem(Reference.ItemColor.EMMENTALER_CHEESE.getColor())
     );
+
+    public static final RegistryObject<GrowthcraftFoodItem> EMMENTALER_CHEESE_SLICE = ITEMS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.EMMENTALER).get(CheeseUtils.SLICE),
+            () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+    );
     public static final RegistryObject<CheeseCurdsDrainedItem> GORGONZOLA_CHEESE_CURDS_DRAINED = ITEMS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.GORGONZOLA).get(CheeseUtils.DRAINED),
             () -> new CheeseCurdsDrainedItem(Reference.ItemColor.GORGONZOLA_CHEESE.getColor())
     );
+
+    public static final RegistryObject<GrowthcraftFoodItem> GORGONZOLA_CHEESE_SLICE = ITEMS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.GORGONZOLA).get(CheeseUtils.SLICE),
+            () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+    );
+
     public static final RegistryObject<CheeseCurdsDrainedItem> GOUDA_CHEESE_CURDS_DRAINED = ITEMS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.GOUDA).get(CheeseUtils.DRAINED),
             () -> new CheeseCurdsDrainedItem(Reference.ItemColor.GOUDA_CHEESE.getColor())
     );
+
+    public static final RegistryObject<GrowthcraftFoodItem> GOUDA_CHEESE_SLICE = ITEMS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.GOUDA).get(CheeseUtils.SLICE),
+            () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+    );
+
     public static final RegistryObject<CheeseCurdsDrainedItem> MONTEREY_CHEESE_CURDS_DRAINED = ITEMS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.MONTEREY).get(CheeseUtils.DRAINED),
             () -> new CheeseCurdsDrainedItem(Reference.ItemColor.MONTEREY_CHEESE.getColor())
     );
+
+    public static final RegistryObject<GrowthcraftFoodItem> MONTEREY_CHEESE_SLICE = ITEMS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.MONTEREY).get(CheeseUtils.SLICE),
+            () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+    );
+
     public static final RegistryObject<CheeseCurdsDrainedItem> PARMESAN_CHEESE_CURDS_DRAINED = ITEMS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.PARMESAN).get(CheeseUtils.DRAINED),
             () -> new CheeseCurdsDrainedItem(Reference.ItemColor.PARMESAN_CHEESE.getColor())
     );
+
+    public static final RegistryObject<GrowthcraftFoodItem> PARMESAN_CHEESE_SLICE = ITEMS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.PARMESAN).get(CheeseUtils.SLICE),
+            () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+    );
+
     public static final RegistryObject<CheeseCurdsDrainedItem> PROVOLONE_CHEESE_CURDS_DRAINED = ITEMS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.PROVOLONE).get(CheeseUtils.DRAINED),
             () -> new CheeseCurdsDrainedItem(Reference.ItemColor.PROVOLONE_CHEESE.getColor())

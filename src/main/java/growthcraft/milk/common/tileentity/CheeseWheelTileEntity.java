@@ -1,8 +1,11 @@
 package growthcraft.milk.common.tileentity;
 
+import growthcraft.milk.common.recipe.CheesePressRecipe;
+import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
 import growthcraft.milk.lib.common.block.CheeseWheelBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -11,6 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEntity {
 
@@ -65,8 +69,17 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
         return this.aged && this.sliceCountBottom > 0;
     }
 
-    public void takeSlice() {
-        this.takeSlice(1);
+    public ItemStack takeSlice() {
+        List<CheesePressRecipe> cheesePressRecipes = this.world.getRecipeManager().getRecipesForType(GrowthcraftMilkRecipes.CHEESE_PRESS_RECIPE_TYPE);
+
+        for (CheesePressRecipe cheesePressRecipe : cheesePressRecipes) {
+            if (cheesePressRecipe.matchesOutput(new ItemStack(this.world.getBlockState(this.pos).getBlock().asItem()))) {
+                this.takeSlice(1);
+                return cheesePressRecipe.getSliceItem();
+            }
+        }
+
+        return null;
     }
 
     public void takeSlice(int count) {

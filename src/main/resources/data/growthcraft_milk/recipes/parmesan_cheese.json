@@ -3,11 +3,14 @@
   "processing_time": 6000,
   "result_type": "item",
   "ingredient": {
-    "item": "growthcraft_milk:cheddar_cheese_curds_drained",
+    "item": "growthcraft_milk:parmesan_cheese_curds_drained",
     "count": 1
   },
   "result_item": {
-    "item": "growthcraft_milk:cheddar_cheese",
+    "item": "growthcraft_milk:parmesan_cheese",
     "count": 1
+  },
+  "slice": {
+    "item": "growthcraft_milk:parmesan_cheese_slice"
   }
 }

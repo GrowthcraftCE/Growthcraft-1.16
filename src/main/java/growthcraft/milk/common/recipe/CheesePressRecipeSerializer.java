@@ -31,8 +31,9 @@ public class CheesePressRecipeSerializer extends ForgeRegistryEntry<IRecipeSeria
         int processingTime = JSONUtils.getInt(json, "processing_time", 6000);
         ItemStack inputItemStack = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "ingredient"), true);
         ItemStack resultItemStack = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "result_item"), true);
+        ItemStack sliceItemStack = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "slice"), true);
 
-        return new CheesePressRecipe(recipeId, inputItemStack, resultItemStack, processingTime);
+        return new CheesePressRecipe(recipeId, inputItemStack, resultItemStack, sliceItemStack, processingTime);
     }
 
     /**
@@ -49,9 +50,10 @@ public class CheesePressRecipeSerializer extends ForgeRegistryEntry<IRecipeSeria
         try {
             ItemStack a = buffer.readItemStack();
             ItemStack b = buffer.readItemStack();
-            int c = buffer.readVarInt();
+            ItemStack c = buffer.readItemStack();
+            int d = buffer.readVarInt();
 
-            return new CheesePressRecipe(recipeId, a, b, c);
+            return new CheesePressRecipe(recipeId, a, b, c, d);
         } catch (Exception ex) {
             GrowthcraftMilk.LOGGER.log(Level.ERROR,
                     "{} threw an exception while trying to read {} from the network buffer.",
@@ -72,6 +74,7 @@ public class CheesePressRecipeSerializer extends ForgeRegistryEntry<IRecipeSeria
         try {
             buffer.writeItemStack(recipe.getRecipeInput());
             buffer.writeItemStack(recipe.getRecipeOutput());
+            buffer.writeItemStack(recipe.getSliceItem());
             buffer.writeVarInt(recipe.getProcessingTime());
         } catch (Exception ex) {
             GrowthcraftMilk.LOGGER.log(Level.ERROR,
