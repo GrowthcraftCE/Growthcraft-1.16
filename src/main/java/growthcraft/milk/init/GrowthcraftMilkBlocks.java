@@ -16,6 +16,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.logging.log4j.Level;
 
 import java.util.ArrayList;
 
@@ -128,8 +129,9 @@ public class GrowthcraftMilkBlocks {
     }
 
     public static void registerBlockItems(IForgeRegistry<Item> itemRegistry, Item.Properties properties) {
-        GrowthcraftMilk.LOGGER.debug("<Growthcraft-Milk> Registration of itemBlocks started ...");
-
+        GrowthcraftMilk.LOGGER.log(Level.DEBUG,
+                "<{}> Registration of itemBlocks started ...",
+                Reference.MODID);
         BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
             final BlockItem blockItem = new BlockItem(block, properties);
             if (block.getRegistryName() != null && !excludeBlockItemRegistry(block.getRegistryName())) {
@@ -138,7 +140,9 @@ public class GrowthcraftMilkBlocks {
             }
         });
 
-        GrowthcraftMilk.LOGGER.debug("<Growthcraft-Milk> Registration of itemBlocks finished.");
+        GrowthcraftMilk.LOGGER.log(Level.DEBUG,
+                "<{}> Registration of itemBlocks finished.",
+                Reference.MODID);
     }
 
     private static boolean excludeBlockItemRegistry(ResourceLocation registryName) {

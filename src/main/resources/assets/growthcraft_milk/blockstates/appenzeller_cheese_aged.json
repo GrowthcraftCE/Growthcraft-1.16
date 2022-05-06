@@ -2,42 +2,88 @@
   "multipart": [
     {
       "when": { "OR": [
-        {"slice_count_top": "0", "facing": "north|east|south|west"},
-        {"slice_count_bottom": "0", "facing": "north|east|south|west"}
+        {
+          "slicestop": "0",
+          "facing": "north|east|south|west"
+        },
+        {
+          "slicesbottom": "0",
+          "facing": "north|east|south|west"
+        }
       ]},
       "apply": {"model": "growthcraft:block/blank_model"}
     },
     {
-      "when": {"slice_count_top": "1", "facing": "north"},
-      "apply": {"model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_top_1"}
+      "when": {
+        "slicestop": "1",
+        "facing": "north"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_top_1"
+      }
     },
     {
-      "when": {"slice_count_top": "2", "facing": "north"},
-      "apply": {"model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_top_2"}
+      "when": {
+        "slicestop": "2",
+        "facing": "north"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_top_2"
+      }
     },
     {
-      "when": {"slice_count_top": "3", "facing": "north"},
-      "apply": {"model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_top_3"}
+      "when": {
+        "slicestop": "3",
+        "facing": "north"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_top_3"
+      }
     },
     {
-      "when": {"slice_count_top": "4", "facing": "north"},
-      "apply": {"model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_top_4"}
+      "when": {
+        "slicestop": "4",
+        "facing": "north"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_top_4"
+      }
     },
     {
-      "when": {"slice_count_bottom": "1", "facing": "north"},
-      "apply": {"model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_bottom_1"}
+      "when": {
+        "slicesbottom": "1",
+        "facing": "north"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_bottom_1"
+      }
     },
     {
-      "when": {"slice_count_bottom": "2", "facing": "north"},
-      "apply": {"model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_bottom_2"}
+      "when": {
+        "slicesbottom": "2",
+        "facing": "north"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_bottom_2"
+      }
     },
     {
-      "when": {"slice_count_bottom": "3", "facing": "north"},
-      "apply": {"model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_bottom_3"}
+      "when": {
+        "slicesbottom": "3",
+        "facing": "north"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_bottom_3"
+      }
     },
     {
-      "when": {"slice_count_bottom": "4", "facing": "north"},
-      "apply": {"model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_bottom_4"}
+      "when": {
+        "slicesbottom": "4",
+        "facing": "north"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_bottom_4"
+      }
     }
   ]
 }

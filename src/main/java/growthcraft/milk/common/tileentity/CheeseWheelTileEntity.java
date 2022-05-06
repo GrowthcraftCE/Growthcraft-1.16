@@ -22,7 +22,7 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
     private int sliceCountTop;
     private int sliceCountBottom;
     private int currentAging;
-    private final int maxAging = 24000 * 3;
+    private static final int MAX_AGING = 24000 * 3;
 
     public CheeseWheelTileEntity() {
         this(GrowthcraftMilkTileEntities.CHEESE_WHEEL_TILE_ENTITY.get());
@@ -39,7 +39,7 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
     @Override
     public void tick() {
         if (world != null && !world.isRemote() && Boolean.FALSE.equals(world.getBlockState(pos).get(CheeseWheelBlock.AGED))) {
-            if (this.currentAging < this.maxAging) {
+            if (this.currentAging < MAX_AGING) {
                 this.currentAging++;
             } else {
                 BlockState state = this.world.getBlockState(pos);
@@ -54,19 +54,18 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
 
     @Override
     public void markDirty() {
-        this.setBlockState();
         super.markDirty();
     }
 
-    private void setBlockState() {
+    private void setBlockState(int bottomSlices, int topSlices) {
         this.world.setBlockState(this.getPos(), this.getBlockState()
-                .with(CheeseWheelBlock.SLICE_COUNT_TOP, this.sliceCountTop)
-                .with(CheeseWheelBlock.SLICE_COUNT_BOTTOM, this.sliceCountBottom)
+                .with(CheeseWheelBlock.SLICE_COUNT_TOP, topSlices)
+                .with(CheeseWheelBlock.SLICE_COUNT_BOTTOM, bottomSlices)
         );
     }
 
     public boolean canTakeSlice() {
-        return this.aged && this.sliceCountBottom > 0;
+        return this.aged && this.getSliceCount() > 0;
     }
 
     public ItemStack takeSlice() {
@@ -88,14 +87,22 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
         } else if (this.sliceCountBottom > 0) {
             this.sliceCountBottom -= count;
         }
-        this.markDirty();
+        this.setBlockState(this.sliceCountBottom, this.sliceCountTop);
     }
 
     public void addSlice(int count) {
-        if (this.sliceCountTop == 0) {
-            this.sliceCountTop = 4;
+        int newTotal = this.sliceCountBottom + this.sliceCountTop + count;
+
+        if (newTotal > 4) {
+            // Then we have enough room to add the slice to the stack.
+            this.sliceCountBottom = 4;
+            this.sliceCountTop = newTotal - this.sliceCountBottom;
+        } else {
+            this.sliceCountBottom = newTotal;
+            this.sliceCountTop = 0;
         }
-        this.markDirty();
+
+        this.setBlockState(this.sliceCountBottom, this.sliceCountTop);
     }
 
 
@@ -103,9 +110,9 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
     public void read(BlockState state, CompoundNBT compound) {
         super.read(state, compound);
 
-        this.sliceCountTop = compound.getInt("SlicesTop");
-        this.sliceCountTop = compound.getInt("SlicesBottom");
-        this.aged = compound.getBoolean("Aged");
+        this.sliceCountTop = compound.getInt("slicestop");
+        this.sliceCountBottom = compound.getInt("slicesbottom");
+        this.aged = compound.getBoolean("aged");
         this.currentAging = compound.getInt("CurrentAging");
     }
 
@@ -113,9 +120,9 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
 
-        compound.putInt("SlicesTop", this.sliceCountTop);
-        compound.putInt("SlicesBottom", this.sliceCountBottom);
-        compound.putBoolean("Aged", this.aged);
+        compound.putInt("slicestop", this.sliceCountTop);
+        compound.putInt("slicesbottom", this.sliceCountBottom);
+        compound.putBoolean("aged", this.aged);
         compound.putInt("CurrentAging", this.currentAging);
 
         return super.write(compound);

@@ -99,20 +99,13 @@ public class CheesePressBlock extends Block {
                     // Loosen the vice and
                     if (tileEntity.getRotation() > 0) {
                         worldIn.setBlockState(pos, state.with(ROTATION, tileEntity.doRotation(false)), 2);
-                        // Auto-Extract the stored item.
-                        GrowthcraftMilk.LOGGER.log(Level.DEBUG, "CheesePress has a {} in Slot(0).", tileEntity.getInventory().getStackInSlot(0));
-
                         ItemStack itemStack = tileEntity.getInventory().extractItem(0, tileEntity.getInventory().getStackInSlot(0).getCount(), false);
 
-                        GrowthcraftMilk.LOGGER.log(Level.DEBUG, "CheesePress has a {} in Slot(0).", tileEntity.getInventory().getStackInSlot(0));
-
-                        GrowthcraftMilk.LOGGER.log(Level.DEBUG, "Pulling {} out of tileEntity.", itemStack.toString());
                         if (!itemStack.isEmpty() && !player.inventory.addItemStackToInventory(itemStack)) {
-                            // TODO: Fix itemstack not being placed in player inventory
                             player.dropItem(itemStack, false);
                             tileEntity.markDirty();
                         } else {
-                            GrowthcraftMilk.LOGGER.log(Level.DEBUG, "ItemStack is empty or we were able to add it to the player inventory.");
+                            GrowthcraftMilk.LOGGER.log(Level.DEBUG, "ItemStack is empty or we were unable to add it to the player inventory.");
                         }
                     }
                 }
