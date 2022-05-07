@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BRB",
+    " B "
+  ],
+  "key": {
+    "R": {
+      "item": "growthcraft_milk:ricotta_cheese_curds_drained"
+    },
+    "B": {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result": {
+    "item": "growthcraft_milk:ricotta_cheese_slice",
+    "count": 4
+  }
+}
