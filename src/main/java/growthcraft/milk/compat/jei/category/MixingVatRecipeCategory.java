@@ -25,6 +25,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.logging.log4j.Level;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,31 +59,37 @@ public class MixingVatRecipeCategory implements IRecipeCategory<MixingVatRecipe>
     }
 
     @Override
+    @Nonnull
     public ResourceLocation getUid() {
         return ID;
     }
 
     @Override
+    @Nonnull
     public Class<? extends MixingVatRecipe> getRecipeClass() {
         return MixingVatRecipe.class;
     }
 
     @Override
+    @Nonnull
     public String getTitle() {
         return title;
     }
 
     @Override
+    @Nonnull
     public IDrawable getBackground() {
         return background;
     }
 
     @Override
+    @Nonnull
     public IDrawable getIcon() {
         return icon;
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public void setIngredients(MixingVatRecipe recipe, IIngredients ingredients) {
         switch (recipe.getCategory()) {
             case FLUID:
@@ -124,13 +132,13 @@ public class MixingVatRecipeCategory implements IRecipeCategory<MixingVatRecipe>
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public void setRecipe(IRecipeLayout layout, MixingVatRecipe recipe, IIngredients ingredients) {
         IGuiFluidStackGroup guiFluidStackGroup = layout.getFluidStacks();
         IGuiItemStackGroup guiItemStackGroup = layout.getItemStacks();
 
         switch (recipe.getCategory()) {
             case FLUID:
-                MixingVatFluidRecipe fluidRecipe = (MixingVatFluidRecipe) recipe;
 
                 // Set FluidStack Input
                 guiFluidStackGroup.init(0, true, 39, 22, 16, 38, 4000, false, null);
@@ -158,12 +166,6 @@ public class MixingVatRecipeCategory implements IRecipeCategory<MixingVatRecipe>
 
                 break;
             case ITEM:
-                GrowthcraftMilk.LOGGER.log(Level.WARN,
-                        "<MixingVatRecipeCategory> Setting Ingredients for {} which is a {}",
-                        recipe.getId(), "item");
-
-                MixingVatItemRecipe itemRecipe = (MixingVatItemRecipe) recipe;
-
                 // Set FluidStack Input
                 guiFluidStackGroup.init(0, true, 39, 22, 16, 38, 4000, false, null);
                 guiFluidStackGroup.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0).get(0));
@@ -187,12 +189,13 @@ public class MixingVatRecipeCategory implements IRecipeCategory<MixingVatRecipe>
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public void draw(MixingVatRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
         try {
             overlayHeated.draw(matrixStack, 89, 47);
         } catch (Exception ex) {
             GrowthcraftMilk.LOGGER.log(Level.ERROR,
-                    "Failure to draw heat texture for Mxing Vat recipe.");
+                    "Failure to draw heat texture for Mixing Vat recipe.");
         }
     }
 }
