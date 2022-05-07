@@ -211,6 +211,12 @@ public class GrowthcraftMilkItems {
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.PROVOLONE).get(CheeseUtils.DRAINED),
             () -> new CheeseCurdsDrainedItem(Reference.ItemColor.PROVOLONE_CHEESE.getColor())
     );
+
+    public static final RegistryObject<GrowthcraftFoodItem> PROVOLONE_CHEESE_SLICE = ITEMS.register(
+            CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.PROVOLONE).get(CheeseUtils.SLICE),
+            () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+    );
+
     public static final RegistryObject<CheeseCurdsDrainedItem> RICOTTA_CHEESE_CURDS_DRAINED = ITEMS.register(
             CheeseUtils.getCheeseNames(UnlocalizedName.CheeseName.RICOTTA).get(CheeseUtils.DRAINED),
             () -> new CheeseCurdsDrainedItem(Reference.ItemColor.RICOTTA_CHEESE.getColor())

@@ -37,7 +37,7 @@
                 },
                 {
                   "function": "minecraft:copy_state",
-                  "block": "growthcraft_milk:appenzeller_cheese",
+                  "block": "growthcraft_milk:provolone_cheese",
                   "properties": [
                     "aged",
                     "slicestop",
@@ -45,7 +45,7 @@
                   ]
                 }
               ],
-              "name": "growthcraft_milk:appenzeller_cheese"
+              "name": "growthcraft_milk:provolone_cheese"
             }
           ]
         }

@@ -44,7 +44,7 @@ public class ColorRegistryEvent {
 
         List<CheeseWheelBlock> cheeseWheelBlocks = new ArrayList<>();
 
-        cheeseWheelBlocks.add(GrowthcraftMilkBlocks.APPENZELLER_CHEESE_PRESSED.get());
+        cheeseWheelBlocks.add(GrowthcraftMilkBlocks.APPENZELLER_CHEESE.get());
         cheeseWheelBlocks.add(GrowthcraftMilkBlocks.ASIAGO_CHEESE.get());
         cheeseWheelBlocks.add(GrowthcraftMilkBlocks.CHEDDAR_CHEESE.get());
         cheeseWheelBlocks.add(GrowthcraftMilkBlocks.EMMENTALER_CHEESE.get());
@@ -108,7 +108,7 @@ public class ColorRegistryEvent {
         cheeseCurdBlocks.forEach(block -> event.getItemColors().register((itemStack, i) -> block.getColor(i), block.asItem()));
 
         List<CheeseWheelBlock> cheeseBlocks = new ArrayList<>();
-        cheeseBlocks.add(GrowthcraftMilkBlocks.APPENZELLER_CHEESE_PRESSED.get());
+        cheeseBlocks.add(GrowthcraftMilkBlocks.APPENZELLER_CHEESE.get());
         cheeseBlocks.add(GrowthcraftMilkBlocks.ASIAGO_CHEESE.get());
         cheeseBlocks.add(GrowthcraftMilkBlocks.CHEDDAR_CHEESE.get());
         cheeseBlocks.add(GrowthcraftMilkBlocks.EMMENTALER_CHEESE.get());

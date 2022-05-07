@@ -35,7 +35,7 @@ public class Reference {
         public static final ColorUtils.GrowthcraftColor CHEESE_BASE_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xFFFDD0);
         public static final ColorUtils.GrowthcraftColor CONDENSED_MILK_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xFFFFFFFA);
         public static final ColorUtils.GrowthcraftColor CREAM_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xFFFFFDD0);
-        public static final ColorUtils.GrowthcraftColor CULTURED_MILK_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xF7D99E);
+        public static final ColorUtils.GrowthcraftColor CULTURED_MILK_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xFFF7D99E);
         public static final ColorUtils.GrowthcraftColor KUMIS_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xFFF9F9F9);
         public static final ColorUtils.GrowthcraftColor MILK_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xFFF6F8ED);
         public static final ColorUtils.GrowthcraftColor RENNET_FLUID_COLOR = new ColorUtils.GrowthcraftColor(0xFF877243);

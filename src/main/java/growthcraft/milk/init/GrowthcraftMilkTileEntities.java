@@ -22,7 +22,7 @@ public class GrowthcraftMilkTileEntities {
             UnlocalizedName.CHEESE_WHEEL_TILE_ENTITY,
             () -> TileEntityType.Builder.create(
                     CheeseWheelTileEntity::new,
-                    GrowthcraftMilkBlocks.APPENZELLER_CHEESE_PRESSED.get(),
+                    GrowthcraftMilkBlocks.APPENZELLER_CHEESE.get(),
                     GrowthcraftMilkBlocks.ASIAGO_CHEESE.get(),
                     GrowthcraftMilkBlocks.CASU_MARZU_CHEESE.get(),
                     GrowthcraftMilkBlocks.CHEDDAR_CHEESE.get(),

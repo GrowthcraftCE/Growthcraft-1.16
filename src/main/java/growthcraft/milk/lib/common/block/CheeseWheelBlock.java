@@ -1,10 +1,8 @@
 package growthcraft.milk.lib.common.block;
 
-import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.common.tileentity.CheeseWheelTileEntity;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
 import net.minecraft.block.*;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
@@ -21,7 +19,6 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -96,11 +93,6 @@ public class CheeseWheelBlock extends HorizontalBlock {
     @SuppressWarnings("deprecation")
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote && handIn.name().equals("MAIN_HAND")) {
-
-            GrowthcraftMilk.LOGGER.log(Level.WARN,
-                    "Cheese Wheel Block is being activated on the server on {}",
-                    hit.getFace());
-
             CheeseWheelTileEntity tileEntity = (CheeseWheelTileEntity) worldIn.getTileEntity(pos);
 
             if (player.getHeldItemMainhand().getItem() == this.asItem()) {
@@ -125,14 +117,6 @@ public class CheeseWheelBlock extends HorizontalBlock {
         }
 
         return ActionResultType.SUCCESS;
-    }
-
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        GrowthcraftMilk.LOGGER.log(Level.WARN,
-                "Block placed by {} on {} via {}",
-                placer.toString(), worldIn.isRemote(), stack.toString());
-        //super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     }
 
     @Override

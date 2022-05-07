@@ -105,7 +105,6 @@ public class CheeseWheelTileEntity extends TileEntity implements ITickableTileEn
         this.setBlockState(this.sliceCountBottom, this.sliceCountTop);
     }
 
-
     @Override
     public void read(BlockState state, CompoundNBT compound) {
         super.read(state, compound);
