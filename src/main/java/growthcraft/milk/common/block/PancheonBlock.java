@@ -1,12 +1,14 @@
 package growthcraft.milk.common.block;
 
 import growthcraft.milk.common.tileentity.PancheonTileEntity;
+import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
 import growthcraft.milk.init.config.GrowthcraftMilkConfig;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.Items;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -21,8 +23,10 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
@@ -83,16 +87,31 @@ public class PancheonBlock extends HorizontalBlock {
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 
-        if (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
-                || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
-            return ActionResultType.SUCCESS;
+        PancheonTileEntity tileEntity = (PancheonTileEntity) worldIn.getTileEntity(pos);
+
+        // Handle Vanilla Milk Bucket
+        if (!worldIn.isRemote && handIn.name().equals("MAIN_HAND") && player.getHeldItemMainhand().getItem() == Items.MILK_BUCKET) {
+            FluidStack milkBucketFluidStack = new FluidStack(GrowthcraftMilkFluids.MILK_FLUID_BLOCK.get().getFluid().getFluid(), 1000);
+            if (tileEntity.isFluidEmpty() || tileEntity.getFluidTank(0).getFluidAmount() == 1000) {
+                tileEntity.getFluidTank(0).fill(milkBucketFluidStack, IFluidHandler.FluidAction.EXECUTE);
+                player.getHeldItemMainhand().shrink(1);
+                return ActionResultType.SUCCESS;
+            } else {
+                return ActionResultType.FAIL;
+            }
         }
 
+        // GUI if enabled
         if (!worldIn.isRemote) {
-            PancheonTileEntity tileEntity = (PancheonTileEntity) worldIn.getTileEntity(pos);
             if (player.isSneaking() && GrowthcraftMilkConfig.isPancheonGuiEnabled()) {
                 NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
+                return ActionResultType.SUCCESS;
             }
+        }
+
+        // Handle generic Fluid capable items
+        if (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
+                || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
             return ActionResultType.SUCCESS;
         }
 
