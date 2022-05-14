@@ -16,6 +16,12 @@ public class GrowthcraftMilkRecipes {
     public static final IRecipeType<ChurnRecipe> CHURN_RECIPE_TYPE = IRecipeType.register(
             new ResourceLocation(Reference.MODID, UnlocalizedName.CHURN_RECIPE).toString()
     );
+    public static final IRecipeType<CheesePressRecipe> CHEESE_PRESS_RECIPE_TYPE = IRecipeType.register(
+            new ResourceLocation(Reference.MODID, UnlocalizedName.CHEESE_PRESS_RECIPE).toString()
+    );
+    public static final RegistryObject<IRecipeSerializer<?>> CHEESE_PRESS_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register(
+            UnlocalizedName.CHEESE_PRESS_RECIPE, CheesePressRecipeSerializer::new
+    );
     public static final RegistryObject<IRecipeSerializer<?>> CHURN_RECIPE_SERIALIZER = RECIPE_SERIALIZERS.register(
             UnlocalizedName.CHURN_RECIPE, ChurnRecipeSerializer::new
     );

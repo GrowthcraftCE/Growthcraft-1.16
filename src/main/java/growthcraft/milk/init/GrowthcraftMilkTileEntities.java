@@ -18,11 +18,20 @@ public class GrowthcraftMilkTileEntities {
             ).build(null)
     );
 
-    // TODO: Add more cheese wheel blocks.
     public static final RegistryObject<TileEntityType<CheeseWheelTileEntity>> CHEESE_WHEEL_TILE_ENTITY = TILE_ENTITIES.register(
             UnlocalizedName.CHEESE_WHEEL_TILE_ENTITY,
             () -> TileEntityType.Builder.create(
-                    CheeseWheelTileEntity::new, GrowthcraftMilkBlocks.APPENZELLER_CHEESE_AGED.get()
+                    CheeseWheelTileEntity::new,
+                    GrowthcraftMilkBlocks.APPENZELLER_CHEESE.get(),
+                    GrowthcraftMilkBlocks.ASIAGO_CHEESE.get(),
+                    GrowthcraftMilkBlocks.CASU_MARZU_CHEESE.get(),
+                    GrowthcraftMilkBlocks.CHEDDAR_CHEESE.get(),
+                    GrowthcraftMilkBlocks.EMMENTALER_CHEESE.get(),
+                    GrowthcraftMilkBlocks.GORGONZOLA_CHEESE.get(),
+                    GrowthcraftMilkBlocks.GOUDA_CHEESE.get(),
+                    GrowthcraftMilkBlocks.MONTEREY_CHEESE.get(),
+                    GrowthcraftMilkBlocks.PROVOLONE_CHEESE.get(),
+                    GrowthcraftMilkBlocks.PARMESAN_CHEESE.get()
             ).build(null)
     );
 

@@ -1,0 +1,55 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "functions": [
+                {
+                  "function": "minecraft:copy_name",
+                  "source": "block_entity"
+                },
+                {
+                  "function": "minecraft:copy_nbt",
+                  "source": "block_entity",
+                  "ops": [
+                    {
+                      "source": "aged",
+                      "target": "BlockEntityTag.aged",
+                      "op": "replace"
+                    },
+                    {
+                      "source": "slicestop",
+                      "target": "BlockEntityTag.slicestop",
+                      "op": "replace"
+                    },
+                    {
+                      "source": "slicesbottom",
+                      "target": "BlockEntityTag.slicesbottom",
+                      "op": "replace"
+                    }
+                  ]
+                },
+                {
+                  "function": "minecraft:copy_state",
+                  "block": "growthcraft_milk:monterey_cheese",
+                  "properties": [
+                    "aged",
+                    "slicestop",
+                    "slicesbottom"
+                  ]
+                }
+              ],
+              "name": "growthcraft_milk:monterey_cheese"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

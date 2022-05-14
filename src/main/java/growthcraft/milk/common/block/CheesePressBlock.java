@@ -27,6 +27,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -85,6 +86,8 @@ public class CheesePressBlock extends Block {
     }
 
     @Override
+    @Nonnull
+    @SuppressWarnings("deprecation")
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
         if (!worldIn.isRemote) {
             CheesePressTileEntity tileEntity = (CheesePressTileEntity) worldIn.getTileEntity(pos);
@@ -96,20 +99,13 @@ public class CheesePressBlock extends Block {
                     // Loosen the vice and
                     if (tileEntity.getRotation() > 0) {
                         worldIn.setBlockState(pos, state.with(ROTATION, tileEntity.doRotation(false)), 2);
-                        // Auto-Extract the stored item.
-                        GrowthcraftMilk.LOGGER.log(Level.DEBUG, "CheesePress has a {} in Slot(0).", tileEntity.getInventory().getStackInSlot(0));
-
                         ItemStack itemStack = tileEntity.getInventory().extractItem(0, tileEntity.getInventory().getStackInSlot(0).getCount(), false);
 
-                        GrowthcraftMilk.LOGGER.log(Level.DEBUG, "CheesePress has a {} in Slot(0).", tileEntity.getInventory().getStackInSlot(0));
-
-                        GrowthcraftMilk.LOGGER.log(Level.DEBUG, "Pulling {} out of tileEntity.", itemStack.toString());
                         if (!itemStack.isEmpty() && !player.inventory.addItemStackToInventory(itemStack)) {
-                            // TODO: Fix itemstack not being placed in player inventory
                             player.dropItem(itemStack, false);
                             tileEntity.markDirty();
                         } else {
-                            GrowthcraftMilk.LOGGER.log(Level.DEBUG, "ItemStack is empty or we were able to add it to the player inventory.");
+                            GrowthcraftMilk.LOGGER.log(Level.DEBUG, "ItemStack is empty or we were unable to add it to the player inventory.");
                         }
                     }
                 }
@@ -124,7 +120,6 @@ public class CheesePressBlock extends Block {
 
                         tileEntity.markDirty();
                     }
-
                 return ActionResultType.SUCCESS;
             }
         }
@@ -132,12 +127,14 @@ public class CheesePressBlock extends Block {
     }
 
     @SuppressWarnings("deprecation")
+    @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return BOUNDING_BOX;
     }
 
     @Override
+    @Nonnull
     @SuppressWarnings("deprecation")
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
         TileEntity tileentity = builder.get(LootParameters.BLOCK_ENTITY);
@@ -147,7 +144,6 @@ public class CheesePressBlock extends Block {
                 for(int i = 0; i < cheesePressTileEntity.getSizeInventory(); ++i) {
                     stackConsumer.accept(cheesePressTileEntity.getStackInSlot(i));
                 }
-
             });
         }
 
