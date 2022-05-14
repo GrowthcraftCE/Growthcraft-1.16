@@ -5,6 +5,7 @@ import growthcraft.lib.common.item.GrowthcraftFoodItem;
 import growthcraft.lib.common.item.GrowthcraftItem;
 import growthcraft.lib.util.CheeseUtils;
 import growthcraft.lib.util.FluidUtils;
+import growthcraft.milk.common.item.MilkingBucketItem;
 import growthcraft.milk.common.item.ThistleSeedItem;
 import growthcraft.milk.lib.common.item.CheeseCurdsDrainedItem;
 import growthcraft.milk.shared.Reference;
@@ -17,6 +18,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class GrowthcraftMilkItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(
             ForgeRegistries.ITEMS, Reference.MODID
+    );
+
+    public static final RegistryObject<MilkingBucketItem> MILKING_BUCKET_IRON = ITEMS.register(
+            UnlocalizedName.MILKING_BUCKET_IRON, MilkingBucketItem::new
     );
 
     public static final RegistryObject<GrowthcraftBucketItem> BUCKET_BUTTER_MILK = ITEMS.register(

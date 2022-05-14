@@ -30,6 +30,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 public class PancheonBlock extends HorizontalBlock {
 
@@ -72,6 +73,7 @@ public class PancheonBlock extends HorizontalBlock {
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
         builder.add(HORIZONTAL_FACING, LOCKED);
