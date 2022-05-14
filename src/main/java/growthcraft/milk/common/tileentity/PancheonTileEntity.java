@@ -264,4 +264,7 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
         return this.maxProcessingTime;
     }
 
+    public boolean isFluidEmpty() {
+        return this.inputFluidTankHandler.getTank(0).isEmpty() && this.outputFluidTankHandler.getTank(0).isEmpty() && this.outputFluidTankHandler.getTank(1).isEmpty();
+    }
 }

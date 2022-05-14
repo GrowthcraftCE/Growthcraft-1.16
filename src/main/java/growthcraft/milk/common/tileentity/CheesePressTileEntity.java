@@ -1,6 +1,8 @@
 package growthcraft.milk.common.tileentity;
 
 import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
+import growthcraft.milk.common.recipe.CheesePressRecipe;
+import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
@@ -19,14 +21,19 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class CheesePressTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
-    private static final int INPUT_INVENTORY_SLOTS = 3;
+    private static final int INPUT_INVENTORY_SLOTS = 1;
     private final GrowthcraftItemHandler inventory;
     private boolean open = true;
     private int rotation;
     private ITextComponent customName;
+
+    private CheesePressRecipe currentRecipe;
+    private int currentProcessingTicks;
+    private int maxProcessingTicks;
 
     public CheesePressTileEntity() {
         this(GrowthcraftMilkTileEntities.CHEESE_PRESS_TILE_ENTITY.get());
@@ -34,7 +41,7 @@ public class CheesePressTileEntity extends LockableLootTileEntity implements ITi
 
     public CheesePressTileEntity(TileEntityType<?> tileEntityType) {
         super(tileEntityType);
-        this.inventory = new GrowthcraftItemHandler(1);
+        this.inventory = new GrowthcraftItemHandler(INPUT_INVENTORY_SLOTS);
         this.rotation = 0;
     }
 
@@ -70,10 +77,50 @@ public class CheesePressTileEntity extends LockableLootTileEntity implements ITi
 
     @Override
     public void tick() {
-        // TODO: Make the cheese press actually do something.
-        if(world != null && !world.isRemote()) {
-
+        if (world != null && !world.isRemote() && !this.inventory.getStackInSlot(0).isEmpty() && this.getRotation() == 7) {
+            if (isRecipeCurrent()) {
+                if (this.currentProcessingTicks < this.maxProcessingTicks) {
+                    this.currentProcessingTicks++;
+                    this.markDirty();
+                } else {
+                    this.processCurrentRecipe();
+                }
+            }
         }
+    }
+
+    private boolean isRecipeCurrent() {
+        List<CheesePressRecipe> cheesePressRecipes = this.world.getRecipeManager().getRecipesForType(GrowthcraftMilkRecipes.CHEESE_PRESS_RECIPE_TYPE);
+
+        for (CheesePressRecipe cheesePressRecipe : cheesePressRecipes) {
+            if (cheesePressRecipe.matches(this.inventory.getStackInSlot(0))) {
+                if (this.currentRecipe != null && this.currentRecipe == cheesePressRecipe) {
+                    return true;
+                } else {
+                    this.currentRecipe = cheesePressRecipe;
+                    this.currentProcessingTicks = 0;
+                    this.maxProcessingTicks = cheesePressRecipe.getProcessingTime();
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public void processCurrentRecipe() {
+        if (currentRecipe != null) {
+            this.getInventory().setStackInSlot(0, ItemStack.EMPTY);
+            this.getInventory().insertItem(0, this.currentRecipe.getRecipeOutput(), false);
+            this.resetProcessing();
+        }
+    }
+
+    public void resetProcessing() {
+        this.currentRecipe = null;
+        this.currentProcessingTicks = 0;
+        this.maxProcessingTicks = 0;
+        this.markDirty();
     }
 
     public int doRotation(boolean increase) {
@@ -100,6 +147,7 @@ public class CheesePressTileEntity extends LockableLootTileEntity implements ITi
             this.customName = ITextComponent.Serializer.getComponentFromJson(compound.getString("CustomName"));
         }
 
+        this.currentProcessingTicks = compound.getInt("CurrentProcessingTicks");
         this.open = compound.getBoolean("IsOpen");
         this.rotation = compound.getInt("rotation");
         NonNullList<ItemStack> inv = NonNullList.withSize(this.inventory.getSlots(), ItemStack.EMPTY);
@@ -114,6 +162,7 @@ public class CheesePressTileEntity extends LockableLootTileEntity implements ITi
             compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
         }
 
+        compound.putInt("CurrentProcessingTicks", this.currentProcessingTicks);
         compound.putBoolean("IsOpen", this.isOpen());
         compound.putInt("rotation", this.getRotation());
         ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());

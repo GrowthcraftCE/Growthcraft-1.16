@@ -1,6 +1,6 @@
 # Growthcraft 6 for Minecraft 1.16.5 (Forge)
 
-[![Growthcraft Version](https://img.shields.io/badge/Growthcraft-6.0.10-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.16)
+[![Growthcraft Version](https://img.shields.io/badge/Growthcraft-6.0.11-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.16)
 [![](http://cf.way2muchnoise.eu/versions/growthcraft-community-edition_latest.svg)](https://minecraft.curseforge.com/projects/growthcraft-community-edition/)
 [![](http://cf.way2muchnoise.eu/short_growthcraft-community-edition.svg)](https://minecraft.curseforge.com/projects/growthcraft-community-edition/)
 [![Forge Version](https://img.shields.io/badge/Minecraft%20Forge-36.2.0-yellow.svg)](http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.16.5.html)
@@ -23,7 +23,7 @@ GitHub wiki documentation.
 
 ### Growthcraft 6 (Minecraft 1.16)
 
-End of Support: TBD Latest Version: 6.0.10 Stable Version: TBD
+End of Support: TBD Latest Version: 6.0.11 Stable Version: TBD
 
 Going from Minecraft Forge 1.12 to 1.16 made a lot of changes to the MCP mappings to the point that it prompted a
 complete rewrite from the ground. We are expecting to have a stable release in a few days.
