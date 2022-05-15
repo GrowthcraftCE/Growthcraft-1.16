@@ -4,6 +4,8 @@ import growthcraft.apiary.client.container.BeeBoxContainer;
 import growthcraft.apiary.init.GrowthcraftApiaryItems;
 import growthcraft.apiary.init.GrowthcraftApiaryTileEntities;
 import growthcraft.apiary.init.config.GrowthcraftApiaryConfig;
+import growthcraft.apiary.shared.Reference;
+import growthcraft.apiary.shared.UnlocalizedName;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,6 +27,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
@@ -222,7 +225,8 @@ public class BeeBoxTileEntity extends LockableLootTileEntity implements ITickabl
     }
 
     protected ITextComponent getDefaultName() {
-        return this.getBlockState().getBlock().getTranslatedName();
+        String translationKey = String.format("container.%s.%s", Reference.MODID, UnlocalizedName.BEE_BOX);
+        return new TranslationTextComponent(translationKey);
     }
 
     @Nullable
