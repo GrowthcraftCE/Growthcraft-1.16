@@ -19,14 +19,14 @@ import net.minecraft.world.World;
 public class ThistleCropBlock extends CropsBlock {
 
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
-            Block.makeCuboidShape(0.0625 * 5, 0.0625 * 0, 0.0625 * 5, 0.0625 * 11, 0.0625 * 4, 0.0625 * 11),
-            Block.makeCuboidShape(0.0625 * 5, 0.0625 * 0, 0.0625 * 5, 0.0625 * 11, 0.0625 * 9, 0.0625 * 11),
-            Block.makeCuboidShape(0.0625 * 5, 0.0625 * 0, 0.0625 * 5, 0.0625 * 11, 0.0625 * 9, 0.0625 * 11),
-            Block.makeCuboidShape(0.0625 * 5, 0.0625 * 0, 0.0625 * 5, 0.0625 * 11, 0.0625 * 9, 0.0625 * 11),
-            Block.makeCuboidShape(0.0625 * 4, 0.0625 * 0, 0.0625 * 4, 0.0625 * 12, 0.0625 * 15, 0.0625 * 12),
-            Block.makeCuboidShape(0.0625 * 4, 0.0625 * 0, 0.0625 * 4, 0.0625 * 12, 0.0625 * 15, 0.0625 * 12),
-            Block.makeCuboidShape(0.0625 * 4, 0.0625 * 0, 0.0625 * 4, 0.0625 * 12, 0.0625 * 15, 0.0625 * 12),
-            Block.makeCuboidShape(0.0625 * 2, 0.0625 * 0, 0.0625 * 2, 0.0625 * 14, 0.0625 * 16, 0.0625 * 14)
+            Block.makeCuboidShape(5.0F, 0.0F, 5.0F, 11.0F, 4.0F, 11.0F),
+            Block.makeCuboidShape(5.0F, 0.0F, 5.0F, 11.0F, 9.0F, 11.0F),
+            Block.makeCuboidShape(5.0F, 0.0F, 5.0F, 11.0F, 9.0F, 11.0F),
+            Block.makeCuboidShape(5.0F, 0.0F, 5.0F, 11.0F, 9.0F, 11.0F),
+            Block.makeCuboidShape(4.0F, 0.0F, 4.0F, 12.0F, 15.0F, 12.0F),
+            Block.makeCuboidShape(4.0F, 0.0F, 4.0F, 12.0F, 15.0F, 12.0F),
+            Block.makeCuboidShape(4.0F, 0.0F, 4.0F, 12.0F, 15.0F, 12.0F),
+            Block.makeCuboidShape(2.0F, 0.0F, 2.0F, 14.0F, 16.0F, 14.0F)
     };
 
     public ThistleCropBlock() {

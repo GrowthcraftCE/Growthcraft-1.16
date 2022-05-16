@@ -5,6 +5,8 @@ import growthcraft.cellar.common.block.RoasterBlock;
 import growthcraft.cellar.common.recipe.RoasterRecipe;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
+import growthcraft.cellar.shared.Reference;
+import growthcraft.cellar.shared.UnlocalizedName;
 import growthcraft.lib.util.BlockStateUtils;
 import growthcraft.lib.util.RecipeUtils;
 import net.minecraft.block.Block;
@@ -28,6 +30,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
@@ -158,7 +161,8 @@ public class RoasterTileEntity extends LockableLootTileEntity implements ITickab
     }
 
     protected ITextComponent getDefaultName() {
-        return this.getBlockState().getBlock().getTranslatedName();
+        String translationKey = String.format("container.%s.%s", Reference.MODID, UnlocalizedName.ROASTER);
+        return new TranslationTextComponent(translationKey);
     }
 
     // Interactive GUI

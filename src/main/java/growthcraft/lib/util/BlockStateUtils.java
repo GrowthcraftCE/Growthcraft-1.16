@@ -104,4 +104,14 @@ public class BlockStateUtils {
         }
     }
 
+    public static boolean isRopeConnected(IBlockReader world, BlockPos pos) {
+        Map<String, Block> blockMap = BlockStateUtils.getSurroundingBlocks(world, pos);
+
+        if (BlockStateUtils.isRopeBlock(blockMap.get("north"))) return true;
+        if (BlockStateUtils.isRopeBlock(blockMap.get("east"))) return true;
+        if (BlockStateUtils.isRopeBlock(blockMap.get("south"))) return true;
+        if (BlockStateUtils.isRopeBlock(blockMap.get("west"))) return true;
+        if (BlockStateUtils.isRopeBlock(blockMap.get("up"))) return true;
+        return BlockStateUtils.isRopeBlock(blockMap.get("down"));
+    }
 }
