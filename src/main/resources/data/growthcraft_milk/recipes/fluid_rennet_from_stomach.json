@@ -4,15 +4,15 @@
   "requires_lid": "false",
   "input_fluid": {
     "fluid": "minecraft:water",
-    "amount": 250
+    "amount": 1000
   },
   "input_item": {
-    "item": "growthcraft_cellar:grain_deep_copper",
+    "item": "growthcraft_milk:stomach",
     "count": 1
   },
   "output_fluid": {
-    "fluid": "growthcraft_cellar:deep_copper_wort_fluid",
-    "amount": 250
+    "fluid": "growthcraft_milk:rennet_fluid",
+    "amount": 1000
   },
   "by_product": {
     "item": "minecraft:bone_meal",
