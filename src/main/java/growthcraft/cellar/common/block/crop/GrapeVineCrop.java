@@ -110,15 +110,14 @@ public class GrapeVineCrop extends GrowthcraftCropsRopeBlock {
         if (BlockStateUtils.isRopeBlock(blockMap.get("west"))) voxelShapeArrayList.add(WEST_BOUNDING_BOX);
         if (BlockStateUtils.isRopeBlock(blockMap.get("up"))) voxelShapeArrayList.add(UP_BOUNDING_BOX);
         if (BlockStateUtils.isRopeBlock(blockMap.get("down"))) voxelShapeArrayList.add(DOWN_BOUNDING_BOX);
+        if (BlockStateUtils.isRopeConnected(worldIn, pos)) voxelShapeArrayList.add(ropeVoxel);
 
-        voxelShapeArrayList.add(ropeVoxel);
+        voxelShapeArrayList.add(CUSTOM_SHAPE_BY_AGE[state.get(this.getAgeProperty())]);
 
         VoxelShape[] voxelShapes = new VoxelShape[voxelShapeArrayList.size()];
         voxelShapes = voxelShapeArrayList.toArray(voxelShapes);
 
-        return VoxelShapes.or(KNOT_BOUNDING_BOX, voxelShapes);
-
-        //return CUSTOM_SHAPE_BY_AGE[state.get(this.getAgeProperty())];
+        return VoxelShapes.or(CUSTOM_SHAPE_BY_AGE[state.get(this.getAgeProperty())], voxelShapes);
     }
 
 }
