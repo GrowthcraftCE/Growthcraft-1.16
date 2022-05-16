@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "ICI",
+    "SSS"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "C": {
+      "tag": "forge:chests/wooden"
+    }
+  },
+  "result": {
+    "item": "growthcraft_milk:cheese_press"
+  }
+}
