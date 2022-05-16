@@ -7,11 +7,11 @@
     "amount": 250
   },
   "input_item": {
-    "item": "growthcraft_cellar:grain_deep_copper",
+    "item": "growthcraft_milk:thistle",
     "count": 1
   },
   "output_fluid": {
-    "fluid": "growthcraft_cellar:deep_copper_wort_fluid",
+    "fluid": "growthcraft_milk:rennet_fluid",
     "amount": 250
   },
   "by_product": {
