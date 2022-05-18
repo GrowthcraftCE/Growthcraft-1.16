@@ -19,7 +19,6 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
@@ -86,7 +85,7 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
         boolean dirty = false;
 
         if (world != null && !world.isRemote) {
-            if (this.inventory.getStackInSlot(0).getItem() != Items.AIR && !inputFluidTank.isEmpty()) {
+            if (!inputFluidTank.isEmpty()) {
 
                 CultureJarRecipe recipe = this.getRecipe(
                         this.inventory.getStackInSlot(0),
