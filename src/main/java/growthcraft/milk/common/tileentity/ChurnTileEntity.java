@@ -8,6 +8,8 @@ import growthcraft.milk.common.block.ChurnBlock;
 import growthcraft.milk.common.recipe.ChurnRecipe;
 import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
+import growthcraft.milk.shared.Reference;
+import growthcraft.milk.shared.UnlocalizedName;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -24,6 +26,7 @@ import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.*;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
@@ -35,6 +38,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.security.SecureRandom;
@@ -206,18 +210,21 @@ public class ChurnTileEntity extends LockableLootTileEntity implements ITickable
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
-        return this.getBlockState().getBlock().getTranslatedName();
+    @Nonnull
+    public ITextComponent getDisplayName() {
+        return this.getName();
     }
 
     @Override
+    @Nonnull
     public ITextComponent getName() {
         return this.customName != null ? this.customName : this.getDefaultName();
     }
 
-    @Override
-    public ITextComponent getDisplayName() {
-        return this.getName() != null ? this.getName() : this.getDefaultName();
+    @Nonnull
+    protected ITextComponent getDefaultName() {
+        String translationKey = String.format("container.%s.%s", Reference.MODID, UnlocalizedName.CHURN);
+        return new TranslationTextComponent(translationKey);
     }
 
     @Override

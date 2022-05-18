@@ -8,6 +8,8 @@ import growthcraft.milk.common.block.PancheonBlock;
 import growthcraft.milk.common.recipe.PancheonRecipe;
 import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
+import growthcraft.milk.shared.Reference;
+import growthcraft.milk.shared.UnlocalizedName;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -23,6 +25,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
@@ -119,16 +122,25 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
-        return this.getBlockState().getBlock().getTranslatedName();
+    @Nonnull
+    public ITextComponent getDisplayName() {
+        return this.getName();
     }
 
     @Override
+    @Nonnull
     public ITextComponent getName() {
         return this.customName != null ? this.customName : this.getDefaultName();
     }
 
+    @Nonnull
+    protected ITextComponent getDefaultName() {
+        String translationKey = String.format("container.%s.%s", Reference.MODID, UnlocalizedName.PANCHEON);
+        return new TranslationTextComponent(translationKey);
+    }
+
     @Override
+    @Nonnull
     protected Container createMenu(int windowId, PlayerInventory playerInventory) {
         return new PancheonContainer(windowId, playerInventory, this);
     }

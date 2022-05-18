@@ -4,6 +4,8 @@ import growthcraft.cellar.common.tileentity.handler.GrowthcraftItemHandler;
 import growthcraft.milk.common.recipe.CheesePressRecipe;
 import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
+import growthcraft.milk.shared.Reference;
+import growthcraft.milk.shared.UnlocalizedName;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ItemStackHelper;
@@ -18,8 +20,10 @@ import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.Constants;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -56,13 +60,21 @@ public class CheesePressTileEntity extends LockableLootTileEntity implements ITi
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
-        return this.getBlockState().getBlock().getTranslatedName();
+    @Nonnull
+    public ITextComponent getDisplayName() {
+        return this.getName();
     }
 
     @Override
+    @Nonnull
     public ITextComponent getName() {
         return this.customName != null ? this.customName : this.getDefaultName();
+    }
+
+    @Nonnull
+    protected ITextComponent getDefaultName() {
+        String translationKey = String.format("container.%s.%s", Reference.MODID, UnlocalizedName.CHEESE_PRESS);
+        return new TranslationTextComponent(translationKey);
     }
 
     @Override
