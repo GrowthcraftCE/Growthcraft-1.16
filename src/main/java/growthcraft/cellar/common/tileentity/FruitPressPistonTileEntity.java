@@ -2,6 +2,8 @@ package growthcraft.cellar.common.tileentity;
 
 import growthcraft.cellar.common.block.FruitPressPistonBlock;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
+import growthcraft.cellar.shared.Reference;
+import growthcraft.cellar.shared.UnlocalizedName;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -11,6 +13,7 @@ import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class FruitPressPistonTileEntity extends LockableLootTileEntity implements ITickableTileEntity {
 
@@ -43,7 +46,8 @@ public class FruitPressPistonTileEntity extends LockableLootTileEntity implement
 
     @Override
     protected ITextComponent getDefaultName() {
-        return null;
+        String translationKey = String.format("container.%s.%s", Reference.MODID, UnlocalizedName.FRUIT_PRESS);
+        return new TranslationTextComponent(translationKey);
     }
 
     @Override
