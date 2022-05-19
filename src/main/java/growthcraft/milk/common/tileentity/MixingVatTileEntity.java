@@ -10,6 +10,8 @@ import growthcraft.milk.common.recipe.MixingVatItemRecipe;
 import growthcraft.milk.common.recipe.MixingVatRecipe;
 import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
+import growthcraft.milk.shared.Reference;
+import growthcraft.milk.shared.UnlocalizedName;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -41,6 +43,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
@@ -272,13 +275,21 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
-        return new TranslationTextComponent(this.getBlockState().getBlock().getTranslationKey());
+    @Nonnull
+    public ITextComponent getDisplayName() {
+        return this.getName();
     }
 
     @Override
+    @Nonnull
     public ITextComponent getName() {
         return this.customName != null ? this.customName : this.getDefaultName();
+    }
+
+    @Nonnull
+    protected ITextComponent getDefaultName() {
+        String translationKey = String.format("container.%s.%s", Reference.MODID, UnlocalizedName.MIXING_VAT);
+        return new TranslationTextComponent(translationKey);
     }
 
     @Override

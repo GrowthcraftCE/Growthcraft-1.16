@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "growthcraft_milk:skim_milk_bucket"
+    },
+    {
+      "tag": "forge:rods/wooden"
+    }
+  ],
+  "result": {
+    "item": "growthcraft_milk:starter_culture",
+    "count": 1
+  }
+}

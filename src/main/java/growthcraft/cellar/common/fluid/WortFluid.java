@@ -23,7 +23,7 @@ public abstract class WortFluid extends ForgeFlowingFluid {
 
     private static final RegistryObject<FlowingFluidBlock> block = GrowthcraftCellarFluids.WORT_FLUID_BLOCK;
     private static final ColorUtils.GrowthcraftColor color = WORT_FLUID_COLOR;
-    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_ipa_ale;
+    private static final RegistryObject<BucketItem> registry_bucket = GrowthcraftCellarItems.bucket_wort;
     private static final RegistryObject<WortFluid.Flowing> registry_fluid_flowing = GrowthcraftCellarFluids.WORT_FLUID_FLOWING;
     private static final RegistryObject<WortFluid.Source> registry_fluid_still = GrowthcraftCellarFluids.WORT_FLUID_STILL;
 

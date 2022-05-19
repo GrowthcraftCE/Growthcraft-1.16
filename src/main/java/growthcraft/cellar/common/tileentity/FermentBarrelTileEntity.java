@@ -98,6 +98,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
                     }
                 }
             } else {
+                /*
                 // Inventory is insufficient to process a recipe, check for Potion Recipe
                 FermentBarrelRecipe recipe = this.getRecipe(
                         this.getFluidTank(0).getFluid()
@@ -106,6 +107,8 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
                 if (recipe != null && recipe != currentRecipe) {
                     this.currentRecipe = recipe;
                 }
+
+                 */
             }
         }
 
@@ -248,32 +251,22 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     // Recipe Handling
     @Nullable
     public FermentBarrelRecipe getRecipe(ItemStack inputItemStack, FluidStack inputFluidStack) {
-        List<FermentBarrelRecipe> recipes = this.getRecipesByType();
+        List<FermentBarrelRecipe> recipes = this.world.getRecipeManager().getRecipesForType(GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
 
-        // Check for Ferment recipes
         for (FermentBarrelRecipe recipe : recipes) {
             if (recipe.matches(inputItemStack, inputFluidStack)
-                    || (this.inventory.getStackInSlot(0).isEmpty() && recipe.matches(inputFluidStack))) {
-                return recipe;
-            }
+                    || recipe.matches(inputFluidStack)) return recipe;
         }
-
         return null;
     }
 
     @Nullable
     public FermentBarrelRecipe getRecipe(FluidStack inputFluidStack) {
-        List<FermentBarrelRecipe> recipes = this.getRecipesByType();
+        List<FermentBarrelRecipe> recipes = this.world.getRecipeManager().getRecipesForType(GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
         for (FermentBarrelRecipe recipe : recipes) {
-            if (recipe.matches(inputFluidStack)) {
-                return recipe;
-            }
+            if (recipe.matches(inputFluidStack)) return recipe;
         }
         return null;
-    }
-
-    private List<FermentBarrelRecipe> getRecipesByType() {
-        return this.world.getRecipeManager().getRecipesForType(GrowthcraftCellarRecipes.FERMENT_BARREL_RECIPE_TYPE);
     }
 
     // Getters and Setters

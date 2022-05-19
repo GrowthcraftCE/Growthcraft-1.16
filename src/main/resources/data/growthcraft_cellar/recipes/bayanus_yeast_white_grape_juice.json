@@ -1,7 +1,7 @@
 {
   "type": "growthcraft_cellar:culture_jar_recipe",
   "processing_time": 600,
-  "requires_heat_source": false,
+  "requires_heat_source": true,
   "input_fluid": {
     "fluid": "growthcraft_cellar:white_grape_juice_fluid",
     "amount": 250

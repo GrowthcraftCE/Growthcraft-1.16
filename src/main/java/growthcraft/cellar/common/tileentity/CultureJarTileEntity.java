@@ -19,7 +19,6 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
@@ -49,6 +48,7 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -86,7 +86,7 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
         boolean dirty = false;
 
         if (world != null && !world.isRemote) {
-            if (this.inventory.getStackInSlot(0).getItem() != Items.AIR && !inputFluidTank.isEmpty()) {
+            if (!inputFluidTank.isEmpty()) {
 
                 CultureJarRecipe recipe = this.getRecipe(
                         this.inventory.getStackInSlot(0),
@@ -270,10 +270,10 @@ public class CultureJarTileEntity extends TileEntity implements ITickableTileEnt
 
     @Nullable
     private CultureJarRecipe getRecipe(ItemStack itemStack, FluidStack fluidStack, boolean requiresHeatSource) {
-        Set<IRecipe<?>> recipes = findRecipesByType(GrowthcraftCellarRecipes.CULTURE_JAR_RECIPE_TYPE, this.world);
-        for (IRecipe<?> recipe : recipes) {
-            CultureJarRecipe cultureJarRecipe = (CultureJarRecipe) recipe;
-            if (cultureJarRecipe.matches(itemStack, fluidStack, requiresHeatSource)) return cultureJarRecipe;
+        List<CultureJarRecipe> recipes = this.world.getRecipeManager().getRecipesForType(GrowthcraftCellarRecipes.CULTURE_JAR_RECIPE_TYPE);
+
+        for (CultureJarRecipe recipe : recipes) {
+            if (recipe.matches(itemStack, fluidStack, requiresHeatSource)) return recipe;
         }
         return null;
     }

@@ -2,18 +2,18 @@ package growthcraft.milk.common.tileentity;
 
 import growthcraft.lib.common.tank.handler.FluidTankHandler;
 import growthcraft.lib.common.tank.handler.FluidTankOutputHandler;
-import growthcraft.lib.util.RecipeUtils;
 import growthcraft.milk.client.container.PancheonContainer;
 import growthcraft.milk.common.block.PancheonBlock;
 import growthcraft.milk.common.recipe.PancheonRecipe;
 import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import growthcraft.milk.init.GrowthcraftMilkTileEntities;
+import growthcraft.milk.shared.Reference;
+import growthcraft.milk.shared.UnlocalizedName;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -23,6 +23,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
@@ -34,7 +35,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Set;
+import java.util.List;
 
 public class PancheonTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
@@ -110,25 +111,34 @@ public class PancheonTileEntity extends LockableLootTileEntity implements ITicka
     @Nullable
     @ParametersAreNonnullByDefault
     private PancheonRecipe getRecipe(FluidStack fluidStack) {
-        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(GrowthcraftMilkRecipes.PANCHEON_RECIPE_TYPE);
-        for (IRecipe<?> recipe : recipes) {
-            PancheonRecipe pancheonRecipe = (PancheonRecipe) recipe;
-            if (pancheonRecipe.matches(fluidStack)) return pancheonRecipe;
+        List<PancheonRecipe> recipes = this.world.getRecipeManager().getRecipesForType(GrowthcraftMilkRecipes.PANCHEON_RECIPE_TYPE);
+
+        for (PancheonRecipe recipe : recipes) {
+            if (recipe.matches(fluidStack)) return recipe;
         }
         return null;
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
-        return this.getBlockState().getBlock().getTranslatedName();
+    @Nonnull
+    public ITextComponent getDisplayName() {
+        return this.getName();
     }
 
     @Override
+    @Nonnull
     public ITextComponent getName() {
         return this.customName != null ? this.customName : this.getDefaultName();
     }
 
+    @Nonnull
+    protected ITextComponent getDefaultName() {
+        String translationKey = String.format("container.%s.%s", Reference.MODID, UnlocalizedName.PANCHEON);
+        return new TranslationTextComponent(translationKey);
+    }
+
     @Override
+    @Nonnull
     protected Container createMenu(int windowId, PlayerInventory playerInventory) {
         return new PancheonContainer(windowId, playerInventory, this);
     }
