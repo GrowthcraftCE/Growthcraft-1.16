@@ -186,11 +186,8 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
         List<FruitPressRecipe> recipes = this.world.getRecipeManager().getRecipesForType(GrowthcraftCellarRecipes.FRUIT_PRESS_RECIPE_TYPE);
 
         for (FruitPressRecipe recipe : recipes) {
-            if (recipe.matches(inputStack)) {
-                return recipe;
-            }
+            if (recipe.matches(inputStack)) return recipe;
         }
-
         return null;
     }
 

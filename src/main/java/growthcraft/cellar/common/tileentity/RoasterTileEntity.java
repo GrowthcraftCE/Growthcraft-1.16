@@ -8,7 +8,6 @@ import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
 import growthcraft.lib.util.BlockStateUtils;
-import growthcraft.lib.util.RecipeUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,7 +17,6 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -39,8 +37,8 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class RoasterTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
@@ -256,12 +254,11 @@ public class RoasterTileEntity extends LockableLootTileEntity implements ITickab
     // Recipe Handling
     @Nullable
     private RoasterRecipe getRecipe(ItemStack inputItemStack, ItemStack redstoneTimerItemStack) {
-        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(GrowthcraftCellarRecipes.ROASTER_RECIPE_TYPE);
+        List<RoasterRecipe> recipes = this.world.getRecipeManager().getRecipesForType(GrowthcraftCellarRecipes.ROASTER_RECIPE_TYPE);
 
-        for (IRecipe<?> recipe : recipes) {
-            RoasterRecipe roasterRecipe = (RoasterRecipe) recipe;
-            if (roasterRecipe.matches(inputItemStack, redstoneTimerItemStack)) {
-                return roasterRecipe;
+        for (RoasterRecipe recipe : recipes) {
+            if (recipe.matches(inputItemStack, redstoneTimerItemStack)) {
+                return recipe;
             }
         }
         return null;

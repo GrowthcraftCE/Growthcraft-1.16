@@ -1,7 +1,6 @@
 package growthcraft.milk.common.tileentity;
 
 import growthcraft.lib.common.tank.handler.FluidTankHandler;
-import growthcraft.lib.util.RecipeUtils;
 import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.client.container.ChurnContainer;
 import growthcraft.milk.common.block.ChurnBlock;
@@ -17,7 +16,6 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -42,7 +40,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.security.SecureRandom;
-import java.util.Set;
+import java.util.List;
 
 public class ChurnTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
@@ -182,10 +180,10 @@ public class ChurnTileEntity extends LockableLootTileEntity implements ITickable
     @Nullable
     @ParametersAreNonnullByDefault
     private ChurnRecipe getRecipe(FluidStack fluidStack) {
-        Set<IRecipe<?>> recipes = RecipeUtils.findRecipesByType(GrowthcraftMilkRecipes.CHURN_RECIPE_TYPE);
-        for (IRecipe<?> recipe : recipes) {
-            ChurnRecipe churnRecipe = (ChurnRecipe) recipe;
-            if (churnRecipe.matches(fluidStack)) return churnRecipe;
+        List<ChurnRecipe> recipes = this.world.getRecipeManager().getRecipesForType(GrowthcraftMilkRecipes.CHURN_RECIPE_TYPE);
+
+        for (ChurnRecipe recipe : recipes) {
+            if (recipe.matches(fluidStack)) return recipe;
         }
         return null;
     }

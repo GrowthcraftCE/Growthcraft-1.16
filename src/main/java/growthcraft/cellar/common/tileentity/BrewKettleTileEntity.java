@@ -49,10 +49,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static growthcraft.cellar.init.GrowthcraftCellarItems.brew_kettle_lid;
@@ -273,10 +270,10 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
     /* Recipe Handling */
     @Nullable
     private BrewKettleRecipe getRecipe(ItemStack itemStack, FluidStack fluidStack, boolean requiresLid) {
-        Set<IRecipe<?>> recipes = findRecipesByType(GrowthcraftCellarRecipes.BREW_KETTLE_RECIPE_TYPE, this.world);
-        for (IRecipe<?> recipe : recipes) {
-            BrewKettleRecipe brewKettleRecipe = (BrewKettleRecipe) recipe;
-            if (brewKettleRecipe.matches(itemStack, fluidStack, requiresLid, isHeated())) return brewKettleRecipe;
+        List<BrewKettleRecipe> recipes = this.world.getRecipeManager().getRecipesForType(GrowthcraftCellarRecipes.BREW_KETTLE_RECIPE_TYPE);
+
+        for (BrewKettleRecipe recipe : recipes) {
+            if (recipe.matches(itemStack, fluidStack, requiresLid, isHeated())) return recipe;
         }
         return null;
     }

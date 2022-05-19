@@ -33,8 +33,8 @@ public class PancheonTileEntityRender extends TileEntityRenderer<PancheonTileEnt
         float maxFluidHeight = 3.5F / 16F;
 
         FluidStack inputFluidStack = tileEntity.getFluidTank(0).getFluid();
-        FluidStack outputFluidStackPrimary = tileEntity.getFluidTank(0).getFluid();
-        FluidStack outputFluidStackSecondary = tileEntity.getFluidTank(1).getFluid();
+        FluidStack outputFluidStackPrimary = tileEntity.getFluidTank(1).getFluid();
+        FluidStack outputFluidStackSecondary = tileEntity.getFluidTank(2).getFluid();
 
         if (!inputFluidStack.isEmpty()) {
             float inputFluidStackHeight = baseOffset + (maxFluidHeight - baseOffset) * inputFluidStack.getAmount() / (float) tileEntity.getFluidTank(0).getCapacity();

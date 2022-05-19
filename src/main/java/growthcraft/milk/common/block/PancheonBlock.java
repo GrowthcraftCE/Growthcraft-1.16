@@ -8,6 +8,7 @@ import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
@@ -97,6 +98,8 @@ public class PancheonBlock extends HorizontalBlock {
             if (tileEntity.isFluidEmpty() || tileEntity.getFluidTank(0).getFluidAmount() == 1000) {
                 tileEntity.getFluidTank(0).fill(milkBucketFluidStack, IFluidHandler.FluidAction.EXECUTE);
                 player.getHeldItemMainhand().shrink(1);
+                player.addItemStackToInventory(new ItemStack(Items.BUCKET));
+                tileEntity.markDirty();
                 return ActionResultType.SUCCESS;
             } else {
                 return ActionResultType.FAIL;
