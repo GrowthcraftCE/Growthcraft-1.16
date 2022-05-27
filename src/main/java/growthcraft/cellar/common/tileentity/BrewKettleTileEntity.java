@@ -56,7 +56,7 @@ import static growthcraft.cellar.init.GrowthcraftCellarItems.brew_kettle_lid;
 
 public class BrewKettleTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
-    public final int maxSmeltTime = GrowthcraftCellarConfig.getDefaultProcessingTime();
+    public int maxProcessingTime = GrowthcraftCellarConfig.getDefaultProcessingTime();
     private final GrowthcraftItemHandler inventory;
     private BrewKettleRecipe currentRecipe;
     private int currentSmeltTime;
@@ -149,7 +149,7 @@ public class BrewKettleTileEntity extends TileEntity implements ITickableTileEnt
                             dirty = true;
                         }
 
-                        if (currentSmeltTime > maxSmeltTime) {
+                        if (currentSmeltTime > maxProcessingTime) {
                             // If the currentSmeltTime is greater than the max, then we need to
                             // move some items and fluids around.
                             this.inputFluidTank.drain(recipe.getInputFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);

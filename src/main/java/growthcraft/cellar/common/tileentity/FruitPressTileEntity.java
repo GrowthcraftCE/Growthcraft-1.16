@@ -87,15 +87,15 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
             );
 
             if (fruitPressRecipe != null) {
-                this.setMaxProcessingTime(fruitPressRecipe.getProcessingTime());
 
-                if (currentRecipe != null && this.isTankFull(0)) {
+                if (this.currentRecipe != null && this.isTankFull(0)) {
                     // Do nothing as we cannot process the output.
                 } else if (fruitPressRecipe != currentRecipe) {
-                    currentRecipe = fruitPressRecipe;
-                } else if (currentProcessingTime >= maxProcessingTime) {
+                    this.currentRecipe = fruitPressRecipe;
+                    this.maxProcessingTime = fruitPressRecipe.getProcessingTime();
+                } else if (this.currentProcessingTime >= this.maxProcessingTime) {
                     this.processRecipeResult();
-                    currentProcessingTime = 0;
+                    this.currentProcessingTime = 0;
                 } else {
                     this.currentProcessingTime++;
                 }
