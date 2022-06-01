@@ -26,6 +26,7 @@ public class FruitPressContainer extends Container {
     private final IWorldPosCallable worldPosCallable;
 
     private final FunctionalIntReferenceHolder currentProcessingTime;
+    private final FunctionalIntReferenceHolder maxProcessingTime;
 
     public FruitPressContainer(final int windowID, final PlayerInventory playerInventory, final FruitPressTileEntity tileEntity) {
         super(GrowthcraftCellarContainers.fruit_press_container.get(), windowID);
@@ -78,10 +79,15 @@ public class FruitPressContainer extends Container {
             }
         }
 
-        currentProcessingTime = new FunctionalIntReferenceHolder(
+        this.trackInt(currentProcessingTime = new FunctionalIntReferenceHolder(
                 this.fruitPressTileEntity::getCurrentProcessingTime,
                 this.fruitPressTileEntity::setCurrentProcessingTime
-        );
+        ));
+
+        this.trackInt(maxProcessingTime = new FunctionalIntReferenceHolder(
+                this.fruitPressTileEntity::getMaxProcessingTime,
+                this.fruitPressTileEntity::setMaxProcessingTime
+        ));
 
         this.trackInt(currentProcessingTime);
 
@@ -140,9 +146,11 @@ public class FruitPressContainer extends Container {
 
     @OnlyIn(Dist.CLIENT)
     public int getProcessingTimeScaled(int size) {
-        return this.currentProcessingTime.get() != 0 && this.fruitPressTileEntity.getMaxProcessingTime() != 0
-                ? this.currentProcessingTime.get() * size / this.fruitPressTileEntity.getMaxProcessingTime()
-                : 0;
+        boolean isProcessing = this.currentProcessingTime.get() != 0 && this.maxProcessingTime.get() != 0;
+
+        int scaledProcessing = isProcessing ? this.currentProcessingTime.get() * size / this.maxProcessingTime.get() : 0;
+
+        return isProcessing ? scaledProcessing : 0;
     }
 
     @OnlyIn(Dist.CLIENT)

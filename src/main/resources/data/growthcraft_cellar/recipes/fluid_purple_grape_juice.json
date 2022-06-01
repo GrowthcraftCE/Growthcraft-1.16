@@ -1,6 +1,6 @@
 {
   "type": "growthcraft_cellar:fruit_press_recipe",
-  "processing_time": 260,
+  "processing_time": 300,
   "input_item": {
     "item": "growthcraft_cellar:grape_purple",
     "count": 1

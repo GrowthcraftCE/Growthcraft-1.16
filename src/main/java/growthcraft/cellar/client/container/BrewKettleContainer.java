@@ -24,7 +24,7 @@ import java.util.Objects;
 public class BrewKettleContainer extends Container {
 
     private final BrewKettleTileEntity brewKettleTileEntity;
-    public FunctionalIntReferenceHolder currentSmeltTime;
+    public FunctionalIntReferenceHolder currentProcessingTime;
     private final IWorldPosCallable canInteractWithCallable;
 
     // Server Side Constructor
@@ -97,7 +97,7 @@ public class BrewKettleContainer extends Container {
             }
         }
 
-        this.trackInt(currentSmeltTime = new FunctionalIntReferenceHolder(
+        this.trackInt(currentProcessingTime = new FunctionalIntReferenceHolder(
                 this.brewKettleTileEntity::getCurrentSmeltTime,
                 this.brewKettleTileEntity::setCurrentSmeltTime
         ));
@@ -158,9 +158,11 @@ public class BrewKettleContainer extends Container {
 
     @OnlyIn(Dist.CLIENT)
     public int getSmeltProgressionScaled(int size) {
-        return this.currentSmeltTime.get() != 0 && this.brewKettleTileEntity.maxSmeltTime != 0
-                ? this.currentSmeltTime.get() * size / this.brewKettleTileEntity.maxSmeltTime
-                : 0;
+        boolean isProcessing = this.currentProcessingTime.get() != 0 && this.brewKettleTileEntity.maxProcessingTime != 0;
+
+        int scaledProcessing = this.currentProcessingTime.get() * size / this.brewKettleTileEntity.maxProcessingTime;
+
+        return isProcessing ? scaledProcessing : 0;
     }
 
     @OnlyIn(Dist.CLIENT)

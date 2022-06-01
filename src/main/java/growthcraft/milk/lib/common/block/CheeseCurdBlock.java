@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -21,6 +22,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IForgeShearable;
 
 import java.awt.*;
@@ -119,6 +122,26 @@ public class CheeseCurdBlock extends Block implements IForgeShearable {
         }
 
         return super.onBlockActivated(state, worldIn, pos, player, hand, hitResult);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (state.get(AGE) < 7) {
+            if (random.nextInt(16) <= 4) {
+                BlockPos blockpos = pos.down();
+                if (world.isAirBlock(blockpos)) {
+
+                    double d0 = (double) pos.getX() + random.nextDouble() / 2.0D;
+                    double d1 = (double) pos.getY() - 0.05D;
+                    double d2 = (double) pos.getZ() + random.nextDouble() / 2.0D;
+
+                    world.addParticle(ParticleTypes.FALLING_HONEY,
+                            d0, d1, d2,
+                            0.0D, 0.0D, 0.0D
+                    );
+                }
+            }
+        }
     }
 
 }
