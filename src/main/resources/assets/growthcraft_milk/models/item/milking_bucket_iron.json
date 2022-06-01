@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "growthcraft_milk:item/milking_bucket_contents",
+    "layer0": "growthcraft_milk:item/milking_bucket_contents_default",
     "layer1": "growthcraft_milk:item/milking_bucket_base"
   }
 }
