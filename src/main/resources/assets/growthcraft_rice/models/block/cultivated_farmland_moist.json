@@ -2,7 +2,7 @@
   "parent": "block/block",
   "textures": {
     "dirt": "minecraft:block/dirt",
-    "top": "minecraft:block/farmland_moist",
+    "top": "growthcraft_rice:block/cultivated_farmland_moist",
     "particle": "#dirt"
   },
   "elements": [

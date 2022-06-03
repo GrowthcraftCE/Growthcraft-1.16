@@ -109,7 +109,10 @@ public class CultivatedFarmlandBlock extends Block implements IWaterLoggable {
 
     @Override
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-        worldIn.setBlockState(pos, state.with(MOISTURE, getMoistureLevel(worldIn, pos)).with(WATERLOGGED, worldIn.getFluidState(pos).getFluid() == Fluids.WATER), 2);
+
+        boolean flooded = worldIn.getFluidState(pos).getFluid() == Fluids.WATER || getMoistureLevel(worldIn, pos) == 7;
+
+        worldIn.setBlockState(pos, state.with(MOISTURE, getMoistureLevel(worldIn, pos)).with(WATERLOGGED, flooded), 2);
     }
 
     public int getMoistureLevel(World worldIn, BlockPos pos) {
