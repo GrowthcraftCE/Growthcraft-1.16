@@ -2,8 +2,8 @@
   "parent": "block/block",
   "textures": {
     "dirt": "minecraft:block/dirt",
-    "top": "minecraft:block/farmland_moist",
-    "particle": "#dirt"
+    "top": "growthcraft_rice:block/cultivated_farmland_moist",
+    "particle": "#top"
   },
   "elements": [
     {
@@ -14,7 +14,7 @@
       ],
       "to": [
         16,
-        14,
+        14.0,
         16
       ],
       "faces": {
@@ -40,7 +40,7 @@
         "north": {
           "uv": [
             0,
-            2,
+            1,
             16,
             16
           ],
@@ -50,7 +50,7 @@
         "south": {
           "uv": [
             0,
-            2,
+            1,
             16,
             16
           ],
@@ -60,7 +60,7 @@
         "west": {
           "uv": [
             0,
-            2,
+            1,
             16,
             16
           ],
@@ -70,7 +70,7 @@
         "east": {
           "uv": [
             0,
-            2,
+            1,
             16,
             16
           ],
