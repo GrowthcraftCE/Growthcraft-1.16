@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "growthcraft_rice:item/sushi_roll_open_art"
+    "layer0": "growthcraft_rice:item/sushi_roll"
   },
   "display": {
     "thirdperson_righthand": {
