@@ -1,14 +1,14 @@
 {
-  "parent": "item/generated",
+  "parent": "minecraft:item/handheld",
   "textures": {
     "layer0": "growthcraft_rice:item/cultivator"
   },
   "display": {
     "thirdperson_righthand": {
       "rotation": [
-        0,
+        180,
         -90,
-        -125
+        55
       ],
       "translation": [
         0,
@@ -23,9 +23,9 @@
     },
     "thirdperson_lefthand": {
       "rotation": [
-        0,
+        180,
         90,
-        125
+        -55
       ],
       "translation": [
         0,
@@ -40,9 +40,9 @@
     },
     "firstperson_righthand": {
       "rotation": [
-        0,
+        180,
         -90,
-        -55
+        25
       ],
       "translation": [
         1.13,
@@ -57,9 +57,9 @@
     },
     "firstperson_lefthand": {
       "rotation": [
-        0,
+        180,
         90,
-        55
+        -25
       ],
       "translation": [
         1.13,
