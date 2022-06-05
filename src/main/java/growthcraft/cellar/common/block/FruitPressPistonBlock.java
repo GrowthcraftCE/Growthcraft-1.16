@@ -1,5 +1,6 @@
 package growthcraft.cellar.common.block;
 
+import growthcraft.cellar.common.tileentity.FruitPressPistonTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -50,7 +51,6 @@ public class FruitPressPistonBlock extends Block {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        worldIn.setBlockState(pos, state.with(PRESSED, isPowered(worldIn, pos)));
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
 
@@ -58,6 +58,13 @@ public class FruitPressPistonBlock extends Block {
     public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
         super.onNeighborChange(state, world, pos, neighbor);
         World worldIn = (World) world;
+
+        if (!state.get(PRESSED) && isPowered(worldIn, pos)) {
+            ((FruitPressPistonTileEntity) worldIn.getTileEntity(pos)).playSound(null, SoundEvents.BLOCK_PISTON_EXTEND);
+        } else if (state.get(PRESSED) && !isPowered(worldIn, pos)) {
+            ((FruitPressPistonTileEntity) worldIn.getTileEntity(pos)).playSound(null, SoundEvents.BLOCK_PISTON_CONTRACT);
+        }
+
         worldIn.setBlockState(pos, state.with(PRESSED, isPowered(worldIn, pos)));
     }
 

@@ -22,6 +22,8 @@ import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -286,6 +288,16 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
         CompoundNBT nbt = new CompoundNBT();
         this.write(nbt);
         return nbt;
+    }
+
+    public void playSound(@Nullable PlayerEntity player, SoundEvent sound) {
+        double dx = (double) this.pos.getX() + 0.5D;
+        double dy = (double) this.pos.getY() + 0.5D;
+        double dz = (double) this.pos.getZ() + 0.5D;
+
+        assert this.world != null;
+        this.world.playSound(player, dx, dy, dz, sound, SoundCategory.BLOCKS, 0.5F,
+                this.world.rand.nextFloat() * 0.1F + 0.9F);
     }
 
 }

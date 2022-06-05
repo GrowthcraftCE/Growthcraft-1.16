@@ -6,8 +6,8 @@ import growthcraft.core.init.GrowthcraftTileEntities;
 import growthcraft.lib.util.BlockStateUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.fluid.FluidState;
@@ -71,8 +71,7 @@ public class RopeBlock extends Block implements IWaterLoggable {
     }
 
     private static Properties getInitProperties(Material material) {
-        Properties properties = Properties.create(material);
-        properties.sound(SoundType.CLOTH);
+        Properties properties = Properties.from(Blocks.WHITE_WOOL);
         return properties;
     }
 

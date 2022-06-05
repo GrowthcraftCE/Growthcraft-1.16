@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.block;
 
-import growthcraft.cellar.common.tileentity.CultureJarTileEntity;
 import growthcraft.cellar.common.tileentity.FruitPressTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
@@ -29,6 +28,8 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+
+import static growthcraft.cellar.common.block.FruitPressPistonBlock.PRESSED;
 
 public class FruitPressBlock extends Block {
 
@@ -97,9 +98,13 @@ public class FruitPressBlock extends Block {
         }
 
         if (!worldIn.isRemote) {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (tileEntity instanceof FruitPressTileEntity) {
+            FruitPressTileEntity tileEntity = (FruitPressTileEntity) worldIn.getTileEntity(pos);
+
+            // Do not allow to open the GUI is the Piston is pressed.
+            if (!worldIn.getBlockState(pos.up()).get(PRESSED)) {
                 NetworkHooks.openGui((ServerPlayerEntity) player, (FruitPressTileEntity) tileEntity, pos);
+                // Play sound
+                tileEntity.playSound(player, SoundEvents.BLOCK_CHEST_OPEN);
             }
         }
 

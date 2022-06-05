@@ -51,7 +51,7 @@ public class MixingVatBlock extends HorizontalBlock {
     }
 
     private static Properties getInitProperties() {
-        Properties properties = AbstractBlock.Properties.from(Blocks.CLAY);
+        Properties properties = AbstractBlock.Properties.from(Blocks.STONE);
         properties.hardnessAndResistance(1.5F);
         properties.notSolid();
         return properties;

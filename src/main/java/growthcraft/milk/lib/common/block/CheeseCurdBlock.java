@@ -44,7 +44,7 @@ public class CheeseCurdBlock extends Block implements IForgeShearable {
     }
 
     private static Properties getInitProperties() {
-        Properties properties = AbstractBlock.Properties.from(Blocks.MUSHROOM_STEM);
+        Properties properties = AbstractBlock.Properties.from(Blocks.WHITE_WOOL);
         properties.hardnessAndResistance(1.5F);
         properties.notSolid();
         properties.harvestLevel(1);
