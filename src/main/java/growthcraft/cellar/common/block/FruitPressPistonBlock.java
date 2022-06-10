@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.block;
 
-import growthcraft.cellar.common.tileentity.FruitPressPistonTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -59,10 +58,11 @@ public class FruitPressPistonBlock extends Block {
         super.onNeighborChange(state, world, pos, neighbor);
         World worldIn = (World) world;
 
+        // Handle sound effects when the powered on/off changes.
         if (!state.get(PRESSED) && isPowered(worldIn, pos)) {
-            ((FruitPressPistonTileEntity) worldIn.getTileEntity(pos)).playSound(null, SoundEvents.BLOCK_PISTON_EXTEND);
+            worldIn.playSound(null, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS, 1.0F, 1.0F);
         } else if (state.get(PRESSED) && !isPowered(worldIn, pos)) {
-            ((FruitPressPistonTileEntity) worldIn.getTileEntity(pos)).playSound(null, SoundEvents.BLOCK_PISTON_CONTRACT);
+            worldIn.playSound(null, pos, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
 
         worldIn.setBlockState(pos, state.with(PRESSED, isPowered(worldIn, pos)));

@@ -51,6 +51,7 @@ public class FruitPressBlock extends Block {
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
+        // The FruitPressPistonBlock has the PRESSED property.
         builder.add(FACING);
     }
 
@@ -72,15 +73,15 @@ public class FruitPressBlock extends Block {
 
     @Override
     public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+        // There must be enough room to place the above FruitPressPistonBlock
         return worldIn.isAirBlock(pos.up());
     }
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-
+        // Add the FruitPressPistonBlock above this location.
         worldIn.setBlockState(pos.up(), GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get().getDefaultState().with(FACING, state.get(FACING)));
-
     }
 
     @Override
@@ -92,23 +93,25 @@ public class FruitPressBlock extends Block {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (worldIn.isRemote) return ActionResultType.SUCCESS;
+
         if (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
                 || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
             return ActionResultType.SUCCESS;
         }
 
-        if (!worldIn.isRemote) {
-            FruitPressTileEntity tileEntity = (FruitPressTileEntity) worldIn.getTileEntity(pos);
+        FruitPressTileEntity tileEntity = (FruitPressTileEntity) worldIn.getTileEntity(pos);
 
-            // Do not allow to open the GUI is the Piston is pressed.
-            if (!worldIn.getBlockState(pos.up()).get(PRESSED)) {
-                NetworkHooks.openGui((ServerPlayerEntity) player, (FruitPressTileEntity) tileEntity, pos);
-                // Play sound
-                tileEntity.playSound(player, SoundEvents.BLOCK_CHEST_OPEN);
-            }
+        // Do not allow to open the GUI is the Piston is pressed.
+        boolean currentlyPressed = worldIn.getBlockState(pos.up()).get(PRESSED);
+
+        if (!currentlyPressed) {
+            NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
+            worldIn.playSound(null, pos, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
 
         return ActionResultType.SUCCESS;
+
     }
 
     /* TileEntity */
