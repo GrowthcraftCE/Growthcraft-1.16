@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.tileentity;
 
-import growthcraft.cellar.common.block.FruitPressPistonBlock;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.UnlocalizedName;
@@ -15,10 +14,13 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nullable;
+
+import static growthcraft.cellar.common.block.FruitPressPistonBlock.PRESSED;
 
 public class FruitPressPistonTileEntity extends LockableLootTileEntity implements ITickableTileEntity {
 
@@ -32,11 +34,22 @@ public class FruitPressPistonTileEntity extends LockableLootTileEntity implement
 
     @Override
     public void tick() {
-        if(world != null && !world.isRemote()) {
-            BlockState state = world.getBlockState(this.getPos());
-            int powerLevel = world.getRedstonePowerFromNeighbors(this.getPos());
-            world.setBlockState(this.pos, state.with(FruitPressPistonBlock.PRESSED, powerLevel == 15));
+        if (this.getWorld() == null) return;
+        if (this.world == null || this.world.isRemote) return;
+
+        BlockState state = world.getBlockState(this.getPos());
+
+        int powerLevel = world.getRedstonePowerFromNeighbors(this.getPos());
+
+        // Handle sound effects when the powered on/off changes.
+        if (!state.get(PRESSED) && powerLevel >= 15) {
+            this.world.playSound(null, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        } else if (state.get(PRESSED) && powerLevel < 15) {
+            this.world.playSound(null, pos, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
+
+        world.setBlockState(this.pos, state.with(PRESSED, powerLevel == 15));
+
     }
 
     @Override

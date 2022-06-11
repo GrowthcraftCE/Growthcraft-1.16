@@ -106,8 +106,8 @@ public class FruitPressBlock extends Block {
         boolean currentlyPressed = worldIn.getBlockState(pos.up()).get(PRESSED);
 
         if (!currentlyPressed) {
-            NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
             worldIn.playSound(null, pos, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
         }
 
         return ActionResultType.SUCCESS;
