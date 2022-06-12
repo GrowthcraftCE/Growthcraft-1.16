@@ -24,6 +24,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -100,6 +101,7 @@ public class PancheonBlock extends HorizontalBlock {
                 player.getHeldItemMainhand().shrink(1);
                 player.addItemStackToInventory(new ItemStack(Items.BUCKET));
                 tileEntity.markDirty();
+                worldIn.notifyBlockUpdate(pos, state, state, Constants.BlockFlags.BLOCK_UPDATE);
                 return ActionResultType.SUCCESS;
             } else {
                 return ActionResultType.FAIL;
