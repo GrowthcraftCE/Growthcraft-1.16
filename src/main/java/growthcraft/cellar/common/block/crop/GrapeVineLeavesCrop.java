@@ -23,6 +23,9 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * GrapeVineLeavesCrop is grape leaves blocks that grow horizontally.
+ */
 public class GrapeVineLeavesCrop extends GrowthcraftCropsRopeBlock {
 
     public static final BooleanProperty TRUNK_CONNECTED = BooleanProperty.create("trunk_connected");

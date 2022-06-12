@@ -11,6 +11,8 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -74,6 +76,8 @@ public class HopsCrop extends GrowthcraftCropsRopeBlock {
 
             // Decrease age to 4
             worldIn.setBlockState(pos, this.getActualBlockStateWithAge(worldIn, pos, 4), 2);
+            // Play sound
+            worldIn.playSound(player, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
         return ActionResultType.PASS;
     }

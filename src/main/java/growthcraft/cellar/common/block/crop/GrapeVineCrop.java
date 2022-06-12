@@ -26,6 +26,9 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * GrapeVineCrop is the actual vine looking block in the GrapeVine Multi-Block.
+ */
 public class GrapeVineCrop extends GrowthcraftCropsRopeBlock {
 
     protected static final VoxelShape[] CUSTOM_SHAPE_BY_AGE = new VoxelShape[]{
@@ -95,7 +98,6 @@ public class GrapeVineCrop extends GrowthcraftCropsRopeBlock {
     public boolean canBeConnectedTo(BlockState state, IBlockReader world, BlockPos pos, Direction facing) {
         return BlockStateUtils.isRopeBlock(state.getBlock());
     }
-
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
