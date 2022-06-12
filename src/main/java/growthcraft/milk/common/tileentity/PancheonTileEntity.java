@@ -40,7 +40,7 @@ import java.util.List;
 public class PancheonTileEntity extends LockableLootTileEntity implements ITickableTileEntity, INamedContainerProvider {
 
     private int currentProcessingTime;
-    // Innput Tank 2,000 mb top accessible
+    // Input Tank 2,000 mb top accessible
     // Output Tanks 1,000 mb each draw from the side or bottom only.
     private ITextComponent customName;
     private FluidTankHandler inputFluidTankHandler;
