@@ -7,6 +7,7 @@ import growthcraft.lib.common.block.GrowthcraftBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -32,7 +33,7 @@ public class GrowthcraftBlocks {
     );
 
     public static final RegistryObject<GrowthcraftBlock> SALT_BLOCK = BLOCKS.register(
-            Reference.SALT_BLOCK, () -> new GrowthcraftBlock(Material.ROCK)
+            Reference.SALT_BLOCK, () -> new GrowthcraftBlock(Material.ROCK, SoundType.STONE)
     );
 
     public static final RegistryObject<GrowthcraftBlock> SALT_ORE = BLOCKS.register(

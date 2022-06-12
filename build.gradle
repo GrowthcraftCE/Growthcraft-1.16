@@ -45,7 +45,7 @@ repositories {
     }
 }
 
-version = project.growthcraft_version as String
+version = "${project.minecraft_version}-${project.growthcraft_version}"
 group = 'growthcraft'
 archivesBaseName = 'growthcraft'
 

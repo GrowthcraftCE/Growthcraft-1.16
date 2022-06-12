@@ -17,7 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
@@ -50,15 +49,8 @@ public class FruitPressPistonBlock extends Block {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        worldIn.setBlockState(pos, state.with(PRESSED, isPowered(worldIn, pos)));
+        // Do nothing as the base of the Fruit Press has the storage inventory.
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
-    }
-
-    @Override
-    public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
-        super.onNeighborChange(state, world, pos, neighbor);
-        World worldIn = (World) world;
-        worldIn.setBlockState(pos, state.with(PRESSED, isPowered(worldIn, pos)));
     }
 
     @Override

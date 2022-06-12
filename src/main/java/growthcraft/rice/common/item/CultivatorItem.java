@@ -16,6 +16,9 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.util.Constants;
+
+import javax.annotation.Nonnull;
 
 public class CultivatorItem extends HoeItem {
 
@@ -32,26 +35,27 @@ public class CultivatorItem extends HoeItem {
     }
 
     @Override
+    @Nonnull
     public ActionResultType onItemUse(ItemUseContext context) {
         World world = context.getWorld();
         BlockPos blockpos = context.getPos();
+        PlayerEntity player = context.getPlayer();
+
         int hook = net.minecraftforge.event.ForgeEventFactory.onHoeUse(context);
         if (hook != 0) return hook > 0 ? ActionResultType.SUCCESS : ActionResultType.FAIL;
+
         if (context.getFace() != Direction.DOWN && world.isAirBlock(blockpos.up())) {
             BlockState blockstate = world.getBlockState(blockpos).getToolModifiedState(world, blockpos, context.getPlayer(), context.getItem(), net.minecraftforge.common.ToolType.HOE);
+
             if (blockstate != null) {
-                PlayerEntity playerentity = context.getPlayer();
-
-                world.playSound(playerentity, blockpos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                if (!world.isRemote) {
-                    if (blockstate.getBlock() == Blocks.FARMLAND) {
-                        world.setBlockState(blockpos, blockstate, 11);
-                    }
+                if (blockstate.getBlock() == Blocks.FARMLAND) {
+                    world.playSound(player, blockpos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    world.setBlockState(blockpos, blockstate, Constants.BlockFlags.RERENDER_MAIN_THREAD);
                 }
-
                 return ActionResultType.func_233537_a_(world.isRemote);
             } else if (world.getBlockState(blockpos).getBlock() == Blocks.FARMLAND) {
-                world.setBlockState(blockpos, GrowthcraftRiceBlocks.CULTIVATED_FARMLAND.get().getDefaultState(), 11);
+                world.playSound(player, blockpos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.setBlockState(blockpos, GrowthcraftRiceBlocks.CULTIVATED_FARMLAND.get().getDefaultState(), Constants.BlockFlags.RERENDER_MAIN_THREAD);
             }
         }
 

@@ -287,5 +287,4 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
         this.write(nbt);
         return nbt;
     }
-
 }

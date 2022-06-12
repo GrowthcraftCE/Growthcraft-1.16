@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.block;
 
-import growthcraft.cellar.common.tileentity.CultureJarTileEntity;
 import growthcraft.cellar.common.tileentity.FruitPressTileEntity;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarTileEntities;
@@ -30,6 +29,8 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
+import static growthcraft.cellar.common.block.FruitPressPistonBlock.PRESSED;
+
 public class FruitPressBlock extends Block {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -50,6 +51,7 @@ public class FruitPressBlock extends Block {
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
+        // The FruitPressPistonBlock has the PRESSED property.
         builder.add(FACING);
     }
 
@@ -71,15 +73,15 @@ public class FruitPressBlock extends Block {
 
     @Override
     public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+        // There must be enough room to place the above FruitPressPistonBlock
         return worldIn.isAirBlock(pos.up());
     }
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-
+        // Add the FruitPressPistonBlock above this location.
         worldIn.setBlockState(pos.up(), GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get().getDefaultState().with(FACING, state.get(FACING)));
-
     }
 
     @Override
@@ -91,19 +93,25 @@ public class FruitPressBlock extends Block {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (worldIn.isRemote) return ActionResultType.SUCCESS;
+
         if (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
                 || player.getHeldItem(handIn).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY).isPresent()) {
             return ActionResultType.SUCCESS;
         }
 
-        if (!worldIn.isRemote) {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (tileEntity instanceof FruitPressTileEntity) {
-                NetworkHooks.openGui((ServerPlayerEntity) player, (FruitPressTileEntity) tileEntity, pos);
-            }
+        FruitPressTileEntity tileEntity = (FruitPressTileEntity) worldIn.getTileEntity(pos);
+
+        // Do not allow to open the GUI is the Piston is pressed.
+        boolean currentlyPressed = worldIn.getBlockState(pos.up()).get(PRESSED);
+
+        if (!currentlyPressed) {
+            worldIn.playSound(null, pos, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
         }
 
         return ActionResultType.SUCCESS;
+
     }
 
     /* TileEntity */

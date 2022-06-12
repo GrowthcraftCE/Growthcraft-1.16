@@ -11,6 +11,8 @@ import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -66,7 +68,7 @@ public class HopsCrop extends GrowthcraftCropsRopeBlock {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (state.get(AGE) == 7) {
+        if (!worldIn.isRemote && state.get(AGE) == 7) {
             int count = RANDOM.nextInt(fruitMax - fruitMin) + fruitMin;
             // Spawn the random drop count
             ItemStack itemStack = new ItemStack(GrowthcraftCellarItems.HOPS.get(), count);
@@ -74,6 +76,10 @@ public class HopsCrop extends GrowthcraftCropsRopeBlock {
 
             // Decrease age to 4
             worldIn.setBlockState(pos, this.getActualBlockStateWithAge(worldIn, pos, 4), 2);
+
+        } else if (worldIn.isRemote && state.get(AGE) == 7) {
+            // Play sound
+            worldIn.playSound(player, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
         return ActionResultType.PASS;
     }

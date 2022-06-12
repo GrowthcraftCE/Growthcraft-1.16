@@ -16,9 +16,7 @@ import net.minecraft.loot.LootParameters;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -94,10 +92,12 @@ public class CheesePressBlock extends Block {
             if (hand.name().equals("MAIN_HAND") && player.getHeldItem(hand).isEmpty()) {
                 if (!player.isSneaking()) {
                     // Tighten the vice
+                    worldIn.playSound(player, pos, SoundEvents.BLOCK_CHAIN_PLACE, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     worldIn.setBlockState(pos, state.with(ROTATION, tileEntity.doRotation(true)), 2);
                 } else {
                     // Loosen the vice and
                     if (tileEntity.getRotation() > 0) {
+                        worldIn.playSound(player, pos, SoundEvents.BLOCK_CHAIN_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
                         worldIn.setBlockState(pos, state.with(ROTATION, tileEntity.doRotation(false)), 2);
                         ItemStack itemStack = tileEntity.getInventory().extractItem(0, tileEntity.getInventory().getStackInSlot(0).getCount(), false);
 
