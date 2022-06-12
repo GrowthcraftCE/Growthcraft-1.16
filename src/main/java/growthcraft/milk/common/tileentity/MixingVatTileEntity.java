@@ -108,7 +108,7 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
                     // Then we should check for a MixingVatRecipe.MixingVatRecipeCategory.FLUID
                     if (checkCurrentRecipe()) {
                         // Then continue processing the recipe inventory.
-                        currentProcessingTime++;
+                        if (this.activated) currentProcessingTime++;
                         if (currentProcessingTime >= maxProcessingTime) {
                             processCurrentRecipe();
                         }
@@ -119,7 +119,7 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
                     // Then we need to process MixingVatRecipe.MixingVatRecipeCategory.ITEM
                     if (checkCurrentRecipe()) {
                         // Then continue processing the recipe inventory.
-                        currentProcessingTime++;
+                        if (this.activated) currentProcessingTime++;
                         if (currentProcessingTime >= maxProcessingTime) {
                             processCurrentRecipe();
                         }

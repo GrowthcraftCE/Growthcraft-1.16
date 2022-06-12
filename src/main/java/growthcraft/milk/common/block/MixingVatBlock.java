@@ -119,24 +119,14 @@ public class MixingVatBlock extends HorizontalBlock {
 
             }
 
+            // Handle recipe and result activation process
             if (handIn.name().equals("MAIN_HAND") && !worldIn.isRemote) {
-                GrowthcraftMilk.LOGGER.debug(
-                        "MixingVatBlock being activated at {} with {}.",
-                        pos, player.getHeldItem(handIn).getItem());
-
                 if (player.isSneaking() && GrowthcraftMilkConfig.isMixingVatGuiEnabled()) {
                     NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
                 } else if (tileEntity.activateResult(player, player.getHeldItem(handIn))) {
-                    GrowthcraftMilk.LOGGER.debug(
-                            "MixingVatTileEntity at {} result activation tool = {}",
-                            pos, tileEntity.getResultActivationTool().getItem());
                     player.getHeldItem(handIn).shrink(1);
                     return ActionResultType.SUCCESS;
                 } else if (tileEntity.activateRecipe(player.getHeldItem(handIn))) {
-                    GrowthcraftMilk.LOGGER.debug(
-                            "MixingVatTileEntity at {} activation tool = {}",
-                            pos, tileEntity.getActivationTool().getItem());
-
                     if (GrowthcraftMilkConfig.isConsumeMixingVatActivator())
                         player.getHeldItem(handIn).shrink(1);
                     return ActionResultType.SUCCESS;
