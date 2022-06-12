@@ -5,6 +5,7 @@ import growthcraft.core.init.GrowthcraftBlocks;
 import growthcraft.core.init.GrowthcraftItems;
 import growthcraft.core.init.GrowthcraftTileEntities;
 import growthcraft.core.init.client.GrowthcraftTileEntityRenders;
+import growthcraft.core.init.config.GrowthcraftConfig;
 import growthcraft.core.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -33,6 +34,8 @@ public class Growthcraft {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, GrowthcraftOreGeneration::generateOres);
+
+        GrowthcraftConfig.loadConfig();
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
