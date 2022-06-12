@@ -41,7 +41,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -209,6 +208,7 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
 
         } else if (category == MixingVatRecipe.MixingVatRecipeCategory.ITEM) {
             MixingVatItemRecipe itemRecipe = (MixingVatItemRecipe) this.currentRecipe;
+            ItemStack recipeResultItemStack = itemRecipe.getResultItemStack();
 
             // Drain recipe input fluids.
             this.inputFluidTankHandler.getTank(0).drain(
@@ -216,13 +216,13 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
             );
 
             // Insert the resulting item
-            this.getInventory().setStackInSlot(3, itemRecipe.getResultItemStack());
+            this.getInventory().insertItem(3, recipeResultItemStack, false);
         }
 
         // Empty out the input inventory slots.
         for (ItemStack itemStack : ingredients) {
-            for (int i = 0; i < this.getInventory().getSlots(); i++) {
-                    this.getInventory().setStackInSlot(i, ItemStack.EMPTY);
+            for (int i = 0; i < INPUT_INVENTORY_SLOTS; i++) {
+                this.getInventory().setStackInSlot(i, ItemStack.EMPTY);
             }
         }
 
@@ -312,7 +312,7 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
         return this.inventory.getSlots();
     }
 
-    public final IItemHandlerModifiable getInventory() {
+    public final GrowthcraftItemHandler getInventory() {
         return this.inventory;
     }
 
@@ -434,12 +434,8 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
     public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
 
         if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && side == Direction.UP) {
-            GrowthcraftMilk.LOGGER.debug("MixingVatTileEntity {} request from {} for outputTank.",
-                    "FLUID_HANDLER_CAPABILITY", side);
             return this.outputFluidTankHandler.getFluidTankHandler(0).cast();
         } else if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && side == Direction.NORTH) {
-            GrowthcraftMilk.LOGGER.debug("MixingVatTileEntity {} request from {} for inputTank.",
-                    "FLUID_HANDLER_CAPABILITY", side);
             return this.inputFluidTankHandler.getFluidTankHandler(0).cast();
         }
 
@@ -452,7 +448,11 @@ public class MixingVatTileEntity extends LockableLootTileEntity implements ITick
     }
 
     public boolean activateRecipe(ItemStack itemStack) {
+        // Fail fast if we are already activated.
+        if (this.activated) return false;
+        // Check if we have the right item to activate the recipe
         this.activated = this.getActivationTool() != null && this.getActivationTool().getItem() == itemStack.getItem();
+
         return this.activated;
     }
 
