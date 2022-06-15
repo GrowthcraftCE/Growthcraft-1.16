@@ -5,14 +5,14 @@
   "sortnum": 1,
   "pages": [
     {
-      "type": "crafting",
-      "text": "Bamboo can be crafted into planks, stairs, slabs, and used as a decorative building block.",
-      "recipe": "growthcraft_bamboo:bamboo_stick"
+      "type": "stonecutting",
+      "text": "Using the stone cutter, bamboo can be cut into bamboo nodes, which can be crafted into planks, stairs, slabs, and used as a decorative building block.",
+      "recipe": "growthcraft_bamboo:bamboo_wood_log"
     },
     {
       "type": "crafting",
-      "recipe": "growthcraft_bamboo:bamboo_plank",
-      "recipe2": "growthcraft_bamboo:bamboo_plank_button"
+      "recipe": "growthcraft_bamboo:bamboo_wood",
+      "recipe2": "growthcraft_bamboo:bamboo_plank"
     },
     {
       "type": "crafting",
@@ -28,6 +28,11 @@
       "type": "crafting",
       "recipe": "growthcraft_bamboo:bamboo_plank_door",
       "recipe2": "growthcraft_bamboo:bamboo_plank_trapdoor"
+    },
+    {
+      "type": "crafting",
+      "recipe": "growthcraft_bamboo:bamboo_plank_pressure_plate",
+      "recipe2": "growthcraft_bamboo:bamboo_plank_button"
     }
   ]
 }
