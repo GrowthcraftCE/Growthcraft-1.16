@@ -1,6 +1,6 @@
 {
   "name": "manual.growthcraft.cellar.name",
   "description": "manual.growthcraft.cellar.description",
-  "icon": "growthcraft_bamboo:textures/item/bamboo.png",
-  "sortnum": 1
+  "icon": "growthcraft_cellar:textures/item/potion/pint_ale_icon.png",
+  "sortnum": 3
 }

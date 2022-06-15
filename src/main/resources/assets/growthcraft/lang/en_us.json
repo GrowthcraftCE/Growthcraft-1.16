@@ -31,5 +31,13 @@
   "manual.growthcraft.apples.name": "Growthcraft Apples",
   "manual.growthcraft.apples.description": "Apple trees produce an edible fruit called, an apple.$(br2)They are cultivated world wide. They have been grown for thousands of years.",
   "manual.growthcraft.bamboo.name": "Growthcraft Bamboo",
-  "manual.growthcraft.bamboo.description": "Bamboo is one of the fastest growing plants in the world. Due to its unique rhizome dependant system.$(br2)Bamboo has a high strength-to-weight ratio similar to timber and it makes a good renewable building material."
+  "manual.growthcraft.bamboo.description": "Bamboo is one of the fastest growing plants in the world. Due to its unique rhizome dependant system.$(br2)Bamboo has a high strength-to-weight ratio similar to timber and it makes a good renewable building material.",
+  "manual.growthcraft.cellar.name": "Growthcraft Cellar",
+  "manual.growthcraft.cellar.description": "Welcome to the process of brewing and fermenting.",
+  "manual.growthcraft.apiary.name": "Growthcraft Apiary",
+  "manual.growthcraft.apiary.description": "Welcome to apiary ....",
+  "manual.growthcraft.milk.name": "Growthcraft Milk",
+  "manual.growthcraft.milk.description": "Welcome to milk ...",
+  "manual.growthcraft.rice.name": "Growthcraft Rice",
+  "manual.growthcraft.rice.description": "Welcome to rice..."
 }
