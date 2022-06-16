@@ -1,0 +1,17 @@
+{
+  "name": "Guide to Chandlering",
+  "icon": "growthcraft_apiary:bee_box",
+  "category": "apiary",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "text",
+      "text": "So, you would like to learn how to become a chandler? You will need to have a good stock of wax candles to be successful. To get started, you will need to dye some bees wax and melt it in the Brew Kettle. Once you have some melted wax in the brew kettle, add some string to make your candles."
+    },
+    {
+      "type": "crafting",
+      "recipe": "growthcraft_apiary:bees_wax_brown",
+      "text": "You can craft dyed waxed by adding any dye to plain bees wax."
+    }
+  ]
+}
