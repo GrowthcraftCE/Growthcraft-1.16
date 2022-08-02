@@ -84,26 +84,29 @@ public class ChurnBlock extends HorizontalBlock {
         }
 
         if (!worldIn.isRemote) {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (tileEntity instanceof ChurnTileEntity) {
-                // If GUI is enabled, player has to sneak to toggle the GUI.
+            ChurnTileEntity tileEntity = (ChurnTileEntity) worldIn.getTileEntity(pos);
+            if (tileEntity != null) {
+                // If GUI is enabled, player has to sneak to toggle the GUI, if
+                // Slot0 has an item, we need to spawn it iin the world, otherwise
+                // we need to toggle the plunger.
                 if (player.isSneaking() && GrowthcraftMilkConfig.isChurnGuiEnabled()) {
-                    NetworkHooks.openGui((ServerPlayerEntity) player, (ChurnTileEntity) tileEntity, pos);
-                } else if (((ChurnTileEntity) tileEntity).getInventory().getStackInSlot(0).getCount() > 0) {
-                    ItemStack itemStack = ((ChurnTileEntity) tileEntity).getStackInSlot(0);
+                    NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
+                } else if (tileEntity.getInventory().getStackInSlot(0).getCount() > 0) {
+                    // Get the ItemStack in Slot0 and try an put it in the player inventory,
+                    // otherwise let it spill into the world.
+                    ItemStack itemStack = tileEntity.getStackInSlot(0);
                     if (!player.inventory.addItemStackToInventory(itemStack)) {
                         player.dropItem(itemStack, false);
                     }
                 } else {
-                    ((ChurnTileEntity) tileEntity).togglePlunger();
+                    tileEntity.togglePlunger();
                 }
 
                 return ActionResultType.SUCCESS;
             }
-        } else {
-            return ActionResultType.SUCCESS;
         }
-        return ActionResultType.FAIL;
+
+        return ActionResultType.SUCCESS;
     }
 
     @Override
