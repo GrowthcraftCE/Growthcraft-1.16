@@ -76,6 +76,7 @@ public class ChurnBlock extends HorizontalBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 
         if (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
@@ -110,13 +111,14 @@ public class ChurnBlock extends HorizontalBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        ArrayList<VoxelShape> voxelShapeArrayList = new ArrayList<VoxelShape>();
+        ArrayList<VoxelShape> voxelShapeArrayList = new ArrayList<>();
         voxelShapeArrayList.add(LAYER0_BOUNDING_BOX);
         voxelShapeArrayList.add(LAYER1_BOUNDING_BOX);
         voxelShapeArrayList.add(LAYER2_BOUNDING_BOX);
 
-        if (state.get(PLUNGED)) {
+        if (Boolean.TRUE.equals(state.get(PLUNGED))) {
             voxelShapeArrayList.add(PLUNGER_DOWN_BOUNDING_BOX);
         } else {
             voxelShapeArrayList.add(PLUNGER_UP_BOUNDING_BOX);
