@@ -10,6 +10,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
@@ -88,7 +89,13 @@ public class FruitPressBlock extends Block {
     public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
         super.onBlockHarvested(worldIn, pos, state, player);
         // Destroy the FruitPressPistonBlock above.
-        worldIn.removeBlock(pos.up(), false);
+        if (!worldIn.isAirBlock(pos.up())) worldIn.removeBlock(pos.up(), false);
+
+        // Dump the item contents. The FluidContents are lost as there isn't a way to pop it into the world.
+        FruitPressTileEntity tileEntity = (FruitPressTileEntity) worldIn.getTileEntity(pos);
+        if (tileEntity != null) {
+            InventoryHelper.dropItems(worldIn, pos, tileEntity.getItems());
+        }
     }
 
     @Override

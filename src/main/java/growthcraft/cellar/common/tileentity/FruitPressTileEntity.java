@@ -167,7 +167,7 @@ public class FruitPressTileEntity extends LockableLootTileEntity implements ITic
     }
 
     @Override
-    protected NonNullList<ItemStack> getItems() {
+    public NonNullList<ItemStack> getItems() {
         return this.inventory.toNonNullList();
     }
 
