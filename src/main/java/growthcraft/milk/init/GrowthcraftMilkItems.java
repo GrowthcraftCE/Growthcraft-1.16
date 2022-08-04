@@ -95,28 +95,28 @@ public class GrowthcraftMilkItems {
             )
     );
     public static final RegistryObject<GrowthcraftFoodItem> ICE_CREAM_APPLE = ITEMS.register(
-            UnlocalizedName.ICE_CREAM_APPLE, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.ICE_CREAM_APPLE, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> ICE_CREAM_CHOCOLATE = ITEMS.register(
-            UnlocalizedName.ICE_CREAM_CHOCOLATE, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.ICE_CREAM_CHOCOLATE, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> ICE_CREAM_GRAPE_PURPLE = ITEMS.register(
-            UnlocalizedName.ICE_CREAM_GRAPE_PURPLE, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.ICE_CREAM_GRAPE_PURPLE, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> ICE_CREAM_GRAPE_RED = ITEMS.register(
-            UnlocalizedName.ICE_CREAM_GRAPE_RED, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.ICE_CREAM_GRAPE_RED, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> ICE_CREAM_GRAPE_WHITE = ITEMS.register(
-            UnlocalizedName.ICE_CREAM_GRAPE_WHITE, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.ICE_CREAM_GRAPE_WHITE, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> ICE_CREAM_PUMPKIN = ITEMS.register(
-            UnlocalizedName.ICE_CREAM_PUMPKIN, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.ICE_CREAM_PUMPKIN, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> ICE_CREAM_WATERMELON = ITEMS.register(
-            UnlocalizedName.ICE_CREAM_WATERMELON, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.ICE_CREAM_WATERMELON, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> ICE_CREAM_HONEY = ITEMS.register(
-            UnlocalizedName.ICE_CREAM_HONEY, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.ICE_CREAM_HONEY, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftItem> BUTTER = ITEMS.register(
             UnlocalizedName.BUTTER, GrowthcraftItem::new

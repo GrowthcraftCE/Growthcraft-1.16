@@ -4,6 +4,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 
 import javax.annotation.Nullable;
 import java.awt.*;
@@ -36,4 +37,13 @@ public class GrowthcraftBucketItem extends BucketItem {
         return i == 0 ? this.color : 0xFFFFFF;
     }
 
+    @Override
+    public boolean hasContainerItem(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public ItemStack getContainerItem(ItemStack itemStack) {
+        return new ItemStack(Items.BUCKET);
+    }
 }
