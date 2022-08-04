@@ -245,31 +245,31 @@ public class GrowthcraftMilkItems {
             UnlocalizedName.THISTLE_SEED, ThistleSeedItem::new
     );
     public static final RegistryObject<GrowthcraftFoodItem> YOGURT_APPLE = ITEMS.register(
-            UnlocalizedName.YOGURT_APPLE, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.YOGURT_APPLE, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> YOGURT_CHOCOLATE = ITEMS.register(
-            UnlocalizedName.YOGURT_CHOCOLATE, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.YOGURT_CHOCOLATE, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> YOGURT_GRAPE_PURPLE = ITEMS.register(
-            UnlocalizedName.YOGURT_GRAPE_PURPLE, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.YOGURT_GRAPE_PURPLE, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> YOGURT_GRAPE_RED = ITEMS.register(
-            UnlocalizedName.YOGURT_GRAPE_RED, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.YOGURT_GRAPE_RED, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> YOGURT_GRAPE_WHITE = ITEMS.register(
-            UnlocalizedName.YOGURT_GRAPE_WHITE, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.YOGURT_GRAPE_WHITE, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> YOGURT_HONEY = ITEMS.register(
-            UnlocalizedName.YOGURT_HONEY, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.YOGURT_HONEY, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> YOGURT_PLAIN = ITEMS.register(
-            UnlocalizedName.YOGURT_PLAIN, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.YOGURT_PLAIN, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> YOGURT_PUMPKIN = ITEMS.register(
-            UnlocalizedName.YOGURT_PUMPKIN, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.YOGURT_PUMPKIN, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
     public static final RegistryObject<GrowthcraftFoodItem> YOGURT_WATERMELON = ITEMS.register(
-            UnlocalizedName.YOGURT_WATERMELON, () -> new GrowthcraftFoodItem(2, 0.3F, 64)
+            UnlocalizedName.YOGURT_WATERMELON, () -> new GrowthcraftFoodItem(2, 0.3F, 8, true)
     );
 
     private GrowthcraftMilkItems() {
