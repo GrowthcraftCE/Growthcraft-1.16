@@ -6,7 +6,7 @@
       "tag": "growthcraft_milk:milk_buckets"
     },
     {
-      "item": "growthcraft_cellar:grape_white"
+      "item": "growthcraft_apiary:honey_comb_full"
     },
     {
       "item": "minecraft:sugar"
@@ -16,7 +16,7 @@
     }
   ],
   "result": {
-    "item": "growthcraft_milk:ice_cream_grape_white",
+    "item": "growthcraft_milk:ice_cream_honey",
     "count": 1
   }
 }
