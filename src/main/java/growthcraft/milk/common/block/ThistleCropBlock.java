@@ -1,7 +1,10 @@
 package growthcraft.milk.common.block;
 
 import growthcraft.milk.init.GrowthcraftMilkItems;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.CropsBlock;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
@@ -17,7 +20,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 public class ThistleCropBlock extends CropsBlock {
-
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
             Block.makeCuboidShape(5.0F, 0.0F, 5.0F, 11.0F, 4.0F, 11.0F),
             Block.makeCuboidShape(5.0F, 0.0F, 5.0F, 11.0F, 9.0F, 11.0F),
@@ -46,10 +48,19 @@ public class ThistleCropBlock extends CropsBlock {
         return properties;
     }
 
+    /*
     @Override
-    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+    public boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
         return state.matchesBlock(Blocks.GRASS);
     }
+
+    @Override
+    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+        BlockState blockStateDown = worldIn.getBlockState(pos.down());
+        return blockStateDown.matchesBlock(Blocks.GRASS);
+    }
+
+     */
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
