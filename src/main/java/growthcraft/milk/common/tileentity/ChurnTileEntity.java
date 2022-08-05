@@ -100,19 +100,15 @@ public class ChurnTileEntity extends LockableLootTileEntity implements ITickable
         if (!world.isRemote()) {
             if (!this.fluidTankHandler.getTank(0).isEmpty() && this.items.getStackInSlot(0).isEmpty()) {
                 if (this.currentRecipe != null) {
-
                     if (this.currentNumberPlunges >= this.maxNumberPlunges) {
                         // Process the recipe results.
                         this.fluidTankHandler.getTank(0).drain(1000, IFluidHandler.FluidAction.EXECUTE);
                         this.fluidTankHandler.getTank(0).fill(currentRecipe.getOutputFluidStack(), IFluidHandler.FluidAction.EXECUTE);
 
                         int randomness = new SecureRandom().nextInt(100);
-                        GrowthcraftMilk.LOGGER.warn(String.format("Churn byProduct chance %d::%d", randomness, currentRecipe.getByProductChance()));
 
                         if (randomness <= currentRecipe.getByProductChance()) {
-                            GrowthcraftMilk.LOGGER.warn(String.format("Churn Slot0 has %s adding %s", this.items.getStackInSlot(0), currentRecipe.getResultItemStack().toString()));
-                            this.items.insertItem(0, currentRecipe.getResultItemStack(), false);
-                            GrowthcraftMilk.LOGGER.warn(String.format("Churn Slot0 has %s", this.items.getStackInSlot(0)));
+                            this.items.insertItem(0, currentRecipe.getResultItemStack().copy(), false);
                         }
 
                         // Reset the plunger
