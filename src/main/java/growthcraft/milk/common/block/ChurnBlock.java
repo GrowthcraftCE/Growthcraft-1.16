@@ -42,7 +42,7 @@ public class ChurnBlock extends HorizontalBlock {
         super(getInitProperties());
         this.setDefaultState(this.stateContainer.getBaseState()
                 .with(HORIZONTAL_FACING, Direction.NORTH)
-                .with(PLUNGED, true));
+                .with(PLUNGED, false));
     }
 
     private static Properties getInitProperties() {
