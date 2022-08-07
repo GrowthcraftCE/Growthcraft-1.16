@@ -43,13 +43,13 @@ public class PancheonTileEntityRender extends TileEntityRenderer<PancheonTileEnt
         }
 
         if (!outputFluidStackPrimary.isEmpty()) {
-            float outputFluidStackPrimaryHeight = baseOffset + (maxFluidHeight - baseOffset) * outputFluidStackPrimary.getAmount() / (float) tileEntity.getFluidTank(1).getCapacity() - (maxFluidHeight / 2);
+            float outputFluidStackPrimaryHeight = (baseOffset * 3) + (maxFluidHeight - baseOffset) * outputFluidStackPrimary.getAmount() / (float) tileEntity.getFluidTank(1).getCapacity() - (maxFluidHeight / 2);
 
             renderFluid(outputFluidStackPrimary, outputFluidStackPrimaryHeight, bufferIn, matrixStackIn, combinedLightIn, combinedOverlayIn);
         }
 
         if (!outputFluidStackSecondary.isEmpty()) {
-            float outputFluidStackSecondaryHeight = baseOffset + (maxFluidHeight - baseOffset) * outputFluidStackSecondary.getAmount() / (float) tileEntity.getFluidTank(2).getCapacity();
+            float outputFluidStackSecondaryHeight = baseOffset + (maxFluidHeight - baseOffset) * outputFluidStackSecondary.getAmount() / (float) tileEntity.getFluidTank(2).getCapacity() - (maxFluidHeight / 2);
 
             renderFluid(outputFluidStackSecondary, outputFluidStackSecondaryHeight, bufferIn, matrixStackIn, combinedLightIn, combinedOverlayIn);
         }
