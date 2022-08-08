@@ -48,7 +48,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     public FermentBarrelTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
         this.inventory = new GrowthcraftItemHandler(1);
-        this.fluidTankHandler = new FluidTankHandler(1, 4000);
+        this.fluidTankHandler = new FluidTankHandler(1, 8000);
         this.currentProcessingTime = 0;
     }
 
