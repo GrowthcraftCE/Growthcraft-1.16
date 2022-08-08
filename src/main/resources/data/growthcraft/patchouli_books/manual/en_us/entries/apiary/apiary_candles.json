@@ -1,8 +1,8 @@
 {
-  "name": "Guide to Chandlering",
-  "icon": "growthcraft_apiary:candle_brown",
+  "name": "Guide to Wax",
+  "icon": "growthcraft_apiary:bees_wax_red",
   "category": "apiary",
-  "sortnum": 3,
+  "sortnum": 1,
   "pages": [
     {
       "type": "text",

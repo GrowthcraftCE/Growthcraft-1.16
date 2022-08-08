@@ -22,8 +22,7 @@ public class ThistleSeedItem extends GrowthcraftItem {
         BlockPos blockpos = context.getPos();
         Block block = world.getBlockState(blockpos).getBlock();
 
-        if (block == Blocks.GRASS_BLOCK) {
-            // Place a GrapeVineCrop
+        if (block == Blocks.FARMLAND) {
             world.setBlockState(blockpos.up(), GrowthcraftMilkBlocks.THISTLE_CROP.get().getDefaultState());
             world.notifyBlockUpdate(blockpos.up(), world.getBlockState(blockpos.up()), world.getBlockState(blockpos.up()), Constants.BlockFlags.BLOCK_UPDATE);
 

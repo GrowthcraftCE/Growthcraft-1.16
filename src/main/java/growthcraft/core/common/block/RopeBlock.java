@@ -98,7 +98,6 @@ public class RopeBlock extends Block implements IWaterLoggable {
                 worldIn.addEntity(itemEntity);
             });
         }
-
         // Remove the tile entity
         if (state.hasTileEntity() && state.getBlock() != newState.getBlock()) {
             worldIn.removeTileEntity(pos);

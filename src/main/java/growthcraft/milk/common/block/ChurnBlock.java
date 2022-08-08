@@ -42,7 +42,7 @@ public class ChurnBlock extends HorizontalBlock {
         super(getInitProperties());
         this.setDefaultState(this.stateContainer.getBaseState()
                 .with(HORIZONTAL_FACING, Direction.NORTH)
-                .with(PLUNGED, true));
+                .with(PLUNGED, false));
     }
 
     private static Properties getInitProperties() {
@@ -76,6 +76,7 @@ public class ChurnBlock extends HorizontalBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 
         if (FluidUtil.interactWithFluidHandler(player, handIn, worldIn, pos, hit.getFace())
@@ -84,36 +85,40 @@ public class ChurnBlock extends HorizontalBlock {
         }
 
         if (!worldIn.isRemote) {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (tileEntity instanceof ChurnTileEntity) {
-                // If GUI is enabled, player has to sneak to toggle the GUI.
+            ChurnTileEntity tileEntity = (ChurnTileEntity) worldIn.getTileEntity(pos);
+            if (tileEntity != null) {
+                // If GUI is enabled, player has to sneak to toggle the GUI, if
+                // Slot0 has an item, we need to spawn it iin the world, otherwise
+                // we need to toggle the plunger.
                 if (player.isSneaking() && GrowthcraftMilkConfig.isChurnGuiEnabled()) {
-                    NetworkHooks.openGui((ServerPlayerEntity) player, (ChurnTileEntity) tileEntity, pos);
-                } else if (((ChurnTileEntity) tileEntity).getInventory().getStackInSlot(0).getCount() > 0) {
-                    ItemStack itemStack = ((ChurnTileEntity) tileEntity).getStackInSlot(0);
+                    NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, pos);
+                } else if (tileEntity.getInventory().getStackInSlot(0).getCount() > 0) {
+                    // Get the ItemStack in Slot0 and try an put it in the player inventory,
+                    // otherwise let it spill into the world.
+                    ItemStack itemStack = tileEntity.getStackInSlot(0);
                     if (!player.inventory.addItemStackToInventory(itemStack)) {
                         player.dropItem(itemStack, false);
                     }
                 } else {
-                    ((ChurnTileEntity) tileEntity).togglePlunger();
+                    tileEntity.togglePlunger();
                 }
 
                 return ActionResultType.SUCCESS;
             }
-        } else {
-            return ActionResultType.SUCCESS;
         }
-        return ActionResultType.FAIL;
+
+        return ActionResultType.SUCCESS;
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        ArrayList<VoxelShape> voxelShapeArrayList = new ArrayList<VoxelShape>();
+        ArrayList<VoxelShape> voxelShapeArrayList = new ArrayList<>();
         voxelShapeArrayList.add(LAYER0_BOUNDING_BOX);
         voxelShapeArrayList.add(LAYER1_BOUNDING_BOX);
         voxelShapeArrayList.add(LAYER2_BOUNDING_BOX);
 
-        if (state.get(PLUNGED)) {
+        if (Boolean.TRUE.equals(state.get(PLUNGED))) {
             voxelShapeArrayList.add(PLUNGER_DOWN_BOUNDING_BOX);
         } else {
             voxelShapeArrayList.add(PLUNGER_UP_BOUNDING_BOX);

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "growthcraft_milk:milk_buckets"
+    },
+    {
+      "item": "minecraft:cocoa_beans"
+    },
+    {
+      "item": "growthcraft_milk:starter_culture"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "item": "growthcraft_milk:yogurt_chocolate",
+    "count": 1
+  }
+}

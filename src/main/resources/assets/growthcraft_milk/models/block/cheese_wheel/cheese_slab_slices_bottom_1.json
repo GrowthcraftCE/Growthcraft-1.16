@@ -2,6 +2,7 @@
   "textures": {
     "0": "growthcraft_milk:block/cheese_base",
     "1": "growthcraft_milk:block/cheese_side",
+    "missing": "growthcraft:block/missing",
     "particle": "growthcraft_milk:block/cheese_base"
   },
   "elements": [

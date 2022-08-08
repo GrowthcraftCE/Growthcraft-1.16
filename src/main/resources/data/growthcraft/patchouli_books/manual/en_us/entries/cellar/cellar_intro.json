@@ -2,12 +2,11 @@
   "name": "Introduction to brewing",
   "icon": "growthcraft_cellar:brew_kettle",
   "category": "cellar",
-  "sortnum": 1,
+  "sortnum": 0,
   "pages": [
     {
-      "type": "stonecutting",
-      "text": "Using the stone cutter, bamboo can be cut into bamboo nodes, which can be crafted into planks, stairs, slabs, and used as a decorative building block.",
-      "recipe": "growthcraft_bamboo:bamboo_wood_log"
+      "type": "patchouli:text",
+      "text": "There are three categories of brewing, ales and lagers, wines, and meades. All three have a similar process.$(br2)Ales and Lagers - "
     }
   ]
 }

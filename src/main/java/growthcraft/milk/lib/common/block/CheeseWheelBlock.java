@@ -33,13 +33,13 @@ public class CheeseWheelBlock extends HorizontalBlock {
     public static final IntegerProperty SLICE_COUNT_BOTTOM = IntegerProperty.create("slicesbottom", 0, 4);
 
     public static final VoxelShape BOUNDING_BOX = Block.makeCuboidShape(
-            0.01F, 0.0F, 0.01F,
-            15.98F, 15.98F, 15.98
+            1.00F, 0.0F, 1.0F,
+            15.0F, 16.0F, 15.0F
     );
 
     public static final VoxelShape BOUNDING_BOX_HALF = Block.makeCuboidShape(
-            0.01F, 0.0F, 0.01F,
-            15.98F, 7.98F, 15.98
+            1.00F, 0.0F, 1.0F,
+            15.0F, 8.0F, 15.0F
     );
 
     private final int color;
@@ -54,6 +54,11 @@ public class CheeseWheelBlock extends HorizontalBlock {
                 .with(SLICE_COUNT_TOP, 0)
                 .with(AGED, false)
         );
+    }
+
+    @Override
+    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+        return 10;
     }
 
     public static Properties getInitProperties() {
@@ -104,12 +109,14 @@ public class CheeseWheelBlock extends HorizontalBlock {
             if (!player.isSneaking() && player.getHeldItemMainhand().isEmpty()) {
                 if (tileEntity.canTakeSlice()) {
                     player.inventory.addItemStackToInventory(tileEntity.takeSlice());
+                    return ActionResultType.SUCCESS;
                 }
             }
 
             if (player.isSneaking() && (tileEntity.getSliceCount() > 4 || tileEntity.getSliceCount() == 4)) {
                 tileEntity.takeSlice(4);
                 player.inventory.addItemStackToInventory(new ItemStack(this.asItem()));
+                return ActionResultType.SUCCESS;
             }
 
             if (tileEntity.getSliceCount() == 0) worldIn.destroyBlock(pos, false);

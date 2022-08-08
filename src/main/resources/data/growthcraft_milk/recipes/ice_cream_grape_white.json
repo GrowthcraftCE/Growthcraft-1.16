@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "growthcraft_milk:milk_buckets"
+    },
+    {
+      "item": "growthcraft_cellar:grape_white"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "item": "growthcraft_milk:ice_cream_grape_white",
+    "count": 1
+  }
+}

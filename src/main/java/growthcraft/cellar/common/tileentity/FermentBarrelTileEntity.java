@@ -48,7 +48,7 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     public FermentBarrelTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
         this.inventory = new GrowthcraftItemHandler(1);
-        this.fluidTankHandler = new FluidTankHandler(1, 4000);
+        this.fluidTankHandler = new FluidTankHandler(1, 8000);
         this.currentProcessingTime = 0;
     }
 
@@ -70,24 +70,27 @@ public class FermentBarrelTileEntity extends LockableLootTileEntity implements I
     public void tick() {
         boolean dirty = false;
         if (this.world != null && !this.world.isRemote) {
+            // If the inventory slot is not empty and there is fluid in the fluid tank
             if (!this.inventory.getStackInSlot(0).isEmpty() && !this.getFluidTank(0).isEmpty()) {
-
+                // Try and get a valid recipe
                 FermentBarrelRecipe recipe = this.getRecipe(
                         this.inventory.getStackInSlot(0),
                         this.getFluidTank(0).getFluid()
                 );
-
+                // If there is a valid recipe
                 if (recipe != null) {
+                    // Set the processing time
                     this.maxProcessingTime = recipe.getProcessingTime();
 
                     if (recipe != this.currentRecipe) {
+                        // Rest the current recipe
                         this.currentRecipe = recipe;
-                        // wait until next cycle to start processing
-                    } else if (this.currentProcessingTime >= this.maxProcessingTime) {
+                    } else if (currentRecipe.getIngredientItemStack().getItem() == inventory.getStackInSlot(0).getItem() && this.currentProcessingTime >= this.maxProcessingTime) {
+                        // The processing time is equal or greater than the max processing time.
                         processRecipeResult();
                         // reset counters
                         this.currentProcessingTime = 0;
-                    } else {
+                    } else if (currentRecipe.getIngredientItemStack().getItem() == inventory.getStackInSlot(0).getItem()) {
                         this.currentProcessingTime++;
                     }
                     dirty = true;

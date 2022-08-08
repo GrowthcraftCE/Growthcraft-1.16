@@ -69,6 +69,7 @@ minecraft {
             property 'forge.logging.console.level', 'info' // info | warn | debug
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            jvmArgs '-Xmx2g'
             mods {
                 growthcraft {
                     source sourceSets.main

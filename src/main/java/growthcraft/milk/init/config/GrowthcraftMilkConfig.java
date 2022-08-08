@@ -48,16 +48,16 @@ public class GrowthcraftMilkConfig {
         // Init Server Side Configuration
         churnGuiEnabled = specBuilder
                 .comment("Set to true to allow users to access the Churn GUI.")
-                .define(String.format("%s.%s", CATEGORY_CHURN, "guiEnabled"), false);
+                .define(String.format("%s.%s", CATEGORY_CHURN, "guiEnabled"), true);
         mixingVatGuiEnabled = specBuilder
                 .comment("Set to true to allow users to access the Mixing Vat GUI.")
-                .define(String.format("%s.%s", CATEGORY_MIXING_VAT, "guiEnabled"), false);
+                .define(String.format("%s.%s", CATEGORY_MIXING_VAT, "guiEnabled"), true);
         mixingVatConsumeActivationItem = specBuilder
                 .comment("Set to true to allow users to access the Mixing Vat GUI.")
                 .define(String.format("%s.%s", CATEGORY_MIXING_VAT, "consumeMixingVatActivator"), false);
         pancheonGuiEnabled = specBuilder
                 .comment("Set to true to allow users to access the Pancheon GUI.")
-                .define(String.format("%s.%s", CATEGORY_PANCHEON, "guiEnabled"), false);
+                .define(String.format("%s.%s", CATEGORY_PANCHEON, "guiEnabled"), true);
     }
 
     public static boolean isChurnGuiEnabled() {

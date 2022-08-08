@@ -30,6 +30,7 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -99,23 +100,28 @@ public class ChurnTileEntity extends LockableLootTileEntity implements ITickable
         if (!world.isRemote()) {
             if (!this.fluidTankHandler.getTank(0).isEmpty() && this.items.getStackInSlot(0).isEmpty()) {
                 if (this.currentRecipe != null) {
-
-                    if (this.currentNumberPlunges > this.maxNumberPlunges) {
+                    if (this.currentNumberPlunges >= this.maxNumberPlunges) {
                         // Process the recipe results.
-                        this.fluidTankHandler.getTank(0).setFluid(currentRecipe.getOutputFluidStack());
-                        if (new SecureRandom().nextInt(100) <= currentRecipe.getByProductChance()) {
-                            this.items.insertItem(0, currentRecipe.getResultItemStack(), false);
+                        this.fluidTankHandler.getTank(0).drain(1000, IFluidHandler.FluidAction.EXECUTE);
+                        this.fluidTankHandler.getTank(0).fill(currentRecipe.getOutputFluidStack(), IFluidHandler.FluidAction.EXECUTE);
+
+                        int randomness = new SecureRandom().nextInt(100);
+
+                        if (randomness <= currentRecipe.getByProductChance()) {
+                            this.items.insertItem(0, currentRecipe.getResultItemStack().copy(), false);
                         }
 
+                        // Reset the plunger
+                        this.world.setBlockState(this.getPos(), this.getBlockState().with(ChurnBlock.PLUNGED, false));
+                        // Clear out the current recipe and counters
                         this.currentRecipe = null;
                         this.currentNumberPlunges = 0;
                         this.plungerLocked = true;
-
-                        dirty = true;
                     } else {
                         this.currentNumberPlunges += i;
-                        dirty = true;
                     }
+
+                    dirty = true;
                 } else {
                     GrowthcraftMilk.LOGGER.error("No recipe found");
                     this.plungerLocked = true;

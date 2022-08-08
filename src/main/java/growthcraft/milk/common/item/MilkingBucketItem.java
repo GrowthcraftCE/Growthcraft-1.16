@@ -47,4 +47,14 @@ public class MilkingBucketItem extends Item {
         properties.maxStackSize(16);
         return properties;
     }
+
+    @Override
+    public ItemStack getContainerItem(ItemStack itemStack) {
+        return new ItemStack(GrowthcraftMilkItems.MILKING_BUCKET_IRON.get());
+    }
+
+    @Override
+    public boolean hasContainerItem(ItemStack stack) {
+        return true;
+    }
 }

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "growthcraft_milk:milk_buckets"
+    },
+    {
+      "item": "growthcraft_apiary:honey_comb_full"
+    },
+    {
+      "item": "growthcraft_milk:starter_culture"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "item": "growthcraft_milk:yogurt_honey",
+    "count": 1
+  }
+}
