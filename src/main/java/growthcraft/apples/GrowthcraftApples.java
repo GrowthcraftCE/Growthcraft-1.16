@@ -53,7 +53,7 @@ public class GrowthcraftApples {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        //proxy.init();
+        GrowthcraftApplesItems.registerCompostables();
         //GrowthcraftApplesConfig.loadConfig();
     }
 

@@ -58,7 +58,8 @@ public class GrowthcraftCellar {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        //PROXY.init();
+        // Add Composter Items
+        GrowthcraftCellarItems.registerCompostables();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

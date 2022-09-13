@@ -10,6 +10,7 @@ import growthcraft.lib.common.item.GrowthcraftBucketItem;
 import growthcraft.lib.common.item.GrowthcraftEnchantedItem;
 import growthcraft.lib.common.item.GrowthcraftFoodItem;
 import growthcraft.lib.common.item.GrowthcraftItem;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
@@ -109,7 +110,7 @@ public class GrowthcraftCellarItems {
     public static final RegistryObject<GrainItem> grain_pale_golden = ITEMS.register(
             UnlocalizedName.GRAIN_PALE_GOLDEN, () -> new GrainItem(Reference.FluidColor.PALE_GOLDEN_WORT_FLUID_COLOR.toIntValue())
     );
-    public static final RegistryObject<GrowthcraftItem> yeast_lager = ITEMS.register(
+    public static final RegistryObject<GrowthcraftItem> YEAST_LAGER = ITEMS.register(
             UnlocalizedName.YEAST_LAGER, GrowthcraftItem::new
     );
     public static final RegistryObject<GrowthcraftEnchantedItem> yeast_lager_ethereal = ITEMS.register(
@@ -313,6 +314,33 @@ public class GrowthcraftCellarItems {
                     new Item.Properties().group(growthcraft.core.shared.Reference.growthcraftCreativeTab).maxStackSize(1)
             )
     );
+
+    public static final void registerCompostables() {
+        float f = 0.3F;
+        float f1 = 0.5F;
+        float f2 = 0.65F;
+        float f3 = 0.85F;
+        float f4 = 1.0F;
+
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.GRAPE_PURPLE.get(), f1);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.GRAPE_RED.get(), f1);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.GRAPE_WHITE.get(), f1);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.GRAPE_PURPLE_SEEDS.get(), f);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.GRAPE_RED_SEEDS.get(), f);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.GRAPE_WHITE_SEEDS.get(), f);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.YEAST_BAYANUS.get(), f);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.YEAST_BREWERS.get(), f);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.YEAST_LAGER.get(), f);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.grain.get(), f);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.grain_amber.get(), f1);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.grain_brown.get(), f3);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.grain_copper.get(), f2);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.grain_dark.get(), f4);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.grain_golden.get(), f);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.grain_deep_amber.get(), f1);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.grain_deep_copper.get(), f2);
+        ComposterBlock.CHANCES.put(GrowthcraftCellarItems.grain_pale_golden.get(), f);
+    }
 
     private GrowthcraftCellarItems() {
         /* Prevent generation of default public constructor */

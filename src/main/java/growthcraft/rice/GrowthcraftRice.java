@@ -55,6 +55,7 @@ public class GrowthcraftRice {
 
     private void setup(final FMLCommonSetupEvent event) {
         //proxy.init();
+        GrowthcraftRiceItems.registerCompostables();
         GrowthcraftRiceConfig.loadConfig();
     }
 
