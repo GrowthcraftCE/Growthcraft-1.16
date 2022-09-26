@@ -29,10 +29,3 @@ jobs:
         uses: Roang-zero1/github-create-release-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload to GitHub
-        uses: Alatyami/github-upload-release-artifacts-action@master
-        with:
-          args: build/libs/
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
