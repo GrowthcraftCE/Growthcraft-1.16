@@ -43,11 +43,19 @@ public class MixingVatItemRecipe extends MixingVatRecipe {
         }
 
         if (this.getIngredientList().size() == testIngredients.size()) {
-            for (int i = 0; i < testIngredients.size(); i++) {
-                if (!this.getIngredientItems().contains(testIngredients.get(i).getItem())) {
-                    return false;
+            // Check the testIngredientList against the recipe ingredient list.
+            for (ItemStack itemStack : testIngredients) {
+                for (ItemStack recipeStack : this.getIngredientList()) {
+                    //if (!itemStack.getItem() == recipeStack.getItem()) return false;
                 }
             }
+
+            // Check the recipe ingredient list against the test
+            for (ItemStack itemStack : this.getIngredientList()) {
+                if (!testIngredients.contains(itemStack)) return false;
+            }
+        } else {
+            return false;
         }
 
         return true;
