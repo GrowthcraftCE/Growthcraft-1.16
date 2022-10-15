@@ -37,20 +37,27 @@ public class MixingVatItemRecipe extends MixingVatRecipe {
      * @return Returns true by default.
      */
     public boolean matches(FluidStack testFluidStack, List<ItemStack> testIngredients) {
-        if (testFluidStack.getFluid() != this.getInputFluidStack().getFluid()
-                && testFluidStack.getAmount() <= this.getInputFluidStack().getAmount()) {
-            return false;
+        boolean fluidMatches = false;
+        boolean itemMatches = false;
+
+        if (testFluidStack.getFluid() == this.getInputFluidStack().getFluid()
+                && testFluidStack.getAmount() == this.getInputFluidStack().getAmount()) {
+            fluidMatches = true;
         }
 
         if (this.getIngredientList().size() == testIngredients.size()) {
-            for (int i = 0; i < testIngredients.size(); i++) {
-                if (!this.getIngredientItems().contains(testIngredients.get(i).getItem())) {
-                    return false;
+            int itemCount = this.getIngredientList().size();
+            int matchCount = 0;
+            for (int i = 0; i < this.getIngredientList().size(); i++) {
+                if (this.getIngredientList().get(i).getItem() == testIngredients.get(i).getItem() &&
+                        this.getIngredientList().get(i).getCount() == testIngredients.get(i).getCount()) {
+                    matchCount++;
                 }
             }
+            if (itemCount == matchCount) itemMatches = true;
         }
 
-        return true;
+        return fluidMatches && itemMatches;
     }
 
     public boolean matchResult(ItemStack itemStack) {
