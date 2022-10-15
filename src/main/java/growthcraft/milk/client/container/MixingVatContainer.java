@@ -1,6 +1,6 @@
 package growthcraft.milk.client.container;
 
-import growthcraft.lib.common.handler.OutputSlotItemHandler;
+import growthcraft.lib.common.handler.NonInteractiveSlotItemHandler;
 import growthcraft.lib.util.FunctionalIntReferenceHolder;
 import growthcraft.milk.common.tileentity.MixingVatTileEntity;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
@@ -53,7 +53,7 @@ public class MixingVatContainer extends Container {
         index++;
 
         /* Output Slots = 1 */
-        this.addSlot(new OutputSlotItemHandler(
+        this.addSlot(new NonInteractiveSlotItemHandler(
                 tileEntity.getInventory(), index, 124, 18
         ));
         index++;
