@@ -8,10 +8,8 @@ on:
 
 jobs:
   build:
-
     name: Build and Release
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -30,3 +28,20 @@ jobs:
         with:
           artifacts: "*.jar"
           token: ${{ secrets.GITHUB_TOKEN }}
+
+  snyk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check configuration files for security issues
+        uses: snyk/actions/gradle-jdk11@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --sarif-file-output=snyk.sarif
+
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: snyk.sarif
