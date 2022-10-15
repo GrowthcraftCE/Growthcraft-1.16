@@ -37,28 +37,27 @@ public class MixingVatItemRecipe extends MixingVatRecipe {
      * @return Returns true by default.
      */
     public boolean matches(FluidStack testFluidStack, List<ItemStack> testIngredients) {
-        if (testFluidStack.getFluid() != this.getInputFluidStack().getFluid()
-                && testFluidStack.getAmount() <= this.getInputFluidStack().getAmount()) {
-            return false;
+        boolean fluidMatches = false;
+        boolean itemMatches = false;
+
+        if (testFluidStack.getFluid() == this.getInputFluidStack().getFluid()
+                && testFluidStack.getAmount() == this.getInputFluidStack().getAmount()) {
+            fluidMatches = true;
         }
 
         if (this.getIngredientList().size() == testIngredients.size()) {
-            // Check the testIngredientList against the recipe ingredient list.
-            for (ItemStack itemStack : testIngredients) {
-                for (ItemStack recipeStack : this.getIngredientList()) {
-                    //if (!itemStack.getItem() == recipeStack.getItem()) return false;
+            int itemCount = this.getIngredientList().size();
+            int matchCount = 0;
+            for (int i = 0; i < this.getIngredientList().size(); i++) {
+                if (this.getIngredientList().get(i).getItem() == testIngredients.get(i).getItem() &&
+                        this.getIngredientList().get(i).getCount() == testIngredients.get(i).getCount()) {
+                    matchCount++;
                 }
             }
-
-            // Check the recipe ingredient list against the test
-            for (ItemStack itemStack : this.getIngredientList()) {
-                if (!testIngredients.contains(itemStack)) return false;
-            }
-        } else {
-            return false;
+            if (itemCount == matchCount) itemMatches = true;
         }
 
-        return true;
+        return fluidMatches && itemMatches;
     }
 
     public boolean matchResult(ItemStack itemStack) {

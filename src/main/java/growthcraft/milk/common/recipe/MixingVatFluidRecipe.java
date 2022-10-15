@@ -32,25 +32,27 @@ public class MixingVatFluidRecipe extends MixingVatRecipe {
 
     public boolean matches(FluidStack testBaseFluidStack, FluidStack testReagentFluidStack,
                            List<ItemStack> testIngredients) {
-        if (testBaseFluidStack.getFluid() != this.getInputFluidStack().getFluid()
-                && testBaseFluidStack.getAmount() <= this.getInputFluidStack().getAmount()) {
-            return false;
-        }
 
-        if (testReagentFluidStack.getFluid() != this.getReagentFluidStack().getFluid()
-                && testReagentFluidStack.getAmount() <= this.getReagentFluidStack().getAmount()) {
-            return false;
-        }
+        boolean fluidMatches = testBaseFluidStack.getFluid() == this.getInputFluidStack().getFluid()
+                && testBaseFluidStack.getAmount() == this.getInputFluidStack().getAmount()
+                && testReagentFluidStack.getFluid() == this.getReagentFluidStack().getFluid()
+                && testReagentFluidStack.getAmount() == this.getReagentFluidStack().getAmount();
+
+        boolean ingredientMatches = false;
 
         if (this.getIngredientList().size() == testIngredients.size()) {
-            for (int i = 0; i < testIngredients.size(); i++) {
-                if (!this.getIngredientItems().contains(testIngredients.get(i).getItem())) {
-                    return false;
+            int itemCount = this.getIngredientList().size();
+            int matchCount = 0;
+            for (int i = 0; i < this.getIngredientList().size(); i++) {
+                if (this.getIngredientList().get(i).getItem() == testIngredients.get(i).getItem() &&
+                        this.getIngredientList().get(i).getCount() == testIngredients.get(i).getCount()) {
+                    matchCount++;
                 }
             }
+            ingredientMatches = itemCount == matchCount;
         }
 
-        return true;
+        return fluidMatches && ingredientMatches;
     }
 
     public FluidStack getReagentFluidStack() {
